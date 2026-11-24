@@ -1,0 +1,48 @@
+Ornate Chess - Future Multiplayer Plans
+=======================================
+
+Goal
+Turn Ornate Chess into a multiplayer app where players can create accounts, save their progress and play live games against one another. It should run for free, without the limits of third-party services.
+
+Hosting
+- We will write our own server and test it on this PC first. A Cloudflare quick tunnel can make it reachable for testing.
+- After that it will be hosted on an Oracle Cloud Always Free Arm VM (A1.Flex: 2 OCPU and 12 GB RAM, 200 GB storage, 10 TB of outbound traffic per month).
+- Caddy will provide HTTPS automatically. The frontend stays on Netlify until launch, and after that the VM serves both the frontend and the API from one address.
+- Oracle reclaims idle machines when CPU (95th percentile), network and memory all stay under 20% for 7 days. Useful low-priority background work keeps the machine above that level.
+
+Stack
+- A single Node.js server with an HTTP API and WebSockets (the ws library) that reuses the app's existing src/engine.js to validate moves on the server.
+- SQLite for storage, using node:sqlite.
+- Passwords hashed with Argon2id.
+- A separate low-priority worker running native Stockfish.
+
+Ratings
+- Glicko-2 (rating, rating deviation and volatility). A rating is treated as provisional while its deviation is above 110, as Lichess does, and each time control has its own rating.
+- After multiplayer matches are added, a player's rating comes only from multiplayer games. Games against the bot no longer change it. The bot stays unrated: a bot game does not count as a rated game, and it does not change the rating, the deviation, the volatility, or the rating history.
+
+Background jobs (low priority)
+- Deeper game reviews, puzzle generation from real games, leaderboards, cheat detection and backups.
+
+Phases
+0. Prep: a private repo, CI and code refactoring.
+1. Accounts and sign-in.
+2. Syncing saved progress (everything currently stored in localStorage).
+3. Live online games with server-side move checking. The main Play page stays one screen: time-control multiplayer options and a Bot option together. The bot is not a separate top-level mode. Bot games stay unrated.
+4. Glicko-2 ratings from multiplayer games only. Bot games stay unrated from this phase on.
+5. Background jobs.
+6. Production hosting on Oracle (private beta).
+7. Anti-cheat.
+8. Social features (optional).
+The estimate for reaching a private beta (Phases 0 to 6) is about 29 to 44 focused working days.
+
+Open items
+- Stockfish is GPL licensed, and the licensing decision is yours.
+- Creating the private GitHub repo mtb-coding/ornate-chess needs your approval.
+- You need to do the Oracle sign-up yourself, because it asks for a card to verify your identity.
+- Account creation will later require an email address and email verification, to limit abuse. Usernames are already unique, including differences of case only.
+
+Status of this copy
+- Phases 1 and 2 are in place on this machine: accounts, sign-in, and automatic progress sync.
+- Phase 3 is in place on this machine. The Play page is one screen with time-control multiplayer options and a Bot option. The server checks each move and owns the Fischer clock.
+- Phase 4 is in place. Bullet, blitz and rapid each have their own Glicko-2 rating on the server, shown on Home, the statistics page and Settings. A finished online game with at least one move updates that category for both players, from the ratings they had before the game. A game that ends before any moves is not rated. Bot games stay unrated and do not change a rating, its deviation, its volatility or its history. The peak counts only a stable rating. It stays empty while the rating is provisional.
+- Phase 5 has started. A separate low-priority worker (`node server/worker.mjs`) queues daily database backups and a deeper review of each finished game that has at least one move. The review uses the bundled Stockfish build on this machine. Puzzle generation from real games, leaderboards and cheat detection are still ahead.

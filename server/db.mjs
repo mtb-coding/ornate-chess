@@ -1,0 +1,121 @@
+// SQLite open and migration. The file is created on first use.
+import fs from 'node:fs';
+import path from 'node:path';
+import { DatabaseSync } from 'node:sqlite';
+import { fileURLToPath } from 'node:url';
+
+const SERVER_DIR = path.dirname(fileURLToPath(import.meta.url));
+export const DEFAULT_DB_PATH = path.join(SERVER_DIR, 'data', 'ornate.sqlite');
+const SCHEMA_VERSION = 5;
+
+const LIVE_GAMES_SQL = `
+CREATE TABLE IF NOT EXISTS live_games (
+  id TEXT PRIMARY KEY,
+  base_ms INTEGER NOT NULL,
+  inc_ms INTEGER NOT NULL,
+  white_id TEXT NOT NULL,
+  black_id TEXT NOT NULL,
+  white_name TEXT NOT NULL,
+  black_name TEXT NOT NULL,
+  game_json TEXT NOT NULL,
+  w_ms INTEGER NOT NULL,
+  b_ms INTEGER NOT NULL,
+  turn_started_at INTEGER,
+  status TEXT NOT NULL,
+  result TEXT,
+  result_reason TEXT,
+  draw_offer TEXT,
+  created_at INTEGER NOT NULL,
+  updated_at INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS live_games_white ON live_games(white_id, status);
+CREATE INDEX IF NOT EXISTS live_games_black ON live_games(black_id, status);
+`;
+
+export function openDatabase(file = DEFAULT_DB_PATH) {
+  if (file !== ':memory:') fs.mkdirSync(path.dirname(file), { recursive: true });
+  const db = new DatabaseSync(file);
+  db.exec('PRAGMA foreign_keys = ON');
+  db.exec('PRAGMA busy_timeout = 5000');
+  if (file !== ':memory:') db.exec('PRAGMA journal_mode = WAL');
+  let version = Number(db.prepare('PRAGMA user_version').get().user_version) || 0;
+  if (version < 1) {
+    db.exec(fs.readFileSync(path.join(SERVER_DIR, 'schema.sql'), 'utf8'));
+    version = 1;
+  }
+  if (version < 2) {
+    db.exec(LIVE_GAMES_SQL);
+    version = 2;
+  }
+  if (version < 3) {
+    db.exec(`CREATE TABLE IF NOT EXISTS pace_ratings (
+      user_id TEXT NOT NULL,
+      pace TEXT NOT NULL,
+      rating REAL NOT NULL,
+      deviation REAL NOT NULL,
+      volatility REAL NOT NULL,
+      games INTEGER NOT NULL,
+      wins INTEGER NOT NULL,
+      draws INTEGER NOT NULL,
+      losses INTEGER NOT NULL,
+      peak REAL,
+      white_json TEXT NOT NULL,
+      black_json TEXT NOT NULL,
+      history_json TEXT NOT NULL,
+      updated_at INTEGER NOT NULL,
+      PRIMARY KEY (user_id, pace)
+    )`);
+    version = 3;
+  }
+  if (version < 4) {
+    db.exec(`CREATE TABLE pace_ratings_v4 (
+      user_id TEXT NOT NULL,
+      pace TEXT NOT NULL,
+      rating REAL NOT NULL,
+      deviation REAL NOT NULL,
+      volatility REAL NOT NULL,
+      games INTEGER NOT NULL,
+      wins INTEGER NOT NULL,
+      draws INTEGER NOT NULL,
+      losses INTEGER NOT NULL,
+      peak REAL,
+      white_json TEXT NOT NULL,
+      black_json TEXT NOT NULL,
+      history_json TEXT NOT NULL,
+      updated_at INTEGER NOT NULL,
+      PRIMARY KEY (user_id, pace)
+    )`);
+    const exists = db.prepare("SELECT 1 AS ok FROM sqlite_master WHERE type = 'table' AND name = 'pace_ratings'").get();
+    if (exists) {
+      db.exec(`INSERT INTO pace_ratings_v4 (
+        user_id, pace, rating, deviation, volatility, games, wins, draws, losses, peak,
+        white_json, black_json, history_json, updated_at
+      )
+      SELECT user_id, pace, rating, deviation, volatility, games, wins, draws, losses,
+        CASE WHEN deviation > 110 THEN NULL ELSE peak END,
+        white_json, black_json, history_json, updated_at
+      FROM pace_ratings`);
+      db.exec('DROP TABLE pace_ratings');
+    }
+    db.exec('ALTER TABLE pace_ratings_v4 RENAME TO pace_ratings');
+    version = 4;
+  }
+  if (version < 5) {
+    db.exec(`CREATE TABLE IF NOT EXISTS jobs (
+      id TEXT PRIMARY KEY,
+      kind TEXT NOT NULL,
+      payload_json TEXT NOT NULL,
+      status TEXT NOT NULL,
+      attempts INTEGER NOT NULL,
+      run_after INTEGER NOT NULL,
+      last_error TEXT,
+      result_json TEXT,
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL
+    );
+    CREATE INDEX IF NOT EXISTS jobs_ready ON jobs(status, run_after);`);
+    version = 5;
+  }
+  db.exec(`PRAGMA user_version = ${version}`);
+  return db;
+}

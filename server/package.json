@@ -1,0 +1,12 @@
+{
+  "name": "ornate-chess-server",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "dependencies": {
+    "@node-rs/argon2": "^2.0.2",
+    "ws": "^8.23.0"
+  }
+}

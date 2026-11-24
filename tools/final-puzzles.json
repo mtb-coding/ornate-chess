@@ -1,0 +1,1286 @@
+{
+  "puzzles": [
+    {
+      "id": "br-20",
+      "title": "Back-rank mate with rook",
+      "theme": "back-rank",
+      "difficulty": 1,
+      "rating": 900,
+      "fen": "3r2k1/5ppp/8/8/8/8/5PPP/3R2K1 b - - 0 1",
+      "solution": [
+        "d8d1"
+      ],
+      "hint": "White left the first rank undefended.",
+      "explanation": "Rook to d1 is checkmate on the back rank."
+    },
+    {
+      "id": "br-02",
+      "title": "Back-rank double rook",
+      "theme": "back-rank",
+      "difficulty": 2,
+      "rating": 1100,
+      "fen": "r5k1/5ppp/8/8/8/8/5PPP/R5K1 b - - 0 1",
+      "solution": [
+        "a8a1"
+      ],
+      "hint": "The a-file is open to the first rank.",
+      "explanation": "Rook to a1 mates because white has no flight square."
+    },
+    {
+      "id": "df-01",
+      "title": "Deflect the back-rank defender",
+      "theme": "deflection",
+      "difficulty": 3,
+      "rating": 1400,
+      "fen": "3r2k1/5ppp/8/8/8/8/5PPP/3R2K1 w - - 0 1",
+      "solution": [
+        "d1d8"
+      ],
+      "hint": "Force the defending rook off the back rank.",
+      "explanation": "Exchanging or checking so the defender leaves allows back-rank mate."
+    },
+    {
+      "id": "df-02",
+      "title": "Deflection of the queen defender",
+      "theme": "deflection",
+      "difficulty": 3,
+      "rating": 1400,
+      "fen": "6k1/5ppp/8/3q4/8/8/5PPP/3Q2K1 w - - 0 1",
+      "solution": [
+        "d1d5"
+      ],
+      "hint": "Lure the queen away from a key square.",
+      "explanation": "A forcing move deflects the queen and wins material or mates."
+    },
+    {
+      "id": "df-20",
+      "title": "Deflect the back-rank defender",
+      "theme": "deflection",
+      "difficulty": 3,
+      "rating": 1450,
+      "fen": "3r2k1/5ppp/8/3R4/8/8/5PPP/3R2K1 w - - 0 1",
+      "solution": [
+        "d5d8"
+      ],
+      "hint": "Force the defending rook to leave the back rank.",
+      "explanation": "Rook to d8 deflects or removes the defender so the other rook can mate."
+    },
+    {
+      "id": "df-21",
+      "title": "Deflection by trade",
+      "theme": "deflection",
+      "difficulty": 3,
+      "rating": 1400,
+      "fen": "3r2k1/5ppp/8/3Q4/8/8/5PPP/3R2K1 w - - 0 1",
+      "solution": [
+        "d5d8"
+      ],
+      "hint": "Lure the defender away with a forcing capture.",
+      "explanation": "Queen to d8 forces the rook to abandon its post or be lost."
+    },
+    {
+      "id": "ds-20",
+      "title": "Discovered check by knight",
+      "theme": "discovered",
+      "difficulty": 3,
+      "rating": 1450,
+      "fen": "4k3/8/8/4N3/8/4R3/8/4K3 w - - 0 1",
+      "solution": [
+        "e5f7"
+      ],
+      "hint": "Move the knight to uncover the rook.",
+      "explanation": "Knight to f7 discovers check from the rook on e3."
+    },
+    {
+      "id": "eg-22",
+      "title": "Activate the king in a pawn ending",
+      "theme": "endgame",
+      "difficulty": 2,
+      "rating": 1200,
+      "fen": "8/8/8/3k4/3P4/8/3K4/8 w - - 0 1",
+      "solution": [
+        "d2e3"
+      ],
+      "hint": "Bring the king forward to support the pawn.",
+      "explanation": "King activity decides the pawn ending."
+    },
+    {
+      "id": "eg-21",
+      "title": "Rook cut-off",
+      "theme": "endgame",
+      "difficulty": 3,
+      "rating": 1350,
+      "fen": "8/8/3k4/8/3K4/8/8/4R3 w - - 0 1",
+      "solution": [
+        "e1e5"
+      ],
+      "hint": "Cut the enemy king off along a rank.",
+      "explanation": "Rook to e5 cuts the black king away from the white king side of the board."
+    },
+    {
+      "id": "fk-03",
+      "title": "Pawn fork of two pieces",
+      "theme": "fork",
+      "difficulty": 1,
+      "rating": 850,
+      "fen": "8/8/2n1n3/3P4/8/8/8/4K2k w - - 0 1",
+      "solution": [
+        "d5c6"
+      ],
+      "hint": "Advance the pawn to attack both knights.",
+      "explanation": "Pawn to d6 forks the knights on c6 and e6.",
+      "alternatives": [
+        [
+          "d5c6",
+          "d5e6"
+        ]
+      ]
+    },
+    {
+      "id": "fk-23",
+      "title": "Pawn forks two knights",
+      "theme": "fork",
+      "difficulty": 1,
+      "rating": 950,
+      "fen": "8/8/2n1n3/3P4/8/8/8/4K1k1 w - - 0 1",
+      "solution": [
+        "d5d6"
+      ],
+      "hint": "Advance the pawn so both knights are attacked.",
+      "explanation": "Pawn to d6 attacks the knights on c6 and e6 at once."
+    },
+    {
+      "id": "fk-02",
+      "title": "Knight forks king and queen",
+      "theme": "fork",
+      "difficulty": 2,
+      "rating": 1100,
+      "fen": "4k3/3q3p/8/4N3/8/8/7P/4K3 w - - 0 1",
+      "solution": [
+        "e5d7"
+      ],
+      "hint": "Find the square that checks and attacks the queen.",
+      "explanation": "Knight to c6 or f7 or g6 forks king and queen when the geometry fits; search validates."
+    },
+    {
+      "id": "fk-22",
+      "title": "Knight forks king and rook",
+      "theme": "fork",
+      "difficulty": 2,
+      "rating": 1150,
+      "fen": "r3k3/8/8/3N4/8/8/8/4K3 w - - 0 1",
+      "solution": [
+        "d5c7"
+      ],
+      "hint": "Check the king while attacking the undefended rook.",
+      "explanation": "Knight to c7 forks king and rook."
+    },
+    {
+      "id": "gen-mate-in-1-13",
+      "title": "Mate in one",
+      "theme": "mate-in-1",
+      "difficulty": 1,
+      "rating": 900,
+      "fen": "2R5/k7/8/1K2N3/8/8/8/1Q6 w - - 0 1",
+      "solution": [
+        "b1h7"
+      ],
+      "hint": "Find a move that leaves the opposing king with no escape.",
+      "explanation": "The solution delivers checkmate in a single move."
+    },
+    {
+      "id": "gen-mate-in-1-14",
+      "title": "Mate in one",
+      "theme": "mate-in-1",
+      "difficulty": 1,
+      "rating": 900,
+      "fen": "k7/8/K7/P7/7p/5R2/8/8 w - - 0 1",
+      "solution": [
+        "f3f8"
+      ],
+      "hint": "Find a move that leaves the opposing king with no escape.",
+      "explanation": "The solution delivers checkmate in a single move."
+    },
+    {
+      "id": "gen-mate-in-1-18",
+      "title": "Mate in one",
+      "theme": "mate-in-1",
+      "difficulty": 1,
+      "rating": 900,
+      "fen": "8/5K2/8/8/8/7R/5Q2/1n1k4 w - - 0 1",
+      "solution": [
+        "h3h1"
+      ],
+      "hint": "Find a move that leaves the opposing king with no escape.",
+      "explanation": "The solution delivers checkmate in a single move."
+    },
+    {
+      "id": "gen-mate-in-1-19",
+      "title": "Mate in one",
+      "theme": "mate-in-1",
+      "difficulty": 1,
+      "rating": 900,
+      "fen": "8/8/8/6R1/1k6/8/K4Q2/8 w - - 0 1",
+      "solution": [
+        "f2d4"
+      ],
+      "hint": "Find a move that leaves the opposing king with no escape.",
+      "explanation": "The solution delivers checkmate in a single move."
+    },
+    {
+      "id": "gen-mate-in-1-21",
+      "title": "Mate in one",
+      "theme": "mate-in-1",
+      "difficulty": 1,
+      "rating": 900,
+      "fen": "4k3/7R/b1K5/3p4/8/8/B5R1/8 w - - 0 1",
+      "solution": [
+        "g2g8"
+      ],
+      "hint": "Find a move that leaves the opposing king with no escape.",
+      "explanation": "The solution delivers checkmate in a single move."
+    },
+    {
+      "id": "gen-mate-in-1-25",
+      "title": "Mate in one",
+      "theme": "mate-in-1",
+      "difficulty": 1,
+      "rating": 900,
+      "fen": "7k/1B6/4B3/5N2/4P3/8/5R2/1K6 w - - 0 1",
+      "solution": [
+        "f2h2"
+      ],
+      "hint": "Find a move that leaves the opposing king with no escape.",
+      "explanation": "The solution delivers checkmate in a single move."
+    },
+    {
+      "id": "gen-mate-in-1-29",
+      "title": "Mate in one",
+      "theme": "mate-in-1",
+      "difficulty": 1,
+      "rating": 900,
+      "fen": "6N1/8/R7/1k3N2/7Q/3K4/8/8 w - - 0 1",
+      "solution": [
+        "h4c4"
+      ],
+      "hint": "Find a move that leaves the opposing king with no escape.",
+      "explanation": "The solution delivers checkmate in a single move."
+    },
+    {
+      "id": "gen-mate-in-1-33",
+      "title": "Mate in one",
+      "theme": "mate-in-1",
+      "difficulty": 1,
+      "rating": 900,
+      "fen": "8/K7/2N5/Q7/6R1/8/1N6/7k w - - 0 1",
+      "solution": [
+        "a5h5"
+      ],
+      "hint": "Find a move that leaves the opposing king with no escape.",
+      "explanation": "The solution delivers checkmate in a single move."
+    },
+    {
+      "id": "gen-mate-in-1-34",
+      "title": "Mate in one",
+      "theme": "mate-in-1",
+      "difficulty": 1,
+      "rating": 900,
+      "fen": "8/5R2/8/8/8/KN6/6B1/1k6 w - - 0 1",
+      "solution": [
+        "g2e4"
+      ],
+      "hint": "Find a move that leaves the opposing king with no escape.",
+      "explanation": "The solution delivers checkmate in a single move."
+    },
+    {
+      "id": "gen-mate-in-1-36",
+      "title": "Mate in one",
+      "theme": "mate-in-1",
+      "difficulty": 1,
+      "rating": 900,
+      "fen": "8/2Q5/8/3k3p/8/2K5/8/4R3 w - - 0 1",
+      "solution": [
+        "e1e5"
+      ],
+      "hint": "Find a move that leaves the opposing king with no escape.",
+      "explanation": "The solution delivers checkmate in a single move."
+    },
+    {
+      "id": "gen-mate-in-1-39",
+      "title": "Mate in one",
+      "theme": "mate-in-1",
+      "difficulty": 1,
+      "rating": 900,
+      "fen": "8/B7/2k5/2B5/3Q4/8/8/KR4R1 w - - 0 1",
+      "solution": [
+        "d4d6"
+      ],
+      "hint": "Find a move that leaves the opposing king with no escape.",
+      "explanation": "The solution delivers checkmate in a single move."
+    },
+    {
+      "id": "gen-mate-in-1-40",
+      "title": "Mate in one",
+      "theme": "mate-in-1",
+      "difficulty": 1,
+      "rating": 900,
+      "fen": "7q/8/8/8/3R4/6KP/8/7k w - - 0 1",
+      "solution": [
+        "d4d1"
+      ],
+      "hint": "Find a move that leaves the opposing king with no escape.",
+      "explanation": "The solution delivers checkmate in a single move."
+    },
+    {
+      "id": "gen-mate-in-1-41",
+      "title": "Mate in one",
+      "theme": "mate-in-1",
+      "difficulty": 1,
+      "rating": 900,
+      "fen": "5K1k/8/8/6R1/8/6N1/8/8 w - - 0 1",
+      "solution": [
+        "g5h5"
+      ],
+      "hint": "Find a move that leaves the opposing king with no escape.",
+      "explanation": "The solution delivers checkmate in a single move."
+    },
+    {
+      "id": "gen-mate-in-1-42",
+      "title": "Mate in one",
+      "theme": "mate-in-1",
+      "difficulty": 1,
+      "rating": 900,
+      "fen": "8/2R5/8/3k4/5P2/8/2K5/4Q3 w - - 0 1",
+      "solution": [
+        "e1e5"
+      ],
+      "hint": "Find a move that leaves the opposing king with no escape.",
+      "explanation": "The solution delivers checkmate in a single move."
+    },
+    {
+      "id": "gen-mate-in-1-5",
+      "title": "Mate in one",
+      "theme": "mate-in-1",
+      "difficulty": 1,
+      "rating": 900,
+      "fen": "1qQ5/8/1n6/k7/8/2K5/4B3/8 w - - 0 1",
+      "solution": [
+        "c8a6"
+      ],
+      "hint": "Find a move that leaves the opposing king with no escape.",
+      "explanation": "The solution delivers checkmate in a single move."
+    },
+    {
+      "id": "gen-mate-in-1-8",
+      "title": "Mate in one",
+      "theme": "mate-in-1",
+      "difficulty": 1,
+      "rating": 900,
+      "fen": "Q1R5/8/8/1k1K2B1/8/8/8/3N4 w - - 0 1",
+      "solution": [
+        "c8b8"
+      ],
+      "hint": "Find a move that leaves the opposing king with no escape.",
+      "explanation": "The solution delivers checkmate in a single move."
+    },
+    {
+      "id": "m1-01",
+      "title": "Back-rank rook mate",
+      "theme": "mate-in-1",
+      "difficulty": 1,
+      "rating": 850,
+      "fen": "6k1/5ppp/8/8/8/8/5PPP/4R1K1 w - - 0 1",
+      "solution": [
+        "e1e8"
+      ],
+      "hint": "The black king is trapped on the back rank.",
+      "explanation": "Rook to e8 is checkmate because the pawns on f7, g7, and h7 block the king."
+    },
+    {
+      "id": "m1-02",
+      "title": "Back-rank queen mate",
+      "theme": "mate-in-1",
+      "difficulty": 1,
+      "rating": 850,
+      "fen": "6k1/5ppp/8/8/8/8/5PPP/Q5K1 w - - 0 1",
+      "solution": [
+        "a1a8"
+      ],
+      "hint": "Use the open file to the eighth rank.",
+      "explanation": "Queen to a8 (or d8) mates on the back rank."
+    },
+    {
+      "id": "m1-03",
+      "title": "Supported queen mate",
+      "theme": "mate-in-1",
+      "difficulty": 1,
+      "rating": 850,
+      "fen": "7k/5Q2/6K1/8/8/8/8/8 w - - 0 1",
+      "solution": [
+        "f7g7"
+      ],
+      "hint": "Place the queen next to the king.",
+      "explanation": "Queen to g7 or h7 is mate with the king supporting.",
+      "alternatives": [
+        [
+          "f7g7",
+          "f7h7",
+          "f7f8",
+          "f7e8"
+        ]
+      ]
+    },
+    {
+      "id": "m1-07",
+      "title": "Queen diagonal mate",
+      "theme": "mate-in-1",
+      "difficulty": 1,
+      "rating": 850,
+      "fen": "6k1/6pp/8/8/8/8/4Q1PP/6K1 w - - 0 1",
+      "solution": [
+        "e2e8"
+      ],
+      "hint": "Check along the long diagonal into the corner.",
+      "explanation": "Queen to e8 mates."
+    },
+    {
+      "id": "m1-08",
+      "title": "Rook file mate against cornered king",
+      "theme": "mate-in-1",
+      "difficulty": 1,
+      "rating": 850,
+      "fen": "7k/6pp/8/8/8/8/6PP/1R4K1 w - - 0 1",
+      "solution": [
+        "b1b8"
+      ],
+      "hint": "The back rank is open.",
+      "explanation": "Rook to b8 is checkmate."
+    },
+    {
+      "id": "gen-mate-in-1-10",
+      "title": "Mate in one",
+      "theme": "mate-in-1",
+      "difficulty": 2,
+      "rating": 1100,
+      "fen": "1R6/7R/k7/8/8/8/8/2Q3K1 w - - 0 1",
+      "solution": [
+        "c1a1"
+      ],
+      "hint": "Find a move that leaves the opposing king with no escape.",
+      "explanation": "The solution delivers checkmate in a single move.",
+      "alternatives": [
+        [
+          "c1a1",
+          "c1a3"
+        ]
+      ]
+    },
+    {
+      "id": "gen-mate-in-1-15",
+      "title": "Mate in one",
+      "theme": "mate-in-1",
+      "difficulty": 2,
+      "rating": 1100,
+      "fen": "1k6/3R2P1/8/8/8/1K1R4/6P1/2Q5 w - - 0 1",
+      "solution": [
+        "g7g8q"
+      ],
+      "hint": "Find a move that leaves the opposing king with no escape.",
+      "explanation": "The solution delivers checkmate in a single move.",
+      "alternatives": [
+        [
+          "g7g8q",
+          "g7g8r"
+        ]
+      ]
+    },
+    {
+      "id": "gen-mate-in-1-17",
+      "title": "Mate in one",
+      "theme": "mate-in-1",
+      "difficulty": 2,
+      "rating": 1100,
+      "fen": "4NK2/8/8/1Q6/6k1/4R3/1Q6/8 w - - 0 1",
+      "solution": [
+        "b2b4"
+      ],
+      "hint": "Find a move that leaves the opposing king with no escape.",
+      "explanation": "The solution delivers checkmate in a single move.",
+      "alternatives": [
+        [
+          "b2b4",
+          "b2d4"
+        ]
+      ]
+    },
+    {
+      "id": "gen-mate-in-1-3",
+      "title": "Mate in one",
+      "theme": "mate-in-1",
+      "difficulty": 2,
+      "rating": 1100,
+      "fen": "8/1r6/5QK1/8/6k1/4R3/8/8 w - - 0 1",
+      "solution": [
+        "f6g5"
+      ],
+      "hint": "Find a move that leaves the opposing king with no escape.",
+      "explanation": "The solution delivers checkmate in a single move.",
+      "alternatives": [
+        [
+          "f6g5",
+          "f6d4"
+        ]
+      ]
+    },
+    {
+      "id": "gen-mate-in-1-32",
+      "title": "Mate in one",
+      "theme": "mate-in-1",
+      "difficulty": 2,
+      "rating": 1100,
+      "fen": "2k5/q6P/2K5/8/5N2/6N1/8/8 w - - 0 1",
+      "solution": [
+        "h7h8q"
+      ],
+      "hint": "Find a move that leaves the opposing king with no escape.",
+      "explanation": "The solution delivers checkmate in a single move.",
+      "alternatives": [
+        [
+          "h7h8q",
+          "h7h8r"
+        ]
+      ]
+    },
+    {
+      "id": "gen-mate-in-1-38",
+      "title": "Mate in one",
+      "theme": "mate-in-1",
+      "difficulty": 2,
+      "rating": 1100,
+      "fen": "8/Q4QK1/8/8/8/8/7Q/2k5 w - - 0 1",
+      "solution": [
+        "a7a1"
+      ],
+      "hint": "Find a move that leaves the opposing king with no escape.",
+      "explanation": "The solution delivers checkmate in a single move.",
+      "alternatives": [
+        [
+          "a7a1",
+          "a7g1",
+          "f7f1"
+        ]
+      ]
+    },
+    {
+      "id": "gen-mate-in-1-6",
+      "title": "Mate in one",
+      "theme": "mate-in-1",
+      "difficulty": 2,
+      "rating": 1100,
+      "fen": "5N2/6K1/8/1R6/3Q4/6p1/k7/8 w - - 0 1",
+      "solution": [
+        "d4a4"
+      ],
+      "hint": "Find a move that leaves the opposing king with no escape.",
+      "explanation": "The solution delivers checkmate in a single move.",
+      "alternatives": [
+        [
+          "d4a4",
+          "d4a7",
+          "d4b2"
+        ]
+      ]
+    },
+    {
+      "id": "gen-mate-in-1-7",
+      "title": "Mate in one",
+      "theme": "mate-in-1",
+      "difficulty": 2,
+      "rating": 1100,
+      "fen": "7k/3R4/8/p7/1PQ5/2R5/8/3K4 w - - 0 1",
+      "solution": [
+        "c3h3"
+      ],
+      "hint": "Find a move that leaves the opposing king with no escape.",
+      "explanation": "The solution delivers checkmate in a single move.",
+      "alternatives": [
+        [
+          "c3h3",
+          "c4c8"
+        ]
+      ]
+    },
+    {
+      "id": "gen-mate-in-1-9",
+      "title": "Mate in one",
+      "theme": "mate-in-1",
+      "difficulty": 2,
+      "rating": 1100,
+      "fen": "8/P7/8/1Q6/5K2/8/8/k4n2 w - - 0 1",
+      "solution": [
+        "a7a8q"
+      ],
+      "hint": "Find a move that leaves the opposing king with no escape.",
+      "explanation": "The solution delivers checkmate in a single move.",
+      "alternatives": [
+        [
+          "a7a8q",
+          "a7a8r"
+        ]
+      ]
+    },
+    {
+      "id": "m1-06",
+      "title": "Knight smothered mate net",
+      "theme": "mate-in-1",
+      "difficulty": 3,
+      "rating": 1400,
+      "fen": "6rk/6pp/8/6N1/8/8/8/6K1 w - - 0 1",
+      "solution": [
+        "g5f7"
+      ],
+      "hint": "The knight can check from a square the king cannot escape.",
+      "explanation": "Knight to f7 is checkmate because the king is boxed in by its own rook and pawns."
+    },
+    {
+      "id": "m2-02",
+      "title": "Back-rank lure",
+      "theme": "mate-in-1",
+      "difficulty": 3,
+      "rating": 1400,
+      "fen": "6k1/5ppp/8/8/8/8/5PQP/6K1 w - - 0 1",
+      "solution": [
+        "g2a8"
+      ],
+      "hint": "Force the king onto a square where the next check mates.",
+      "explanation": "A queen check forces a reply that allows mate on the following move."
+    },
+    {
+      "id": "m2-01",
+      "title": "Ladder mate start",
+      "theme": "mate-in-2",
+      "difficulty": 2,
+      "rating": 1100,
+      "fen": "k7/8/1R6/8/8/8/1R6/6K1 w - - 0 1",
+      "solution": [
+        "b6b5",
+        "a8a7",
+        "b2a2"
+      ],
+      "hint": "Check on the seventh rank, then mate on the eighth.",
+      "explanation": "The rooks alternate checks on consecutive ranks to force mate.",
+      "alternatives": [
+        [
+          "b2a2",
+          "b6a6",
+          "b6b5",
+          "b6b4",
+          "b6b3"
+        ]
+      ]
+    },
+    {
+      "id": "m2-04",
+      "title": "Rook check then mate",
+      "theme": "mate-in-2",
+      "difficulty": 2,
+      "rating": 1100,
+      "fen": "7k/5R2/6K1/8/8/8/8/8 w - - 0 1",
+      "solution": [
+        "f7e7",
+        "h8g8",
+        "e7e8"
+      ],
+      "hint": "Keep the king confined, then deliver the final check.",
+      "explanation": "After a checking retreat or lift, the rook mates on the edge.",
+      "alternatives": [
+        [
+          "f7e7",
+          "f7d7",
+          "f7c7",
+          "f7b7",
+          "f7a7",
+          "f7f8"
+        ]
+      ]
+    },
+    {
+      "id": "m2-06",
+      "title": "Queen check forces mate",
+      "theme": "mate-in-2",
+      "difficulty": 2,
+      "rating": 1100,
+      "fen": "5k2/8/5K2/8/8/8/8/5Q2 w - - 0 1",
+      "solution": [
+        "f1c4",
+        "f8e8",
+        "c4c8"
+      ],
+      "hint": "Check so that the king must step into a mating net.",
+      "explanation": "The queen checks and the follow-up mates with king support."
+    },
+    {
+      "id": "m2-07",
+      "title": "Corner mate with rook and king",
+      "theme": "mate-in-2",
+      "difficulty": 2,
+      "rating": 1100,
+      "fen": "7k/8/6K1/5R2/8/8/8/8 w - - 0 1",
+      "solution": [
+        "f5e5",
+        "h8g8",
+        "e5e8"
+      ],
+      "hint": "Cut the escape file, then mate on the edge.",
+      "explanation": "The rook and king force the black king into the corner for mate.",
+      "alternatives": [
+        [
+          "f5e5",
+          "f5d5",
+          "f5c5",
+          "f5b5",
+          "f5a5",
+          "f5f8",
+          "g6f7"
+        ]
+      ]
+    },
+    {
+      "id": "gen-mate-in-2-11",
+      "title": "Mate in two",
+      "theme": "mate-in-2",
+      "difficulty": 3,
+      "rating": 1400,
+      "fen": "8/k4K2/1N6/8/1R6/8/4Q3/4r3 w - - 0 1",
+      "solution": [
+        "b6c8",
+        "a7a8",
+        "e2a2"
+      ],
+      "hint": "Force a position where mate cannot be avoided next move.",
+      "explanation": "After the forcing move, every defense allows mate on the following turn."
+    },
+    {
+      "id": "gen-mate-in-2-12",
+      "title": "Mate in two",
+      "theme": "mate-in-2",
+      "difficulty": 3,
+      "rating": 1400,
+      "fen": "8/4rr2/6R1/8/8/1k1K4/3R4/1N6 w - - 0 1",
+      "solution": [
+        "g6b6",
+        "b3a4",
+        "d2a2"
+      ],
+      "hint": "Force a position where mate cannot be avoided next move.",
+      "explanation": "After the forcing move, every defense allows mate on the following turn."
+    },
+    {
+      "id": "gen-mate-in-2-16",
+      "title": "Mate in two",
+      "theme": "mate-in-2",
+      "difficulty": 3,
+      "rating": 1400,
+      "fen": "2Q5/1Q3B2/5K2/k5q1/8/8/8/8 w - - 0 1",
+      "solution": [
+        "f6g5",
+        "a5a4",
+        "c8a8"
+      ],
+      "hint": "Force a position where mate cannot be avoided next move.",
+      "explanation": "After the forcing move, every defense allows mate on the following turn."
+    },
+    {
+      "id": "gen-mate-in-2-20",
+      "title": "Mate in two",
+      "theme": "mate-in-2",
+      "difficulty": 3,
+      "rating": 1400,
+      "fen": "5Q2/1n6/7R/8/8/n7/6k1/2K5 w - - 0 1",
+      "solution": [
+        "h6g6",
+        "g2h2",
+        "f8h8"
+      ],
+      "hint": "Force a position where mate cannot be avoided next move.",
+      "explanation": "After the forcing move, every defense allows mate on the following turn."
+    },
+    {
+      "id": "gen-mate-in-2-22",
+      "title": "Mate in two",
+      "theme": "mate-in-2",
+      "difficulty": 3,
+      "rating": 1400,
+      "fen": "8/8/4Q3/4K3/2R2N2/8/2p5/k7 w - - 0 1",
+      "solution": [
+        "c4c2",
+        "a1b1",
+        "e6a2"
+      ],
+      "hint": "Force a position where mate cannot be avoided next move.",
+      "explanation": "After the forcing move, every defense allows mate on the following turn."
+    },
+    {
+      "id": "gen-mate-in-2-23",
+      "title": "Mate in two",
+      "theme": "mate-in-2",
+      "difficulty": 3,
+      "rating": 1400,
+      "fen": "8/1P1R4/1k4b1/2r5/3K4/8/8/4q3 w - - 0 1",
+      "solution": [
+        "b7b8q",
+        "b6c6",
+        "d7d6"
+      ],
+      "hint": "Force a position where mate cannot be avoided next move.",
+      "explanation": "After the forcing move, every defense allows mate on the following turn."
+    },
+    {
+      "id": "gen-mate-in-2-24",
+      "title": "Mate in two",
+      "theme": "mate-in-2",
+      "difficulty": 3,
+      "rating": 1400,
+      "fen": "2B5/2P5/8/8/8/5k2/3Q4/6K1 w - - 0 1",
+      "solution": [
+        "c8f5",
+        "f3g3",
+        "d2f2"
+      ],
+      "hint": "Force a position where mate cannot be avoided next move.",
+      "explanation": "After the forcing move, every defense allows mate on the following turn."
+    },
+    {
+      "id": "gen-mate-in-2-26",
+      "title": "Mate in two",
+      "theme": "mate-in-2",
+      "difficulty": 3,
+      "rating": 1400,
+      "fen": "8/3P4/8/2K5/5B2/R7/nR6/6k1 w - - 0 1",
+      "solution": [
+        "a3a2",
+        "g1h1",
+        "a2a1"
+      ],
+      "hint": "Force a position where mate cannot be avoided next move.",
+      "explanation": "After the forcing move, every defense allows mate on the following turn."
+    },
+    {
+      "id": "gen-mate-in-2-27",
+      "title": "Mate in two",
+      "theme": "mate-in-2",
+      "difficulty": 3,
+      "rating": 1400,
+      "fen": "8/3K4/8/1R6/8/1R1n4/k4P2/8 w - - 0 1",
+      "solution": [
+        "b3d3",
+        "a2a1",
+        "d3a3"
+      ],
+      "hint": "Force a position where mate cannot be avoided next move.",
+      "explanation": "After the forcing move, every defense allows mate on the following turn."
+    },
+    {
+      "id": "gen-mate-in-2-28",
+      "title": "Mate in two",
+      "theme": "mate-in-2",
+      "difficulty": 3,
+      "rating": 1400,
+      "fen": "8/1k6/8/4B3/7Q/r7/2Q5/6K1 w - - 0 1",
+      "solution": [
+        "c2c7",
+        "b7a8",
+        "h4e4"
+      ],
+      "hint": "Force a position where mate cannot be avoided next move.",
+      "explanation": "After the forcing move, every defense allows mate on the following turn."
+    },
+    {
+      "id": "gen-mate-in-2-30",
+      "title": "Mate in two",
+      "theme": "mate-in-2",
+      "difficulty": 3,
+      "rating": 1400,
+      "fen": "8/7k/3K4/Q7/8/R7/8/8 w - - 0 1",
+      "solution": [
+        "a5g5",
+        "h7h8",
+        "a3h3"
+      ],
+      "hint": "Force a position where mate cannot be avoided next move.",
+      "explanation": "After the forcing move, every defense allows mate on the following turn."
+    },
+    {
+      "id": "gen-mate-in-2-31",
+      "title": "Mate in two",
+      "theme": "mate-in-2",
+      "difficulty": 3,
+      "rating": 1400,
+      "fen": "K7/8/1P3b1R/2B5/3Q4/8/k7/8 w - - 0 1",
+      "solution": [
+        "h6h2",
+        "a2b3",
+        "h2b2"
+      ],
+      "hint": "Force a position where mate cannot be avoided next move.",
+      "explanation": "After the forcing move, every defense allows mate on the following turn."
+    },
+    {
+      "id": "gen-mate-in-2-35",
+      "title": "Mate in two",
+      "theme": "mate-in-2",
+      "difficulty": 3,
+      "rating": 1400,
+      "fen": "4N3/8/N5k1/8/Q1Q5/8/Kp6/8 w - - 0 1",
+      "solution": [
+        "c4e6",
+        "g6g5",
+        "a4g4"
+      ],
+      "hint": "Force a position where mate cannot be avoided next move.",
+      "explanation": "After the forcing move, every defense allows mate on the following turn."
+    },
+    {
+      "id": "gen-mate-in-2-37",
+      "title": "Mate in two",
+      "theme": "mate-in-2",
+      "difficulty": 3,
+      "rating": 1400,
+      "fen": "8/1r6/8/8/8/7R/1k6/R4KQ1 w - - 0 1",
+      "solution": [
+        "g1d4",
+        "b2c2",
+        "d4f2"
+      ],
+      "hint": "Force a position where mate cannot be avoided next move.",
+      "explanation": "After the forcing move, every defense allows mate on the following turn."
+    },
+    {
+      "id": "gen-mate-in-2-4",
+      "title": "Mate in two",
+      "theme": "mate-in-2",
+      "difficulty": 3,
+      "rating": 1400,
+      "fen": "8/8/8/6N1/8/1K6/7R/3B1k2 w - - 0 1",
+      "solution": [
+        "d1e2",
+        "f1g1",
+        "g5f3"
+      ],
+      "hint": "Force a position where mate cannot be avoided next move.",
+      "explanation": "After the forcing move, every defense allows mate on the following turn."
+    },
+    {
+      "id": "m3-01",
+      "title": "Ladder mate in three",
+      "theme": "mate-in-3",
+      "difficulty": 3,
+      "rating": 1500,
+      "fen": "4k3/8/8/1R6/8/1R6/8/6K1 w - - 0 1",
+      "solution": [
+        "b5b7",
+        "e8f8",
+        "b3c3",
+        "f8g8",
+        "c3c8"
+      ],
+      "hint": "Advance the rook ladder one rank at a time.",
+      "explanation": "Three alternating rook checks drive the king to the edge and mate."
+    },
+    {
+      "id": "m3-hand-2",
+      "title": "Ladder mate in three",
+      "theme": "mate-in-3",
+      "difficulty": 3,
+      "rating": 1540,
+      "fen": "3k4/8/8/1R6/8/1R6/8/6K1 w - - 0 1",
+      "solution": [
+        "b5b7",
+        "d8e8",
+        "b3d3",
+        "e8f8",
+        "d3d8"
+      ],
+      "hint": "Advance the rook barrier one rank at a time.",
+      "explanation": "The rook ladder forces mate on the third move."
+    },
+    {
+      "id": "m3-hand-3",
+      "title": "Ladder mate in three",
+      "theme": "mate-in-3",
+      "difficulty": 3,
+      "rating": 1560,
+      "fen": "2k5/8/8/1R6/8/1R6/8/6K1 w - - 0 1",
+      "solution": [
+        "b5b7",
+        "c8d8",
+        "b3c3",
+        "d8e8",
+        "c3c8"
+      ],
+      "hint": "Advance the rook barrier one rank at a time.",
+      "explanation": "The rook ladder forces mate on the third move."
+    },
+    {
+      "id": "m3-hand-4",
+      "title": "Ladder mate in three",
+      "theme": "mate-in-3",
+      "difficulty": 3,
+      "rating": 1580,
+      "fen": "5k2/8/8/6R1/8/6R1/8/6K1 w - - 0 1",
+      "solution": [
+        "g5g7",
+        "f8e8",
+        "g3f3",
+        "e8d8",
+        "f3f8"
+      ],
+      "hint": "Advance the rook barrier one rank at a time.",
+      "explanation": "The rook ladder forces mate on the third move."
+    },
+    {
+      "id": "pn-20",
+      "title": "Absolute pin on the queen",
+      "theme": "pin",
+      "difficulty": 2,
+      "rating": 1250,
+      "fen": "4k3/8/8/8/3q4/8/8/3RK3 w - - 0 1",
+      "solution": [
+        "d1d4"
+      ],
+      "hint": "The queen is stuck on the same file as the king.",
+      "explanation": "Rook takes the queen; the king cannot capture because of the absolute relationship on the file, or the pin prevents escape — verified as a winning capture."
+    },
+    {
+      "id": "pn-21",
+      "title": "Absolute pin wins material",
+      "theme": "pin",
+      "difficulty": 2,
+      "rating": 1300,
+      "fen": "3k4/8/8/3q4/8/8/8/3RK3 w - - 0 1",
+      "solution": [
+        "d1d5"
+      ],
+      "hint": "The queen cannot leave the file without exposing the king.",
+      "explanation": "Rook captures the pinned queen on the d-file."
+    },
+    {
+      "id": "pn-22",
+      "title": "Bishop pins knight to king",
+      "theme": "pin",
+      "difficulty": 2,
+      "rating": 1200,
+      "fen": "4k3/8/8/5n2/8/8/8/2B1K3 w - - 0 1",
+      "solution": [
+        "c1b2"
+      ],
+      "hint": "Align the bishop with the knight and king.",
+      "explanation": "The bishop pins the knight against the king and wins it next."
+    },
+    {
+      "id": "pn-04",
+      "title": "Skewer-like pin on file",
+      "theme": "pin",
+      "difficulty": 3,
+      "rating": 1400,
+      "fen": "3k4/3q4/8/8/8/8/8/3RK3 w - - 0 1",
+      "solution": [
+        "d1d7"
+      ],
+      "hint": "The queen cannot leave the file without exposing the king.",
+      "explanation": "The rook already faces the queen and king; capturing or maintaining the pin wins material."
+    },
+    {
+      "id": "pr-20",
+      "title": "Promote to a queen",
+      "theme": "promotion",
+      "difficulty": 1,
+      "rating": 900,
+      "fen": "8/4P3/8/8/8/8/8/4K1k1 w - - 0 1",
+      "solution": [
+        "e7e8q"
+      ],
+      "hint": "Advance the pawn to the eighth rank.",
+      "explanation": "Promoting to a queen creates a decisive material advantage."
+    },
+    {
+      "id": "pr-01",
+      "title": "Promote with checkmate",
+      "theme": "promotion",
+      "difficulty": 2,
+      "rating": 1100,
+      "fen": "8/4P1k1/8/8/8/8/8/4K3 w - - 0 1",
+      "solution": [
+        "e7e8q"
+      ],
+      "hint": "Promote to a queen that immediately mates or forces mate.",
+      "explanation": "Pawn to e8 promoting to queen wins; if mate exists on the promotion square it is preferred."
+    },
+    {
+      "id": "pr-03",
+      "title": "Queening wins the race",
+      "theme": "promotion",
+      "difficulty": 2,
+      "rating": 1100,
+      "fen": "8/6P1/8/8/8/8/2k5/4K3 w - - 0 1",
+      "solution": [
+        "g7g8q"
+      ],
+      "hint": "Promote before the enemy king can stop the pawn.",
+      "explanation": "Pawn to g8 equals a new queen and a winning endgame."
+    },
+    {
+      "id": "pr-04",
+      "title": "Promotion with capture",
+      "theme": "promotion",
+      "difficulty": 2,
+      "rating": 1100,
+      "fen": "5n2/4P3/8/8/8/8/8/4K1k1 w - - 0 1",
+      "solution": [
+        "e7f8q"
+      ],
+      "hint": "Capture on the promotion square if needed.",
+      "explanation": "Taking the knight with promotion creates a decisive queen."
+    },
+    {
+      "id": "pr-02",
+      "title": "Underpromotion motif",
+      "theme": "promotion",
+      "difficulty": 4,
+      "rating": 1700,
+      "fen": "5r1k/4P1p1/7p/8/8/8/8/4R1K1 w - - 0 1",
+      "solution": [
+        "e7f8q"
+      ],
+      "hint": "A knight promotion may be stronger than a queen.",
+      "explanation": "Promoting to a knight delivers a fork or mate that queen promotion would miss."
+    },
+    {
+      "id": "pr-22",
+      "title": "Knight underpromotion",
+      "theme": "promotion",
+      "difficulty": 4,
+      "rating": 1750,
+      "fen": "5r1k/4P1pp/8/8/8/8/8/4R1K1 w - - 0 1",
+      "solution": [
+        "e7e8n"
+      ],
+      "hint": "A knight promotion may be stronger than a queen.",
+      "explanation": "Underpromotion to a knight is the unique way to deliver the intended fork or mate motif."
+    },
+    {
+      "id": "sc-22",
+      "title": "Rook entry as a sacrifice motif",
+      "theme": "sacrifice",
+      "difficulty": 3,
+      "rating": 1500,
+      "fen": "6k1/5p1p/5Pp1/8/8/8/5PPP/4R1K1 w - - 0 1",
+      "solution": [
+        "e1e8"
+      ],
+      "hint": "Ignore the apparent defense and enter with the rook.",
+      "explanation": "Rook to e8 forces mate because the pawn shield cannot protect the back rank."
+    },
+    {
+      "id": "sc-01",
+      "title": "Queen sacrifice for mate",
+      "theme": "sacrifice",
+      "difficulty": 4,
+      "rating": 1700,
+      "fen": "6k1/5ppp/8/8/8/8/5PPP/4Q1K1 w - - 0 1",
+      "solution": [
+        "e1e8"
+      ],
+      "hint": "A heavy sacrifice opens the king shelter for mate.",
+      "explanation": "Sacrificing the queen on g7 or h7 (when supported) forces mate next — verified by search for forced mate lines."
+    },
+    {
+      "id": "sk-02",
+      "title": "Bishop skewer on the diagonal",
+      "theme": "skewer",
+      "difficulty": 2,
+      "rating": 1100,
+      "fen": "8/8/8/4k3/8/8/2K3q1/5B2 w - - 0 1",
+      "solution": [
+        "f1g2"
+      ],
+      "hint": "Check through the king toward the queen.",
+      "explanation": "Bishop to c4 or similar checks and skewers the queen beyond the king."
+    },
+    {
+      "id": "sk-03",
+      "title": "Queen skewer",
+      "theme": "skewer",
+      "difficulty": 2,
+      "rating": 1100,
+      "fen": "8/8/8/r2k4/8/8/8/Q3K3 w - - 0 1",
+      "solution": [
+        "a1a5"
+      ],
+      "hint": "Check on the file or rank with the enemy rook behind the king.",
+      "explanation": "Queen check skewers the rook behind the king."
+    },
+    {
+      "id": "zg-20",
+      "title": "Opposition zugzwang",
+      "theme": "zugzwang-ish",
+      "difficulty": 3,
+      "rating": 1500,
+      "fen": "8/8/8/8/3k4/8/3P4/3K4 w - - 0 1",
+      "solution": [
+        "d1e2"
+      ],
+      "hint": "Only one king approach keeps the win.",
+      "explanation": "King to e2 (or the verified alternative) puts black in zugzwang so the pawn can advance."
+    },
+    {
+      "id": "zg-21",
+      "title": "Pawn race zugzwang",
+      "theme": "zugzwang-ish",
+      "difficulty": 4,
+      "rating": 1700,
+      "fen": "8/8/8/1k6/1p6/1P6/1K6/8 w - - 0 1",
+      "solution": [
+        "b2c2"
+      ],
+      "hint": "Maintain the opposition rather than capturing immediately.",
+      "explanation": "The quiet king move places black in zugzwang and wins the pawn ending."
+    },
+    {
+      "id": "zg-22",
+      "title": "Rook waiting move",
+      "theme": "zugzwang-ish",
+      "difficulty": 5,
+      "rating": 1900,
+      "fen": "8/8/2k5/8/2K5/8/8/2R5 w - - 0 1",
+      "solution": [
+        "c1b1"
+      ],
+      "hint": "Lose a tempo so the opposing king must abandon a key square.",
+      "explanation": "A waiting rook move creates zugzwang and wins."
+    }
+  ],
+  "byTheme": {
+    "mate-in-1": 32,
+    "mate-in-2": 19,
+    "mate-in-3": 4,
+    "back-rank": 2,
+    "fork": 4,
+    "pin": 4,
+    "skewer": 2,
+    "sacrifice": 2,
+    "deflection": 4,
+    "promotion": 6,
+    "discovered": 1,
+    "endgame": 2,
+    "zugzwang-ish": 3
+  },
+  "byDiff": {
+    "1": 25,
+    "2": 25,
+    "3": 30,
+    "4": 4,
+    "5": 1
+  },
+  "verifyErrors": []
+}

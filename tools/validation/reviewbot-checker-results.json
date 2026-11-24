@@ -1,0 +1,11471 @@
+[
+ {
+  "code": "e1qdk4v6.5",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 37,
+    "sfBest": "f5b1",
+    "solution": "f5b1",
+    "gap": 676,
+    "topScore": 732,
+    "secScore": 56,
+    "secMove": "e7e6"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e5u6orw.d",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 33,
+    "sfBest": "c3b4",
+    "solution": "c3b4",
+    "gap": 672,
+    "topScore": 709,
+    "secScore": 37,
+    "secMove": "f3e5"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e1l07663.q",
+  "level": "easy",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 29,
+    "sfBest": "e3f4",
+    "solution": "e3f4",
+    "gap": 873,
+    "topScore": 912,
+    "secScore": 39,
+    "secMove": "g5e6"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e4nwru6.9",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 32,
+    "sfBest": "d4c5",
+    "solution": "d4c5",
+    "gap": 598,
+    "topScore": 558,
+    "secScore": -40,
+    "secMove": "d4d5"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e12ycka6.b",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 3,
+    "sfBest": "a1c1",
+    "solution": "a1c1",
+    "gap": 1487,
+    "topScore": 668,
+    "secScore": -819,
+    "secMove": "d3d1"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e1vjgmas.2",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 27,
+    "sfBest": "b7a6",
+    "solution": "b7a6",
+    "gap": 580,
+    "topScore": 569,
+    "secScore": -11,
+    "secMove": "d7d6"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e11imq9.4",
+  "level": "easy",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 31,
+    "sfBest": "d5b5",
+    "solution": "d5b5",
+    "gap": 343,
+    "topScore": 489,
+    "secScore": 146,
+    "secMove": "d5g2"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e17gscfh.9",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 46,
+    "sfBest": "e5f6",
+    "solution": "e5f6",
+    "gap": 713,
+    "topScore": 1318,
+    "secScore": 605,
+    "secMove": "c4d3"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e6u47pr.10",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 55,
+    "sfBest": "e7f8",
+    "solution": "e7f8",
+    "gap": 97838,
+    "topScore": 99999,
+    "secScore": 2161,
+    "secMove": "d8h8",
+    "mateForcers": [
+     "e7f8"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "e1qfb7iu.10",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [
+   "step0: moves forcing mate in 1: [f7g6,f7e6] vs solution f7g6"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 42,
+    "sfBest": "f7e6",
+    "solution": "f7g6",
+    "gap": 0,
+    "topScore": 99999,
+    "secScore": 99999,
+    "secMove": "f7g6",
+    "solutionRank": 2,
+    "mateForcers": [
+     "f7g6",
+     "f7e6"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "e1pxw6ei.8",
+  "level": "easy",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 36,
+    "sfBest": "d4c6",
+    "solution": "d4c6",
+    "gap": 625,
+    "topScore": 673,
+    "secScore": 48,
+    "secMove": "e2c3"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e16fdu31.e",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [
+   "step0: second move a3b5 within 1cp (99998 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 39,
+    "sfBest": "b4c5",
+    "solution": "b4c5",
+    "gap": 1,
+    "topScore": 99999,
+    "secScore": 99998,
+    "secMove": "a3b5",
+    "mateForcers": [
+     "b4c5"
+    ]
+   }
+  ],
+  "matGain": 1,
+  "finalMate": true
+ },
+ {
+  "code": "eijlww2.7",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 27,
+    "sfBest": "g4f5",
+    "solution": "g4f5",
+    "gap": 373,
+    "topScore": 389,
+    "secScore": 16,
+    "secMove": "f1g2"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1to0zcl.o",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 29,
+    "sfBest": "c3b4",
+    "solution": "c3b4",
+    "gap": 288,
+    "topScore": 589,
+    "secScore": 301,
+    "secMove": "d2d4"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1en5a57.3",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 34,
+    "sfBest": "d1h5",
+    "solution": "d1h5",
+    "gap": 99265,
+    "topScore": 99999,
+    "secScore": 734,
+    "secMove": "f1c4",
+    "mateForcers": [
+     "d1h5"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "e58jxlg.7",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 35,
+    "sfBest": "e4d5",
+    "solution": "e4d5",
+    "gap": 499,
+    "topScore": 576,
+    "secScore": 77,
+    "secMove": "c3d5"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e702oln.q",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 32,
+    "sfBest": "g2f3",
+    "solution": "g2f3",
+    "gap": 982,
+    "topScore": 582,
+    "secScore": -400,
+    "secMove": "d2d3"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e1xa0pbr.6",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 33,
+    "sfBest": "e5g5",
+    "solution": "e5g5",
+    "gap": 586,
+    "topScore": 640,
+    "secScore": 54,
+    "secMove": "g8f6"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1r2q86m.a",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 42,
+    "sfBest": "c4g8",
+    "solution": "c4g8",
+    "gap": 623,
+    "topScore": 650,
+    "secScore": 27,
+    "secMove": "g4g8"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e1os10a3.7",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 29,
+    "sfBest": "b5a4",
+    "solution": "b5a4",
+    "gap": 753,
+    "topScore": 725,
+    "secScore": -28,
+    "secMove": "c7c6"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e1i3ecib.i",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 39,
+    "sfBest": "d5f4",
+    "solution": "d5f4",
+    "gap": 597,
+    "topScore": 573,
+    "secScore": -24,
+    "secMove": "d5c7"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e2o7njd.g",
+  "level": "easy",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 44,
+    "sfBest": "f2g1",
+    "solution": "f2g1",
+    "gap": 355,
+    "topScore": 537,
+    "secScore": 182,
+    "secMove": "f2e2"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e4qmc1g.o",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 41,
+    "sfBest": "c6c2",
+    "solution": "c6c2",
+    "gap": 1159,
+    "topScore": 1218,
+    "secScore": 59,
+    "secMove": "c6e8"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "ewcc4ki.d",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 37,
+    "sfBest": "d3c1",
+    "solution": "d3c1",
+    "gap": 537,
+    "topScore": 631,
+    "secScore": 94,
+    "secMove": "f5e4"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "ebbe7l2.7",
+  "level": "easy",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 41,
+    "sfBest": "d3f5",
+    "solution": "d3f5",
+    "gap": 703,
+    "topScore": 628,
+    "secScore": -75,
+    "secMove": "d3d2"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e12l530r.j",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 38,
+    "sfBest": "e5f4",
+    "solution": "e5f4",
+    "gap": 165,
+    "topScore": 485,
+    "secScore": 320,
+    "secMove": "h4f2"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e4rsu8h.q",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 39,
+    "sfBest": "d5e7",
+    "solution": "d5e7",
+    "gap": 941,
+    "topScore": 1564,
+    "secScore": 623,
+    "secMove": "f2f3"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "eha60by.8",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 32,
+    "sfBest": "f3g5",
+    "solution": "f3g5",
+    "gap": 638,
+    "topScore": 748,
+    "secScore": 110,
+    "secMove": "c3d5"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e1c4usju.m",
+  "level": "easy",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 37,
+    "sfBest": "c4a6",
+    "solution": "c4a6",
+    "gap": 513,
+    "topScore": 518,
+    "secScore": 5,
+    "secMove": "f1d1"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "eop37x1.3",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 35,
+    "sfBest": "g7h6",
+    "solution": "g7h6",
+    "gap": 319,
+    "topScore": 528,
+    "secScore": 209,
+    "secMove": "a6b4"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1euydo4.a",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 28,
+    "sfBest": "a5b4",
+    "solution": "a5b4",
+    "gap": 637,
+    "topScore": 527,
+    "secScore": -110,
+    "secMove": "e2d4"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e6ujes.i",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 46,
+    "sfBest": "e3a7",
+    "solution": "e3a7",
+    "gap": 409,
+    "topScore": 697,
+    "secScore": 288,
+    "secMove": "d1d2"
+   }
+  ],
+  "matGain": 5,
+  "finalMate": false
+ },
+ {
+  "code": "exuzix1.w",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 39,
+    "sfBest": "b4a2",
+    "solution": "b4a2",
+    "gap": 99256,
+    "topScore": 99999,
+    "secScore": 743,
+    "secMove": "e6b3",
+    "mateForcers": [
+     "b4a2"
+    ]
+   }
+  ],
+  "matGain": 1,
+  "finalMate": true
+ },
+ {
+  "code": "e21xowg.2",
+  "level": "easy",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 47,
+    "sfBest": "h5c5",
+    "solution": "h5c5",
+    "gap": 630,
+    "topScore": 669,
+    "secScore": 39,
+    "secMove": "h5e2"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1jlhuys.q",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 30,
+    "sfBest": "a6c5",
+    "solution": "a6c5",
+    "gap": 661,
+    "topScore": 265,
+    "secScore": -396,
+    "secMove": "h6f4"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e1o20mwp.e",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 30,
+    "sfBest": "h4g5",
+    "solution": "h4g5",
+    "gap": 364,
+    "topScore": 977,
+    "secScore": 613,
+    "secMove": "d2f3"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e16nrzkt.x",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [
+   "step0: second move c4e6 within 1cp (99998 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 60,
+    "sfBest": "d1d8",
+    "solution": "d1d8",
+    "gap": 1,
+    "topScore": 99999,
+    "secScore": 99998,
+    "secMove": "c4e6",
+    "mateForcers": [
+     "d1d8"
+    ]
+   }
+  ],
+  "matGain": 9,
+  "finalMate": true
+ },
+ {
+  "code": "eoxks4y.7",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 47,
+    "sfBest": "h7f7",
+    "solution": "h7f7",
+    "gap": 99199,
+    "topScore": 99999,
+    "secScore": 800,
+    "secMove": "h7g8",
+    "mateForcers": [
+     "h7f7"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "ezh03p8.p",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [
+   "step0: second move f5f7 within 3cp (99996 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 48,
+    "sfBest": "d5f7",
+    "solution": "d5f7",
+    "gap": 3,
+    "topScore": 99999,
+    "secScore": 99996,
+    "secMove": "f5f7",
+    "mateForcers": [
+     "d5f7"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "epcx0da.w",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 39,
+    "sfBest": "d4e6",
+    "solution": "d4e6",
+    "gap": 849,
+    "topScore": 1147,
+    "secScore": 298,
+    "secMove": "b1h7"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e18dgt8h.10",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 42,
+    "sfBest": "h4g4",
+    "solution": "h4g4",
+    "gap": 97639,
+    "topScore": 99999,
+    "secScore": 2360,
+    "secMove": "h4f4",
+    "mateForcers": [
+     "h4g4"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "e1b79z2h.k",
+  "level": "easy",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 39,
+    "sfBest": "c5e3",
+    "solution": "c5e3",
+    "gap": 288,
+    "topScore": 836,
+    "secScore": 548,
+    "secMove": "c7c6"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "ek8et1v.c",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 41,
+    "sfBest": "d5d7",
+    "solution": "d5d7",
+    "gap": 99469,
+    "topScore": 99999,
+    "secScore": 530,
+    "secMove": "b5d7",
+    "mateForcers": [
+     "d5d7"
+    ]
+   }
+  ],
+  "matGain": 3,
+  "finalMate": true
+ },
+ {
+  "code": "e1hragnk.5",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 34,
+    "sfBest": "c3b4",
+    "solution": "c3b4",
+    "gap": 345,
+    "topScore": 589,
+    "secScore": 244,
+    "secMove": "d1b3"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e5uwkd0.c",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 28,
+    "sfBest": "c7d6",
+    "solution": "c7d6",
+    "gap": 430,
+    "topScore": 380,
+    "secScore": -50,
+    "secMove": "e8e6"
+   }
+  ],
+  "matGain": 5,
+  "finalMate": false
+ },
+ {
+  "code": "e1i250at.n",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 37,
+    "sfBest": "e6h3",
+    "solution": "e6h3",
+    "gap": 335,
+    "topScore": 351,
+    "secScore": 16,
+    "secMove": "d4e4"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "eea9vzj.t",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 37,
+    "sfBest": "c6b5",
+    "solution": "c6b5",
+    "gap": 713,
+    "topScore": 1270,
+    "secScore": 557,
+    "secMove": "d6d4"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e4k8s8u.n",
+  "level": "easy",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 36,
+    "sfBest": "h8d8",
+    "solution": "h8d8",
+    "gap": 549,
+    "topScore": 1366,
+    "secScore": 817,
+    "secMove": "e1e8"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e10wiiui.p",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 30,
+    "sfBest": "b6e6",
+    "solution": "b6e6",
+    "gap": 836,
+    "topScore": 832,
+    "secScore": -4,
+    "secMove": "b6b5"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e866dfp.9",
+  "level": "easy",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 31,
+    "sfBest": "a4b4",
+    "solution": "a4b4",
+    "gap": 469,
+    "topScore": 555,
+    "secScore": 86,
+    "secMove": "a3b5"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e19f9ki.b",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 47,
+    "sfBest": "d8d3",
+    "solution": "d8d3",
+    "gap": 100175,
+    "topScore": 99999,
+    "secScore": -176,
+    "secMove": "a8b8",
+    "mateForcers": [
+     "d8d3"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "eq6mul9.s",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 41,
+    "sfBest": "d5g2",
+    "solution": "d5g2",
+    "gap": 99522,
+    "topScore": 99999,
+    "secScore": 477,
+    "secMove": "h3g2",
+    "mateForcers": [
+     "d5g2"
+    ]
+   }
+  ],
+  "matGain": 1,
+  "finalMate": true
+ },
+ {
+  "code": "eaeo3nw.e",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 39,
+    "sfBest": "g5e7",
+    "solution": "g5e7",
+    "gap": 537,
+    "topScore": 773,
+    "secScore": 236,
+    "secMove": "c3d5"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "emf6wed.7",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 37,
+    "sfBest": "g4h5",
+    "solution": "g4h5",
+    "gap": 387,
+    "topScore": 594,
+    "secScore": 207,
+    "secMove": "b1c3"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "eljbp1u.8",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 32,
+    "sfBest": "d1h5",
+    "solution": "d1h5",
+    "gap": 99894,
+    "topScore": 99999,
+    "secScore": 105,
+    "secMove": "b1d2",
+    "mateForcers": [
+     "d1h5"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "e1ni1kne.e",
+  "level": "easy",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 43,
+    "sfBest": "f4f6",
+    "solution": "f4f6",
+    "gap": 503,
+    "topScore": 333,
+    "secScore": -170,
+    "secMove": "d5f7"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "ehr9y6q.4",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 30,
+    "sfBest": "b2a3",
+    "solution": "b2a3",
+    "gap": 333,
+    "topScore": 670,
+    "secScore": 337,
+    "secMove": "e2d3"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "etpxenb.f",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 33,
+    "sfBest": "d5c6",
+    "solution": "d5c6",
+    "gap": 406,
+    "topScore": 519,
+    "secScore": 113,
+    "secMove": "a2a4"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1xircj9.3",
+  "level": "easy",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 41,
+    "sfBest": "g6f5",
+    "solution": "g6f5",
+    "gap": 389,
+    "topScore": 506,
+    "secScore": 117,
+    "secMove": "d7d5"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1859ibr.f",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 34,
+    "sfBest": "b8a6",
+    "solution": "b8a6",
+    "gap": 451,
+    "topScore": 786,
+    "secScore": 335,
+    "secMove": "d8d7"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "eds9t6w.3",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 31,
+    "sfBest": "g4d1",
+    "solution": "g4d1",
+    "gap": 899,
+    "topScore": 670,
+    "secScore": -229,
+    "secMove": "g4c8"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "eic0fnq.l",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 27,
+    "sfBest": "b7a6",
+    "solution": "b7a6",
+    "gap": 563,
+    "topScore": 254,
+    "secScore": -309,
+    "secMove": "b7f3"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e11bft01.e",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [
+   "step0: second move g7e5 within 5cp (99994 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 34,
+    "sfBest": "g4g2",
+    "solution": "g4g2",
+    "gap": 5,
+    "topScore": 99999,
+    "secScore": 99994,
+    "secMove": "g7e5",
+    "mateForcers": [
+     "g4g2"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "e1yfmf1v.d",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 45,
+    "sfBest": "e6h3",
+    "solution": "e6h3",
+    "gap": 99310,
+    "topScore": 99999,
+    "secScore": 689,
+    "secMove": "f3g5",
+    "mateForcers": [
+     "e6h3"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "e1owm2ha.q",
+  "level": "easy",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 36,
+    "sfBest": "c6b6",
+    "solution": "c6b6",
+    "gap": 463,
+    "topScore": 609,
+    "secScore": 146,
+    "secMove": "c4f7"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "ehdh07x.h",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 46,
+    "sfBest": "d6c7",
+    "solution": "d6c7",
+    "gap": 549,
+    "topScore": 1093,
+    "secScore": 544,
+    "secMove": "a3b5"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e1qicoet.f",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 6,
+    "sfBest": "f2e3",
+    "solution": "f2e3",
+    "gap": 829,
+    "topScore": 248,
+    "secScore": -581,
+    "secMove": "c1b1"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e1fi6vsf.f",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 26,
+    "sfBest": "e5f4",
+    "solution": "e5f4",
+    "gap": 337,
+    "topScore": 366,
+    "secScore": 29,
+    "secMove": "g8e7"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "er60vhc.4",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 27,
+    "sfBest": "f7e6",
+    "solution": "f7e6",
+    "gap": 1139,
+    "topScore": 642,
+    "secScore": -497,
+    "secMove": "h7h5"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e14qjvhc.3",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 39,
+    "sfBest": "d5c6",
+    "solution": "d5c6",
+    "gap": 259,
+    "topScore": 723,
+    "secScore": 464,
+    "secMove": "f1c4"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1mr1c0v.g",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 40,
+    "sfBest": "d4e3",
+    "solution": "d4e3",
+    "gap": 484,
+    "topScore": 1044,
+    "secScore": 560,
+    "secMove": "f6d5"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "emfmv43.c",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 42,
+    "sfBest": "f3d4",
+    "solution": "f3d4",
+    "gap": 570,
+    "topScore": 546,
+    "secScore": -24,
+    "secMove": "c3d5"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1afc5jf.n",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 3,
+    "sfBest": "c2d3",
+    "solution": "c2d3",
+    "gap": 829,
+    "topScore": 1342,
+    "secScore": 513,
+    "secMove": "e1d1"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1xii5au.2",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 31,
+    "sfBest": "c8g4",
+    "solution": "c8g4",
+    "gap": 472,
+    "topScore": 971,
+    "secScore": 499,
+    "secMove": "e4f2"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e1p0lrox.8",
+  "level": "easy",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 43,
+    "sfBest": "d4e5",
+    "solution": "d4e5",
+    "gap": 783,
+    "topScore": 1041,
+    "secScore": 258,
+    "secMove": "c1f4"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "edysw8u.2",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 27,
+    "sfBest": "c6e5",
+    "solution": "c6e5",
+    "gap": 515,
+    "topScore": 503,
+    "secScore": -12,
+    "secMove": "h7h6"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1qyozwh.c",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 32,
+    "sfBest": "g4d1",
+    "solution": "g4d1",
+    "gap": 517,
+    "topScore": 572,
+    "secScore": 55,
+    "secMove": "f6d7"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "ew14cno.i",
+  "level": "easy",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 33,
+    "sfBest": "d5b6",
+    "solution": "d5b6",
+    "gap": 401,
+    "topScore": 805,
+    "secScore": 404,
+    "secMove": "c2c4"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "ec4mfdj.8",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 28,
+    "sfBest": "d5c4",
+    "solution": "d5c4",
+    "gap": 215,
+    "topScore": 392,
+    "secScore": 177,
+    "secMove": "e8g8"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1kuteun.3",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 31,
+    "sfBest": "c3e4",
+    "solution": "c3e4",
+    "gap": 414,
+    "topScore": 457,
+    "secScore": 43,
+    "secMove": "h2h4"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1fpw4r6.3",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 37,
+    "sfBest": "e4d5",
+    "solution": "e4d5",
+    "gap": 335,
+    "topScore": 608,
+    "secScore": 273,
+    "secMove": "e5f7"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e9b6pd1.2",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 44,
+    "sfBest": "h4g3",
+    "solution": "h4g3",
+    "gap": 99887,
+    "topScore": 99999,
+    "secScore": 112,
+    "secMove": "f8e7",
+    "mateForcers": [
+     "h4g3"
+    ]
+   }
+  ],
+  "matGain": 1,
+  "finalMate": true
+ },
+ {
+  "code": "eidu2jk.l",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [
+   "step0: second move e6g4 within 5cp (99994 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 49,
+    "sfBest": "f2d2",
+    "solution": "f2d2",
+    "gap": 5,
+    "topScore": 99999,
+    "secScore": 99994,
+    "secMove": "e6g4",
+    "mateForcers": [
+     "f2d2"
+    ]
+   }
+  ],
+  "matGain": 3,
+  "finalMate": true
+ },
+ {
+  "code": "e1j7l4b4.n",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 32,
+    "sfBest": "h3h4",
+    "solution": "h3h4",
+    "gap": 769,
+    "topScore": 817,
+    "secScore": 48,
+    "secMove": "f1e1"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "ee5nwx2.a",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 39,
+    "sfBest": "d8h4",
+    "solution": "d8h4",
+    "gap": 99706,
+    "topScore": 99999,
+    "secScore": 293,
+    "secMove": "h7h5",
+    "mateForcers": [
+     "d8h4"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "eqxo9d6.3",
+  "level": "easy",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 36,
+    "sfBest": "e7h4",
+    "solution": "e7h4",
+    "gap": 446,
+    "topScore": 567,
+    "secScore": 121,
+    "secMove": "d7e5"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1l3j9rg.x",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [
+   "step0: second move g3h4 within 1cp (99998 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 46,
+    "sfBest": "d7d8q",
+    "solution": "d7d8q",
+    "gap": 1,
+    "topScore": 99999,
+    "secScore": 99998,
+    "secMove": "g3h4",
+    "mateForcers": [
+     "d7d8q"
+    ]
+   }
+  ],
+  "matGain": 8,
+  "finalMate": true
+ },
+ {
+  "code": "e13a5ezl.11",
+  "level": "easy",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 40,
+    "sfBest": "c3b4",
+    "solution": "c3b4",
+    "gap": 414,
+    "topScore": 267,
+    "secScore": -147,
+    "secMove": "h3g5"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1tjbt2f.u",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 44,
+    "sfBest": "d5b6",
+    "solution": "d5b6",
+    "gap": 640,
+    "topScore": 1956,
+    "secScore": 1316,
+    "secMove": "h1g1"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e1xqcj45.m",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 36,
+    "sfBest": "f3d4",
+    "solution": "f3d4",
+    "gap": 469,
+    "topScore": 1021,
+    "secScore": 552,
+    "secMove": "d1d4"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e1j2ovnp.7",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 47,
+    "sfBest": "c3d1",
+    "solution": "c3d1",
+    "gap": 700,
+    "topScore": 1445,
+    "secScore": 745,
+    "secMove": "h4c4"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e1appwhs.d",
+  "level": "easy",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 44,
+    "sfBest": "e4e8",
+    "solution": "e4e8",
+    "gap": 1573,
+    "topScore": 2236,
+    "secScore": 663,
+    "secMove": "e4d5"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e5uemt8.i",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 49,
+    "sfBest": "d5d7",
+    "solution": "d5d7",
+    "gap": 98620,
+    "topScore": 99999,
+    "secScore": 1379,
+    "secMove": "b5d7",
+    "mateForcers": [
+     "d5d7"
+    ]
+   }
+  ],
+  "matGain": 3,
+  "finalMate": true
+ },
+ {
+  "code": "ekctpzg.9",
+  "level": "easy",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 43,
+    "sfBest": "c8h8",
+    "solution": "c8h8",
+    "gap": 327,
+    "topScore": 295,
+    "secScore": -32,
+    "secMove": "c8b7"
+   }
+  ],
+  "matGain": 5,
+  "finalMate": false
+ },
+ {
+  "code": "epm29iq.18",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 35,
+    "sfBest": "h8a8",
+    "solution": "h8a8",
+    "gap": 807,
+    "topScore": 360,
+    "secScore": -447,
+    "secMove": "h8h6"
+   }
+  ],
+  "matGain": 5,
+  "finalMate": false
+ },
+ {
+  "code": "e14429tz.b",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 48,
+    "sfBest": "c6b4",
+    "solution": "c6b4",
+    "gap": 98608,
+    "topScore": 99999,
+    "secScore": 1391,
+    "secMove": "c6d4",
+    "mateForcers": [
+     "c6b4"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "e1efi3gz.y",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 51,
+    "sfBest": "g5e3",
+    "solution": "g5e3",
+    "gap": 96964,
+    "topScore": 99999,
+    "secScore": 3035,
+    "secMove": "d1d5",
+    "mateForcers": [
+     "g5e3"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "e1r0ms81.m",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 25,
+    "sfBest": "a6b5",
+    "solution": "a6b5",
+    "gap": 1092,
+    "topScore": 514,
+    "secScore": -578,
+    "secMove": "h6g4"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "ekfbtmc.s",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 34,
+    "sfBest": "c5d6",
+    "solution": "c5d6",
+    "gap": 583,
+    "topScore": 965,
+    "secScore": 382,
+    "secMove": "d2d4"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "elxxyos.4",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 22,
+    "sfBest": "g5f4",
+    "solution": "g5f4",
+    "gap": 663,
+    "topScore": 504,
+    "secScore": -159,
+    "secMove": "h7h6"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "exudwat.o",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 20,
+    "sfBest": "e7f6",
+    "solution": "e7f6",
+    "gap": 746,
+    "topScore": 780,
+    "secScore": 34,
+    "secMove": "b6b5"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "ew9f16s.9",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 33,
+    "sfBest": "e5d7",
+    "solution": "e5d7",
+    "gap": 400,
+    "topScore": 669,
+    "secScore": 269,
+    "secMove": "d1e2"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e1uzjsld.b",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 55,
+    "sfBest": "d4d5",
+    "solution": "d4d5",
+    "gap": 735,
+    "topScore": 608,
+    "secScore": -127,
+    "secMove": "d4e5"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1ldigj7.d",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 6,
+    "sfBest": "g4f3",
+    "solution": "g4f3",
+    "gap": 712,
+    "topScore": 692,
+    "secScore": -20,
+    "secMove": "f7e8"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "evsjast.b",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [
+   "step0: second move d4a4 within 5cp (99994 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 56,
+    "sfBest": "f1b5",
+    "solution": "f1b5",
+    "gap": 5,
+    "topScore": 99999,
+    "secScore": 99994,
+    "secMove": "d4a4",
+    "mateForcers": [
+     "f1b5"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "e1o8xga0.m",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 3,
+    "sfBest": "h7g6",
+    "solution": "h7g6",
+    "gap": 1213,
+    "topScore": 1100,
+    "secScore": -113,
+    "secMove": "e8f8"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "erwk8ae.7",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 39,
+    "sfBest": "f3d4",
+    "solution": "f3d4",
+    "gap": 447,
+    "topScore": 697,
+    "secScore": 250,
+    "secMove": "c3d4"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1uwsyvt.9",
+  "level": "easy",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 46,
+    "sfBest": "c2c8",
+    "solution": "c2c8",
+    "gap": 349,
+    "topScore": 613,
+    "secScore": 264,
+    "secMove": "f1b5"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e1igm10m.6",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 27,
+    "sfBest": "f6g4",
+    "solution": "f6g4",
+    "gap": 727,
+    "topScore": 679,
+    "secScore": -48,
+    "secMove": "d7d6"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e11l5kf.n",
+  "level": "easy",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 48,
+    "sfBest": "d5a5",
+    "solution": "d5a5",
+    "gap": 901,
+    "topScore": 850,
+    "secScore": -51,
+    "secMove": "g4f6"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "eec4qxt.c",
+  "level": "easy",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 53,
+    "sfBest": "a8a7",
+    "solution": "a8a7",
+    "gap": 540,
+    "topScore": 1167,
+    "secScore": 627,
+    "secMove": "d5h5"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e1i7gwmg.5",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 29,
+    "sfBest": "b4c5",
+    "solution": "b4c5",
+    "gap": 507,
+    "topScore": 408,
+    "secScore": -99,
+    "secMove": "g1f3"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "eupolv5.2",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [
+   "step0: second move e5d7 within 1cp (99998 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 45,
+    "sfBest": "h5f5",
+    "solution": "h5f5",
+    "gap": 1,
+    "topScore": 99999,
+    "secScore": 99998,
+    "secMove": "e5d7",
+    "mateForcers": [
+     "h5f5"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "e1l93m4u.7",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 45,
+    "sfBest": "h5f7",
+    "solution": "h5f7",
+    "gap": 99329,
+    "topScore": 99999,
+    "secScore": 670,
+    "secMove": "e1g1",
+    "mateForcers": [
+     "h5f7"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "e1dqbceo.m",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 34,
+    "sfBest": "a4d7",
+    "solution": "a4d7",
+    "gap": 100566,
+    "topScore": 99999,
+    "secScore": -567,
+    "secMove": "e1g1",
+    "mateForcers": [
+     "a4d7"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "evprvgg.f",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 30,
+    "sfBest": "d1c2",
+    "solution": "d1c2",
+    "gap": 754,
+    "topScore": 782,
+    "secScore": 28,
+    "secMove": "a4b6"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1v3n9z8.i",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 37,
+    "sfBest": "e4c3",
+    "solution": "e4c3",
+    "gap": 471,
+    "topScore": 648,
+    "secScore": 177,
+    "secMove": "d7d6"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e1o5cw0e.x",
+  "level": "easy",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 37,
+    "sfBest": "g1h1",
+    "solution": "g1h1",
+    "gap": 1141,
+    "topScore": 2767,
+    "secScore": 1626,
+    "secMove": "f6f5"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e18xueo.7",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 32,
+    "sfBest": "f6d5",
+    "solution": "f6d5",
+    "gap": 464,
+    "topScore": 581,
+    "secScore": 117,
+    "secMove": "h7h5"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "eq7klpa.x",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 39,
+    "sfBest": "d7b5",
+    "solution": "d7b5",
+    "gap": 513,
+    "topScore": 236,
+    "secScore": -277,
+    "secMove": "f8e8"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "efg6ylo.s",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 29,
+    "sfBest": "d5c4",
+    "solution": "d5c4",
+    "gap": 783,
+    "topScore": 727,
+    "secScore": -56,
+    "secMove": "c7c6"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e1dq6yw4.6",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [
+   "step0: second move d1h5 within 1cp (99998 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 48,
+    "sfBest": "c4f7",
+    "solution": "c4f7",
+    "gap": 1,
+    "topScore": 99999,
+    "secScore": 99998,
+    "secMove": "d1h5",
+    "mateForcers": [
+     "c4f7"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "e13q3ot3.4",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 32,
+    "sfBest": "c3d5",
+    "solution": "c3d5",
+    "gap": 461,
+    "topScore": 492,
+    "secScore": 31,
+    "secMove": "d1e2"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1gzki18.d",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 27,
+    "sfBest": "e5d6",
+    "solution": "e5d6",
+    "gap": 600,
+    "topScore": 969,
+    "secScore": 369,
+    "secMove": "a3b1"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e1vio0g6.e",
+  "level": "easy",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 47,
+    "sfBest": "c2d1",
+    "solution": "c2d1",
+    "gap": 626,
+    "topScore": 695,
+    "secScore": 69,
+    "secMove": "d7e5"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "ed1lt8r.s",
+  "level": "easy",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 33,
+    "sfBest": "e5a1",
+    "solution": "e5a1",
+    "gap": 426,
+    "topScore": 522,
+    "secScore": 96,
+    "secMove": "e7e6"
+   }
+  ],
+  "matGain": 5,
+  "finalMate": false
+ },
+ {
+  "code": "eksc7do.y",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 31,
+    "sfBest": "c3a4",
+    "solution": "c3a4",
+    "gap": 538,
+    "topScore": 320,
+    "secScore": -218,
+    "secMove": "e2f4"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1x3291w.i",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 40,
+    "sfBest": "f5e3",
+    "solution": "f5e3",
+    "gap": 99093,
+    "topScore": 99999,
+    "secScore": 906,
+    "secMove": "f5g3",
+    "mateForcers": [
+     "f5e3"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "e1yg8jkc.i",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 31,
+    "sfBest": "d7d4",
+    "solution": "d7d4",
+    "gap": 611,
+    "topScore": 670,
+    "secScore": 59,
+    "secMove": "c6c5"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "evliaci.v",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 1,
+    "sfBest": "c7d6",
+    "solution": "c7d6",
+    "gap": null,
+    "topScore": 582
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e12aev0v.m",
+  "level": "easy",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 39,
+    "sfBest": "b4c5",
+    "solution": "b4c5",
+    "gap": 632,
+    "topScore": 869,
+    "secScore": 237,
+    "secMove": "d5c3"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e7n4yzq.5",
+  "level": "easy",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 23,
+    "sfBest": "d8g5",
+    "solution": "d8g5",
+    "gap": 572,
+    "topScore": 565,
+    "secScore": -7,
+    "secMove": "g7g6"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1pr81c2.a",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 38,
+    "sfBest": "c3a4",
+    "solution": "c3a4",
+    "gap": 462,
+    "topScore": 1085,
+    "secScore": 623,
+    "secMove": "d3b5"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e14s7lne.a",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 34,
+    "sfBest": "d5e4",
+    "solution": "d5e4",
+    "gap": 410,
+    "topScore": 633,
+    "secScore": 223,
+    "secMove": "g6g5"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1k5uke4.j",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 40,
+    "sfBest": "f2e3",
+    "solution": "f2e3",
+    "gap": 170,
+    "topScore": 342,
+    "secScore": 172,
+    "secMove": "d6b7"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "etljghp.i",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 4,
+    "sfBest": "g8h7",
+    "solution": "g8h7",
+    "gap": 581,
+    "topScore": 463,
+    "secScore": -118,
+    "secMove": "g8h8"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1d0yc4u.w",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 44,
+    "sfBest": "d4f5",
+    "solution": "d4f5",
+    "gap": 535,
+    "topScore": 773,
+    "secScore": 238,
+    "secMove": "d3e3"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1g57f5l.b",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 48,
+    "sfBest": "h5f7",
+    "solution": "h5f7",
+    "gap": 99684,
+    "topScore": 99999,
+    "secScore": 315,
+    "secMove": "b2b3",
+    "mateForcers": [
+     "h5f7"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "e1ey3u48.a",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 42,
+    "sfBest": "e4a8",
+    "solution": "e4a8",
+    "gap": 378,
+    "topScore": 307,
+    "secScore": -71,
+    "secMove": "g1f3"
+   }
+  ],
+  "matGain": 5,
+  "finalMate": false
+ },
+ {
+  "code": "e5nlp8f.8",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 22,
+    "sfBest": "c6d4",
+    "solution": "c6d4",
+    "gap": 576,
+    "topScore": 597,
+    "secScore": 21,
+    "secMove": "d7d5"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e8yeymx.d",
+  "level": "easy",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 39,
+    "sfBest": "e5h8",
+    "solution": "e5h8",
+    "gap": 440,
+    "topScore": 413,
+    "secScore": -27,
+    "secMove": "h2h4"
+   }
+  ],
+  "matGain": 5,
+  "finalMate": false
+ },
+ {
+  "code": "e1ov9rcd.b",
+  "level": "easy",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 31,
+    "sfBest": "c2e4",
+    "solution": "c2e4",
+    "gap": 363,
+    "topScore": 549,
+    "secScore": 186,
+    "secMove": "e5f7"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e12c0t53.e",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 38,
+    "sfBest": "g5d8",
+    "solution": "g5d8",
+    "gap": 389,
+    "topScore": 692,
+    "secScore": 303,
+    "secMove": "e2b5"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e16ezazl.3",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 37,
+    "sfBest": "f4h6",
+    "solution": "f4h6",
+    "gap": 409,
+    "topScore": 683,
+    "secScore": 274,
+    "secMove": "h2h3"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1w3j1l6.w",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [
+   "step0: second move f2f6 within 1cp (99998 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 47,
+    "sfBest": "e5f4",
+    "solution": "e5f4",
+    "gap": 1,
+    "topScore": 99999,
+    "secScore": 99998,
+    "secMove": "f2f6",
+    "mateForcers": [
+     "e5f4"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "e1eyzza9.j",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 24,
+    "sfBest": "c1g5",
+    "solution": "c1g5",
+    "gap": 742,
+    "topScore": 605,
+    "secScore": -137,
+    "secMove": "h3h4"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "ezmxqe0.7",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 33,
+    "sfBest": "d1h5",
+    "solution": "d1h5",
+    "gap": 625,
+    "topScore": 709,
+    "secScore": 84,
+    "secMove": "f2f3"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e11berwu.c",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 27,
+    "sfBest": "g5h4",
+    "solution": "g5h4",
+    "gap": 307,
+    "topScore": 562,
+    "secScore": 255,
+    "secMove": "d6c7"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1voiqph.11",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 1,
+    "sfBest": "c1c2",
+    "solution": "c1c2",
+    "gap": null,
+    "topScore": 565
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "eyqkk3e.q",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 43,
+    "sfBest": "f3g5",
+    "solution": "f3g5",
+    "gap": 955,
+    "topScore": 1005,
+    "secScore": 50,
+    "secMove": "a1b1"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "eqtjru0.h",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 37,
+    "sfBest": "g7f8",
+    "solution": "g7f8",
+    "gap": 98594,
+    "topScore": 99999,
+    "secScore": 1405,
+    "secMove": "c5g1",
+    "mateForcers": [
+     "g7f8"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "epcut54.l",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 37,
+    "sfBest": "g4f5",
+    "solution": "g4f5",
+    "gap": 439,
+    "topScore": 1008,
+    "secScore": 569,
+    "secMove": "d3f5"
+   }
+  ],
+  "matGain": 5,
+  "finalMate": false
+ },
+ {
+  "code": "e79pg6s.6",
+  "level": "easy",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 34,
+    "sfBest": "e2c4",
+    "solution": "e2c4",
+    "gap": 787,
+    "topScore": 769,
+    "secScore": -18,
+    "secMove": "d2e3"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e16gzga.e",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 29,
+    "sfBest": "f6h5",
+    "solution": "f6h5",
+    "gap": 1210,
+    "topScore": 487,
+    "secScore": -723,
+    "secMove": "g7g5"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e1wo4n2k.c",
+  "level": "easy",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 35,
+    "sfBest": "c2d4",
+    "solution": "c2d4",
+    "gap": 505,
+    "topScore": 1019,
+    "secScore": 514,
+    "secMove": "e6f5"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "enxs2ac.d",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 34,
+    "sfBest": "e4d6",
+    "solution": "e4d6",
+    "gap": 100055,
+    "topScore": 99999,
+    "secScore": -56,
+    "secMove": "h3g5",
+    "mateForcers": [
+     "e4d6"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "e164z76n.y",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 38,
+    "sfBest": "f4e3",
+    "solution": "f4e3",
+    "gap": 366,
+    "topScore": 443,
+    "secScore": 77,
+    "secMove": "b5b4"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "eh6kptb.4",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 1,
+    "sfBest": "g1h2",
+    "solution": "g1h2",
+    "gap": null,
+    "topScore": 737
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e136ld6t.g",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 54,
+    "sfBest": "b4d3",
+    "solution": "b4d3",
+    "gap": 273,
+    "topScore": 583,
+    "secScore": 310,
+    "secMove": "d7g4"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e1113j7a.9",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [
+   "step0: moves forcing mate in 1: [e4d6,e4f6] vs solution e4f6"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 44,
+    "sfBest": "e4d6",
+    "solution": "e4f6",
+    "gap": 0,
+    "topScore": 99999,
+    "secScore": 99999,
+    "secMove": "e4f6",
+    "solutionRank": 2,
+    "mateForcers": [
+     "e4d6",
+     "e4f6"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "e1falwkd.d",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 23,
+    "sfBest": "g7h6",
+    "solution": "g7h6",
+    "gap": 768,
+    "topScore": 586,
+    "secScore": -182,
+    "secMove": "e8g8"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "ef9ys4v.e",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 40,
+    "sfBest": "b5c4",
+    "solution": "b5c4",
+    "gap": 432,
+    "topScore": 590,
+    "secScore": 158,
+    "secMove": "e5e4"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "egdbnno.2",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 2,
+    "sfBest": "e8f7",
+    "solution": "e8f7",
+    "gap": 1360,
+    "topScore": 695,
+    "secScore": -665,
+    "secMove": "e8d7"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e1hbwszj.8",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 40,
+    "sfBest": "e5f3",
+    "solution": "e5f3",
+    "gap": 99980,
+    "topScore": 99999,
+    "secScore": 19,
+    "secMove": "d8d1",
+    "mateForcers": [
+     "e5f3"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "e1w0bokp.b",
+  "level": "easy",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 33,
+    "sfBest": "e5h5",
+    "solution": "e5h5",
+    "gap": 529,
+    "topScore": 517,
+    "secScore": -12,
+    "secMove": "e5e2"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1vmk9hs.g",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 48,
+    "sfBest": "e3f2",
+    "solution": "e3f2",
+    "gap": 509,
+    "topScore": 499,
+    "secScore": -10,
+    "secMove": "e3a7"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1g1kh9m.5",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 35,
+    "sfBest": "d8c7",
+    "solution": "d8c7",
+    "gap": 700,
+    "topScore": 663,
+    "secScore": -37,
+    "secMove": "d8e7"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e41gkut.9",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 33,
+    "sfBest": "f6d5",
+    "solution": "f6d5",
+    "gap": 885,
+    "topScore": 684,
+    "secScore": -201,
+    "secMove": "d1e2"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "ewafw49.e",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [
+   "step0: second move b5c4 within 1cp (99998 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 64,
+    "sfBest": "d8f8",
+    "solution": "d8f8",
+    "gap": 1,
+    "topScore": 99999,
+    "secScore": 99998,
+    "secMove": "b5c4",
+    "mateForcers": [
+     "d8f8"
+    ]
+   }
+  ],
+  "matGain": 3,
+  "finalMate": true
+ },
+ {
+  "code": "e1lsoh1y.b",
+  "level": "easy",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 28,
+    "sfBest": "a1a2",
+    "solution": "a1a2",
+    "gap": 400,
+    "topScore": 782,
+    "secScore": 382,
+    "secMove": "d4d5"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "euseoql.b",
+  "level": "easy",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 40,
+    "sfBest": "a5g5",
+    "solution": "a5g5",
+    "gap": 591,
+    "topScore": 468,
+    "secScore": -123,
+    "secMove": "c6c5"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e6snwa7.p",
+  "level": "easy",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 36,
+    "sfBest": "a5b4",
+    "solution": "a5b4",
+    "gap": 1673,
+    "topScore": 910,
+    "secScore": -763,
+    "secMove": "a5d5"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e1eosy2v.g",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 40,
+    "sfBest": "d5g2",
+    "solution": "d5g2",
+    "gap": 99399,
+    "topScore": 99999,
+    "secScore": 600,
+    "secMove": "d5h1",
+    "mateForcers": [
+     "d5g2"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "ehoy33r.d",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 28,
+    "sfBest": "e5d6",
+    "solution": "e5d6",
+    "gap": 953,
+    "topScore": 700,
+    "secScore": -253,
+    "secMove": "a2a3"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e1b5xfs.c",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 40,
+    "sfBest": "b4b5",
+    "solution": "b4b5",
+    "gap": 632,
+    "topScore": 681,
+    "secScore": 49,
+    "secMove": "f8g7"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1chz5ae.9",
+  "level": "easy",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 36,
+    "sfBest": "f3a8",
+    "solution": "f3a8",
+    "gap": 238,
+    "topScore": 542,
+    "secScore": 304,
+    "secMove": "g5e6"
+   }
+  ],
+  "matGain": 5,
+  "finalMate": false
+ },
+ {
+  "code": "es9cvjm.k",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 32,
+    "sfBest": "h6g4",
+    "solution": "h6g4",
+    "gap": 623,
+    "topScore": 650,
+    "secScore": 27,
+    "secMove": "e8g8"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1unulp1.4",
+  "level": "easy",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 36,
+    "sfBest": "a4b4",
+    "solution": "a4b4",
+    "gap": 446,
+    "topScore": 751,
+    "secScore": 305,
+    "secMove": "h2h4"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "eir8niz.9",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 49,
+    "sfBest": "g4e3",
+    "solution": "g4e3",
+    "gap": 454,
+    "topScore": 1058,
+    "secScore": 604,
+    "secMove": "d4f3"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e199l8z5.e",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 49,
+    "sfBest": "d3f5",
+    "solution": "d3f5",
+    "gap": 232,
+    "topScore": 515,
+    "secScore": 283,
+    "secMove": "c3b3"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e12s9hgq.d",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 36,
+    "sfBest": "c6d8",
+    "solution": "c6d8",
+    "gap": 548,
+    "topScore": 476,
+    "secScore": -72,
+    "secMove": "h2h4"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "eomq5zz.f",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 46,
+    "sfBest": "a4e8",
+    "solution": "a4e8",
+    "gap": 99471,
+    "topScore": 99999,
+    "secScore": 528,
+    "secMove": "a1b1",
+    "mateForcers": [
+     "a4e8"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "e128e6pk.h",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 34,
+    "sfBest": "c6b7",
+    "solution": "c6b7",
+    "gap": 329,
+    "topScore": 554,
+    "secScore": 225,
+    "secMove": "a2a4"
+   }
+  ],
+  "matGain": 5,
+  "finalMate": false
+ },
+ {
+  "code": "e1w4nbxe.c",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 39,
+    "sfBest": "d5c4",
+    "solution": "d5c4",
+    "gap": 538,
+    "topScore": 1063,
+    "secScore": 525,
+    "secMove": "e5b2"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "esw5o5i.7",
+  "level": "easy",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 38,
+    "sfBest": "b5a6",
+    "solution": "b5a6",
+    "gap": 394,
+    "topScore": 903,
+    "secScore": 509,
+    "secMove": "b1c3"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e1xuogh.2",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 40,
+    "sfBest": "e5d6",
+    "solution": "e5d6",
+    "gap": 710,
+    "topScore": 764,
+    "secScore": 54,
+    "secMove": "g5f4"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e1mnaceq.k",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 43,
+    "sfBest": "c4f7",
+    "solution": "c4f7",
+    "gap": 98945,
+    "topScore": 99999,
+    "secScore": 1054,
+    "secMove": "c5d6",
+    "mateForcers": [
+     "c4f7"
+    ]
+   }
+  ],
+  "matGain": 1,
+  "finalMate": true
+ },
+ {
+  "code": "e14fknvg.4",
+  "level": "easy",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 33,
+    "sfBest": "e6d5",
+    "solution": "e6d5",
+    "gap": 567,
+    "topScore": 501,
+    "secScore": -66,
+    "secMove": "e6d7"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1hwvny7.11",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [
+   "step0: second move b5d5 within 5cp (99994 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 48,
+    "sfBest": "b5d7",
+    "solution": "b5d7",
+    "gap": 5,
+    "topScore": 99999,
+    "secScore": 99994,
+    "secMove": "b5d5",
+    "mateForcers": [
+     "b5d7"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "e1wcef1v.i",
+  "level": "easy",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 32,
+    "sfBest": "a6e2",
+    "solution": "a6e2",
+    "gap": 517,
+    "topScore": 585,
+    "secScore": 68,
+    "secMove": "d6d5"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "etodvio.8",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 36,
+    "sfBest": "f5e4",
+    "solution": "f5e4",
+    "gap": 406,
+    "topScore": 249,
+    "secScore": -157,
+    "secMove": "e6e5"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1rz1rm1.8",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 37,
+    "sfBest": "f6h5",
+    "solution": "f6h5",
+    "gap": 638,
+    "topScore": 645,
+    "secScore": 7,
+    "secMove": "c8g4"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e19ingc3.g",
+  "level": "easy",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 31,
+    "sfBest": "d4e3",
+    "solution": "d4e3",
+    "gap": 862,
+    "topScore": 655,
+    "secScore": -207,
+    "secMove": "c6c5"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e11ewnrg.2",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 23,
+    "sfBest": "b2d4",
+    "solution": "b2d4",
+    "gap": 451,
+    "topScore": 634,
+    "secScore": 183,
+    "secMove": "g1f3"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "eqizfio.4",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 28,
+    "sfBest": "e5f3",
+    "solution": "e5f3",
+    "gap": 436,
+    "topScore": 667,
+    "secScore": 231,
+    "secMove": "d6c5"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1j4f19s.t",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 36,
+    "sfBest": "f8f1",
+    "solution": "f8f1",
+    "gap": 100317,
+    "topScore": 99999,
+    "secScore": -318,
+    "secMove": "a5d5",
+    "mateForcers": [
+     "f8f1"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "es0gy61.f",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 38,
+    "sfBest": "f4f7",
+    "solution": "f4f7",
+    "gap": 99883,
+    "topScore": 99999,
+    "secScore": 116,
+    "secMove": "g2h3",
+    "mateForcers": [
+     "f4f7"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "e1y8i0gq.b",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 31,
+    "sfBest": "f3g2",
+    "solution": "f3g2",
+    "gap": 2397,
+    "topScore": 2935,
+    "secScore": 538,
+    "secMove": "d8b6"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e16kmfm9.l",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 34,
+    "sfBest": "c7e5",
+    "solution": "c7e5",
+    "gap": 527,
+    "topScore": 643,
+    "secScore": 116,
+    "secMove": "d1d2"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "eiiqrlw.5",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 31,
+    "sfBest": "c1g5",
+    "solution": "c1g5",
+    "gap": 675,
+    "topScore": 873,
+    "secScore": 198,
+    "secMove": "g2g3"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e3nomrk.v",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [
+   "step0: second move f7f8 within 1cp (99998 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 54,
+    "sfBest": "f7e8",
+    "solution": "f7e8",
+    "gap": 1,
+    "topScore": 99999,
+    "secScore": 99998,
+    "secMove": "f7f8",
+    "mateForcers": [
+     "f7e8"
+    ]
+   }
+  ],
+  "matGain": 5,
+  "finalMate": true
+ },
+ {
+  "code": "e3anlm4.7",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 37,
+    "sfBest": "g5d8",
+    "solution": "g5d8",
+    "gap": 1103,
+    "topScore": 542,
+    "secScore": -561,
+    "secMove": "g5e3"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e1xcykhz.r",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 38,
+    "sfBest": "e5g6",
+    "solution": "e5g6",
+    "gap": 194,
+    "topScore": 395,
+    "secScore": 201,
+    "secMove": "f1e1"
+   }
+  ],
+  "matGain": 5,
+  "finalMate": false
+ },
+ {
+  "code": "erh49k5.e",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [
+   "step0: second move c4c5 within 1cp (99998 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 54,
+    "sfBest": "g5f4",
+    "solution": "g5f4",
+    "gap": 1,
+    "topScore": 99999,
+    "secScore": 99998,
+    "secMove": "c4c5",
+    "mateForcers": [
+     "g5f4"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "ebgbnq.e",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 40,
+    "sfBest": "e5f5",
+    "solution": "e5f5",
+    "gap": 367,
+    "topScore": 378,
+    "secScore": 11,
+    "secMove": "e2g3"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "exq0ygc.3",
+  "level": "easy",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 38,
+    "sfBest": "a4b4",
+    "solution": "a4b4",
+    "gap": 590,
+    "topScore": 697,
+    "secScore": 107,
+    "secMove": "c4d5"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "edu0bo2.e",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 51,
+    "sfBest": "g3h1",
+    "solution": "g3h1",
+    "gap": 471,
+    "topScore": 541,
+    "secScore": 70,
+    "secMove": "g3f1"
+   }
+  ],
+  "matGain": 5,
+  "finalMate": false
+ },
+ {
+  "code": "ea4vbfs.e",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 34,
+    "sfBest": "c5d4",
+    "solution": "c5d4",
+    "gap": 1183,
+    "topScore": 509,
+    "secScore": -674,
+    "secMove": "d5e6"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "euc5d7q.x",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 27,
+    "sfBest": "c6b5",
+    "solution": "c6b5",
+    "gap": 469,
+    "topScore": 350,
+    "secScore": -119,
+    "secMove": "f8a3"
+   }
+  ],
+  "matGain": 5,
+  "finalMate": false
+ },
+ {
+  "code": "e1i2o3lz.i",
+  "level": "easy",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 31,
+    "sfBest": "d6e5",
+    "solution": "d6e5",
+    "gap": 358,
+    "topScore": 573,
+    "secScore": 215,
+    "secMove": "f6e4"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e171aspx.q",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 46,
+    "sfBest": "f5g5",
+    "solution": "f5g5",
+    "gap": 430,
+    "topScore": 1105,
+    "secScore": 675,
+    "secMove": "e8g8"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "eooha5g.4",
+  "level": "easy",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 28,
+    "sfBest": "f1a6",
+    "solution": "f1a6",
+    "gap": 577,
+    "topScore": 758,
+    "secScore": 181,
+    "secMove": "d2d4"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "eslh70k.7",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 31,
+    "sfBest": "f7g6",
+    "solution": "f7g6",
+    "gap": 480,
+    "topScore": 551,
+    "secScore": 71,
+    "secMove": "d7d5"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "eb86pfs.8",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 24,
+    "sfBest": "h3g4",
+    "solution": "h3g4",
+    "gap": 426,
+    "topScore": 813,
+    "secScore": 387,
+    "secMove": "c1b2"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e133jsza.i",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 33,
+    "sfBest": "b7a6",
+    "solution": "b7a6",
+    "gap": 614,
+    "topScore": 689,
+    "secScore": 75,
+    "secMove": "b7g2"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e1h3gqqp.d",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 25,
+    "sfBest": "c3a5",
+    "solution": "c3a5",
+    "gap": 471,
+    "topScore": 857,
+    "secScore": 386,
+    "secMove": "d1d4"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e18uxmn5.6",
+  "level": "easy",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 31,
+    "sfBest": "b3b4",
+    "solution": "b3b4",
+    "gap": 467,
+    "topScore": 498,
+    "secScore": 31,
+    "secMove": "c4d5"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e18joven.m",
+  "level": "easy",
+  "theme": "mate-in-1",
+  "mateIn": 1,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 44,
+    "sfBest": "d5g2",
+    "solution": "d5g2",
+    "gap": 99202,
+    "topScore": 99999,
+    "secScore": 797,
+    "secMove": "e6d4",
+    "mateForcers": [
+     "d5g2"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "e1awlfpj.h",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 36,
+    "sfBest": "d4b3",
+    "solution": "d4b3",
+    "gap": 475,
+    "topScore": 444,
+    "secScore": -31,
+    "secMove": "h6f5"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "encnjj6.q",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 42,
+    "sfBest": "c3b5",
+    "solution": "c3b5",
+    "gap": 910,
+    "topScore": 966,
+    "secScore": 56,
+    "secMove": "c4b3"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e1yozqpr.6",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 28,
+    "sfBest": "a5b5",
+    "solution": "a5b5",
+    "gap": 608,
+    "topScore": 509,
+    "secScore": -99,
+    "secMove": "a5b6"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "e1b4l0qc.k",
+  "level": "easy",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 32,
+    "sfBest": "d4c5",
+    "solution": "d4c5",
+    "gap": 409,
+    "topScore": 836,
+    "secScore": 427,
+    "secMove": "e5e6"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e1wzv22g.o",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 32,
+    "sfBest": "h7g6",
+    "solution": "h7g6",
+    "gap": 706,
+    "topScore": 676,
+    "secScore": -30,
+    "secMove": "e7f6"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "e1xwy1av.g",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 31,
+    "sfBest": "g2h3",
+    "solution": "g2h3",
+    "gap": 593,
+    "topScore": 273,
+    "secScore": -320,
+    "secMove": "e4c5"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "mm0ajtw.n",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [
+   "step2: second move c4c5 within 1cp (99998 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 49,
+    "sfBest": "d3f5",
+    "solution": "d3f5",
+    "gap": 99396,
+    "topScore": 99998,
+    "secScore": 602,
+    "secMove": "e1h4",
+    "mateForcers": [
+     "d3f5"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 50,
+    "sfBest": "e1e5",
+    "solution": "e1e5",
+    "gap": 1,
+    "topScore": 99999,
+    "secScore": 99998,
+    "secMove": "c4c5",
+    "mateForcers": [
+     "e1e5"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "e1l1vcww.3",
+  "level": "easy",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 42,
+    "sfBest": "c4c7",
+    "solution": "c4c7",
+    "gap": 445,
+    "topScore": 524,
+    "secScore": 79,
+    "secMove": "c8g4"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "m148toit.5",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 39,
+    "sfBest": "c4f7",
+    "solution": "c4f7",
+    "gap": 99740,
+    "topScore": 99998,
+    "secScore": 258,
+    "secMove": "g5e6",
+    "mateForcers": [
+     "c4f7"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 38,
+    "sfBest": "c3d5",
+    "solution": "c3d5",
+    "gap": 100043,
+    "topScore": 99999,
+    "secScore": -44,
+    "secMove": "g5e6",
+    "mateForcers": [
+     "c3d5"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "m67aam1.8",
+  "level": "medium",
+  "theme": "hanging-piece",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 35,
+    "sfBest": "a4b4",
+    "solution": "a4b4",
+    "gap": 276,
+    "topScore": 254,
+    "secScore": -22,
+    "secMove": "g2f3"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "m1n3oasx.6",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 40,
+    "sfBest": "d8h4",
+    "solution": "d8h4",
+    "gap": 99294,
+    "topScore": 99998,
+    "secScore": 704,
+    "secMove": "e6e5",
+    "mateForcers": [
+     "d8h4"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 42,
+    "sfBest": "h4f2",
+    "solution": "h4f2",
+    "gap": 99311,
+    "topScore": 99999,
+    "secScore": 688,
+    "secMove": "h6h5",
+    "mateForcers": [
+     "h4f2"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "mgrrxe.k",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 46,
+    "sfBest": "d5h5",
+    "solution": "d5h5",
+    "gap": 99494,
+    "topScore": 99998,
+    "secScore": 504,
+    "secMove": "d4a7",
+    "mateForcers": [
+     "d5h5"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 44,
+    "sfBest": "h5g6",
+    "solution": "h5g6",
+    "gap": 99896,
+    "topScore": 99999,
+    "secScore": 103,
+    "secMove": "h5g4",
+    "mateForcers": [
+     "h5g6"
+    ]
+   }
+  ],
+  "matGain": 1,
+  "finalMate": true
+ },
+ {
+  "code": "m4c1suk.c",
+  "level": "medium",
+  "theme": "skewer",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 44,
+    "sfBest": "b2a3",
+    "solution": "b2a3",
+    "gap": 1126,
+    "topScore": 1634,
+    "secScore": 508,
+    "secMove": "e1g1"
+   },
+   {
+    "k": 2,
+    "legalMoves": 47,
+    "sfBest": "a3c5",
+    "solution": "a3c5",
+    "gap": 804,
+    "topScore": 1632,
+    "secScore": 828,
+    "secMove": "e6c8"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "mq9rzee.6",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 38,
+    "sfBest": "d5f7",
+    "solution": "d5f7",
+    "gap": 99327,
+    "topScore": 99998,
+    "secScore": 671,
+    "secMove": "h2h4",
+    "mateForcers": [
+     "d5f7"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 38,
+    "sfBest": "f7f8",
+    "solution": "f7f8",
+    "gap": 99630,
+    "topScore": 99999,
+    "secScore": 369,
+    "secMove": "g1f3",
+    "mateForcers": [
+     "f7f8"
+    ]
+   }
+  ],
+  "matGain": 1,
+  "finalMate": true
+ },
+ {
+  "code": "m1wq939n.6",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 47,
+    "sfBest": "e2h5",
+    "solution": "e2h5",
+    "gap": 99583,
+    "topScore": 99998,
+    "secScore": 415,
+    "secMove": "e1c1",
+    "mateForcers": [
+     "e2h5"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 57,
+    "sfBest": "h5f7",
+    "solution": "h5f7",
+    "gap": 99511,
+    "topScore": 99999,
+    "secScore": 488,
+    "secMove": "f4e5",
+    "mateForcers": [
+     "h5f7"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "m186rvn4.a",
+  "level": "medium",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 33,
+    "sfBest": "c4g4",
+    "solution": "c4g4",
+    "gap": 542,
+    "topScore": 274,
+    "secScore": -268,
+    "secMove": "c4b4"
+   },
+   {
+    "k": 2,
+    "legalMoves": 35,
+    "sfBest": "g4g5",
+    "solution": "g4g5",
+    "gap": 651,
+    "topScore": 400,
+    "secScore": -251,
+    "secMove": "e8g8"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "m1ox4jmx.b",
+  "level": "medium",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 33,
+    "sfBest": "d3b5",
+    "solution": "d3b5",
+    "gap": 572,
+    "topScore": 565,
+    "secScore": -7,
+    "secMove": "h3f4"
+   },
+   {
+    "k": 2,
+    "legalMoves": 33,
+    "sfBest": "d1g4",
+    "solution": "d1g4",
+    "gap": 575,
+    "topScore": 574,
+    "secScore": -1,
+    "secMove": "b5d7"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "mh2p58f.r",
+  "level": "medium",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 33,
+    "sfBest": "f6f7",
+    "solution": "f6f7",
+    "gap": 598,
+    "topScore": 551,
+    "secScore": -47,
+    "secMove": "e2e4"
+   },
+   {
+    "k": 2,
+    "legalMoves": 31,
+    "sfBest": "f7g8",
+    "solution": "f7g8",
+    "gap": 546,
+    "topScore": 597,
+    "secScore": 51,
+    "secMove": "f2f3"
+   }
+  ],
+  "matGain": 5,
+  "finalMate": false
+ },
+ {
+  "code": "m1fzif0f.o",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [
+   "step2: second move h8g8 within 1cp (99998 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 32,
+    "sfBest": "h4g3",
+    "solution": "h4g3",
+    "gap": 99588,
+    "topScore": 99998,
+    "secScore": 410,
+    "secMove": "e8f8",
+    "mateForcers": [
+     "h4g3"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 34,
+    "sfBest": "h5h4",
+    "solution": "h5h4",
+    "gap": 1,
+    "topScore": 99999,
+    "secScore": 99998,
+    "secMove": "h8g8",
+    "mateForcers": [
+     "h5h4"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "mg75t8f.2",
+  "level": "medium",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 27,
+    "sfBest": "d1h5",
+    "solution": "d1h5",
+    "gap": 577,
+    "topScore": 553,
+    "secScore": -24,
+    "secMove": "d2d4"
+   },
+   {
+    "k": 2,
+    "legalMoves": 38,
+    "sfBest": "h5c5",
+    "solution": "h5c5",
+    "gap": 422,
+    "topScore": 576,
+    "secScore": 154,
+    "secMove": "h5e5"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "ma6uvby.i",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 36,
+    "sfBest": "d8h4",
+    "solution": "d8h4",
+    "gap": 99395,
+    "topScore": 99998,
+    "secScore": 603,
+    "secMove": "c5d4",
+    "mateForcers": [
+     "d8h4"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 45,
+    "sfBest": "h4f2",
+    "solution": "h4f2",
+    "gap": 99342,
+    "topScore": 99999,
+    "secScore": 657,
+    "secMove": "c5d4",
+    "mateForcers": [
+     "h4f2"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "m1fpoi1o.8",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [
+   "step2: second move c1g5 within 2cp (99997 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 52,
+    "sfBest": "d1h5",
+    "solution": "d1h5",
+    "gap": 99251,
+    "topScore": 99998,
+    "secScore": 747,
+    "secMove": "b5d7",
+    "mateForcers": [
+     "d1h5"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 58,
+    "sfBest": "h5f7",
+    "solution": "h5f7",
+    "gap": 2,
+    "topScore": 99999,
+    "secScore": 99997,
+    "secMove": "c1g5",
+    "mateForcers": [
+     "h5f7"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "m196278i.x",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [
+   "step2: second move c7b6 within 1cp (99998 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 41,
+    "sfBest": "e5c7",
+    "solution": "e5c7",
+    "gap": 97777,
+    "topScore": 99998,
+    "secScore": 2221,
+    "secMove": "d5f6",
+    "mateForcers": [
+     "e5c7"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 46,
+    "sfBest": "d5c3",
+    "solution": "d5c3",
+    "gap": 1,
+    "topScore": 99999,
+    "secScore": 99998,
+    "secMove": "c7b6",
+    "mateForcers": [
+     "d5c3"
+    ]
+   }
+  ],
+  "matGain": 1,
+  "finalMate": true
+ },
+ {
+  "code": "m1fgjt2z.g",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [
+   "step2: second move b4d2 within 2cp (99997 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 44,
+    "sfBest": "g5e3",
+    "solution": "g5e3",
+    "gap": 99907,
+    "topScore": 99998,
+    "secScore": 91,
+    "secMove": "g5g2",
+    "mateForcers": [
+     "g5e3"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 46,
+    "sfBest": "e3e2",
+    "solution": "e3e2",
+    "gap": 2,
+    "topScore": 99999,
+    "secScore": 99997,
+    "secMove": "b4d2",
+    "mateForcers": [
+     "e3e2"
+    ]
+   }
+  ],
+  "matGain": 9,
+  "finalMate": true
+ },
+ {
+  "code": "m1owa26x.6",
+  "level": "medium",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 38,
+    "sfBest": "e2b5",
+    "solution": "e2b5",
+    "gap": 580,
+    "topScore": 611,
+    "secScore": 31,
+    "secMove": "e1g1"
+   },
+   {
+    "k": 2,
+    "legalMoves": 43,
+    "sfBest": "b5b7",
+    "solution": "b5b7",
+    "gap": 492,
+    "topScore": 721,
+    "secScore": 229,
+    "secMove": "d2d4"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "m137v6wn.x",
+  "level": "medium",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 36,
+    "sfBest": "f8c5",
+    "solution": "f8c5",
+    "gap": 415,
+    "topScore": 551,
+    "secScore": 136,
+    "secMove": "f8d6"
+   },
+   {
+    "k": 2,
+    "legalMoves": 32,
+    "sfBest": "d7c5",
+    "solution": "d7c5",
+    "gap": 1056,
+    "topScore": 572,
+    "secScore": -484,
+    "secMove": "h6g5"
+   }
+  ],
+  "matGain": 6,
+  "finalMate": false
+ },
+ {
+  "code": "m1cc6zb0.8",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [
+   "step2: second move c1g5 within 4cp (99995 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 45,
+    "sfBest": "b7c8",
+    "solution": "b7c8",
+    "gap": 99406,
+    "topScore": 99998,
+    "secScore": 592,
+    "secMove": "c4b5",
+    "mateForcers": [
+     "b7c8"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 44,
+    "sfBest": "c3d5",
+    "solution": "c3d5",
+    "gap": 4,
+    "topScore": 99999,
+    "secScore": 99995,
+    "secMove": "c1g5",
+    "mateForcers": [
+     "c3d5"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "mledini.d",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 40,
+    "sfBest": "e4d6",
+    "solution": "e4d6",
+    "gap": 99155,
+    "topScore": 99998,
+    "secScore": 843,
+    "secMove": "d5d6",
+    "mateForcers": [
+     "e4d6"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 41,
+    "sfBest": "d5f7",
+    "solution": "d5f7",
+    "gap": 99110,
+    "topScore": 99999,
+    "secScore": 889,
+    "secMove": "d5d2",
+    "mateForcers": [
+     "d5f7"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "m1vbolln.5",
+  "level": "medium",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 31,
+    "sfBest": "e6d5",
+    "solution": "e6d5",
+    "gap": 514,
+    "topScore": 533,
+    "secScore": 19,
+    "secMove": "e7b4"
+   },
+   {
+    "k": 2,
+    "legalMoves": 33,
+    "sfBest": "d5e4",
+    "solution": "d5e4",
+    "gap": 510,
+    "topScore": 534,
+    "secScore": 24,
+    "secMove": "b8d7"
+   }
+  ],
+  "matGain": 4,
+  "finalMate": false
+ },
+ {
+  "code": "m1geqdxx.8",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [
+   "step2: moves forcing mate in 1: [d8d3,d8d2] vs solution d8d3"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 30,
+    "sfBest": "e7b4",
+    "solution": "e7b4",
+    "gap": 99470,
+    "topScore": 99998,
+    "secScore": 528,
+    "secMove": "d8a5",
+    "mateForcers": [
+     "e7b4"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 35,
+    "sfBest": "d8d2",
+    "solution": "d8d3",
+    "gap": 0,
+    "topScore": 99999,
+    "secScore": 99999,
+    "secMove": "d8d3",
+    "solutionRank": 2,
+    "mateForcers": [
+     "d8d3",
+     "d8d2"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "m1qcj4zf.m",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 52,
+    "sfBest": "e2e6",
+    "solution": "e2e6",
+    "gap": 99660,
+    "topScore": 99998,
+    "secScore": 338,
+    "secMove": "d5e6",
+    "mateForcers": [
+     "e2e6"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 54,
+    "sfBest": "d2a5",
+    "solution": "d2a5",
+    "gap": 99549,
+    "topScore": 99999,
+    "secScore": 450,
+    "secMove": "a1d1",
+    "mateForcers": [
+     "d2a5"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "m1m13koe.i",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 21,
+    "sfBest": "e7f5",
+    "solution": "e7f5",
+    "gap": 99107,
+    "topScore": 99998,
+    "secScore": 891,
+    "secMove": "g6h5",
+    "mateForcers": [
+     "e7f5"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 29,
+    "sfBest": "f8c5",
+    "solution": "f8c5",
+    "gap": 99255,
+    "topScore": 99999,
+    "secScore": 744,
+    "secMove": "g6f5",
+    "mateForcers": [
+     "f8c5"
+    ]
+   }
+  ],
+  "matGain": -3,
+  "finalMate": true
+ },
+ {
+  "code": "mvb74o1.p",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 50,
+    "sfBest": "d2h6",
+    "solution": "d2h6",
+    "gap": 97120,
+    "topScore": 99998,
+    "secScore": 2878,
+    "secMove": "f6h7",
+    "mateForcers": [
+     "d2h6"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 43,
+    "sfBest": "d5f7",
+    "solution": "d5f7",
+    "gap": 99231,
+    "topScore": 99999,
+    "secScore": 768,
+    "secMove": "f6d7",
+    "mateForcers": [
+     "d5f7"
+    ]
+   }
+  ],
+  "matGain": -1,
+  "finalMate": true
+ },
+ {
+  "code": "mr2dxj4.5",
+  "level": "medium",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 45,
+    "sfBest": "g3g2",
+    "solution": "g3g2",
+    "gap": 438,
+    "topScore": 635,
+    "secScore": 197,
+    "secMove": "f8c5"
+   },
+   {
+    "k": 2,
+    "legalMoves": 42,
+    "sfBest": "g2h1q",
+    "solution": "g2h1q",
+    "gap": 568,
+    "topScore": 610,
+    "secScore": 42,
+    "secMove": "g2h1r"
+   }
+  ],
+  "matGain": 4,
+  "finalMate": false
+ },
+ {
+  "code": "m5cyai0.g",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 42,
+    "sfBest": "d5c5",
+    "solution": "d5c5",
+    "gap": 99308,
+    "topScore": 99998,
+    "secScore": 690,
+    "secMove": "f1e1",
+    "mateForcers": [
+     "d5c5"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 46,
+    "sfBest": "c5f8",
+    "solution": "c5f8",
+    "gap": 99508,
+    "topScore": 99999,
+    "secScore": 491,
+    "secMove": "c5b5",
+    "mateForcers": [
+     "c5f8"
+    ]
+   }
+  ],
+  "matGain": 3,
+  "finalMate": true
+ },
+ {
+  "code": "m1v0q0a6.r",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [
+   "step2: second move e3f4 within 1cp (99998 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 49,
+    "sfBest": "c4a6",
+    "solution": "c4a6",
+    "gap": 98962,
+    "topScore": 99998,
+    "secScore": 1036,
+    "secMove": "e3f4",
+    "mateForcers": [
+     "c4a6"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 54,
+    "sfBest": "a3b5",
+    "solution": "a3b5",
+    "gap": 1,
+    "topScore": 99999,
+    "secScore": 99998,
+    "secMove": "e3f4",
+    "mateForcers": [
+     "a3b5"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "m63joa1.7",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 38,
+    "sfBest": "d5f6",
+    "solution": "d5f6",
+    "gap": 99565,
+    "topScore": 99998,
+    "secScore": 433,
+    "secMove": "a2a3",
+    "mateForcers": [
+     "d5f6"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 41,
+    "sfBest": "c1h6",
+    "solution": "c1h6",
+    "gap": 99397,
+    "topScore": 99999,
+    "secScore": 602,
+    "secMove": "b2b4",
+    "mateForcers": [
+     "c1h6"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "m1t87im.j",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [
+   "step2: second move h3g2 within 2cp (99997 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 35,
+    "sfBest": "d8g5",
+    "solution": "d8g5",
+    "gap": 99352,
+    "topScore": 99998,
+    "secScore": 646,
+    "secMove": "a8a6",
+    "mateForcers": [
+     "d8g5"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 43,
+    "sfBest": "g5g2",
+    "solution": "g5g2",
+    "gap": 2,
+    "topScore": 99999,
+    "secScore": 99997,
+    "secMove": "h3g2",
+    "mateForcers": [
+     "g5g2"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "m73d1k2.2",
+  "level": "medium",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 43,
+    "sfBest": "h4e4",
+    "solution": "h4e4",
+    "gap": 656,
+    "topScore": 405,
+    "secScore": -251,
+    "secMove": "h4d8"
+   },
+   {
+    "k": 2,
+    "legalMoves": 50,
+    "sfBest": "e4h1",
+    "solution": "e4h1",
+    "gap": 354,
+    "topScore": 434,
+    "secScore": 80,
+    "secMove": "e4c2"
+   }
+  ],
+  "matGain": 6,
+  "finalMate": false
+ },
+ {
+  "code": "m1wy8stj.3",
+  "level": "medium",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 45,
+    "sfBest": "d4e5",
+    "solution": "d4e5",
+    "gap": 603,
+    "topScore": 516,
+    "secScore": -87,
+    "secMove": "c1f4"
+   },
+   {
+    "k": 2,
+    "legalMoves": 43,
+    "sfBest": "e5e4",
+    "solution": "e5e4",
+    "gap": 526,
+    "topScore": 530,
+    "secScore": 4,
+    "secMove": "f1e1"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "m19f2u0r.u",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [
+   "step2: second move h3g4 within 2cp (99997 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 46,
+    "sfBest": "g4h3",
+    "solution": "g4h3",
+    "gap": 98999,
+    "topScore": 99998,
+    "secScore": 999,
+    "secMove": "h8g8",
+    "mateForcers": [
+     "g4h3"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 46,
+    "sfBest": "d7g4",
+    "solution": "d7g4",
+    "gap": 2,
+    "topScore": 99999,
+    "secScore": 99997,
+    "secMove": "h3g4",
+    "mateForcers": [
+     "d7g4"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "m1q1co5a.2",
+  "level": "medium",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 49,
+    "sfBest": "d1h5",
+    "solution": "d1h5",
+    "gap": 441,
+    "topScore": 545,
+    "secScore": 104,
+    "secMove": "c4g8"
+   },
+   {
+    "k": 2,
+    "legalMoves": 55,
+    "sfBest": "h5c5",
+    "solution": "h5c5",
+    "gap": 384,
+    "topScore": 552,
+    "secScore": 168,
+    "secMove": "d4c6"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "mwddjbv.b",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [
+   "step2: second move c4e4 within 1cp (99998 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 41,
+    "sfBest": "d3c4",
+    "solution": "d3c4",
+    "gap": 99226,
+    "topScore": 99998,
+    "secScore": 772,
+    "secMove": "c1b1",
+    "mateForcers": [
+     "d3c4"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 40,
+    "sfBest": "f1d3",
+    "solution": "f1d3",
+    "gap": 1,
+    "topScore": 99999,
+    "secScore": 99998,
+    "secMove": "c4e4",
+    "mateForcers": [
+     "f1d3"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "msla4w9.c",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 33,
+    "sfBest": "a4h4",
+    "solution": "a4h4",
+    "gap": 99857,
+    "topScore": 99998,
+    "secScore": 141,
+    "secMove": "e6f5",
+    "mateForcers": [
+     "a4h4"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 35,
+    "sfBest": "h4g3",
+    "solution": "h4g3",
+    "gap": 100364,
+    "topScore": 99999,
+    "secScore": -365,
+    "secMove": "h4e4",
+    "mateForcers": [
+     "h4g3"
+    ]
+   }
+  ],
+  "matGain": 1,
+  "finalMate": true
+ },
+ {
+  "code": "m85cgo6.7",
+  "level": "medium",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 36,
+    "sfBest": "d6d4",
+    "solution": "d6d4",
+    "gap": 500,
+    "topScore": 455,
+    "secScore": -45,
+    "secMove": "d6d5"
+   },
+   {
+    "k": 2,
+    "legalMoves": 44,
+    "sfBest": "e6f7",
+    "solution": "e6f7",
+    "gap": 233,
+    "topScore": 467,
+    "secScore": 234,
+    "secMove": "d4e4"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "mv47lus.i",
+  "level": "medium",
+  "theme": "discovered",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 29,
+    "sfBest": "d6g3",
+    "solution": "d6g3",
+    "gap": 339,
+    "topScore": 603,
+    "secScore": 264,
+    "secMove": "f8f7"
+   },
+   {
+    "k": 2,
+    "legalMoves": 24,
+    "sfBest": "d8d5",
+    "solution": "d8d5",
+    "gap": 1387,
+    "topScore": 623,
+    "secScore": -764,
+    "secMove": "d8d7"
+   }
+  ],
+  "matGain": 6,
+  "finalMate": false
+ },
+ {
+  "code": "mcxygfh.f",
+  "level": "medium",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 34,
+    "sfBest": "f3e5",
+    "solution": "f3e5",
+    "gap": 687,
+    "topScore": 736,
+    "secScore": 49,
+    "secMove": "c1h6"
+   },
+   {
+    "k": 2,
+    "legalMoves": 38,
+    "sfBest": "e5c4",
+    "solution": "e5c4",
+    "gap": 677,
+    "topScore": 836,
+    "secScore": 159,
+    "secMove": "c3d5"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "mzm3u1e.i",
+  "level": "medium",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 49,
+    "sfBest": "e4c6",
+    "solution": "e4c6",
+    "gap": 2182,
+    "topScore": 3072,
+    "secScore": 890,
+    "secMove": "d6d7"
+   },
+   {
+    "k": 2,
+    "legalMoves": 46,
+    "sfBest": "c6a8",
+    "solution": "c6a8",
+    "gap": 2862,
+    "topScore": 3349,
+    "secScore": 487,
+    "secMove": "c6d7"
+   }
+  ],
+  "matGain": 5,
+  "finalMate": false
+ },
+ {
+  "code": "m1us8v2k.c",
+  "level": "medium",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 41,
+    "sfBest": "b4c2",
+    "solution": "b4c2",
+    "gap": 533,
+    "topScore": 482,
+    "secScore": -51,
+    "secMove": "b4c6"
+   },
+   {
+    "k": 2,
+    "legalMoves": 43,
+    "sfBest": "c2a1",
+    "solution": "c2a1",
+    "gap": 751,
+    "topScore": 480,
+    "secScore": -271,
+    "secMove": "c8g4"
+   }
+  ],
+  "matGain": 5,
+  "finalMate": false
+ },
+ {
+  "code": "m4o4ng1.6",
+  "level": "medium",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 37,
+    "sfBest": "d8d5",
+    "solution": "d8d5",
+    "gap": 460,
+    "topScore": 492,
+    "secScore": 32,
+    "secMove": "d8d6"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "mzype68.c",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [
+   "step2: second move c5g1 within 1cp (99998 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 39,
+    "sfBest": "d8h4",
+    "solution": "d8h4",
+    "gap": 99796,
+    "topScore": 99998,
+    "secScore": 202,
+    "secMove": "f3h4",
+    "mateForcers": [
+     "d8h4"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 47,
+    "sfBest": "h4h2",
+    "solution": "h4h2",
+    "gap": 1,
+    "topScore": 99999,
+    "secScore": 99998,
+    "secMove": "c5g1",
+    "mateForcers": [
+     "h4h2"
+    ]
+   }
+  ],
+  "matGain": 4,
+  "finalMate": true
+ },
+ {
+  "code": "mimv3m2.8",
+  "level": "medium",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 38,
+    "sfBest": "a5c5",
+    "solution": "a5c5",
+    "gap": 383,
+    "topScore": 659,
+    "secScore": 276,
+    "secMove": "f6e4"
+   },
+   {
+    "k": 2,
+    "legalMoves": 36,
+    "sfBest": "c5c4",
+    "solution": "c5c4",
+    "gap": 397,
+    "topScore": 656,
+    "secScore": 259,
+    "secMove": "f6e4"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "m17yn8c8.7",
+  "level": "medium",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 32,
+    "sfBest": "b6b2",
+    "solution": "b6b2",
+    "gap": 582,
+    "topScore": 577,
+    "secScore": -5,
+    "secMove": "f8c5"
+   },
+   {
+    "k": 2,
+    "legalMoves": 40,
+    "sfBest": "b2c3",
+    "solution": "b2c3",
+    "gap": 511,
+    "topScore": 611,
+    "secScore": 100,
+    "secMove": "d7c6"
+   }
+  ],
+  "matGain": 4,
+  "finalMate": false
+ },
+ {
+  "code": "m1j3rxq7.f",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 44,
+    "sfBest": "e2h5",
+    "solution": "e2h5",
+    "gap": 99238,
+    "topScore": 99998,
+    "secScore": 760,
+    "secMove": "c1g5",
+    "mateForcers": [
+     "e2h5"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 43,
+    "sfBest": "b3f7",
+    "solution": "b3f7",
+    "gap": 99323,
+    "topScore": 99999,
+    "secScore": 676,
+    "secMove": "c1g5",
+    "mateForcers": [
+     "b3f7"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "m1ptt3dx.w",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [
+   "step2: second move g7h6 within 1cp (99998 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 43,
+    "sfBest": "g2f3",
+    "solution": "g2f3",
+    "gap": 98348,
+    "topScore": 99998,
+    "secScore": 1650,
+    "secMove": "a8a1",
+    "mateForcers": [
+     "g2f3"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 49,
+    "sfBest": "f3e2",
+    "solution": "f3e2",
+    "gap": 1,
+    "topScore": 99999,
+    "secScore": 99998,
+    "secMove": "g7h6",
+    "mateForcers": [
+     "f3e2"
+    ]
+   }
+  ],
+  "matGain": 3,
+  "finalMate": true
+ },
+ {
+  "code": "m3zml9i.5",
+  "level": "medium",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 34,
+    "sfBest": "d4e3",
+    "solution": "d4e3",
+    "gap": 567,
+    "topScore": 702,
+    "secScore": 135,
+    "secMove": "c7c5"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "m1gaqf34.m",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 45,
+    "sfBest": "f6e4",
+    "solution": "f6e4",
+    "gap": 99380,
+    "topScore": 99998,
+    "secScore": 618,
+    "secMove": "g3g1",
+    "mateForcers": [
+     "f6e4"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 40,
+    "sfBest": "g3f2",
+    "solution": "g3f2",
+    "gap": 99463,
+    "topScore": 99999,
+    "secScore": 536,
+    "secMove": "g3g1",
+    "mateForcers": [
+     "g3f2"
+    ]
+   }
+  ],
+  "matGain": 3,
+  "finalMate": true
+ },
+ {
+  "code": "m1yrhbl2.r",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [
+   "step2: second move e4d6 within 4cp (99995 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 37,
+    "sfBest": "h4f6",
+    "solution": "h4f6",
+    "gap": 99867,
+    "topScore": 99998,
+    "secScore": 131,
+    "secMove": "h4h6",
+    "mateForcers": [
+     "h4f6"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 40,
+    "sfBest": "f1g1",
+    "solution": "f1g1",
+    "gap": 4,
+    "topScore": 99999,
+    "secScore": 99995,
+    "secMove": "e4d6",
+    "mateForcers": [
+     "f1g1"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "m1idrmy.8",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [
+   "step2: second move d2d4 within 5cp (99994 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 35,
+    "sfBest": "f4f5",
+    "solution": "f4f5",
+    "gap": 98953,
+    "topScore": 99998,
+    "secScore": 1045,
+    "secMove": "d1g4",
+    "mateForcers": [
+     "f4f5"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 35,
+    "sfBest": "g5f7",
+    "solution": "g5f7",
+    "gap": 5,
+    "topScore": 99999,
+    "secScore": 99994,
+    "secMove": "d2d4",
+    "mateForcers": [
+     "g5f7"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "m15qgpwu.10",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [
+   "step2: second move f4e6 within 1cp (99998 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 55,
+    "sfBest": "e1e7",
+    "solution": "e1e7",
+    "gap": 99059,
+    "topScore": 99998,
+    "secScore": 939,
+    "secMove": "b4c3",
+    "mateForcers": [
+     "e1e7"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 56,
+    "sfBest": "d4g7",
+    "solution": "d4g7",
+    "gap": 1,
+    "topScore": 99999,
+    "secScore": 99998,
+    "secMove": "f4e6",
+    "mateForcers": [
+     "d4g7"
+    ]
+   }
+  ],
+  "matGain": 1,
+  "finalMate": true
+ },
+ {
+  "code": "m1y79y7h.2",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 44,
+    "sfBest": "d5f6",
+    "solution": "d5f6",
+    "gap": 99600,
+    "topScore": 99998,
+    "secScore": 398,
+    "secMove": "c1g5",
+    "mateForcers": [
+     "d5f6"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 43,
+    "sfBest": "c1h6",
+    "solution": "c1h6",
+    "gap": 99881,
+    "topScore": 99999,
+    "secScore": 118,
+    "secMove": "d1d2",
+    "mateForcers": [
+     "c1h6"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "mrm62ov.2",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 37,
+    "sfBest": "g4h3",
+    "solution": "g4h3",
+    "gap": 98863,
+    "topScore": 99998,
+    "secScore": 1135,
+    "secMove": "g8f6",
+    "mateForcers": [
+     "g4h3"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 36,
+    "sfBest": "h1g1",
+    "solution": "h1g1",
+    "gap": 98571,
+    "topScore": 99999,
+    "secScore": 1428,
+    "secMove": "d4d3",
+    "mateForcers": [
+     "h1g1"
+    ]
+   }
+  ],
+  "matGain": 3,
+  "finalMate": true
+ },
+ {
+  "code": "m1laj29d.i",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [
+   "step2: second move f2f3 within 1cp (99998 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 35,
+    "sfBest": "f3f6",
+    "solution": "f3f6",
+    "gap": 99174,
+    "topScore": 99998,
+    "secScore": 824,
+    "secMove": "f3g3",
+    "mateForcers": [
+     "f3f6"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 43,
+    "sfBest": "f6g7",
+    "solution": "f6g7",
+    "gap": 1,
+    "topScore": 99999,
+    "secScore": 99998,
+    "secMove": "f2f3",
+    "mateForcers": [
+     "f6g7"
+    ]
+   }
+  ],
+  "matGain": 9,
+  "finalMate": true
+ },
+ {
+  "code": "msxlbx7.b",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [
+   "step2: second move c3d2 within 2cp (99997 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 53,
+    "sfBest": "b4c3",
+    "solution": "b4c3",
+    "gap": 98982,
+    "topScore": 99998,
+    "secScore": 1016,
+    "secMove": "d8d1",
+    "mateForcers": [
+     "b4c3"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 52,
+    "sfBest": "d8d2",
+    "solution": "d8d2",
+    "gap": 2,
+    "topScore": 99999,
+    "secScore": 99997,
+    "secMove": "c3d2",
+    "mateForcers": [
+     "d8d2"
+    ]
+   }
+  ],
+  "matGain": 12,
+  "finalMate": true
+ },
+ {
+  "code": "mew39jz.d",
+  "level": "medium",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 40,
+    "sfBest": "d5e4",
+    "solution": "d5e4",
+    "gap": 448,
+    "topScore": 613,
+    "secScore": 165,
+    "secMove": "d5d4"
+   },
+   {
+    "k": 2,
+    "legalMoves": 42,
+    "sfBest": "d8d3",
+    "solution": "d8d3",
+    "gap": 434,
+    "topScore": 601,
+    "secScore": 167,
+    "secMove": "c8f5"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "mr2kg8y.a",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 38,
+    "sfBest": "g4h5",
+    "solution": "g4h5",
+    "gap": 99388,
+    "topScore": 99998,
+    "secScore": 610,
+    "secMove": "g4g6",
+    "mateForcers": [
+     "g4h5"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 40,
+    "sfBest": "h5e5",
+    "solution": "h5e5",
+    "gap": 99411,
+    "topScore": 99999,
+    "secScore": 588,
+    "secMove": "h5f7",
+    "mateForcers": [
+     "h5e5"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "miokppx.h",
+  "level": "medium",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 46,
+    "sfBest": "f3g5",
+    "solution": "f3g5",
+    "gap": 513,
+    "topScore": 555,
+    "secScore": 42,
+    "secMove": "d1d2"
+   },
+   {
+    "k": 2,
+    "legalMoves": 49,
+    "sfBest": "g5e6",
+    "solution": "g5e6",
+    "gap": 503,
+    "topScore": 543,
+    "secScore": 40,
+    "secMove": "d1d2"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "m169a7zh.f",
+  "level": "medium",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 39,
+    "sfBest": "h5g3",
+    "solution": "h5g3",
+    "gap": 527,
+    "topScore": 367,
+    "secScore": -160,
+    "secMove": "h4b4"
+   },
+   {
+    "k": 2,
+    "legalMoves": 40,
+    "sfBest": "h4h1",
+    "solution": "h4h1",
+    "gap": 728,
+    "topScore": 377,
+    "secScore": -351,
+    "secMove": "h4g3"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "mhkajmz.t",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [
+   "step2: second move d6c6 within 7cp (99992 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 36,
+    "sfBest": "c6d6",
+    "solution": "c6d6",
+    "gap": 99786,
+    "topScore": 99998,
+    "secScore": 212,
+    "secMove": "d2d6",
+    "mateForcers": [
+     "c6d6"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 41,
+    "sfBest": "d6d8",
+    "solution": "d6d8",
+    "gap": 7,
+    "topScore": 99999,
+    "secScore": 99992,
+    "secMove": "d6c6",
+    "mateForcers": [
+     "d6d8"
+    ]
+   }
+  ],
+  "matGain": 1,
+  "finalMate": true
+ },
+ {
+  "code": "m1xchf82.g",
+  "level": "medium",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 45,
+    "sfBest": "d5e7",
+    "solution": "d5e7",
+    "gap": 438,
+    "topScore": 659,
+    "secScore": 221,
+    "secMove": "a1d1"
+   },
+   {
+    "k": 2,
+    "legalMoves": 47,
+    "sfBest": "e7g6",
+    "solution": "e7g6",
+    "gap": 397,
+    "topScore": 725,
+    "secScore": 328,
+    "secMove": "h5h3"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "m4hmd3t.v",
+  "level": "medium",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 35,
+    "sfBest": "b2d4",
+    "solution": "b2d4",
+    "gap": 406,
+    "topScore": 464,
+    "secScore": 58,
+    "secMove": "e6f5"
+   },
+   {
+    "k": 2,
+    "legalMoves": 37,
+    "sfBest": "d4e4",
+    "solution": "d4e4",
+    "gap": 372,
+    "topScore": 484,
+    "secScore": 112,
+    "secMove": "h7h6"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "m1kpx1dz.13",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [
+   "step2: second move d1d7 within 3cp (99996 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 50,
+    "sfBest": "c7e6",
+    "solution": "c7e6",
+    "gap": 98956,
+    "topScore": 99998,
+    "secScore": 1042,
+    "secMove": "g3f5",
+    "mateForcers": [
+     "c7e6"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 52,
+    "sfBest": "f4c7",
+    "solution": "f4c7",
+    "gap": 3,
+    "topScore": 99999,
+    "secScore": 99996,
+    "secMove": "d1d7",
+    "mateForcers": [
+     "f4c7"
+    ]
+   }
+  ],
+  "matGain": 9,
+  "finalMate": true
+ },
+ {
+  "code": "m2rxlo4.a",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [
+   "step2: second move g6f7 within 0cp (99999 vs 99999) and still winning",
+   "step2: moves forcing mate in 1: [g6f7,g5e6] vs solution g5e6"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 42,
+    "sfBest": "h5g6",
+    "solution": "h5g6",
+    "gap": 99481,
+    "topScore": 99998,
+    "secScore": 517,
+    "secMove": "h5h8",
+    "mateForcers": [
+     "h5g6"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 46,
+    "sfBest": "g5e6",
+    "solution": "g5e6",
+    "gap": 0,
+    "topScore": 99999,
+    "secScore": 99999,
+    "secMove": "g6f7",
+    "mateForcers": [
+     "g6f7",
+     "g5e6"
+    ]
+   }
+  ],
+  "matGain": 1,
+  "finalMate": true
+ },
+ {
+  "code": "m10m9jmc.2",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 43,
+    "sfBest": "d8h4",
+    "solution": "d8h4",
+    "gap": 99698,
+    "topScore": 99998,
+    "secScore": 300,
+    "secMove": "g8h6",
+    "mateForcers": [
+     "d8h4"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 53,
+    "sfBest": "h4g3",
+    "solution": "h4g3",
+    "gap": 99732,
+    "topScore": 99999,
+    "secScore": 267,
+    "secMove": "h4g5",
+    "mateForcers": [
+     "h4g3"
+    ]
+   }
+  ],
+  "matGain": 1,
+  "finalMate": true
+ },
+ {
+  "code": "mb1fy2j.2",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [
+   "step2: second move f4g5 within 6cp (99993 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 45,
+    "sfBest": "d1h5",
+    "solution": "d1h5",
+    "gap": 99863,
+    "topScore": 99998,
+    "secScore": 135,
+    "secMove": "c4f7",
+    "mateForcers": [
+     "d1h5"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 52,
+    "sfBest": "h5f7",
+    "solution": "h5f7",
+    "gap": 6,
+    "topScore": 99999,
+    "secScore": 99993,
+    "secMove": "f4g5",
+    "mateForcers": [
+     "h5f7"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "m16ivh14.i",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [
+   "step2: second move h5h6 within 2cp (99997 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 45,
+    "sfBest": "g4h5",
+    "solution": "g4h5",
+    "gap": 99248,
+    "topScore": 99998,
+    "secScore": 750,
+    "secMove": "e3g5",
+    "mateForcers": [
+     "g4h5"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 46,
+    "sfBest": "h5f7",
+    "solution": "h5f7",
+    "gap": 2,
+    "topScore": 99999,
+    "secScore": 99997,
+    "secMove": "h5h6",
+    "mateForcers": [
+     "h5f7"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "m66wjhv.a",
+  "level": "medium",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 40,
+    "sfBest": "d1a4",
+    "solution": "d1a4",
+    "gap": 348,
+    "topScore": 398,
+    "secScore": 50,
+    "secMove": "d5f7"
+   },
+   {
+    "k": 2,
+    "legalMoves": 43,
+    "sfBest": "a4a5",
+    "solution": "a4a5",
+    "gap": 525,
+    "topScore": 415,
+    "secScore": -110,
+    "secMove": "d5f7"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "m19rr8ig.d",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [
+   "step2: second move c2e3 within 2cp (99997 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 42,
+    "sfBest": "d4c2",
+    "solution": "d4c2",
+    "gap": 98554,
+    "topScore": 99998,
+    "secScore": 1444,
+    "secMove": "b4d2",
+    "mateForcers": [
+     "d4c2"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 42,
+    "sfBest": "d7d2",
+    "solution": "d7d2",
+    "gap": 2,
+    "topScore": 99999,
+    "secScore": 99997,
+    "secMove": "c2e3",
+    "mateForcers": [
+     "d7d2"
+    ]
+   }
+  ],
+  "matGain": 9,
+  "finalMate": true
+ },
+ {
+  "code": "mfbhhle.p",
+  "level": "medium",
+  "theme": "skewer",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 36,
+    "sfBest": "a3b4",
+    "solution": "a3b4",
+    "gap": 1053,
+    "topScore": 2028,
+    "secScore": 975,
+    "secMove": "c6b5"
+   },
+   {
+    "k": 2,
+    "legalMoves": 40,
+    "sfBest": "e6f4",
+    "solution": "e6f4",
+    "gap": 1500,
+    "topScore": 1739,
+    "secScore": 239,
+    "secMove": "b4b5"
+   }
+  ],
+  "matGain": 4,
+  "finalMate": false
+ },
+ {
+  "code": "m1e5blq0.d",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [
+   "step2: second move h5h6 within 2cp (99997 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 45,
+    "sfBest": "g4h5",
+    "solution": "g4h5",
+    "gap": 98678,
+    "topScore": 99998,
+    "secScore": 1320,
+    "secMove": "d2e4",
+    "mateForcers": [
+     "g4h5"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 46,
+    "sfBest": "h5f7",
+    "solution": "h5f7",
+    "gap": 2,
+    "topScore": 99999,
+    "secScore": 99997,
+    "secMove": "h5h6",
+    "mateForcers": [
+     "h5f7"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "m49lbnr.v",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 37,
+    "sfBest": "d2d8",
+    "solution": "d2d8",
+    "gap": 99947,
+    "topScore": 99998,
+    "secScore": 51,
+    "secMove": "d2d6",
+    "mateForcers": [
+     "d2d8"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 30,
+    "sfBest": "d1d8",
+    "solution": "d1d8",
+    "gap": 100793,
+    "topScore": 99999,
+    "secScore": -794,
+    "secMove": "g5d8",
+    "mateForcers": [
+     "d1d8"
+    ]
+   }
+  ],
+  "matGain": -4,
+  "finalMate": true
+ },
+ {
+  "code": "mkrppuy.z",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 34,
+    "sfBest": "d7g4",
+    "solution": "d7g4",
+    "gap": 99966,
+    "topScore": 99998,
+    "secScore": 32,
+    "secMove": "e8c8",
+    "mateForcers": [
+     "d7g4"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 38,
+    "sfBest": "g4g2",
+    "solution": "g4g2",
+    "gap": 99859,
+    "topScore": 99999,
+    "secScore": 140,
+    "secMove": "d6d5",
+    "mateForcers": [
+     "g4g2"
+    ]
+   }
+  ],
+  "matGain": 1,
+  "finalMate": true
+ },
+ {
+  "code": "m19h9gfv.i",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [
+   "step2: second move h6d2 within 2cp (99997 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 47,
+    "sfBest": "d2h6",
+    "solution": "d2h6",
+    "gap": 99262,
+    "topScore": 99998,
+    "secScore": 736,
+    "secMove": "f7e8",
+    "mateForcers": [
+     "d2h6"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 42,
+    "sfBest": "h6f8",
+    "solution": "h6f8",
+    "gap": 2,
+    "topScore": 99999,
+    "secScore": 99997,
+    "secMove": "h6d2",
+    "mateForcers": [
+     "h6f8"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "mvddgxm.e",
+  "level": "medium",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 44,
+    "sfBest": "e5d3",
+    "solution": "e5d3",
+    "gap": 553,
+    "topScore": 662,
+    "secScore": 109,
+    "secMove": "d8h4"
+   },
+   {
+    "k": 2,
+    "legalMoves": 37,
+    "sfBest": "d8d3",
+    "solution": "d8d3",
+    "gap": 1004,
+    "topScore": 677,
+    "secScore": -327,
+    "secMove": "c6b4"
+   }
+  ],
+  "matGain": 6,
+  "finalMate": false
+ },
+ {
+  "code": "mbncp70.7",
+  "level": "medium",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 19,
+    "sfBest": "d8a5",
+    "solution": "d8a5",
+    "gap": 316,
+    "topScore": 585,
+    "secScore": 269,
+    "secMove": "e7e5"
+   },
+   {
+    "k": 2,
+    "legalMoves": 27,
+    "sfBest": "a5b5",
+    "solution": "a5b5",
+    "gap": 407,
+    "topScore": 583,
+    "secScore": 176,
+    "secMove": "g7g5"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "m2ojtzi.j",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 53,
+    "sfBest": "f4h6",
+    "solution": "f4h6",
+    "gap": 99247,
+    "topScore": 99998,
+    "secScore": 751,
+    "secMove": "c7e6",
+    "mateForcers": [
+     "f4h6"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 52,
+    "sfBest": "e2e6",
+    "solution": "e2e6",
+    "gap": 99221,
+    "topScore": 99999,
+    "secScore": 778,
+    "secMove": "c7d5",
+    "mateForcers": [
+     "e2e6"
+    ]
+   }
+  ],
+  "matGain": 3,
+  "finalMate": true
+ },
+ {
+  "code": "m1018625.d",
+  "level": "medium",
+  "theme": "discovered",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 43,
+    "sfBest": "e5e6",
+    "solution": "e5e6",
+    "gap": 431,
+    "topScore": 782,
+    "secScore": 351,
+    "secMove": "d4e3"
+   },
+   {
+    "k": 2,
+    "legalMoves": 38,
+    "sfBest": "c4d4",
+    "solution": "c4d4",
+    "gap": 1158,
+    "topScore": 733,
+    "secScore": -425,
+    "secMove": "e6f7"
+   }
+  ],
+  "matGain": 6,
+  "finalMate": false
+ },
+ {
+  "code": "m1o28qbo.6",
+  "level": "medium",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 38,
+    "sfBest": "d8f6",
+    "solution": "d8f6",
+    "gap": 1016,
+    "topScore": 1491,
+    "secScore": 475,
+    "secMove": "h8f8"
+   },
+   {
+    "k": 2,
+    "legalMoves": 48,
+    "sfBest": "d4f3",
+    "solution": "d4f3",
+    "gap": 1097,
+    "topScore": 1660,
+    "secScore": 563,
+    "secMove": "e4g3"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "m1hghzci.2",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 45,
+    "sfBest": "g4f5",
+    "solution": "g4f5",
+    "gap": 99268,
+    "topScore": 99998,
+    "secScore": 730,
+    "secMove": "b1c3",
+    "mateForcers": [
+     "g4f5"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 49,
+    "sfBest": "f5f7",
+    "solution": "f5f7",
+    "gap": 99663,
+    "topScore": 99999,
+    "secScore": 336,
+    "secMove": "e4e5",
+    "mateForcers": [
+     "f5f7"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "m168hyvj.6",
+  "level": "medium",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 43,
+    "sfBest": "d1h5",
+    "solution": "d1h5",
+    "gap": 1482,
+    "topScore": 1894,
+    "secScore": 412,
+    "secMove": "f1c4"
+   },
+   {
+    "k": 2,
+    "legalMoves": 51,
+    "sfBest": "h5h6",
+    "solution": "h5h6",
+    "gap": 1136,
+    "topScore": 1862,
+    "secScore": 726,
+    "secMove": "h2h4"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "m1plxhaw.t",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 37,
+    "sfBest": "d1d4",
+    "solution": "d1d4",
+    "gap": 98593,
+    "topScore": 99998,
+    "secScore": 1405,
+    "secMove": "e2g4",
+    "mateForcers": [
+     "d1d4"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 49,
+    "sfBest": "d4e5",
+    "solution": "d4e5",
+    "gap": 96302,
+    "topScore": 99999,
+    "secScore": 3697,
+    "secMove": "a3f8",
+    "mateForcers": [
+     "d4e5"
+    ]
+   }
+  ],
+  "matGain": 3,
+  "finalMate": true
+ },
+ {
+  "code": "m1sptxae.2",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [
+   "step2: second move d1d3 within 1cp (99998 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 41,
+    "sfBest": "f3g5",
+    "solution": "f3g5",
+    "gap": 99078,
+    "topScore": 99998,
+    "secScore": 920,
+    "secMove": "c2c4",
+    "mateForcers": [
+     "f3g5"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 47,
+    "sfBest": "b5d3",
+    "solution": "b5d3",
+    "gap": 1,
+    "topScore": 99999,
+    "secScore": 99998,
+    "secMove": "d1d3",
+    "mateForcers": [
+     "b5d3"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "m1cquxyh.m",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 38,
+    "sfBest": "g5h4",
+    "solution": "g5h4",
+    "gap": 99871,
+    "topScore": 99998,
+    "secScore": 127,
+    "secMove": "g8e7",
+    "mateForcers": [
+     "g5h4"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 39,
+    "sfBest": "b6f2",
+    "solution": "b6f2",
+    "gap": 99883,
+    "topScore": 99999,
+    "secScore": 116,
+    "secMove": "g8e7",
+    "mateForcers": [
+     "b6f2"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "m1q3cqc9.e",
+  "level": "medium",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 30,
+    "sfBest": "d4f3",
+    "solution": "d4f3",
+    "gap": 445,
+    "topScore": 492,
+    "secScore": 47,
+    "secMove": "f8g7"
+   },
+   {
+    "k": 2,
+    "legalMoves": 30,
+    "sfBest": "f3g5",
+    "solution": "f3g5",
+    "gap": 438,
+    "topScore": 508,
+    "secScore": 70,
+    "secMove": "f8g7"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "mka77p7.3",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 46,
+    "sfBest": "g6h7",
+    "solution": "g6h7",
+    "gap": 99532,
+    "topScore": 99998,
+    "secScore": 466,
+    "secMove": "g6g7",
+    "mateForcers": [
+     "g6h7"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 32,
+    "sfBest": "d3g6",
+    "solution": "d3g6",
+    "gap": 100726,
+    "topScore": 99999,
+    "secScore": -727,
+    "secMove": "e2g3",
+    "mateForcers": [
+     "d3g6"
+    ]
+   }
+  ],
+  "matGain": -8,
+  "finalMate": true
+ },
+ {
+  "code": "m1iywyy8.i",
+  "level": "medium",
+  "theme": "mate-in-2",
+  "mateIn": 2,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 31,
+    "sfBest": "e4e5",
+    "solution": "e4e5",
+    "gap": 99399,
+    "topScore": 99998,
+    "secScore": 599,
+    "secMove": "e2g3",
+    "mateForcers": [
+     "e4e5"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 34,
+    "sfBest": "c4f4",
+    "solution": "c4f4",
+    "gap": 97795,
+    "topScore": 99999,
+    "secScore": 2204,
+    "secMove": "c4d4",
+    "mateForcers": [
+     "c4f4"
+    ]
+   }
+  ],
+  "matGain": -1,
+  "finalMate": true
+ },
+ {
+  "code": "m1uquz53.k",
+  "level": "medium",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 45,
+    "sfBest": "e4f6",
+    "solution": "e4f6",
+    "gap": 935,
+    "topScore": 1666,
+    "secScore": 731,
+    "secMove": "f1d1"
+   },
+   {
+    "k": 2,
+    "legalMoves": 47,
+    "sfBest": "f6d7",
+    "solution": "f6d7",
+    "gap": 871,
+    "topScore": 1753,
+    "secScore": 882,
+    "secMove": "e5e3"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "h1yi3gfp.4",
+  "level": "hard",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 39,
+    "sfBest": "f8d8",
+    "solution": "f8d8",
+    "gap": 592,
+    "topScore": 696,
+    "secScore": 104,
+    "secMove": "f6g6"
+   },
+   {
+    "k": 2,
+    "legalMoves": 1,
+    "sfBest": "f6d8",
+    "solution": "f6d8",
+    "gap": null,
+    "topScore": 718
+   }
+  ],
+  "matGain": 4,
+  "finalMate": false
+ },
+ {
+  "code": "h16xs2zp.j",
+  "level": "hard",
+  "theme": "mate-in-3",
+  "mateIn": 3,
+  "flags": [
+   "step2: second move g3g7 within 4cp (99994 vs 99998) and still winning",
+   "step4: second move f7e7 within 4cp (99995 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 50,
+    "sfBest": "f1f7",
+    "solution": "f1f7",
+    "gap": 98591,
+    "topScore": 99997,
+    "secScore": 1406,
+    "secMove": "h3g5",
+    "mateForcers": [
+     "f1f7"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 53,
+    "sfBest": "g3e5",
+    "solution": "g3e5",
+    "gap": 4,
+    "topScore": 99998,
+    "secScore": 99994,
+    "secMove": "g3g7",
+    "mateForcers": [
+     "g3e5"
+    ]
+   },
+   {
+    "k": 4,
+    "legalMoves": 47,
+    "sfBest": "e5e7",
+    "solution": "e5e7",
+    "gap": 4,
+    "topScore": 99999,
+    "secScore": 99995,
+    "secMove": "f7e7",
+    "mateForcers": [
+     "e5e7"
+    ]
+   }
+  ],
+  "matGain": 10,
+  "finalMate": true
+ },
+ {
+  "code": "htvuif6.b",
+  "level": "hard",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 39,
+    "sfBest": "c1g5",
+    "solution": "c1g5",
+    "gap": 289,
+    "topScore": 438,
+    "secScore": 149,
+    "secMove": "d5e4"
+   },
+   {
+    "k": 2,
+    "legalMoves": 42,
+    "sfBest": "d5c6",
+    "solution": "d5c6",
+    "gap": 307,
+    "topScore": 443,
+    "secScore": 136,
+    "secMove": "d5e4"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "h1j4fy5a.12",
+  "level": "hard",
+  "theme": "discovered",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 24,
+    "sfBest": "e7d7",
+    "solution": "e7d7",
+    "gap": 560,
+    "topScore": 504,
+    "secScore": -56,
+    "secMove": "b6b5"
+   },
+   {
+    "k": 2,
+    "legalMoves": 29,
+    "sfBest": "d7d3",
+    "solution": "d7d3",
+    "gap": 492,
+    "topScore": 552,
+    "secScore": 60,
+    "secMove": "d8g5"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "hn4rzze.c",
+  "level": "hard",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 39,
+    "sfBest": "d8b6",
+    "solution": "d8b6",
+    "gap": 786,
+    "topScore": 1444,
+    "secScore": 658,
+    "secMove": "g4d7"
+   },
+   {
+    "k": 2,
+    "legalMoves": 51,
+    "sfBest": "c2e3",
+    "solution": "c2e3",
+    "gap": 699,
+    "topScore": 1414,
+    "secScore": 715,
+    "secMove": "g4d7"
+   },
+   {
+    "k": 4,
+    "legalMoves": 50,
+    "sfBest": "e3d1",
+    "solution": "e3d1",
+    "gap": 925,
+    "topScore": 1639,
+    "secScore": 714,
+    "secMove": "c8c2"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "hhbexwf.a",
+  "level": "hard",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 47,
+    "sfBest": "c4b5",
+    "solution": "c4b5",
+    "gap": 441,
+    "topScore": 413,
+    "secScore": -28,
+    "secMove": "a4d7"
+   },
+   {
+    "k": 2,
+    "legalMoves": 43,
+    "sfBest": "b5a6",
+    "solution": "b5a6",
+    "gap": 650,
+    "topScore": 375,
+    "secScore": -275,
+    "secMove": "b5d3"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "h1pddn83.j",
+  "level": "hard",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 30,
+    "sfBest": "f5f6",
+    "solution": "f5f6",
+    "gap": 436,
+    "topScore": 372,
+    "secScore": -64,
+    "secMove": "a5b7"
+   },
+   {
+    "k": 2,
+    "legalMoves": 30,
+    "sfBest": "f6g7",
+    "solution": "f6g7",
+    "gap": 491,
+    "topScore": 359,
+    "secScore": -132,
+    "secMove": "h6g5"
+   }
+  ],
+  "matGain": 5,
+  "finalMate": false
+ },
+ {
+  "code": "hnydomh.z",
+  "level": "hard",
+  "theme": "mate-in-3",
+  "mateIn": 3,
+  "flags": [
+   "step4: second move e6f6 within 1cp (99998 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 44,
+    "sfBest": "f6f7",
+    "solution": "f6f7",
+    "gap": 99330,
+    "topScore": 99997,
+    "secScore": 667,
+    "secMove": "c1b1",
+    "mateForcers": [
+     "f6f7"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 48,
+    "sfBest": "e1e6",
+    "solution": "e1e6",
+    "gap": 98337,
+    "topScore": 99998,
+    "secScore": 1661,
+    "secMove": "e1e4",
+    "mateForcers": [
+     "e1e6"
+    ]
+   },
+   {
+    "k": 4,
+    "legalMoves": 46,
+    "sfBest": "f7f5",
+    "solution": "f7f5",
+    "gap": 1,
+    "topScore": 99999,
+    "secScore": 99998,
+    "secMove": "e6f6",
+    "mateForcers": [
+     "f7f5"
+    ]
+   }
+  ],
+  "matGain": 1,
+  "finalMate": true
+ },
+ {
+  "code": "h1cceoqd.5",
+  "level": "hard",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 42,
+    "sfBest": "f8a3",
+    "solution": "f8a3",
+    "gap": 419,
+    "topScore": 546,
+    "secScore": 127,
+    "secMove": "f8c5"
+   },
+   {
+    "k": 2,
+    "legalMoves": 42,
+    "sfBest": "d5a5",
+    "solution": "d5a5",
+    "gap": 299,
+    "topScore": 529,
+    "secScore": 230,
+    "secMove": "e8g8"
+   },
+   {
+    "k": 4,
+    "legalMoves": 40,
+    "sfBest": "a5a3",
+    "solution": "a5a3",
+    "gap": 506,
+    "topScore": 547,
+    "secScore": 41,
+    "secMove": "a5c5"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "hjnh408.8",
+  "level": "hard",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 40,
+    "sfBest": "f3g5",
+    "solution": "f3g5",
+    "gap": 1378,
+    "topScore": 1941,
+    "secScore": 563,
+    "secMove": "f4e5"
+   },
+   {
+    "k": 2,
+    "legalMoves": 45,
+    "sfBest": "g5e6",
+    "solution": "g5e6",
+    "gap": 1369,
+    "topScore": 1999,
+    "secScore": 630,
+    "secMove": "g1f1"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "hgxrlki.b",
+  "level": "hard",
+  "theme": "mate-in-3",
+  "mateIn": 3,
+  "flags": [
+   "step4: moves forcing mate in 1: [e5d6,d1d6] vs solution e5d6"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 39,
+    "sfBest": "e2h5",
+    "solution": "e2h5",
+    "gap": 99441,
+    "topScore": 99997,
+    "secScore": 556,
+    "secMove": "d5e6",
+    "mateForcers": [
+     "e2h5"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 43,
+    "sfBest": "d5d6",
+    "solution": "d5d6",
+    "gap": 97910,
+    "topScore": 99998,
+    "secScore": 2088,
+    "secMove": "e5f6",
+    "mateForcers": [
+     "d5d6"
+    ]
+   },
+   {
+    "k": 4,
+    "legalMoves": 45,
+    "sfBest": "d1d6",
+    "solution": "e5d6",
+    "gap": 0,
+    "topScore": 99999,
+    "secScore": 99999,
+    "secMove": "e5d6",
+    "solutionRank": 2,
+    "mateForcers": [
+     "e5d6",
+     "d1d6"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "h8lj2po.z",
+  "level": "hard",
+  "theme": "mate-in-3",
+  "mateIn": 3,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 41,
+    "sfBest": "b3e3",
+    "solution": "b3e3",
+    "gap": 98029,
+    "topScore": 99997,
+    "secScore": 1968,
+    "secMove": "f3f4",
+    "mateForcers": [
+     "b3e3"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 46,
+    "sfBest": "e2d3",
+    "solution": "e2d3",
+    "gap": 98965,
+    "topScore": 99998,
+    "secScore": 1033,
+    "secMove": "e2b5",
+    "mateForcers": [
+     "e2d3"
+    ]
+   },
+   {
+    "k": 4,
+    "legalMoves": 30,
+    "sfBest": "e3e4",
+    "solution": "e3e4",
+    "gap": 96768,
+    "topScore": 99999,
+    "secScore": 3231,
+    "secMove": "d3e4",
+    "mateForcers": [
+     "e3e4"
+    ]
+   }
+  ],
+  "matGain": 9,
+  "finalMate": true
+ },
+ {
+  "code": "h1szrv86.3",
+  "level": "hard",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 30,
+    "sfBest": "f4e5",
+    "solution": "f4e5",
+    "gap": 287,
+    "topScore": 544,
+    "secScore": 257,
+    "secMove": "e2e4"
+   },
+   {
+    "k": 2,
+    "legalMoves": 28,
+    "sfBest": "e5f6",
+    "solution": "e5f6",
+    "gap": 418,
+    "topScore": 567,
+    "secScore": 149,
+    "secMove": "g2g4"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "h7c0f7n.g",
+  "level": "hard",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 30,
+    "sfBest": "f1e1",
+    "solution": "f1e1",
+    "gap": 773,
+    "topScore": 600,
+    "secScore": -173,
+    "secMove": "d1d4"
+   },
+   {
+    "k": 2,
+    "legalMoves": 1,
+    "sfBest": "d1e1",
+    "solution": "d1e1",
+    "gap": null,
+    "topScore": 587
+   }
+  ],
+  "matGain": 4,
+  "finalMate": false
+ },
+ {
+  "code": "hxbpv5m.p",
+  "level": "hard",
+  "theme": "mate-in-3",
+  "mateIn": 3,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 37,
+    "sfBest": "h7h5",
+    "solution": "h7h5",
+    "gap": 99368,
+    "topScore": 99997,
+    "secScore": 629,
+    "secMove": "a7a5",
+    "mateForcers": [
+     "h7h5"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 38,
+    "sfBest": "h1f2",
+    "solution": "h1f2",
+    "gap": 99257,
+    "topScore": 99998,
+    "secScore": 741,
+    "secMove": "b7e4",
+    "mateForcers": [
+     "h1f2"
+    ]
+   },
+   {
+    "k": 4,
+    "legalMoves": 40,
+    "sfBest": "h5h4",
+    "solution": "h5h4",
+    "gap": 99331,
+    "topScore": 99999,
+    "secScore": 668,
+    "secMove": "f2e4",
+    "mateForcers": [
+     "h5h4"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "hfwyem4.b",
+  "level": "hard",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 32,
+    "sfBest": "g4e5",
+    "solution": "g4e5",
+    "gap": 539,
+    "topScore": 649,
+    "secScore": 110,
+    "secMove": "h7h5"
+   },
+   {
+    "k": 2,
+    "legalMoves": 33,
+    "sfBest": "e5d3",
+    "solution": "e5d3",
+    "gap": 544,
+    "topScore": 629,
+    "secScore": 85,
+    "secMove": "d8d3"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "hklnrrg.m",
+  "level": "hard",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 48,
+    "sfBest": "g4f5",
+    "solution": "g4f5",
+    "gap": 506,
+    "topScore": 511,
+    "secScore": 5,
+    "secMove": "g4f3"
+   },
+   {
+    "k": 2,
+    "legalMoves": 45,
+    "sfBest": "g6f5",
+    "solution": "g6f5",
+    "gap": 657,
+    "topScore": 516,
+    "secScore": -141,
+    "secMove": "a6a5"
+   }
+  ],
+  "matGain": 6,
+  "finalMate": false
+ },
+ {
+  "code": "hx71p4j.z",
+  "level": "hard",
+  "theme": "mate-in-3",
+  "mateIn": 3,
+  "flags": [
+   "step4: second move e3e4 within 1cp (99998 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 41,
+    "sfBest": "d3f5",
+    "solution": "d3f5",
+    "gap": 98760,
+    "topScore": 99997,
+    "secScore": 1237,
+    "secMove": "b3c4",
+    "mateForcers": [
+     "d3f5"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 44,
+    "sfBest": "f5e6",
+    "solution": "f5e6",
+    "gap": 97934,
+    "topScore": 99998,
+    "secScore": 2064,
+    "secMove": "f5f6",
+    "mateForcers": [
+     "f5e6"
+    ]
+   },
+   {
+    "k": 4,
+    "legalMoves": 43,
+    "sfBest": "b3b4",
+    "solution": "b3b4",
+    "gap": 1,
+    "topScore": 99999,
+    "secScore": 99998,
+    "secMove": "e3e4",
+    "mateForcers": [
+     "b3b4"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "hvg8m1g.f",
+  "level": "hard",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 39,
+    "sfBest": "f6e4",
+    "solution": "f6e4",
+    "gap": 337,
+    "topScore": 549,
+    "secScore": 212,
+    "secMove": "f3f5"
+   },
+   {
+    "k": 2,
+    "legalMoves": 44,
+    "sfBest": "e4d2",
+    "solution": "e4d2",
+    "gap": 305,
+    "topScore": 562,
+    "secScore": 257,
+    "secMove": "f3f6"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "h5b3bxa.i",
+  "level": "hard",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 28,
+    "sfBest": "b4b5",
+    "solution": "b4b5",
+    "gap": 417,
+    "topScore": 654,
+    "secScore": 237,
+    "secMove": "d2d3"
+   },
+   {
+    "k": 2,
+    "legalMoves": 29,
+    "sfBest": "b5c6",
+    "solution": "b5c6",
+    "gap": 369,
+    "topScore": 679,
+    "secScore": 310,
+    "secMove": "e2e3"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "h1hkw03s.d",
+  "level": "hard",
+  "theme": "sacrifice",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 45,
+    "sfBest": "f4d4",
+    "solution": "f4d4",
+    "gap": 420,
+    "topScore": 699,
+    "secScore": 279,
+    "secMove": "f4f6"
+   },
+   {
+    "k": 2,
+    "legalMoves": 31,
+    "sfBest": "e5f3",
+    "solution": "e5f3",
+    "gap": 1350,
+    "topScore": 673,
+    "secScore": -677,
+    "secMove": "f7f6"
+   },
+   {
+    "k": 4,
+    "legalMoves": 32,
+    "sfBest": "f3d4",
+    "solution": "f3d4",
+    "gap": 1311,
+    "topScore": 669,
+    "secScore": -642,
+    "secMove": "f7f6"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "h197f2m3.l",
+  "level": "hard",
+  "theme": "mate-in-3",
+  "mateIn": 3,
+  "flags": [
+   "step4: second move g6h6 within 1cp (99998 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 48,
+    "sfBest": "d5h5",
+    "solution": "d5h5",
+    "gap": 99300,
+    "topScore": 99997,
+    "secScore": 697,
+    "secMove": "c1b1",
+    "mateForcers": [
+     "d5h5"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 49,
+    "sfBest": "h5g6",
+    "solution": "h5g6",
+    "gap": 99541,
+    "topScore": 99998,
+    "secScore": 457,
+    "secMove": "e4g6",
+    "mateForcers": [
+     "h5g6"
+    ]
+   },
+   {
+    "k": 4,
+    "legalMoves": 50,
+    "sfBest": "g6h7",
+    "solution": "g6h7",
+    "gap": 1,
+    "topScore": 99999,
+    "secScore": 99998,
+    "secMove": "g6h6",
+    "mateForcers": [
+     "g6h7"
+    ]
+   }
+  ],
+  "matGain": 1,
+  "finalMate": true
+ },
+ {
+  "code": "h9rakmc.g",
+  "level": "hard",
+  "theme": "mate-in-3",
+  "mateIn": 3,
+  "flags": [
+   "step2: second move c5b4 within 4cp (99994 vs 99998) and still winning",
+   "step4: second move c5b4 within 1cp (99998 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 43,
+    "sfBest": "e7e4",
+    "solution": "e7e4",
+    "gap": 98997,
+    "topScore": 99997,
+    "secScore": 1000,
+    "secMove": "g8f6",
+    "mateForcers": [
+     "e7e4"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 52,
+    "sfBest": "e4e3",
+    "solution": "e4e3",
+    "gap": 4,
+    "topScore": 99998,
+    "secScore": 99994,
+    "secMove": "c5b4",
+    "mateForcers": [
+     "e4e3"
+    ]
+   },
+   {
+    "k": 4,
+    "legalMoves": 51,
+    "sfBest": "e3e2",
+    "solution": "e3e2",
+    "gap": 1,
+    "topScore": 99999,
+    "secScore": 99998,
+    "secMove": "c5b4",
+    "mateForcers": [
+     "e3e2"
+    ]
+   }
+  ],
+  "matGain": 13,
+  "finalMate": true
+ },
+ {
+  "code": "hxzsgpg.6",
+  "level": "hard",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 36,
+    "sfBest": "c2c6",
+    "solution": "c2c6",
+    "gap": 310,
+    "topScore": 618,
+    "secScore": 308,
+    "secMove": "d2d4"
+   },
+   {
+    "k": 2,
+    "legalMoves": 40,
+    "sfBest": "c6d5",
+    "solution": "c6d5",
+    "gap": 508,
+    "topScore": 634,
+    "secScore": 126,
+    "secMove": "d2d4"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "h12h1nzm.q",
+  "level": "hard",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 34,
+    "sfBest": "b7b4",
+    "solution": "b7b4",
+    "gap": 897,
+    "topScore": 1530,
+    "secScore": 633,
+    "secMove": "e7d5"
+   },
+   {
+    "k": 2,
+    "legalMoves": 45,
+    "sfBest": "c6d4",
+    "solution": "c6d4",
+    "gap": 1277,
+    "topScore": 2025,
+    "secScore": 748,
+    "secMove": "d7f5"
+   },
+   {
+    "k": 4,
+    "legalMoves": 51,
+    "sfBest": "d4f3",
+    "solution": "d4f3",
+    "gap": 1434,
+    "topScore": 2834,
+    "secScore": 1400,
+    "secMove": "c8b8"
+   }
+  ],
+  "matGain": 10,
+  "finalMate": false
+ },
+ {
+  "code": "h1id5snm.h",
+  "level": "hard",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 43,
+    "sfBest": "b5c7",
+    "solution": "b5c7",
+    "gap": 603,
+    "topScore": 252,
+    "secScore": -351,
+    "secMove": "b5c3"
+   },
+   {
+    "k": 2,
+    "legalMoves": 47,
+    "sfBest": "c7a8",
+    "solution": "c7a8",
+    "gap": 343,
+    "topScore": 247,
+    "secScore": -96,
+    "secMove": "b3b6"
+   }
+  ],
+  "matGain": 5,
+  "finalMate": false
+ },
+ {
+  "code": "h1yuchdm.m",
+  "level": "hard",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 38,
+    "sfBest": "d2a5",
+    "solution": "d2a5",
+    "gap": 364,
+    "topScore": 520,
+    "secScore": 156,
+    "secMove": "e4e5"
+   },
+   {
+    "k": 2,
+    "legalMoves": 8,
+    "sfBest": "b3a5",
+    "solution": "b3a5",
+    "gap": 1053,
+    "topScore": 545,
+    "secScore": -508,
+    "secMove": "b1d2"
+   }
+  ],
+  "matGain": 6,
+  "finalMate": false
+ },
+ {
+  "code": "hg1hctu.c",
+  "level": "hard",
+  "theme": "mate-in-3",
+  "mateIn": 3,
+  "flags": [
+   "step4: second move g7g5 within 3cp (99996 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 47,
+    "sfBest": "g5h4",
+    "solution": "g5h4",
+    "gap": 99232,
+    "topScore": 99997,
+    "secScore": 765,
+    "secMove": "d5e4",
+    "mateForcers": [
+     "g5h4"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 46,
+    "sfBest": "h4f2",
+    "solution": "h4f2",
+    "gap": 99200,
+    "topScore": 99998,
+    "secScore": 798,
+    "secMove": "d5e4",
+    "mateForcers": [
+     "h4f2"
+    ]
+   },
+   {
+    "k": 4,
+    "legalMoves": 44,
+    "sfBest": "c6e5",
+    "solution": "c6e5",
+    "gap": 3,
+    "topScore": 99999,
+    "secScore": 99996,
+    "secMove": "g7g5",
+    "mateForcers": [
+     "c6e5"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "h1djgce9.j",
+  "level": "hard",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 40,
+    "sfBest": "a8b8",
+    "solution": "a8b8",
+    "gap": 430,
+    "topScore": 430,
+    "secScore": 0,
+    "secMove": "c8b8"
+   },
+   {
+    "k": 2,
+    "legalMoves": 5,
+    "sfBest": "b8c8",
+    "solution": "b8c8",
+    "gap": 1415,
+    "topScore": 438,
+    "secScore": -977,
+    "secMove": "g8g7"
+   }
+  ],
+  "matGain": 4,
+  "finalMate": false
+ },
+ {
+  "code": "h6myao3.n",
+  "level": "hard",
+  "theme": "mate-in-3",
+  "mateIn": 3,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 38,
+    "sfBest": "f3f5",
+    "solution": "f3f5",
+    "gap": 99285,
+    "topScore": 99997,
+    "secScore": 712,
+    "secMove": "d2d4",
+    "mateForcers": [
+     "f3f5"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 41,
+    "sfBest": "f5h7",
+    "solution": "f5h7",
+    "gap": 99220,
+    "topScore": 99998,
+    "secScore": 778,
+    "secMove": "d2d3",
+    "mateForcers": [
+     "f5h7"
+    ]
+   },
+   {
+    "k": 4,
+    "legalMoves": 36,
+    "sfBest": "h7h8",
+    "solution": "h7h8",
+    "gap": 99128,
+    "topScore": 99999,
+    "secScore": 871,
+    "secMove": "e4a8",
+    "mateForcers": [
+     "h7h8"
+    ]
+   }
+  ],
+  "matGain": 4,
+  "finalMate": true
+ },
+ {
+  "code": "h1uv6fhe.8",
+  "level": "hard",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 38,
+    "sfBest": "e4c3",
+    "solution": "e4c3",
+    "gap": 588,
+    "topScore": 490,
+    "secScore": -98,
+    "secMove": "f7f6"
+   },
+   {
+    "k": 2,
+    "legalMoves": 40,
+    "sfBest": "c3b5",
+    "solution": "c3b5",
+    "gap": 417,
+    "topScore": 478,
+    "secScore": 61,
+    "secMove": "f7f6"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "h10kva99.2",
+  "level": "hard",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 34,
+    "sfBest": "d4c2",
+    "solution": "d4c2",
+    "gap": 227,
+    "topScore": 303,
+    "secScore": 76,
+    "secMove": "e7d5"
+   },
+   {
+    "k": 2,
+    "legalMoves": 32,
+    "sfBest": "c2a1",
+    "solution": "c2a1",
+    "gap": 318,
+    "topScore": 313,
+    "secScore": -5,
+    "secMove": "e7d5"
+   }
+  ],
+  "matGain": 5,
+  "finalMate": false
+ },
+ {
+  "code": "hxnprdj.3",
+  "level": "hard",
+  "theme": "mate-in-3",
+  "mateIn": 3,
+  "flags": [
+   "step4: second move d5f7 within 2cp (99997 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 42,
+    "sfBest": "h5f7",
+    "solution": "h5f7",
+    "gap": 99431,
+    "topScore": 99997,
+    "secScore": 566,
+    "secMove": "f5f6",
+    "mateForcers": [
+     "h5f7"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 39,
+    "sfBest": "f7d5",
+    "solution": "f7d5",
+    "gap": 99707,
+    "topScore": 99998,
+    "secScore": 291,
+    "secMove": "d2d4",
+    "mateForcers": [
+     "f7d5"
+    ]
+   },
+   {
+    "k": 4,
+    "legalMoves": 41,
+    "sfBest": "d5e5",
+    "solution": "d5e5",
+    "gap": 2,
+    "topScore": 99999,
+    "secScore": 99997,
+    "secMove": "d5f7",
+    "mateForcers": [
+     "d5e5"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "h1hzi48t.5",
+  "level": "hard",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 34,
+    "sfBest": "f6e4",
+    "solution": "f6e4",
+    "gap": 559,
+    "topScore": 614,
+    "secScore": 55,
+    "secMove": "c6c5"
+   },
+   {
+    "k": 2,
+    "legalMoves": 36,
+    "sfBest": "e4d2",
+    "solution": "e4d2",
+    "gap": 1181,
+    "topScore": 633,
+    "secScore": -548,
+    "secMove": "f8e8"
+   }
+  ],
+  "matGain": 6,
+  "finalMate": false
+ },
+ {
+  "code": "ho5jaz1.7",
+  "level": "hard",
+  "theme": "mate-in-3",
+  "mateIn": 3,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 30,
+    "sfBest": "d1g4",
+    "solution": "d1g4",
+    "gap": 99537,
+    "topScore": 99997,
+    "secScore": 460,
+    "secMove": "d2d4",
+    "mateForcers": [
+     "d1g4"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 38,
+    "sfBest": "g4f5",
+    "solution": "g4f5",
+    "gap": 99745,
+    "topScore": 99998,
+    "secScore": 253,
+    "secMove": "e4f5",
+    "mateForcers": [
+     "g4f5"
+    ]
+   },
+   {
+    "k": 4,
+    "legalMoves": 41,
+    "sfBest": "c3d5",
+    "solution": "c3d5",
+    "gap": 99648,
+    "topScore": 99999,
+    "secScore": 351,
+    "secMove": "d2d3",
+    "mateForcers": [
+     "c3d5"
+    ]
+   }
+  ],
+  "matGain": 1,
+  "finalMate": true
+ },
+ {
+  "code": "hl7vuzw.m",
+  "level": "hard",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 27,
+    "sfBest": "f7e5",
+    "solution": "f7e5",
+    "gap": 517,
+    "topScore": 337,
+    "secScore": -180,
+    "secMove": "c7c5"
+   },
+   {
+    "k": 2,
+    "legalMoves": 30,
+    "sfBest": "e5c4",
+    "solution": "e5c4",
+    "gap": 456,
+    "topScore": 297,
+    "secScore": -159,
+    "secMove": "f6f5"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "h118r504.k",
+  "level": "hard",
+  "theme": "promotion",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 37,
+    "sfBest": "b6b7",
+    "solution": "b6b7",
+    "gap": 551,
+    "topScore": 551,
+    "secScore": 0,
+    "secMove": "a3b2"
+   },
+   {
+    "k": 2,
+    "legalMoves": 27,
+    "sfBest": "b7a8q",
+    "solution": "b7a8q",
+    "gap": 869,
+    "topScore": 553,
+    "secScore": -316,
+    "secMove": "b7a8r"
+   }
+  ],
+  "matGain": 4,
+  "finalMate": false
+ },
+ {
+  "code": "h1cc25qx.18",
+  "level": "hard",
+  "theme": "mate-in-3",
+  "mateIn": 3,
+  "flags": [
+   "step4: moves forcing mate in 1: [e4f5,g4f5] vs solution e4f5"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 38,
+    "sfBest": "f3d4",
+    "solution": "f3d4",
+    "gap": 99552,
+    "topScore": 99997,
+    "secScore": 445,
+    "secMove": "d3f1",
+    "mateForcers": [
+     "f3d4"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 36,
+    "sfBest": "d1g4",
+    "solution": "d1g4",
+    "gap": 99589,
+    "topScore": 99998,
+    "secScore": 409,
+    "secMove": "f2f4",
+    "mateForcers": [
+     "d1g4"
+    ]
+   },
+   {
+    "k": 4,
+    "legalMoves": 44,
+    "sfBest": "g4f5",
+    "solution": "e4f5",
+    "gap": 0,
+    "topScore": 99999,
+    "secScore": 99999,
+    "secMove": "e4f5",
+    "solutionRank": 2,
+    "mateForcers": [
+     "e4f5",
+     "g4f5"
+    ]
+   }
+  ],
+  "matGain": 1,
+  "finalMate": true
+ },
+ {
+  "code": "hdjvlh7.5",
+  "level": "hard",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 47,
+    "sfBest": "f3h5",
+    "solution": "f3h5",
+    "gap": 514,
+    "topScore": 694,
+    "secScore": 180,
+    "secMove": "b5d7"
+   },
+   {
+    "k": 2,
+    "legalMoves": 48,
+    "sfBest": "e5g6",
+    "solution": "e5g6",
+    "gap": 513,
+    "topScore": 696,
+    "secScore": 183,
+    "secMove": "b5d7"
+   },
+   {
+    "k": 4,
+    "legalMoves": 45,
+    "sfBest": "h5h8",
+    "solution": "h5h8",
+    "gap": 625,
+    "topScore": 686,
+    "secScore": 61,
+    "secMove": "b5d7"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "h1vedv18.3",
+  "level": "hard",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 45,
+    "sfBest": "d1d5",
+    "solution": "d1d5",
+    "gap": 299,
+    "topScore": 622,
+    "secScore": 323,
+    "secMove": "a2a4"
+   },
+   {
+    "k": 2,
+    "legalMoves": 53,
+    "sfBest": "d5c6",
+    "solution": "d5c6",
+    "gap": 372,
+    "topScore": 616,
+    "secScore": 244,
+    "secMove": "f3e5"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "h1pdwzht.h",
+  "level": "hard",
+  "theme": "mate-in-3",
+  "mateIn": 3,
+  "flags": [
+   "step4: second move d2h6 within 1cp (99998 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 46,
+    "sfBest": "d1h5",
+    "solution": "d1h5",
+    "gap": 99335,
+    "topScore": 99997,
+    "secScore": 662,
+    "secMove": "d3d4",
+    "mateForcers": [
+     "d1h5"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 55,
+    "sfBest": "h5g6",
+    "solution": "h5g6",
+    "gap": 99296,
+    "topScore": 99998,
+    "secScore": 702,
+    "secMove": "h5g4",
+    "mateForcers": [
+     "h5g6"
+    ]
+   },
+   {
+    "k": 4,
+    "legalMoves": 57,
+    "sfBest": "g6f7",
+    "solution": "g6f7",
+    "gap": 1,
+    "topScore": 99999,
+    "secScore": 99998,
+    "secMove": "d2h6",
+    "mateForcers": [
+     "g6f7"
+    ]
+   }
+  ],
+  "matGain": 1,
+  "finalMate": true
+ },
+ {
+  "code": "htkt7g8.m",
+  "level": "hard",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 33,
+    "sfBest": "f3e4",
+    "solution": "f3e4",
+    "gap": 511,
+    "topScore": 455,
+    "secScore": -56,
+    "secMove": "f3e2"
+   },
+   {
+    "k": 2,
+    "legalMoves": 31,
+    "sfBest": "d1a4",
+    "solution": "d1a4",
+    "gap": 532,
+    "topScore": 439,
+    "secScore": -93,
+    "secMove": "h3g5"
+   },
+   {
+    "k": 4,
+    "legalMoves": 33,
+    "sfBest": "a4c4",
+    "solution": "a4c4",
+    "gap": 675,
+    "topScore": 439,
+    "secScore": -236,
+    "secMove": "a4d7"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "h4699jo.t",
+  "level": "hard",
+  "theme": "mate-in-3",
+  "mateIn": 3,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 42,
+    "sfBest": "f3e3",
+    "solution": "f3e3",
+    "gap": 98713,
+    "topScore": 99997,
+    "secScore": 1284,
+    "secMove": "b2b4",
+    "mateForcers": [
+     "f3e3"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 47,
+    "sfBest": "f7d5",
+    "solution": "f7d5",
+    "gap": 98896,
+    "topScore": 99998,
+    "secScore": 1102,
+    "secMove": "h3g5",
+    "mateForcers": [
+     "f7d5"
+    ]
+   },
+   {
+    "k": 4,
+    "legalMoves": 44,
+    "sfBest": "e4d5",
+    "solution": "e4d5",
+    "gap": 99407,
+    "topScore": 99999,
+    "secScore": 592,
+    "secMove": "b5a7",
+    "mateForcers": [
+     "e4d5"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "hvb3q93.o",
+  "level": "hard",
+  "theme": "mate-in-3",
+  "mateIn": 3,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 39,
+    "sfBest": "e3g5",
+    "solution": "e3g5",
+    "gap": 99317,
+    "topScore": 99997,
+    "secScore": 680,
+    "secMove": "e4f3",
+    "mateForcers": [
+     "e3g5"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 40,
+    "sfBest": "g5f6",
+    "solution": "g5f6",
+    "gap": 99326,
+    "topScore": 99998,
+    "secScore": 672,
+    "secMove": "e4f4",
+    "mateForcers": [
+     "g5f6"
+    ]
+   },
+   {
+    "k": 4,
+    "legalMoves": 45,
+    "sfBest": "e4e7",
+    "solution": "e4e7",
+    "gap": 99090,
+    "topScore": 99999,
+    "secScore": 909,
+    "secMove": "g4g5",
+    "mateForcers": [
+     "e4e7"
+    ]
+   }
+  ],
+  "matGain": 1,
+  "finalMate": true
+ },
+ {
+  "code": "hib7u5o.6",
+  "level": "hard",
+  "theme": "mate-in-3",
+  "mateIn": 3,
+  "flags": [
+   "step4: second move f4d4 within 2cp (99997 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 47,
+    "sfBest": "d8d4",
+    "solution": "d8d4",
+    "gap": 99673,
+    "topScore": 99997,
+    "secScore": 324,
+    "secMove": "g8f6",
+    "mateForcers": [
+     "d8d4"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 51,
+    "sfBest": "d4f4",
+    "solution": "d4f4",
+    "gap": 99470,
+    "topScore": 99998,
+    "secScore": 528,
+    "secMove": "g8f6",
+    "mateForcers": [
+     "d4f4"
+    ]
+   },
+   {
+    "k": 4,
+    "legalMoves": 54,
+    "sfBest": "f4b4",
+    "solution": "f4b4",
+    "gap": 2,
+    "topScore": 99999,
+    "secScore": 99997,
+    "secMove": "f4d4",
+    "mateForcers": [
+     "f4b4"
+    ]
+   }
+  ],
+  "matGain": 3,
+  "finalMate": true
+ },
+ {
+  "code": "h105n7k5.k",
+  "level": "hard",
+  "theme": "sacrifice",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 45,
+    "sfBest": "b4c5",
+    "solution": "b4c5",
+    "gap": 357,
+    "topScore": 608,
+    "secScore": 251,
+    "secMove": "g4h4"
+   },
+   {
+    "k": 2,
+    "legalMoves": 38,
+    "sfBest": "b6c5",
+    "solution": "b6c5",
+    "gap": 1079,
+    "topScore": 577,
+    "secScore": -502,
+    "secMove": "g4g2"
+   }
+  ],
+  "matGain": 6,
+  "finalMate": false
+ },
+ {
+  "code": "h1agnogg.u",
+  "level": "hard",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 39,
+    "sfBest": "a3b3",
+    "solution": "a3b3",
+    "gap": 636,
+    "topScore": 562,
+    "secScore": -74,
+    "secMove": "a6d3"
+   },
+   {
+    "k": 2,
+    "legalMoves": 33,
+    "sfBest": "c2b3",
+    "solution": "c2b3",
+    "gap": 1096,
+    "topScore": 580,
+    "secScore": -516,
+    "secMove": "d2f4"
+   }
+  ],
+  "matGain": 4,
+  "finalMate": false
+ },
+ {
+  "code": "h17mc8x7.8",
+  "level": "hard",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 45,
+    "sfBest": "d4d8",
+    "solution": "d4d8",
+    "gap": 446,
+    "topScore": 667,
+    "secScore": 221,
+    "secMove": "c4b5"
+   },
+   {
+    "k": 2,
+    "legalMoves": 33,
+    "sfBest": "e5f7",
+    "solution": "e5f7",
+    "gap": 478,
+    "topScore": 629,
+    "secScore": 151,
+    "secMove": "e5d3"
+   },
+   {
+    "k": 4,
+    "legalMoves": 32,
+    "sfBest": "f7h8",
+    "solution": "f7h8",
+    "gap": 579,
+    "topScore": 635,
+    "secScore": 56,
+    "secMove": "c4e6"
+   }
+  ],
+  "matGain": 5,
+  "finalMate": false
+ },
+ {
+  "code": "h2kezif.2",
+  "level": "hard",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 32,
+    "sfBest": "d8d5",
+    "solution": "d8d5",
+    "gap": 406,
+    "topScore": 419,
+    "secScore": 13,
+    "secMove": "h7h5"
+   },
+   {
+    "k": 2,
+    "legalMoves": 41,
+    "sfBest": "d5c5",
+    "solution": "d5c5",
+    "gap": 475,
+    "topScore": 443,
+    "secScore": -32,
+    "secMove": "h7h5"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "hsr5mvt.d",
+  "level": "hard",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 44,
+    "sfBest": "e4f6",
+    "solution": "e4f6",
+    "gap": 1066,
+    "topScore": 1838,
+    "secScore": 772,
+    "secMove": "e4d6"
+   },
+   {
+    "k": 2,
+    "legalMoves": 54,
+    "sfBest": "e3e8",
+    "solution": "e3e8",
+    "gap": 2347,
+    "topScore": 2446,
+    "secScore": 99,
+    "secMove": "f6d5"
+   },
+   {
+    "k": 4,
+    "legalMoves": 52,
+    "sfBest": "f6d5",
+    "solution": "f6d5",
+    "gap": 1241,
+    "topScore": 2442,
+    "secScore": 1201,
+    "secMove": "a1c1"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "h1g89v7j.7",
+  "level": "hard",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 41,
+    "sfBest": "d1h5",
+    "solution": "d1h5",
+    "gap": 385,
+    "topScore": 690,
+    "secScore": 305,
+    "secMove": "d5f7"
+   },
+   {
+    "k": 2,
+    "legalMoves": 45,
+    "sfBest": "h5g5",
+    "solution": "h5g5",
+    "gap": 420,
+    "topScore": 733,
+    "secScore": 313,
+    "secMove": "d5f7"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "hgnhohy.5",
+  "level": "hard",
+  "theme": "mate-in-3",
+  "mateIn": 3,
+  "flags": [
+   "step4: second move f7d5 within 2cp (99997 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 39,
+    "sfBest": "d1h5",
+    "solution": "d1h5",
+    "gap": 99361,
+    "topScore": 99997,
+    "secScore": 636,
+    "secMove": "d2d4",
+    "mateForcers": [
+     "d1h5"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 48,
+    "sfBest": "h5f7",
+    "solution": "h5f7",
+    "gap": 99272,
+    "topScore": 99998,
+    "secScore": 726,
+    "secMove": "d2d4",
+    "mateForcers": [
+     "h5f7"
+    ]
+   },
+   {
+    "k": 4,
+    "legalMoves": 50,
+    "sfBest": "e5c4",
+    "solution": "e5c4",
+    "gap": 2,
+    "topScore": 99999,
+    "secScore": 99997,
+    "secMove": "f7d5",
+    "mateForcers": [
+     "e5c4"
+    ]
+   }
+  ],
+  "matGain": 0,
+  "finalMate": true
+ },
+ {
+  "code": "h1dor5mk.s",
+  "level": "hard",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 37,
+    "sfBest": "e7c5",
+    "solution": "e7c5",
+    "gap": 884,
+    "topScore": 337,
+    "secScore": -547,
+    "secMove": "e7d8"
+   },
+   {
+    "k": 2,
+    "legalMoves": 38,
+    "sfBest": "e8e3",
+    "solution": "e8e3",
+    "gap": 883,
+    "topScore": 325,
+    "secScore": -558,
+    "secMove": "b7b6"
+   },
+   {
+    "k": 4,
+    "legalMoves": 45,
+    "sfBest": "e3c5",
+    "solution": "e3c5",
+    "gap": 834,
+    "topScore": 338,
+    "secScore": -496,
+    "secMove": "b7b6"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "hcq961f.l",
+  "level": "hard",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 43,
+    "sfBest": "h5h3",
+    "solution": "h5h3",
+    "gap": 194,
+    "topScore": 818,
+    "secScore": 624,
+    "secMove": "e2c1"
+   },
+   {
+    "k": 2,
+    "legalMoves": 41,
+    "sfBest": "h3f3",
+    "solution": "h3f3",
+    "gap": 243,
+    "topScore": 962,
+    "secScore": 719,
+    "secMove": "e2c1"
+   },
+   {
+    "k": 4,
+    "legalMoves": 44,
+    "sfBest": "f3h1",
+    "solution": "f3h1",
+    "gap": 271,
+    "topScore": 938,
+    "secScore": 667,
+    "secMove": "e2c1"
+   }
+  ],
+  "matGain": 5,
+  "finalMate": false
+ },
+ {
+  "code": "h1qmsrjf.7",
+  "level": "hard",
+  "theme": "mate-in-3",
+  "mateIn": 3,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 46,
+    "sfBest": "d1h5",
+    "solution": "d1h5",
+    "gap": 99142,
+    "topScore": 99997,
+    "secScore": 855,
+    "secMove": "b5c6",
+    "mateForcers": [
+     "d1h5"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 47,
+    "sfBest": "h5g6",
+    "solution": "h5g6",
+    "gap": 98914,
+    "topScore": 99998,
+    "secScore": 1084,
+    "secMove": "f5g6",
+    "mateForcers": [
+     "h5g6"
+    ]
+   },
+   {
+    "k": 4,
+    "legalMoves": 50,
+    "sfBest": "g6f7",
+    "solution": "g6f7",
+    "gap": 99083,
+    "topScore": 99999,
+    "secScore": 916,
+    "secMove": "f5f6",
+    "mateForcers": [
+     "g6f7"
+    ]
+   }
+  ],
+  "matGain": 1,
+  "finalMate": true
+ },
+ {
+  "code": "h6oub6p.2",
+  "level": "hard",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 31,
+    "sfBest": "d1h5",
+    "solution": "d1h5",
+    "gap": 381,
+    "topScore": 390,
+    "secScore": 9,
+    "secMove": "d2e4"
+   },
+   {
+    "k": 2,
+    "legalMoves": 41,
+    "sfBest": "h5d5",
+    "solution": "h5d5",
+    "gap": 475,
+    "topScore": 380,
+    "secScore": -95,
+    "secMove": "h5e5"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "hesx8b7.a",
+  "level": "hard",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 37,
+    "sfBest": "d8d4",
+    "solution": "d8d4",
+    "gap": 317,
+    "topScore": 583,
+    "secScore": 266,
+    "secMove": "e4f2"
+   },
+   {
+    "k": 2,
+    "legalMoves": 46,
+    "sfBest": "d4a1",
+    "solution": "d4a1",
+    "gap": 545,
+    "topScore": 601,
+    "secScore": 56,
+    "secMove": "d4e5"
+   }
+  ],
+  "matGain": 5,
+  "finalMate": false
+ },
+ {
+  "code": "hlb9tsz.e",
+  "level": "hard",
+  "theme": "skewer",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 23,
+    "sfBest": "c1b2",
+    "solution": "c1b2",
+    "gap": 277,
+    "topScore": 376,
+    "secScore": 99,
+    "secMove": "f1e1"
+   },
+   {
+    "k": 2,
+    "legalMoves": 32,
+    "sfBest": "b2h8",
+    "solution": "b2h8",
+    "gap": 368,
+    "topScore": 447,
+    "secScore": 79,
+    "secMove": "a3b5"
+   }
+  ],
+  "matGain": 5,
+  "finalMate": false
+ },
+ {
+  "code": "hr90mkc.9",
+  "level": "hard",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 36,
+    "sfBest": "d1a4",
+    "solution": "d1a4",
+    "gap": 555,
+    "topScore": 217,
+    "secScore": -338,
+    "secMove": "d3d4"
+   },
+   {
+    "k": 2,
+    "legalMoves": 42,
+    "sfBest": "d5f4",
+    "solution": "d5f4",
+    "gap": 325,
+    "topScore": 243,
+    "secScore": -82,
+    "secMove": "f2f3"
+   },
+   {
+    "k": 4,
+    "legalMoves": 36,
+    "sfBest": "f4h5",
+    "solution": "f4h5",
+    "gap": 647,
+    "topScore": 235,
+    "secScore": -412,
+    "secMove": "f2f3"
+   }
+  ],
+  "matGain": 5,
+  "finalMate": false
+ },
+ {
+  "code": "h1yajmjs.a",
+  "level": "hard",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 36,
+    "sfBest": "f6e4",
+    "solution": "f6e4",
+    "gap": 536,
+    "topScore": 627,
+    "secScore": 91,
+    "secMove": "d7f5"
+   },
+   {
+    "k": 2,
+    "legalMoves": 38,
+    "sfBest": "e4c3",
+    "solution": "e4c3",
+    "gap": 765,
+    "topScore": 619,
+    "secScore": -146,
+    "secMove": "f8e8"
+   }
+  ],
+  "matGain": 6,
+  "finalMate": false
+ },
+ {
+  "code": "hyryz3x.f",
+  "level": "hard",
+  "theme": "sacrifice",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 29,
+    "sfBest": "b1a1",
+    "solution": "b1a1",
+    "gap": 564,
+    "topScore": 621,
+    "secScore": 57,
+    "secMove": "f2f4"
+   },
+   {
+    "k": 2,
+    "legalMoves": 27,
+    "sfBest": "d1a1",
+    "solution": "d1a1",
+    "gap": 1266,
+    "topScore": 617,
+    "secScore": -649,
+    "secMove": "b4b5"
+   }
+  ],
+  "matGain": 4,
+  "finalMate": false
+ },
+ {
+  "code": "h2aoi54.8",
+  "level": "hard",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 39,
+    "sfBest": "b4c2",
+    "solution": "b4c2",
+    "gap": 395,
+    "topScore": 403,
+    "secScore": 8,
+    "secMove": "a7a5"
+   },
+   {
+    "k": 2,
+    "legalMoves": 40,
+    "sfBest": "c2a1",
+    "solution": "c2a1",
+    "gap": 545,
+    "topScore": 397,
+    "secScore": -148,
+    "secMove": "c2b4"
+   }
+  ],
+  "matGain": 5,
+  "finalMate": false
+ },
+ {
+  "code": "hy0ufk7.f",
+  "level": "hard",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 37,
+    "sfBest": "b2b4",
+    "solution": "b2b4",
+    "gap": 431,
+    "topScore": 587,
+    "secScore": 156,
+    "secMove": "d5c3"
+   },
+   {
+    "k": 2,
+    "legalMoves": 32,
+    "sfBest": "e4d5",
+    "solution": "e4d5",
+    "gap": 991,
+    "topScore": 601,
+    "secScore": -390,
+    "secMove": "e4g2"
+   }
+  ],
+  "matGain": 6,
+  "finalMate": false
+ },
+ {
+  "code": "h14abijz.8",
+  "level": "hard",
+  "theme": "mate-in-3",
+  "mateIn": 3,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 48,
+    "sfBest": "c3d5",
+    "solution": "c3d5",
+    "gap": 99370,
+    "topScore": 99997,
+    "secScore": 627,
+    "secMove": "e3b6",
+    "mateForcers": [
+     "c3d5"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 51,
+    "sfBest": "d1g4",
+    "solution": "d1g4",
+    "gap": 98727,
+    "topScore": 99998,
+    "secScore": 1271,
+    "secMove": "e3b6",
+    "mateForcers": [
+     "d1g4"
+    ]
+   },
+   {
+    "k": 4,
+    "legalMoves": 58,
+    "sfBest": "g4f5",
+    "solution": "g4f5",
+    "gap": 98967,
+    "topScore": 99999,
+    "secScore": 1032,
+    "secMove": "e4f5",
+    "mateForcers": [
+     "g4f5"
+    ]
+   }
+  ],
+  "matGain": 4,
+  "finalMate": true
+ },
+ {
+  "code": "h3yqw5j.2",
+  "level": "hard",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 38,
+    "sfBest": "d8h4",
+    "solution": "d8h4",
+    "gap": 573,
+    "topScore": 539,
+    "secScore": -34,
+    "secMove": "b8c6"
+   },
+   {
+    "k": 2,
+    "legalMoves": 46,
+    "sfBest": "h4e4",
+    "solution": "h4e4",
+    "gap": 685,
+    "topScore": 554,
+    "secScore": -131,
+    "secMove": "h4d4"
+   },
+   {
+    "k": 4,
+    "legalMoves": 47,
+    "sfBest": "e4h1",
+    "solution": "e4h1",
+    "gap": 634,
+    "topScore": 578,
+    "secScore": -56,
+    "secMove": "e4c2"
+   }
+  ],
+  "matGain": 5,
+  "finalMate": false
+ },
+ {
+  "code": "h1f5ru6o.e",
+  "level": "hard",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 36,
+    "sfBest": "d4c6",
+    "solution": "d4c6",
+    "gap": 411,
+    "topScore": 547,
+    "secScore": 136,
+    "secMove": "c1g5"
+   },
+   {
+    "k": 2,
+    "legalMoves": 31,
+    "sfBest": "d1h5",
+    "solution": "d1h5",
+    "gap": 582,
+    "topScore": 571,
+    "secScore": -11,
+    "secMove": "d1g4"
+   },
+   {
+    "k": 4,
+    "legalMoves": 30,
+    "sfBest": "h5g5",
+    "solution": "h5g5",
+    "gap": 517,
+    "topScore": 553,
+    "secScore": 36,
+    "secMove": "c1g5"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "huqb768.f",
+  "level": "hard",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 30,
+    "sfBest": "c7f4",
+    "solution": "c7f4",
+    "gap": 428,
+    "topScore": 565,
+    "secScore": 137,
+    "secMove": "d7f6"
+   },
+   {
+    "k": 2,
+    "legalMoves": 37,
+    "sfBest": "f4e4",
+    "solution": "f4e4",
+    "gap": 423,
+    "topScore": 554,
+    "secScore": 131,
+    "secMove": "d7f6"
+   },
+   {
+    "k": 4,
+    "legalMoves": 35,
+    "sfBest": "e4h1",
+    "solution": "e4h1",
+    "gap": 568,
+    "topScore": 602,
+    "secScore": 34,
+    "secMove": "b7b6"
+   }
+  ],
+  "matGain": 5,
+  "finalMate": false
+ },
+ {
+  "code": "h1u8u97c.l",
+  "level": "hard",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 35,
+    "sfBest": "d1d5",
+    "solution": "d1d5",
+    "gap": 287,
+    "topScore": 408,
+    "secScore": 121,
+    "secMove": "f2f4"
+   },
+   {
+    "k": 2,
+    "legalMoves": 39,
+    "sfBest": "d5a8",
+    "solution": "d5a8",
+    "gap": 396,
+    "topScore": 423,
+    "secScore": 27,
+    "secMove": "f2f4"
+   }
+  ],
+  "matGain": 5,
+  "finalMate": false
+ },
+ {
+  "code": "h11h30jl.4",
+  "level": "hard",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 31,
+    "sfBest": "b8c6",
+    "solution": "b8c6",
+    "gap": 584,
+    "topScore": 639,
+    "secScore": 55,
+    "secMove": "d7d6"
+   },
+   {
+    "k": 2,
+    "legalMoves": 30,
+    "sfBest": "c6d4",
+    "solution": "c6d4",
+    "gap": 562,
+    "topScore": 673,
+    "secScore": 111,
+    "secMove": "e7f6"
+   }
+  ],
+  "matGain": 6,
+  "finalMate": false
+ },
+ {
+  "code": "h1i1k3q7.6",
+  "level": "hard",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 36,
+    "sfBest": "d8d4",
+    "solution": "d8d4",
+    "gap": 444,
+    "topScore": 460,
+    "secScore": 16,
+    "secMove": "c5f2"
+   },
+   {
+    "k": 2,
+    "legalMoves": 36,
+    "sfBest": "d4e5",
+    "solution": "d4e5",
+    "gap": 578,
+    "topScore": 437,
+    "secScore": -141,
+    "secMove": "d4b4"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "hvixztu.7",
+  "level": "hard",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 30,
+    "sfBest": "e2b5",
+    "solution": "e2b5",
+    "gap": 356,
+    "topScore": 670,
+    "secScore": 314,
+    "secMove": "d2d4"
+   },
+   {
+    "k": 2,
+    "legalMoves": 25,
+    "sfBest": "c3b5",
+    "solution": "c3b5",
+    "gap": 1145,
+    "topScore": 659,
+    "secScore": -486,
+    "secMove": "d2d4"
+   }
+  ],
+  "matGain": 6,
+  "finalMate": false
+ },
+ {
+  "code": "hudlpas.h",
+  "level": "hard",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 38,
+    "sfBest": "c1g5",
+    "solution": "c1g5",
+    "gap": 515,
+    "topScore": 426,
+    "secScore": -89,
+    "secMove": "c1e3"
+   },
+   {
+    "k": 2,
+    "legalMoves": 46,
+    "sfBest": "g5d8",
+    "solution": "g5d8",
+    "gap": 411,
+    "topScore": 396,
+    "secScore": -15,
+    "secMove": "d3d4"
+   }
+  ],
+  "matGain": 4,
+  "finalMate": false
+ },
+ {
+  "code": "hjzr6hj.d",
+  "level": "hard",
+  "theme": "mate-in-3",
+  "mateIn": 3,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 34,
+    "sfBest": "c2a4",
+    "solution": "c2a4",
+    "gap": 99049,
+    "topScore": 99997,
+    "secScore": 948,
+    "secMove": "c1g5",
+    "mateForcers": [
+     "c2a4"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 33,
+    "sfBest": "a4b5",
+    "solution": "a4b5",
+    "gap": 99144,
+    "topScore": 99998,
+    "secScore": 854,
+    "secMove": "c1g5",
+    "mateForcers": [
+     "a4b5"
+    ]
+   },
+   {
+    "k": 4,
+    "legalMoves": 39,
+    "sfBest": "d1d6",
+    "solution": "d1d6",
+    "gap": 98700,
+    "topScore": 99999,
+    "secScore": 1299,
+    "secMove": "c1g5",
+    "mateForcers": [
+     "d1d6"
+    ]
+   }
+  ],
+  "matGain": 1,
+  "finalMate": true
+ },
+ {
+  "code": "hf20anr.3",
+  "level": "hard",
+  "theme": "discovered",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 42,
+    "sfBest": "f4g3",
+    "solution": "f4g3",
+    "gap": 500,
+    "topScore": 572,
+    "secScore": 72,
+    "secMove": "h4f6"
+   },
+   {
+    "k": 2,
+    "legalMoves": 46,
+    "sfBest": "g3h2",
+    "solution": "g3h2",
+    "gap": 371,
+    "topScore": 559,
+    "secScore": 188,
+    "secMove": "c6d4"
+   }
+  ],
+  "matGain": 2,
+  "finalMate": false
+ },
+ {
+  "code": "hrby3rx.o",
+  "level": "hard",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 41,
+    "sfBest": "d7b5",
+    "solution": "d7b5",
+    "gap": 651,
+    "topScore": 793,
+    "secScore": 142,
+    "secMove": "b7b5"
+   },
+   {
+    "k": 2,
+    "legalMoves": 34,
+    "sfBest": "a6b5",
+    "solution": "a6b5",
+    "gap": 939,
+    "topScore": 809,
+    "secScore": -130,
+    "secMove": "d8d5"
+   }
+  ],
+  "matGain": 6,
+  "finalMate": false
+ },
+ {
+  "code": "h3al0ft.4",
+  "level": "hard",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 43,
+    "sfBest": "d1d5",
+    "solution": "d1d5",
+    "gap": 358,
+    "topScore": 541,
+    "secScore": 183,
+    "secMove": "d1f3"
+   },
+   {
+    "k": 2,
+    "legalMoves": 48,
+    "sfBest": "d5c6",
+    "solution": "d5c6",
+    "gap": 612,
+    "topScore": 529,
+    "secScore": -83,
+    "secMove": "c4c5"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "hdfdqr6.q",
+  "level": "hard",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 44,
+    "sfBest": "h3g5",
+    "solution": "h3g5",
+    "gap": 474,
+    "topScore": 547,
+    "secScore": 73,
+    "secMove": "h3f4"
+   },
+   {
+    "k": 2,
+    "legalMoves": 41,
+    "sfBest": "g5e6",
+    "solution": "g5e6",
+    "gap": 445,
+    "topScore": 564,
+    "secScore": 119,
+    "secMove": "g3h5"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "h1nqhdx7.a",
+  "level": "hard",
+  "theme": "mate-in-3",
+  "mateIn": 3,
+  "flags": [
+   "step4: moves forcing mate in 1: [e7d8,e7e8] vs solution e7e8"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 43,
+    "sfBest": "d4e5",
+    "solution": "d4e5",
+    "gap": 99196,
+    "topScore": 99997,
+    "secScore": 801,
+    "secMove": "d5c7",
+    "mateForcers": [
+     "d4e5"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 43,
+    "sfBest": "e5e7",
+    "solution": "e5e7",
+    "gap": 97229,
+    "topScore": 99998,
+    "secScore": 2769,
+    "secMove": "c1f4",
+    "mateForcers": [
+     "e5e7"
+    ]
+   },
+   {
+    "k": 4,
+    "legalMoves": 42,
+    "sfBest": "e7d8",
+    "solution": "e7e8",
+    "gap": 0,
+    "topScore": 99999,
+    "secScore": 99999,
+    "secMove": "e7e8",
+    "solutionRank": 2,
+    "mateForcers": [
+     "e7d8",
+     "e7e8"
+    ]
+   }
+  ],
+  "matGain": 9,
+  "finalMate": true
+ },
+ {
+  "code": "hdy8alm.a",
+  "level": "hard",
+  "theme": "mate-in-3",
+  "mateIn": 3,
+  "flags": [
+   "step4: second move g4e2 within 2cp (99997 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 36,
+    "sfBest": "c8g4",
+    "solution": "c8g4",
+    "gap": 99200,
+    "topScore": 99997,
+    "secScore": 797,
+    "secMove": "c8h3",
+    "mateForcers": [
+     "c8g4"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 39,
+    "sfBest": "g2f2",
+    "solution": "g2f2",
+    "gap": 97857,
+    "topScore": 99998,
+    "secScore": 2141,
+    "secMove": "g4d1",
+    "mateForcers": [
+     "g2f2"
+    ]
+   },
+   {
+    "k": 4,
+    "legalMoves": 42,
+    "sfBest": "f2e2",
+    "solution": "f2e2",
+    "gap": 2,
+    "topScore": 99999,
+    "secScore": 99997,
+    "secMove": "g4e2",
+    "mateForcers": [
+     "f2e2"
+    ]
+   }
+  ],
+  "matGain": 10,
+  "finalMate": true
+ },
+ {
+  "code": "hel70oc.g",
+  "level": "hard",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 37,
+    "sfBest": "c4c5",
+    "solution": "c4c5",
+    "gap": 712,
+    "topScore": 483,
+    "secScore": -229,
+    "secMove": "a4a5"
+   },
+   {
+    "k": 2,
+    "legalMoves": 34,
+    "sfBest": "g2d5",
+    "solution": "g2d5",
+    "gap": 771,
+    "topScore": 477,
+    "secScore": -294,
+    "secMove": "a4a5"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "hzwqgg7.j",
+  "level": "hard",
+  "theme": "sacrifice",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 44,
+    "sfBest": "f6g4",
+    "solution": "f6g4",
+    "gap": 359,
+    "topScore": 658,
+    "secScore": 299,
+    "secMove": "e8g8"
+   },
+   {
+    "k": 2,
+    "legalMoves": 36,
+    "sfBest": "h3g4",
+    "solution": "h3g4",
+    "gap": 1545,
+    "topScore": 659,
+    "secScore": -886,
+    "secMove": "h3h5"
+   }
+  ],
+  "matGain": 6,
+  "finalMate": false
+ },
+ {
+  "code": "hxyv72x.4",
+  "level": "hard",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 40,
+    "sfBest": "f8b4",
+    "solution": "f8b4",
+    "gap": 662,
+    "topScore": 605,
+    "secScore": -57,
+    "secMove": "e6c4"
+   },
+   {
+    "k": 2,
+    "legalMoves": 35,
+    "sfBest": "c6b4",
+    "solution": "c6b4",
+    "gap": 1120,
+    "topScore": 612,
+    "secScore": -508,
+    "secMove": "g7g5"
+   }
+  ],
+  "matGain": 6,
+  "finalMate": false
+ },
+ {
+  "code": "h7poa7u.k",
+  "level": "hard",
+  "theme": "pin",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 54,
+    "sfBest": "e5c7",
+    "solution": "e5c7",
+    "gap": 246,
+    "topScore": 464,
+    "secScore": 218,
+    "secMove": "d7c6"
+   },
+   {
+    "k": 2,
+    "legalMoves": 56,
+    "sfBest": "c7a5",
+    "solution": "c7a5",
+    "gap": 352,
+    "topScore": 506,
+    "secScore": 154,
+    "secMove": "c5d4"
+   }
+  ],
+  "matGain": 9,
+  "finalMate": false
+ },
+ {
+  "code": "hexpvq6.5",
+  "level": "hard",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 35,
+    "sfBest": "b6b2",
+    "solution": "b6b2",
+    "gap": 261,
+    "topScore": 460,
+    "secScore": 199,
+    "secMove": "b8d7"
+   },
+   {
+    "k": 2,
+    "legalMoves": 36,
+    "sfBest": "g4f3",
+    "solution": "g4f3",
+    "gap": 402,
+    "topScore": 480,
+    "secScore": 78,
+    "secMove": "b8a6"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ },
+ {
+  "code": "h1kxj24y.b",
+  "level": "hard",
+  "theme": "discovered",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 55,
+    "sfBest": "e4c3",
+    "solution": "e4c3",
+    "gap": 242,
+    "topScore": 466,
+    "secScore": 224,
+    "secMove": "e4d2"
+   },
+   {
+    "k": 2,
+    "legalMoves": 49,
+    "sfBest": "d5h1",
+    "solution": "d5h1",
+    "gap": 759,
+    "topScore": 502,
+    "secScore": -257,
+    "secMove": "b4a3"
+   },
+   {
+    "k": 4,
+    "legalMoves": 39,
+    "sfBest": "h1d1",
+    "solution": "h1d1",
+    "gap": 939,
+    "topScore": 517,
+    "secScore": -422,
+    "secMove": "h1h2"
+   }
+  ],
+  "matGain": 11,
+  "finalMate": false
+ },
+ {
+  "code": "hcxpyci.9",
+  "level": "hard",
+  "theme": "mate-in-3",
+  "mateIn": 3,
+  "flags": [
+   "step4: second move d2h6 within 1cp (99998 vs 99999) and still winning"
+  ],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 49,
+    "sfBest": "e2h5",
+    "solution": "e2h5",
+    "gap": 99581,
+    "topScore": 99997,
+    "secScore": 416,
+    "secMove": "e5g6",
+    "mateForcers": [
+     "e2h5"
+    ]
+   },
+   {
+    "k": 2,
+    "legalMoves": 48,
+    "sfBest": "h5g6",
+    "solution": "h5g6",
+    "gap": 99014,
+    "topScore": 99998,
+    "secScore": 984,
+    "secMove": "e5g6",
+    "mateForcers": [
+     "h5g6"
+    ]
+   },
+   {
+    "k": 4,
+    "legalMoves": 51,
+    "sfBest": "g6f7",
+    "solution": "g6f7",
+    "gap": 1,
+    "topScore": 99999,
+    "secScore": 99998,
+    "secMove": "d2h6",
+    "mateForcers": [
+     "g6f7"
+    ]
+   }
+  ],
+  "matGain": 1,
+  "finalMate": true
+ },
+ {
+  "code": "h1a8w12x.h",
+  "level": "hard",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 37,
+    "sfBest": "d7c5",
+    "solution": "d7c5",
+    "gap": 215,
+    "topScore": 302,
+    "secScore": 87,
+    "secMove": "g5c5"
+   },
+   {
+    "k": 2,
+    "legalMoves": 36,
+    "sfBest": "c5b3",
+    "solution": "c5b3",
+    "gap": 392,
+    "topScore": 334,
+    "secScore": -58,
+    "secMove": "a8c8"
+   }
+  ],
+  "matGain": 6,
+  "finalMate": false
+ },
+ {
+  "code": "h1lykbs5.i",
+  "level": "hard",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 40,
+    "sfBest": "b5d6",
+    "solution": "b5d6",
+    "gap": 577,
+    "topScore": 557,
+    "secScore": -20,
+    "secMove": "b1c3"
+   },
+   {
+    "k": 2,
+    "legalMoves": 34,
+    "sfBest": "e5e8",
+    "solution": "e5e8",
+    "gap": 709,
+    "topScore": 545,
+    "secScore": -164,
+    "secMove": "d2d6"
+   }
+  ],
+  "matGain": 6,
+  "finalMate": false
+ },
+ {
+  "code": "h181lsdk.s",
+  "level": "hard",
+  "theme": "material",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 44,
+    "sfBest": "a1g1",
+    "solution": "a1g1",
+    "gap": 670,
+    "topScore": 614,
+    "secScore": -56,
+    "secMove": "h1g1"
+   },
+   {
+    "k": 2,
+    "legalMoves": 43,
+    "sfBest": "g1h1",
+    "solution": "g1h1",
+    "gap": 489,
+    "topScore": 609,
+    "secScore": 120,
+    "secMove": "d4c6"
+   }
+  ],
+  "matGain": 4,
+  "finalMate": false
+ },
+ {
+  "code": "h16cs150.d",
+  "level": "hard",
+  "theme": "fork",
+  "mateIn": 0,
+  "flags": [],
+  "steps": [
+   {
+    "k": 0,
+    "legalMoves": 34,
+    "sfBest": "e6f7",
+    "solution": "e6f7",
+    "gap": 668,
+    "topScore": 365,
+    "secScore": -303,
+    "secMove": "a4e4"
+   },
+   {
+    "k": 2,
+    "legalMoves": 32,
+    "sfBest": "a4c4",
+    "solution": "a4c4",
+    "gap": 575,
+    "topScore": 378,
+    "secScore": -197,
+    "secMove": "f1e2"
+   },
+   {
+    "k": 4,
+    "legalMoves": 30,
+    "sfBest": "c4d3",
+    "solution": "c4d3",
+    "gap": 443,
+    "topScore": 372,
+    "secScore": -71,
+    "secMove": "f3g5"
+   }
+  ],
+  "matGain": 3,
+  "finalMate": false
+ }
+]

@@ -1,0 +1,54 @@
+Ornate Chess - Current Features (build e12, 2026-11-23)
+=======================================================
+
+Ornate Chess is an installable web app (PWA) that also works offline. It runs at https://ornate-chess.netlify.app and locally through start.bat on port 8002. Everything is stored on the device in browser storage, and there are no accounts yet.
+
+Play
+- Play the bot: a built-in engine at eight levels, from Novice (about 400 Elo) to Grandmaster (about 2500 Elo). From the Casual level up, the bot uses a small opening book. A chess clock is optional.
+- Two players: two people play on the same device, with an optional clock and custom time controls.
+- The board can be flipped, and the app names the opening as soon as you play into one.
+- Board annotations let you draw arrows and highlight squares. Keyboard shortcuts are supported.
+- Sound effects are pre-rendered so they play reliably on mobile.
+
+Player rating
+- Your rating is estimated from games against the bot and is shown on the home page with its history.
+
+Game review (in the style of chess.com)
+- Stockfish 19 lite (WebAssembly) analyses every move at depth 12 with two candidate lines.
+- Moves are labelled Brilliant, Great, Best, Excellent, Good, Book, Inaccuracy, Mistake, Miss, Blunder or Forced.
+- The review shows an evaluation bar, an evaluation graph, an accuracy figure for each side and the engine's best line.
+- You can step through moves and engine lines. The stepping is tuned to stay smooth on phones.
+- Each move plays its sound as you step forward, and Brilliant moves have their own preloaded sound.
+
+Mistakes and puzzles
+- Mistake puzzles: positions where you went wrong in your own games become puzzles, along with insights into the kinds of mistakes you make.
+- Puzzles: a set of tactical positions, from mate in one to endgame technique.
+- Generated puzzles: the device creates new puzzles on request at easy, medium or hard difficulty, and each one is checked with the engine.
+
+Openings
+- An opening library with more than a hundred named openings, taken from the Lichess chess-openings dataset (CC0). You can step through each opening and practise it.
+
+Endgame practice
+- Essential positions played against the engine:
+  - Basic checkmates: king and queen, king and rook, two bishops, and bishop and knight.
+  - King and pawn endings: the opposition, key squares, the square of the pawn and the outside passed pawn.
+  - Rook endings: the Lucena, Philidor and Vancura positions.
+  - Queen and minor-piece endings: queen against a centre pawn, queen against a rook pawn, and the wrong bishop with a rook pawn.
+
+Analysis
+- Load a game, a PGN or a FEN position and study it with Stockfish.
+
+Saved games
+- Load, rename, delete, import and export the games stored on the device as PGN files.
+
+Progress statistics
+- Rating over time, results by colour, bot level and opening, puzzle accuracy and completed endgames.
+
+Learn
+- A summary of the rules, a guide to chess notation and a list of keyboard shortcuts.
+
+Settings
+- Display, sound and gameplay preferences, set with simple toggles.
+
+Planned (see PLANS-multiplayer.txt)
+- Accounts, saved progress across devices, live online games and Glicko-2 ratings, on a self-hosted server.
