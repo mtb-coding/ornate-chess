@@ -37,7 +37,7 @@ The estimate for reaching a private beta (Phases 0 to 6) is about 29 to 44 focus
 
 Open items
 - Stockfish is GPL licensed, and the licensing decision is yours.
-- Creating the private GitHub repo mtb-coding/ornate-chess needs your approval.
+- The source is published at https://github.com/mtb-coding/ornate-chess under GPLv3.
 - You need to do the Oracle sign-up yourself, because it asks for a card to verify your identity.
 - Account creation will later require an email address and email verification, to limit abuse. Usernames are already unique, including differences of case only.
 
