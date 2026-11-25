@@ -18,6 +18,7 @@ const ROUTES = [
   { id: 'openings', label: 'Openings', title: 'Opening library', load: () => import('./ui/page-openings.js') },
   { id: 'endgames', label: 'Endgames', title: 'Endgame practice', load: () => import('./ui/page-endgames.js') },
   { id: 'stats', label: 'Stats', title: 'Progress statistics', load: () => import('./ui/page-stats.js') },
+  { id: 'leaderboard', label: 'Leaderboards', title: 'Leaderboards', load: () => import('./ui/page-leaderboard.js') },
   { id: 'saved', label: 'Saved games', title: 'Saved games', load: () => import('./ui/page-saved.js') },
   { id: 'analysis', label: 'Analysis', title: 'Analysis', load: () => import('./ui/page-analysis.js') },
   { id: 'review', label: 'Review', title: 'Game review', load: () => import('./ui/page-review.js'), nav: false },

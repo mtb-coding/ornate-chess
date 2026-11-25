@@ -8,13 +8,55 @@ import { play as sfx, soundForMove } from './sound.js';
 import { confirmDialog } from './dialogs.js';
 import { modeTabs } from './page-puzzle-gen.js';
 import { reviewStore } from '../review-storage.js';
+import { listOnlinePuzzles, markOnlinePuzzle, removeOnlinePuzzle } from './online-puzzles.js';
 import { JUDGMENT_LABELS, inspectMistakePuzzle, verifyMistakePuzzle } from '../review.js';
 import { StockfishEngine } from './stockfish-client.js';
 import { analyseWeaknesses, weaknessParagraphs } from '../mistake-insights.js';
 import { badgeSvg } from './review-badges.js';
 
 const fc = `<span class="fc tl">${CORNER}</span><span class="fc tr">${CORNER}</span><span class="fc bl">${CORNER}</span><span class="fc br">${CORNER}</span>`;
-const EMPTY = 'Review a game to collect positions you can retry.';
+const EMPTY = 'Review a saved game, or finish an online game, to collect positions you can retry. An online game is reviewed on the account server after it ends.';
+
+let onlineCache = [];
+
+function mergeMistakes(local, online) {
+  const seen = new Set(local.map((p) => `${p.fen}|${p.solution && p.solution[0]}`));
+  const extra = [];
+  for (const puzzle of online) {
+    const key = `${puzzle.fen}|${puzzle.solution && puzzle.solution[0]}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    extra.push(puzzle);
+  }
+  return [...extra, ...local];
+}
+
+function currentMistakes(store) {
+  return mergeMistakes(store.listMistakes(), onlineCache);
+}
+
+function findMistake(store, id) {
+  return store.getMistake(id) || onlineCache.find((puzzle) => puzzle.id === id) || null;
+}
+
+async function rememberMistake(store, puzzle, fields) {
+  if (puzzle.source === 'online') {
+    const updated = await markOnlinePuzzle(puzzle.id, fields);
+    const index = onlineCache.findIndex((item) => item.id === puzzle.id);
+    if (index >= 0 && updated) onlineCache[index] = updated;
+    return;
+  }
+  store.markMistake(puzzle.id, fields);
+}
+
+async function forgetMistake(store, puzzle) {
+  if (puzzle.source === 'online') {
+    await removeOnlinePuzzle(puzzle.id);
+    onlineCache = onlineCache.filter((item) => item.id !== puzzle.id);
+    return;
+  }
+  store.removeMistake(puzzle.id);
+}
 
 function mistakeCardTitle(p) {
   const side = p.color === 'b' ? 'Black' : 'White';
@@ -60,11 +102,11 @@ function weaknessesSection(store, mistakes) {
   </section>`;
 }
 
-function renderList(root) {
-
+async function renderList(root) {
   const store = reviewStore();
+  onlineCache = await listOnlinePuzzles();
   const draw = () => {
-    const all = store.listMistakes();
+    const all = currentMistakes(store);
     const unsolved = all.filter((p) => p.solved !== true).length;
     const solved = all.filter((p) => p.solved === true).length;
     window.__chess.mistakes = all;
@@ -88,6 +130,7 @@ function renderList(root) {
             const title = mistakeCardTitle(p);
             return `<li class="frame tight ${p.solved === true ? 'is-solved' : ''}${legal ? '' : ' is-invalid'}" data-id="${esc(p.id)}">${fc}<div class="frame-inner">
               <h2 class="pz-title">${badge}${legal ? `<a href="${href}">${esc(title)}</a>` : esc(title)}</h2>
+              ${p.source === 'online' ? `<p class="muted">${esc(p.gameName ? `From the online game ${p.gameName}.` : 'From an online game.')}</p>` : ''}
               <div class="mistake-status" data-status>
                 <span class="mistake-chip ${statusKind}">${esc(status)}</span>
               </div>
@@ -106,18 +149,18 @@ function renderList(root) {
     const b = e.target.closest('[data-act="remove"]');
     if (!b) return;
     const id = b.dataset.id;
-    const p = store.getMistake(id);
+    const p = findMistake(store, id);
     if (!p) return;
     const ok = await confirmDialog('Remove this position', 'Remove this position from My mistakes?', { ok: 'Remove', danger: true });
     if (!ok) return;
-    store.removeMistake(id);
+    try { await forgetMistake(store, p); } catch (err) { toast(err.message); return; }
     toast('Removed.');
     draw();
   };
   draw();
 
   let engine = null;
-  const legal = store.listMistakes().filter((p) => inspectMistakePuzzle(p).ok);
+  const legal = currentMistakes(store).filter((p) => inspectMistakePuzzle(p).ok);
   if (legal.length) {
     engine = new StockfishEngine();
     (async () => {
@@ -142,9 +185,13 @@ function renderList(root) {
   return () => { if (engine) { try { engine.terminate(); } catch { /* already gone */ } engine = null; } };
 }
 
-function renderSolve(root, id) {
+async function renderSolve(root, id) {
   const store = reviewStore();
-  const raw = store.getMistake(id);
+  let raw = store.getMistake(id);
+  if (!raw) {
+    onlineCache = await listOnlinePuzzles();
+    raw = findMistake(store, id);
+  }
   if (!raw) {
     root.innerHTML = `
       <h1 class="page-title" id="title-puzzles">My mistakes</h1>
@@ -169,7 +216,7 @@ function renderSolve(root, id) {
     root.querySelector('[data-act="remove"]').addEventListener('click', async () => {
       const ok = await confirmDialog('Remove this position', 'Remove this position from My mistakes?', { ok: 'Remove', danger: true });
       if (!ok) return;
-      store.removeMistake(id);
+      try { await forgetMistake(store, raw); } catch (err) { toast(err.message); return; }
       toast('Removed.');
       location.hash = '#/puzzles/mistakes';
     });
@@ -213,7 +260,7 @@ function renderSolve(root, id) {
 
   const record = (solved) => {
     state.attempts += 1;
-    try { store.markMistake(puzzle.id, { solved, attempts: state.attempts, usedHint: state.usedHint }); } catch (err) { console.warn('[mistakes]', err.message); }
+    rememberMistake(store, puzzle, { solved, attempts: state.attempts, usedHint: state.usedHint }).catch((err) => console.warn('[mistakes]', err.message));
   };
 
   const reset = () => {
@@ -285,13 +332,14 @@ function renderSolve(root, id) {
         setStatus(`The hint shows the full move.`);
       } else setStatus('The piece to move is highlighted. Select Hint again to see the destination.');
     } else if (act === 'nextpz') {
-      const next = store.listMistakes().find((p) => !p.solved && p.id !== id) || store.listMistakes().find((p) => p.id !== id);
+      const list = currentMistakes(store);
+      const next = list.find((p) => !p.solved && p.id !== id) || list.find((p) => p.id !== id);
       if (next) location.hash = `#/puzzles/mistakes/${encodeURIComponent(next.id)}`;
       else toast('There are no further positions in the list.');
     } else if (act === 'remove') {
       const ok = await confirmDialog('Remove this position', 'Remove this position from My mistakes?', { ok: 'Remove', danger: true });
       if (!ok) return;
-      store.removeMistake(id);
+      try { await forgetMistake(store, raw); } catch (err) { toast(err.message); return; }
       toast('Removed.');
       location.hash = '#/puzzles/mistakes';
     }

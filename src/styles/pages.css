@@ -160,6 +160,18 @@
 .pace-card .rating-figure { width: 100%; min-width: 0; box-sizing: border-box; font-size: 2.1rem; padding: 8px 10px; }
 .pace-card .rating-stats { grid-template-columns: 1fr; }
 .pace-card .stat-grid dd { overflow-wrap: anywhere; }
+.lb-paces { flex-wrap: wrap; max-width: 100%; }
+.lb-paces a { display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+.lb-paces .icon { width: 18px; height: 18px; }
+.lb-you { margin: 0 0 14px; }
+.lb-wrap { max-width: 100%; }
+.lb-table { width: 100%; border-collapse: collapse; }
+.lb-table caption.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.lb-table th { font-variant: small-caps; letter-spacing: .08em; color: var(--ink-muted); font-weight: 500; }
+.lb-table th, .lb-table td { padding: 8px 6px; border-bottom: 1px solid var(--line); vertical-align: baseline; }
+.lb-table .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.lb-table .is-you td { color: var(--gold-ink); }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
 /* Puzzle mode tabs (collection and generated puzzles) */
 .mode-tabs { display: flex; justify-content: center; gap: 0; margin: 0 auto 16px; max-width: 520px; border: 1px solid var(--line); border-radius: 3px; padding: 3px; background: var(--bg-0); }

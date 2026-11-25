@@ -5,6 +5,7 @@ import path from 'node:path';
 import { constants, setPriority } from 'node:os';
 import { DEFAULT_DB_PATH, openDatabase } from './db.mjs';
 import { claimJob, ensureBackup, failJob, finishJob, runBackup, runReview } from './jobs.mjs';
+import { REVIEW_DEPTH } from '../src/review.js';
 import { createNodeEngine } from './stockfish-process.mjs';
 
 const POLL_MS = 5000;
@@ -20,7 +21,10 @@ let engine = null;
 
 function analyser() {
   if (!engine) engine = createNodeEngine(undefined, { hash: 16 });
-  return (fen) => engine.analyse(fen, { depth: 8, multipv: 1 });
+  return (fen, opts = {}) => engine.analyse(fen, {
+    depth: opts.depth ?? REVIEW_DEPTH,
+    multipv: opts.multipv ?? 2,
+  });
 }
 
 async function tick() {

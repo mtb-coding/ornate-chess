@@ -2,7 +2,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
-import { Game } from '../src/engine.js';
+import { analyseGame, buildReview, replayGame, REVIEW_DEPTH } from '../src/review.js';
+import { recordCheatFlags } from './cheat.mjs';
+import { paceForClock } from './ratings.mjs';
+import { saveGameReview } from './reviews.mjs';
 
 export const JOB_KINDS = ['backup', 'review'];
 const MAX_ATTEMPTS = 3;
@@ -82,14 +85,56 @@ export function runBackup(db, { directory, now = Date.now(), keep = 7 } = {}) {
   return { file: dest, bytes: fs.statSync(dest).size };
 }
 
-/** One deep line on the final position of a stored live game. */
-export async function runReview(db, job, { analyse } = {}) {
+/**
+ * Review every move of a stored live game and keep a puzzle for each mistake.
+ * `analyse(fen, { depth, multipv })` is the bundled engine, or a stand-in in tests.
+ */
+export async function runReview(db, job, { analyse, depth = REVIEW_DEPTH, now = Date.now() } = {}) {
   const payload = JSON.parse(job.payload_json);
-  const row = db.prepare('SELECT game_json FROM live_games WHERE id = ?').get(payload.gameId);
+  const row = db.prepare(`SELECT id, white_id AS whiteId, black_id AS blackId,
+      white_name AS whiteName, black_name AS blackName, game_json AS gameJson,
+      base_ms AS baseMs, inc_ms AS incMs
+    FROM live_games WHERE id = ?`).get(payload.gameId);
   if (!row) throw new Error('That finished game is no longer stored.');
-  const game = Game.fromJSON(JSON.parse(row.game_json));
-  const fen = game.fen();
+  const saved = JSON.parse(row.gameJson);
+  const uci = Array.isArray(saved.uci) ? saved.uci : [];
+  if (!uci.length) throw new Error('That game has no moves to review.');
   if (!analyse) throw new Error('No engine is available for this review.');
-  const line = await analyse(fen);
-  return { gameId: payload.gameId, fen, ply: game.length, line };
+  const replayed = replayGame(saved.startFen, uci);
+  const evals = await analyseGame({ analyse }, replayed, { depth });
+  const review = buildReview({
+    startFen: saved.startFen,
+    uci,
+    mode: 'online',
+    depth,
+    name: `${row.whiteName} against ${row.blackName}`,
+    gameId: row.id,
+    evals,
+  });
+  review.analyzedAt = now;
+  const stored = saveGameReview(db, {
+    gameId: row.id,
+    whiteId: row.whiteId,
+    blackId: row.blackId,
+    review,
+    now,
+  });
+  const pace = paceForClock(row.baseMs, row.incMs);
+  const marks = recordCheatFlags(db, {
+    gameId: row.id,
+    whiteId: row.whiteId,
+    blackId: row.blackId,
+    pace,
+    moves: review.moves,
+    now,
+  });
+  return {
+    gameId: row.id,
+    depth,
+    ply: uci.length,
+    accuracy: review.accuracy,
+    mistakes: review.mistakes.length,
+    puzzles: stored.puzzles,
+    flags: marks.flags,
+  };
 }

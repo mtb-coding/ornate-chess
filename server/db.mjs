@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 
 const SERVER_DIR = path.dirname(fileURLToPath(import.meta.url));
 export const DEFAULT_DB_PATH = path.join(SERVER_DIR, 'data', 'ornate.sqlite');
-const SCHEMA_VERSION = 5;
+const SCHEMA_VERSION = 7;
 
 const LIVE_GAMES_SQL = `
 CREATE TABLE IF NOT EXISTS live_games (
@@ -115,6 +115,46 @@ export function openDatabase(file = DEFAULT_DB_PATH) {
     );
     CREATE INDEX IF NOT EXISTS jobs_ready ON jobs(status, run_after);`);
     version = 5;
+  }
+  if (version < 6) {
+    db.exec(`CREATE TABLE IF NOT EXISTS game_reviews (
+      game_id TEXT PRIMARY KEY,
+      depth INTEGER NOT NULL,
+      review_json TEXT NOT NULL,
+      created_at INTEGER NOT NULL
+    );
+    CREATE TABLE IF NOT EXISTS game_puzzles (
+      id TEXT PRIMARY KEY,
+      game_id TEXT NOT NULL,
+      user_id TEXT NOT NULL,
+      color TEXT NOT NULL,
+      ply INTEGER NOT NULL,
+      puzzle_json TEXT NOT NULL,
+      solved INTEGER NOT NULL,
+      attempts INTEGER NOT NULL,
+      used_hint INTEGER NOT NULL,
+      removed INTEGER NOT NULL,
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL
+    );
+    CREATE UNIQUE INDEX IF NOT EXISTS game_puzzles_move ON game_puzzles(game_id, user_id, ply);
+    CREATE INDEX IF NOT EXISTS game_puzzles_user ON game_puzzles(user_id, created_at);`);
+    version = 6;
+  }
+  if (version < 7) {
+    db.exec(`CREATE TABLE IF NOT EXISTS cheat_flags (
+      game_id TEXT NOT NULL,
+      user_id TEXT NOT NULL,
+      pace TEXT NOT NULL,
+      color TEXT NOT NULL,
+      moves INTEGER NOT NULL,
+      matches INTEGER NOT NULL,
+      average_loss REAL NOT NULL,
+      created_at INTEGER NOT NULL,
+      PRIMARY KEY (game_id, user_id)
+    );
+    CREATE INDEX IF NOT EXISTS cheat_flags_player ON cheat_flags(user_id, pace);`);
+    version = 7;
   }
   db.exec(`PRAGMA user_version = ${version}`);
   return db;

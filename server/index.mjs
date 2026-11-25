@@ -8,6 +8,8 @@ import { readRatings } from './ratings.mjs';
 import { DEFAULT_DB_PATH, openDatabase } from './db.mjs';
 import { HttpError } from './errors.mjs';
 import { createLive } from './live.mjs';
+import { leaderboard } from './cheat.mjs';
+import { listGamePuzzles, readGameReview, updateGamePuzzle } from './reviews.mjs';
 import { getSync, putSync } from './sync.mjs';
 
 export const ALLOWED_ORIGINS = new Set([
@@ -147,6 +149,30 @@ async function handle(req, res, db) {
     const body = await readJson(req, MAX_SYNC_BYTES);
     putSync(db, user.id, body.entries);
     send(res, 200, { ok: true });
+    return;
+  }
+  if (req.method === 'GET' && pathName === '/api/leaderboard') {
+    const user = userFromAuthorization(db, req.headers.authorization);
+    send(res, 200, leaderboard(db, url.searchParams.get('pace'), user && user.id));
+    return;
+  }
+  if (req.method === 'GET' && pathName === '/api/puzzles') {
+    const user = requireUser(db, req);
+    send(res, 200, { puzzles: listGamePuzzles(db, user.id) });
+    return;
+  }
+  const puzzlePath = /^\/api\/puzzles\/([^/]+)$/.exec(pathName);
+  if (req.method === 'POST' && puzzlePath) {
+    const user = requireUser(db, req);
+    const body = await readJson(req, MAX_AUTH_BYTES);
+    const puzzle = updateGamePuzzle(db, user.id, decodeURIComponent(puzzlePath[1]), body);
+    send(res, 200, { puzzle });
+    return;
+  }
+  const reviewPath = /^\/api\/reviews\/([^/]+)$/.exec(pathName);
+  if (req.method === 'GET' && reviewPath) {
+    const user = requireUser(db, req);
+    send(res, 200, readGameReview(db, decodeURIComponent(reviewPath[1]), user.id));
     return;
   }
   if (pathName.startsWith('/api/')) {
