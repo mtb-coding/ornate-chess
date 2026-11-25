@@ -113,11 +113,11 @@ await test('a finished game with a move asks for a deeper review', async () => {
 await test('a player can read and solve a puzzle from an online game', async () => {
   const srv = await startTestServer();
   try {
-    const registered = await srv.api('POST', '/api/auth/register', { body: { username: 'ada_jobs', password: 'correct-horse' } });
+    const registered = await srv.api('POST', '/api/auth/register', { body: { username: 'ada_jobs', password: 'correct-horse', email: 'ada_jobs@example.com' } });
     assert.equal(registered.status, 200);
     const token = registered.json.token;
     const userId = registered.json.user.id;
-    const other = await srv.api('POST', '/api/auth/register', { body: { username: 'bea_jobs', password: 'correct-horse' } });
+    const other = await srv.api('POST', '/api/auth/register', { body: { username: 'bea_jobs', password: 'correct-horse', email: 'bea_jobs@example.com' } });
     const gameId = 'game-ada';
     srv.db.prepare(`INSERT INTO live_games (
       id, base_ms, inc_ms, white_id, black_id, white_name, black_name, game_json,
@@ -155,7 +155,7 @@ await test('a player can read and solve a puzzle from an online game', async () 
     assert.equal(black.json.review.name, 'ada_jobs against bea_jobs');
     const own = await srv.api('GET', `/api/reviews/${gameId}`, { token });
     assert.equal(own.json.review.name, 'ada_jobs against bea_jobs');
-    const outsider = await srv.api('POST', '/api/auth/register', { body: { username: 'cy_jobs', password: 'correct-horse' } });
+    const outsider = await srv.api('POST', '/api/auth/register', { body: { username: 'cy_jobs', password: 'correct-horse', email: 'cy_jobs@example.com' } });
     const denied = await srv.api('GET', `/api/reviews/${gameId}`, { token: outsider.json.token });
     assert.equal(denied.status, 403);
     const id = listed.json.puzzles[0].id;

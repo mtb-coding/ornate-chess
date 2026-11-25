@@ -4,6 +4,7 @@ import { clockMark } from '../src/ui/clock.js';
 import { PACES } from '../src/online-ratings.js';
 import { PROVISIONAL_DEVIATION } from '../src/glicko.js';
 import { HttpError } from './errors.mjs';
+import { friendState } from './friends.mjs';
 
 const USERNAME = /^[A-Za-z0-9_]{3,24}$/;
 const FOLLOW_LIMIT = 200;
@@ -84,6 +85,37 @@ function recentGames(db, userIds, limit) {
   return games;
 }
 
+export function readFinishedGame(db, id, viewerId = null) {
+  const row = db.prepare(`SELECT id, white_id, black_id, white_name, black_name, result, result_reason,
+      base_ms, inc_ms, game_json, status
+    FROM live_games WHERE id = ?`).get(id);
+  if (!row || row.status !== 'finished' || !row.result) throw new HttpError(404, 'That game is not stored.');
+  let game;
+  try { game = JSON.parse(row.game_json); } catch { throw new HttpError(404, 'That game is not stored.'); }
+  const mark = clockMark(row.base_ms, row.inc_ms);
+  const you = viewerId === row.white_id ? 'w' : viewerId === row.black_id ? 'b' : null;
+  let review = null;
+  if (you) {
+    const stored = db.prepare('SELECT 1 AS ok FROM game_reviews WHERE game_id = ?').get(row.id);
+    review = stored ? 'ready' : 'pending';
+  }
+  return {
+    id: row.id,
+    white: row.white_name,
+    black: row.black_name,
+    result: row.result,
+    reason: row.result_reason,
+    baseMs: row.base_ms,
+    incMs: row.inc_ms,
+    pace: mark ? mark.pace : null,
+    paceLabel: mark ? mark.paceLabel : 'Online',
+    clock: mark ? mark.short : '',
+    game,
+    you,
+    review,
+  };
+}
+
 export function playerProfile(db, username, viewerId = null) {
   const user = findUser(db, username);
   const followers = db.prepare('SELECT COUNT(*) AS n FROM follows WHERE followed_id = ?').get(user.id).n;
@@ -96,6 +128,7 @@ export function playerProfile(db, username, viewerId = null) {
     username: user.username,
     you: viewerId === user.id,
     following,
+    friend: viewerId ? friendState(db, viewerId, user.id) : null,
     followers,
     followingCount,
     ratings: ratingsFor(db, user.id),

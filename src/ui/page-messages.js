@@ -1,7 +1,7 @@
 // Off-game messages. A vertical list of people, and the open conversation beside it.
 import { esc, formatDate } from './dom.js';
 import { apiBase, readAccount } from './account-client.js';
-import { noteInbox } from './message-notice.js';
+import { markThreadSeen, noteInbox } from './message-notice.js';
 
 const HINT = {
   incoming: 'Request',
@@ -156,7 +156,6 @@ export async function render(root, { rest } = {}) {
     return;
   }
   if (token !== generation || !root.isConnected) return;
-  noteInbox(inbox.threads || []);
   let active = null;
   if (requested) {
     try {
@@ -166,5 +165,10 @@ export async function render(root, { rest } = {}) {
     }
   }
   if (token !== generation || !root.isConnected) return;
+  if (active && !active.error && Array.isArray(active.messages) && active.messages.length) {
+    const newest = active.messages[active.messages.length - 1];
+    if (newest && Number.isFinite(newest.at)) markThreadSeen(active.username, newest.at);
+  }
+  noteInbox(inbox.threads || []);
   paint(root, account, inbox.threads || [], active);
 }

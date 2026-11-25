@@ -3,14 +3,16 @@ import http from 'node:http';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { WebSocketServer } from 'ws';
-import { login, logout, register, userFromAuthorization } from './auth.mjs';
+import { confirmEmailChange, confirmPassword, confirmPasswordChange, confirmPasswordRecovery, login, logout, register, removeAccount, requestEmailChange, requestPasswordChange, requestPasswordRecovery, userFromAuthorization } from './auth.mjs';
 import { readRatings } from './ratings.mjs';
 import { DEFAULT_DB_PATH, openDatabase } from './db.mjs';
 import { HttpError } from './errors.mjs';
 import { createLive } from './live.mjs';
 import { leaderboard, submitAppeal } from './cheat.mjs';
 import { listGamePuzzles, readGameReview, updateGamePuzzle } from './reviews.mjs';
-import { followPlayer, followingFeed, playerProfile, unfollowPlayer } from './social.mjs';
+import { acceptChallenge, createChallenge, declineChallenge, listChallenges } from './challenges.mjs';
+import { followPlayer, followingFeed, playerProfile, readFinishedGame, unfollowPlayer } from './social.mjs';
+import { acceptFriend, declineFriend, listFriends, removeFriend, requestFriend, searchPlayers } from './friends.mjs';
 import { acceptMessage, declineMessage, listThreads, readThread, sendMessage } from './messages.mjs';
 import { getSync, putSync } from './sync.mjs';
 
@@ -101,7 +103,7 @@ function requireUser(db, req) {
   return user;
 }
 
-async function handle(req, res, db) {
+async function handle(req, res, db, hub) {
   if (!applyCors(req, res)) {
     send(res, 403, { error: 'That origin is not allowed to call this API.' });
     return;
@@ -131,6 +133,69 @@ async function handle(req, res, db) {
     send(res, 200, { ok: true });
     return;
   }
+  if (req.method === 'POST' && pathName === '/api/auth/password') {
+    const user = requireUser(db, req);
+    send(res, 200, await requestPasswordChange(db, user.id, await readJson(req, MAX_AUTH_BYTES)));
+    return;
+  }
+  if (req.method === 'POST' && pathName === '/api/auth/password/confirm') {
+    const user = requireUser(db, req);
+    send(res, 200, confirmPasswordChange(db, user.id, await readJson(req, MAX_AUTH_BYTES)));
+    return;
+  }
+  if (req.method === 'POST' && pathName === '/api/auth/recover') {
+    send(res, 200, await requestPasswordRecovery(db, await readJson(req, MAX_AUTH_BYTES)));
+    return;
+  }
+  if (req.method === 'POST' && pathName === '/api/auth/recover/confirm') {
+    send(res, 200, confirmPasswordRecovery(db, await readJson(req, MAX_AUTH_BYTES)));
+    return;
+  }
+  if (req.method === 'POST' && pathName === '/api/auth/email') {
+    const user = requireUser(db, req);
+    send(res, 200, await requestEmailChange(db, user.id, await readJson(req, MAX_AUTH_BYTES)));
+    return;
+  }
+  if (req.method === 'POST' && pathName === '/api/auth/email/confirm') {
+    const user = requireUser(db, req);
+    send(res, 200, confirmEmailChange(db, user.id, await readJson(req, MAX_AUTH_BYTES)));
+    return;
+  }
+  if (req.method === 'GET' && pathName === '/api/live') {
+    const user = requireUser(db, req);
+    send(res, 200, { game: hub.activeSummary(user.id), ...listChallenges(db, user.id) });
+    return;
+  }
+  if (req.method === 'POST' && pathName === '/api/challenges') {
+    const user = requireUser(db, req);
+    send(res, 200, createChallenge(db, hub, user, await readJson(req, MAX_AUTH_BYTES)));
+    return;
+  }
+  const challengePath = /^\/api\/challenges\/([^/]+)\/(accept|decline)$/.exec(pathName);
+  if (req.method === 'POST' && challengePath) {
+    const user = requireUser(db, req);
+    const id = decodeURIComponent(challengePath[1]);
+    const result = challengePath[2] === 'accept'
+      ? acceptChallenge(db, hub, user, id)
+      : declineChallenge(db, user, id);
+    send(res, 200, result);
+    return;
+  }
+  const gamePath = /^\/api\/games\/([^/]+)$/.exec(pathName);
+  if (req.method === 'GET' && gamePath) {
+    const user = userFromAuthorization(db, req.headers.authorization);
+    send(res, 200, readFinishedGame(db, decodeURIComponent(gamePath[1]), user && user.id));
+    return;
+  }
+  if (req.method === 'POST' && pathName === '/api/auth/delete') {
+    const user = requireUser(db, req);
+    const body = await readJson(req, MAX_AUTH_BYTES);
+    await confirmPassword(db, user.id, body && body.password);
+    if (hub) hub.retire(user.id);
+    removeAccount(db, user.id);
+    send(res, 200, { ok: true });
+    return;
+  }
   if (req.method === 'GET' && pathName === '/api/ratings') {
     const user = requireUser(db, req);
     send(res, 200, { ratings: readRatings(db, user.id) });
@@ -138,7 +203,7 @@ async function handle(req, res, db) {
   }
   if (req.method === 'GET' && pathName === '/api/auth/me') {
     const user = requireUser(db, req);
-    send(res, 200, { user: { id: user.id, username: user.username, createdAt: user.createdAt } });
+    send(res, 200, { user: { id: user.id, username: user.username, createdAt: user.createdAt, email: user.email || '', emailVerified: Boolean(user.emailVerified) } });
     return;
   }
   if (req.method === 'GET' && pathName === '/api/sync') {
@@ -179,6 +244,40 @@ async function handle(req, res, db) {
     const user = requireUser(db, req);
     const body = await readJson(req, MAX_AUTH_BYTES);
     send(res, 200, unfollowPlayer(db, user.id, body.username));
+    return;
+  }
+  if (req.method === 'GET' && pathName === '/api/friends') {
+    const user = requireUser(db, req);
+    send(res, 200, listFriends(db, user.id));
+    return;
+  }
+  if (req.method === 'GET' && pathName === '/api/friends/search') {
+    const user = requireUser(db, req);
+    send(res, 200, searchPlayers(db, user.id, url.searchParams.get('q')));
+    return;
+  }
+  if (req.method === 'POST' && pathName === '/api/friends/request') {
+    const user = requireUser(db, req);
+    const body = await readJson(req, MAX_AUTH_BYTES);
+    send(res, 200, requestFriend(db, user.id, body.username));
+    return;
+  }
+  if (req.method === 'POST' && pathName === '/api/friends/accept') {
+    const user = requireUser(db, req);
+    const body = await readJson(req, MAX_AUTH_BYTES);
+    send(res, 200, acceptFriend(db, user.id, body.username));
+    return;
+  }
+  if (req.method === 'POST' && pathName === '/api/friends/decline') {
+    const user = requireUser(db, req);
+    const body = await readJson(req, MAX_AUTH_BYTES);
+    send(res, 200, declineFriend(db, user.id, body.username));
+    return;
+  }
+  if (req.method === 'POST' && pathName === '/api/friends/remove') {
+    const user = requireUser(db, req);
+    const body = await readJson(req, MAX_AUTH_BYTES);
+    send(res, 200, removeFriend(db, user.id, body.username));
     return;
   }
   if (req.method === 'GET' && pathName === '/api/messages') {
@@ -275,7 +374,7 @@ function attachSocket(ws, db, hub) {
       }
       clearTimeout(helloTimer);
       sendFn = (payload) => safeSend(ws, payload);
-      hub.connect(user, sendFn);
+      hub.connect(user, sendFn, () => { try { ws.close(); } catch { /* The socket may already be closed. */ } });
       return;
     }
     try { hub.command(user, msg, Date.now()); } catch (err) {
@@ -293,7 +392,7 @@ export function createServer({ db, port = 0, host = '127.0.0.1' }) {
   if (!db) throw new Error('createServer requires a database.');
   const hub = createLive(db);
   const server = http.createServer((req, res) => {
-    handle(req, res, db).catch((err) => {
+    handle(req, res, db, hub).catch((err) => {
       if (err instanceof HttpError) {
         send(res, err.status, { error: err.message });
         return;

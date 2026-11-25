@@ -12,8 +12,8 @@ async function test(name, fn) {
 await test('a player page and the following list stay on the account', async () => {
   const srv = await startTestServer();
   try {
-    const ada = await srv.api('POST', '/api/auth/register', { body: { username: 'Ada_social', password: 'correct-horse' } });
-    const bea = await srv.api('POST', '/api/auth/register', { body: { username: 'bea_social', password: 'correct-horse' } });
+    const ada = await srv.api('POST', '/api/auth/register', { body: { username: 'Ada_social', password: 'correct-horse', email: 'ada_social@example.com' } });
+    const bea = await srv.api('POST', '/api/auth/register', { body: { username: 'bea_social', password: 'correct-horse', email: 'bea_social@example.com' } });
     assert.equal(ada.status, 200);
     const hidden = await srv.api('GET', '/api/following');
     assert.equal(hidden.status, 401);

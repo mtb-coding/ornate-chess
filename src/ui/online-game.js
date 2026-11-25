@@ -11,6 +11,7 @@ import { mods } from './modules.js';
 import { formatGlicko } from '../glicko.js';
 import { PACE_LABEL } from '../online-ratings.js';
 import { storeRatings } from './online-ratings-client.js';
+import { noteLiveBoard } from './live-notice.js';
 
 const fc = `<span class="fc tl">${CORNER}</span><span class="fc tr">${CORNER}</span><span class="fc bl">${CORNER}</span><span class="fc br">${CORNER}</span>`;
 
@@ -35,11 +36,12 @@ function moveList(game) {
 export function mountOnlineGame(section, initial, actions) {
   let state = initial;
   let saved = false;
+  let rematch = null;
   const s = settings();
   section.innerHTML = `
     <h1 class="page-title" id="title-play">Play</h1>
     <p class="lede">This game is played online. The server checks every move and keeps the clock.</p>
-    <div class="game-layout mode-online">
+    <div class="game-layout mode-online" data-live-game="1">
       <div class="board-col">
         <div class="player-bar" data-slot="top"></div>
         <div class="board-row-wrap"><div class="board-host"></div></div>
@@ -59,6 +61,7 @@ export function mountOnlineGame(section, initial, actions) {
         </div></div>
       </aside>
     </div>`;
+  noteLiveBoard();
   const root = section;
   const board = new Board(root.querySelector('.board-host'), {
     pieceSet: s.pieceSet,
@@ -130,16 +133,10 @@ export function mountOnlineGame(section, initial, actions) {
     board.setMovable(movable);
     root.querySelector('.status').textContent = statusText(parsed);
     const note = root.querySelector('[data-draw-note]');
+    const rematchLine = rematchText();
     if (state.status === 'live' && state.drawOffer === state.you) note.textContent = 'You offered a draw.';
     else if (state.status === 'live' && state.drawOffer) note.textContent = 'Your opponent offered a draw.';
-    else if (state.rating) {
-      const name = (PACE_LABEL[state.rating.pace] || 'Online').toLowerCase();
-      const now = formatGlicko(state.rating.after, state.rating.deviation);
-      const points = Math.abs(state.rating.delta);
-      const word = points === 1 ? 'point' : 'points';
-      const change = state.rating.delta > 0 ? `${points} ${word} higher` : state.rating.delta < 0 ? `${points} ${word} lower` : 'unchanged';
-      note.textContent = `Your ${name} rating is now ${now}, which is ${change}.`;
-    } else note.textContent = '';
+    else note.textContent = [ratingLine(), rematchLine].filter(Boolean).join(' ');
     root.querySelector('.movelist').innerHTML = parsed.length ? moveList(parsed) : '<p class="muted">No moves have been played yet.</p>';
     const controls = root.querySelector('.controls');
     const btn = (act, icon, label) => `<button class="btn" type="button" data-act="${act}">${ICONS[icon]}<span>${label}</span></button>`;
@@ -150,6 +147,11 @@ export function mountOnlineGame(section, initial, actions) {
       } else if (!state.drawOffer) html += btn('draw', 'handshake', 'Offer a draw');
       html += btn('resign', 'flag', 'Resign');
     } else {
+      if (rematch && rematch.state === 'incoming') {
+        html += btn('rematch-accept', 'play', 'Accept the rematch') + btn('rematch-decline', 'flag', 'Decline the rematch');
+      } else if (!rematch || rematch.state === 'declined' || rematch.state === 'idle') {
+        html += btn('rematch', 'play', 'Rematch');
+      }
       html += btn('analyse', 'next', 'Analyse') + `<a class="btn" href="#/play?lobby=1">${ICONS.play}<span>Return to Play</span></a>`;
     }
     controls.innerHTML = html;
@@ -225,6 +227,9 @@ export function mountOnlineGame(section, initial, actions) {
       if (ok) actions.send({ type: 'resign', gameId: state.id });
     } else if (act === 'draw' || act === 'accept') actions.send({ type: 'draw', gameId: state.id });
     else if (act === 'decline') actions.send({ type: 'decline', gameId: state.id });
+    else if (act === 'rematch') actions.send({ type: 'rematch', gameId: state.id });
+    else if (act === 'rematch-accept') actions.send({ type: 'rematch-accept', gameId: state.id });
+    else if (act === 'rematch-decline') actions.send({ type: 'rematch-decline', gameId: state.id });
     else if (act === 'analyse') {
       app.pendingLoad = {
         target: 'analysis',
@@ -241,12 +246,37 @@ export function mountOnlineGame(section, initial, actions) {
 
   paint(false);
 
+  function ratingLine() {
+    if (!state.rating) return '';
+    const name = (PACE_LABEL[state.rating.pace] || 'Online').toLowerCase();
+    const now = formatGlicko(state.rating.after, state.rating.deviation);
+    const points = Math.abs(state.rating.delta);
+    const word = points === 1 ? 'point' : 'points';
+    const change = state.rating.delta > 0 ? `${points} ${word} higher` : state.rating.delta < 0 ? `${points} ${word} lower` : 'unchanged';
+    return `Your ${name} rating is now ${now}, which is ${change}.`;
+  }
+
+  function rematchText() {
+    if (!rematch || state.status !== 'finished') return '';
+    if (rematch.state === 'outgoing') return 'You offered a rematch. Waiting for a reply.';
+    if (rematch.state === 'incoming') return `${rematch.username || 'Your opponent'} offered a rematch.`;
+    if (rematch.state === 'declined') return 'The rematch was declined.';
+    if (rematch.state === 'left') return 'Your opponent has left the game.';
+    return '';
+  }
+
   return {
     update(next) {
+      if (next.id !== state.id || next.status === 'live') rematch = null;
       const grew = Game.fromJSON(next.game).length > (ply || 0);
       state = next;
       offset = next.serverNow - Date.now();
       paint(grew);
+    },
+    rematch(msg) {
+      if (!msg || (msg.gameId && msg.gameId !== state.id) || state.status !== 'finished') return;
+      rematch = !msg.state || msg.state === 'idle' ? null : msg;
+      paint(false);
     },
     status(text) {
       const el = root.querySelector('.status');

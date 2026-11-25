@@ -11,7 +11,7 @@ async function test(name, fn) {
 const srv = await startTestServer();
 try {
   const registered = await srv.api('POST', '/api/auth/register', {
-    body: { username: 'sync_user', password: 'correct-horse' },
+    body: { username: 'sync_user', password: 'correct-horse', email: 'sync_user@example.com' },
   });
   assert.equal(registered.status, 200);
   const token = registered.json.token;

@@ -269,8 +269,8 @@ test('cancelling a search does not start a game', () => {
 await test('a socket session can sign in, match and play a move', async () => {
   const srv = await startTestServer();
   try {
-    const ada = await srv.api('POST', '/api/auth/register', { body: { username: 'Ada_Live', password: 'correct-horse' } });
-    const bea = await srv.api('POST', '/api/auth/register', { body: { username: 'Bea_Live', password: 'correct-horse' } });
+    const ada = await srv.api('POST', '/api/auth/register', { body: { username: 'Ada_Live', password: 'correct-horse', email: 'ada_live@example.com' } });
+    const bea = await srv.api('POST', '/api/auth/register', { body: { username: 'Bea_Live', password: 'correct-horse', email: 'bea_live@example.com' } });
     assert.equal(ada.status, 200);
     const open = (token) => new Promise((resolve, reject) => {
       const ws = new WebSocket(`ws://127.0.0.1:${srv.port}/ws`);
@@ -324,6 +324,140 @@ await test('a socket session can sign in, match and play a move', async () => {
     assert.deepEqual(moved.game.game.uci, ['e2e4']);
     a.ws.close();
     b.ws.close();
+  } finally {
+    await srv.close();
+  }
+});
+
+test('a rematch swaps the colours, keeps the clock, and can be declined', () => {
+  const db = openDatabase(':memory:');
+  const live = createLive(db);
+  const white = seat('Eve');
+  const black = seat('Fay');
+  live.connect(white.user, white.send);
+  live.connect(black.user, black.send);
+  const t0 = 70_000;
+  live.command(white.user, { type: 'seek', baseMs: 60000, incMs: 0, color: 'w' }, t0);
+  live.command(black.user, { type: 'seek', baseMs: 60000, incMs: 0, color: 'b' }, t0);
+  const id = last(white, 'game').game.id;
+  const play = (user, uci, at) => live.command(user, { type: 'move', gameId: id, uci }, at);
+  play(white.user, 'f2f3', t0 + 1);
+  play(black.user, 'e7e5', t0 + 2);
+  play(white.user, 'g2g4', t0 + 3);
+  play(black.user, 'd8h4', t0 + 4);
+  assert.equal(last(white, 'game').game.status, 'finished');
+
+  live.command(white.user, { type: 'rematch', gameId: id }, t0 + 10);
+  assert.equal(last(white, 'rematch').state, 'outgoing');
+  assert.equal(last(black, 'rematch').state, 'incoming');
+  assert.equal(last(black, 'rematch').username, 'Eve');
+  live.command(black.user, { type: 'rematch-decline', gameId: id }, t0 + 11);
+  assert.equal(last(white, 'rematch').state, 'declined');
+  assert.equal(last(black, 'rematch').state, 'idle');
+  live.command(white.user, { type: 'rematch', gameId: id }, t0 + 12);
+  live.command(black.user, { type: 'rematch', gameId: id }, t0 + 13);
+  const next = last(white, 'game').game;
+  assert.notEqual(next.id, id);
+  assert.equal(next.status, 'live');
+  assert.equal(next.you, 'b');
+  assert.equal(last(black, 'game').game.you, 'w');
+  assert.equal(next.baseMs, 60000);
+  assert.equal(next.incMs, 0);
+  assert.equal(next.white.username, 'Fay');
+  assert.equal(next.black.username, 'Eve');
+
+  live.command(white.user, { type: 'resign', gameId: next.id }, t0 + 20);
+  const finished = last(white, 'game').game.id;
+  live.disconnect(black.user.id, black.send, t0 + 21);
+  live.command(white.user, { type: 'rematch', gameId: finished }, t0 + 22);
+  assert.match(last(white, 'error').error, /left the game/);
+
+  const other = seat('Gia');
+  live.connect(other.user, other.send);
+  live.connect(black.user, black.send);
+  live.command(white.user, { type: 'seek', baseMs: 180000, incMs: 2000, color: 'w' }, t0 + 30);
+  live.command(other.user, { type: 'seek', baseMs: 180000, incMs: 2000, color: 'b' }, t0 + 30);
+  assert.equal(last(white, 'game').game.status, 'live');
+  live.command(white.user, { type: 'rematch', gameId: finished }, t0 + 31);
+  assert.match(last(white, 'error').error, /Finish the current game/);
+  db.close();
+});
+
+test('deleting an account resigns a started game and aborts a game with no moves', () => {
+  const db = openDatabase(':memory:');
+  const live = createLive(db);
+  const white = seat('Ned');
+  const black = seat('Ora');
+  live.connect(white.user, white.send);
+  live.connect(black.user, black.send);
+  const t0 = 80_000;
+  live.command(white.user, { type: 'seek', baseMs: 300000, incMs: 0, color: 'w' }, t0);
+  live.command(black.user, { type: 'seek', baseMs: 300000, incMs: 0, color: 'b' }, t0);
+  const id = last(white, 'game').game.id;
+  live.command(white.user, { type: 'move', gameId: id, uci: 'e2e4' }, t0 + 5);
+  live.retire(white.user.id, t0 + 6);
+  assert.equal(last(black, 'game').game.result, '0-1');
+  assert.equal(last(black, 'game').game.resultReason, 'resignation');
+  assert.match(last(white, 'error').error, /deleted/);
+
+  const a = seat('Pia');
+  const b = seat('Quill');
+  live.connect(a.user, a.send);
+  live.connect(b.user, b.send);
+  live.command(a.user, { type: 'seek', baseMs: 300000, incMs: 0, color: 'w' }, t0 + 10);
+  live.command(b.user, { type: 'seek', baseMs: 300000, incMs: 0, color: 'b' }, t0 + 10);
+  live.retire(a.user.id, t0 + 11);
+  assert.equal(last(b).type, 'aborted');
+  db.close();
+});
+
+await test('deleting an account over HTTP ends the live game and removes the ratings', async () => {
+  const srv = await startTestServer();
+  try {
+    const ada = await srv.api('POST', '/api/auth/register', { body: { username: 'Ada_Gone', password: 'correct-horse', email: 'ada_gone@example.com' } });
+    const bea = await srv.api('POST', '/api/auth/register', { body: { username: 'Bea_Stay', password: 'correct-horse', email: 'bea_stay@example.com' } });
+    const open = (token) => new Promise((resolve, reject) => {
+      const ws = new WebSocket(`ws://127.0.0.1:${srv.port}/ws`);
+      const inbox = [];
+      ws.addEventListener('message', (ev) => { inbox.push(JSON.parse(ev.data)); });
+      ws.addEventListener('error', () => reject(new Error('The socket failed.')));
+      ws.addEventListener('open', () => {
+        ws.send(JSON.stringify({ type: 'hello', token }));
+        resolve({
+          ws,
+          send(obj) { ws.send(JSON.stringify(obj)); },
+          async wait(pred, ms = 2000) {
+            const start = Date.now();
+            while (Date.now() - start < ms) {
+              const found = inbox.find(pred);
+              if (found) return found;
+              await new Promise((done) => setTimeout(done, 20));
+            }
+            throw new Error(`The socket sent no matching message: ${JSON.stringify(inbox)}`);
+          },
+        });
+      });
+    });
+    const white = await open(ada.json.token);
+    const black = await open(bea.json.token);
+    await white.wait((msg) => msg.type === 'welcome');
+    await black.wait((msg) => msg.type === 'welcome');
+    white.send({ type: 'seek', baseMs: 300000, incMs: 0, color: 'w' });
+    black.send({ type: 'seek', baseMs: 300000, incMs: 0, color: 'b' });
+    const started = await white.wait((msg) => msg.type === 'game' && msg.game.status === 'live');
+    white.send({ type: 'move', gameId: started.game.id, uci: 'e2e4' });
+    await black.wait((msg) => msg.type === 'game' && msg.game.game.uci.length === 1);
+    const removed = await srv.api('POST', '/api/auth/delete', { token: ada.json.token, body: { password: 'correct-horse' } });
+    assert.equal(removed.status, 200);
+    const finished = await black.wait((msg) => msg.type === 'game' && msg.game.status === 'finished');
+    assert.equal(finished.game.resultReason, 'resignation');
+    assert.equal(finished.game.result, '0-1');
+    assert.equal((await srv.api('POST', '/api/auth/login', { body: { username: 'Ada_Gone', password: 'correct-horse' } })).status, 401);
+    assert.equal(srv.db.prepare('SELECT COUNT(*) AS n FROM pace_ratings WHERE user_id = ?').get(ada.json.user.id).n, 0);
+    assert.equal(srv.db.prepare('SELECT games FROM pace_ratings WHERE user_id = ? AND pace = ?').get(bea.json.user.id, 'blitz').games, 1);
+    assert.equal(srv.db.prepare('SELECT COUNT(*) AS n FROM live_games WHERE white_id = ? OR black_id = ?').get(ada.json.user.id, ada.json.user.id).n, 0);
+    white.ws.close();
+    black.ws.close();
   } finally {
     await srv.close();
   }

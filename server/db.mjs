@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 
 const SERVER_DIR = path.dirname(fileURLToPath(import.meta.url));
 export const DEFAULT_DB_PATH = path.join(SERVER_DIR, 'data', 'ornate.sqlite');
-const SCHEMA_VERSION = 9;
+const SCHEMA_VERSION = 12;
 
 const LIVE_GAMES_SQL = `
 CREATE TABLE IF NOT EXISTS live_games (
@@ -209,6 +209,52 @@ export function openDatabase(file = DEFAULT_DB_PATH) {
     CREATE INDEX IF NOT EXISTS direct_messages_thread ON direct_messages(thread_id, created_at);
     CREATE INDEX IF NOT EXISTS direct_messages_sender ON direct_messages(sender_id, created_at);`);
     version = 9;
+  }
+  if (version < 10) {
+    addColumn(db, 'users', 'email', 'email TEXT');
+    addColumn(db, 'users', 'email_verified', 'email_verified INTEGER NOT NULL DEFAULT 0');
+    db.exec(`CREATE TABLE IF NOT EXISTS password_resets (
+      user_id TEXT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+      email TEXT NOT NULL,
+      code_hash TEXT NOT NULL,
+      next_hash TEXT NOT NULL,
+      expires_at INTEGER NOT NULL,
+      attempts INTEGER NOT NULL,
+      created_at INTEGER NOT NULL
+    )`);
+    version = 10;
+  }
+  if (version < 11) {
+    addColumn(db, 'password_resets', 'purpose', "purpose TEXT NOT NULL DEFAULT 'password'");
+    db.exec(`CREATE TABLE IF NOT EXISTS challenges (
+      id TEXT PRIMARY KEY,
+      from_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      to_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      from_name TEXT NOT NULL,
+      to_name TEXT NOT NULL,
+      base_ms INTEGER NOT NULL,
+      inc_ms INTEGER NOT NULL,
+      color TEXT NOT NULL,
+      created_at INTEGER NOT NULL,
+      expires_at INTEGER NOT NULL
+    );
+    CREATE INDEX IF NOT EXISTS challenges_to ON challenges(to_id, expires_at);
+    CREATE INDEX IF NOT EXISTS challenges_from ON challenges(from_id);`);
+    version = 11;
+  }
+  if (version < 12) {
+    db.exec(`CREATE TABLE IF NOT EXISTS friendships (
+      user_low TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      user_high TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      requested_by TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      status TEXT NOT NULL,
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL,
+      PRIMARY KEY (user_low, user_high)
+    );
+    CREATE INDEX IF NOT EXISTS friendships_low ON friendships(user_low, status);
+    CREATE INDEX IF NOT EXISTS friendships_high ON friendships(user_high, status);`);
+    version = 12;
   }
   db.exec(`PRAGMA user_version = ${version}`);
   return db;

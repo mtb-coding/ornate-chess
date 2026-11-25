@@ -12,6 +12,7 @@ export async function startTestServer() {
   return {
     db,
     port: srv.port,
+    hub: srv.hub,
     async close() {
       await srv.close();
       db.close();

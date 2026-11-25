@@ -259,9 +259,11 @@ async function runSync({ backend = browserStore(), token, userId, apiBase: base 
   return result;
 }
 
-export async function loginOrRegister({ kind, username, password, backend = browserStore(), apiBase: base = apiBase(backend) }) {
+export async function loginOrRegister({ kind, username, password, email, backend = browserStore(), apiBase: base = apiBase(backend) }) {
   const path = kind === 'register' ? '/api/auth/register' : '/api/auth/login';
-  const json = await request(base, path, { method: 'POST', body: { username, password } });
+  const body = { username, password };
+  if (kind === 'register') body.email = email;
+  const json = await request(base, path, { method: 'POST', body });
   return { token: json.token, username: json.user.username, userId: json.user.id };
 }
 

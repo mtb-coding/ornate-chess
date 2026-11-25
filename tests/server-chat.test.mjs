@@ -84,8 +84,8 @@ await test('a declined in-game request cannot be repeated', () => {
 await test('off-game messages stay closed until the request is accepted', async () => {
   const srv = await startTestServer();
   try {
-    const ada = await srv.api('POST', '/api/auth/register', { body: { username: 'ada_chat', password: 'correct-horse' } });
-    const bea = await srv.api('POST', '/api/auth/register', { body: { username: 'bea_chat', password: 'correct-horse' } });
+    const ada = await srv.api('POST', '/api/auth/register', { body: { username: 'ada_chat', password: 'correct-horse', email: 'ada_chat@example.com' } });
+    const bea = await srv.api('POST', '/api/auth/register', { body: { username: 'bea_chat', password: 'correct-horse', email: 'bea_chat@example.com' } });
     const hidden = await srv.api('GET', '/api/messages');
     assert.equal(hidden.status, 401);
     const self = await srv.api('POST', '/api/messages/ada_chat', { token: ada.json.token, body: { text: 'Hello me.' } });
@@ -109,7 +109,9 @@ await test('off-game messages stay closed until the request is accepted', async 
     assert.equal(inbox.json.threads[0].username, 'bea_chat');
     assert.equal(inbox.json.threads[0].status, 'open');
     assert.equal(inbox.json.threads[0].last, 'Yes.');
-    const cy = await srv.api('POST', '/api/auth/register', { body: { username: 'cy_chat', password: 'correct-horse' } });
+    assert.equal(inbox.json.threads[0].lastYours, false);
+    assert.equal(typeof inbox.json.threads[0].lastAt, 'number');
+    const cy = await srv.api('POST', '/api/auth/register', { body: { username: 'cy_chat', password: 'correct-horse', email: 'cy_chat@example.com' } });
     await srv.api('POST', '/api/messages/cy_chat', { token: ada.json.token, body: { text: 'Another note.' } });
     const declined = await srv.api('POST', '/api/messages/ada_chat/decline', { token: cy.json.token });
     assert.equal(declined.json.status, 'declined');

@@ -1,7 +1,8 @@
 // Accounts and bearer sessions. The token itself is never stored.
-import { createHash, randomBytes, randomUUID } from 'node:crypto';
+import { createHash, randomBytes, randomInt, randomUUID, timingSafeEqual } from 'node:crypto';
 import { Algorithm, hash, verify } from '@node-rs/argon2';
 import { HttpError } from './errors.mjs';
+import { sendMail } from './mail.mjs';
 
 const ARGON = {
   algorithm: Algorithm.Argon2id,
@@ -10,7 +11,10 @@ const ARGON = {
   parallelism: 1,
 };
 const SESSION_MS = 30 * 24 * 60 * 60 * 1000;
+const CODE_MS = 15 * 60 * 1000;
+const CODE_GAP_MS = 30 * 1000;
 const USERNAME = /^[A-Za-z0-9_]{3,24}$/;
+const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 let dummyHash = null;
 
@@ -33,6 +37,75 @@ function checkPassword(password) {
   return password;
 }
 
+function checkEmail(email) {
+  const value = typeof email === 'string' ? email.trim().toLowerCase() : '';
+  if (!value || value.length > 254 || /[\r\n]/.test(value) || !EMAIL.test(value)) {
+    throw new HttpError(400, 'Enter an email address.');
+  }
+  return value;
+}
+
+function maskEmail(email) {
+  const at = email.indexOf('@');
+  return `${email.slice(0, 1)}•••${email.slice(at)}`;
+}
+
+function codeHash(code) {
+  return createHash('sha256').update(code).digest('hex');
+}
+
+function storePending(db, userId, { email, nextHash, purpose, code, now }) {
+  db.prepare(`INSERT INTO password_resets (user_id, email, code_hash, next_hash, expires_at, attempts, created_at, purpose)
+    VALUES (?, ?, ?, ?, ?, 0, ?, ?)
+    ON CONFLICT(user_id) DO UPDATE SET
+      email = excluded.email,
+      code_hash = excluded.code_hash,
+      next_hash = excluded.next_hash,
+      expires_at = excluded.expires_at,
+      attempts = 0,
+      created_at = excluded.created_at,
+      purpose = excluded.purpose`).run(userId, email, codeHash(code), nextHash, now + CODE_MS, now, purpose);
+}
+
+function assertCodeGap(db, userId, now) {
+  const pending = db.prepare('SELECT created_at FROM password_resets WHERE user_id = ?').get(userId);
+  if (pending && now - pending.created_at < CODE_GAP_MS) {
+    throw new HttpError(429, 'Wait a moment before asking for another code.');
+  }
+}
+
+function pendingRow(db, userId, purpose, now) {
+  const row = db.prepare('SELECT email, code_hash, next_hash, expires_at, attempts, purpose FROM password_resets WHERE user_id = ?').get(userId);
+  if (!row || row.purpose !== purpose) throw new HttpError(400, 'Ask for a confirmation code first.');
+  if (row.expires_at <= now) {
+    db.prepare('DELETE FROM password_resets WHERE user_id = ?').run(userId);
+    throw new HttpError(400, 'That confirmation code has expired. Ask for a new one.');
+  }
+  return row;
+}
+
+function acceptCode(db, userId, row, code) {
+  if (!codesMatch(row.code_hash, code)) {
+    const attempts = row.attempts + 1;
+    if (attempts >= 5) {
+      db.prepare('DELETE FROM password_resets WHERE user_id = ?').run(userId);
+      throw new HttpError(400, 'That confirmation code is no longer valid. Ask for a new one.');
+    }
+    db.prepare('UPDATE password_resets SET attempts = ? WHERE user_id = ?').run(attempts, userId);
+    throw new HttpError(400, 'That confirmation code is not correct.');
+  }
+}
+
+function codeFrom(body) {
+  return body && typeof body.code === 'string' ? body.code.trim() : '';
+}
+
+function codesMatch(stored, code) {
+  const left = Buffer.from(stored, 'hex');
+  const right = createHash('sha256').update(code).digest();
+  return left.length === right.length && timingSafeEqual(left, right);
+}
+
 async function dummyPasswordHash() {
   if (!dummyHash) dummyHash = await hash('ornate-chess-dummy-password', ARGON);
   return dummyHash;
@@ -52,12 +125,13 @@ function issueSession(db, userId, now = Date.now()) {
 export async function register(db, body) {
   const username = checkUsername(body && body.username);
   const password = checkPassword(body && body.password);
+  const email = checkEmail(body && body.email);
   const passwordHash = await hash(password, ARGON);
   const id = randomUUID();
   const createdAt = Date.now();
   try {
-    db.prepare('INSERT INTO users (id, username, username_fold, password_hash, created_at) VALUES (?, ?, ?, ?, ?)')
-      .run(id, username, username.toLowerCase(), passwordHash, createdAt);
+    db.prepare('INSERT INTO users (id, username, username_fold, password_hash, created_at, email, email_verified) VALUES (?, ?, ?, ?, ?, ?, 1)')
+      .run(id, username, username.toLowerCase(), passwordHash, createdAt, email);
   } catch (err) {
     if (String(err.message).includes('UNIQUE')) {
       throw new HttpError(409, 'That username is already in use.');
@@ -82,7 +156,7 @@ export function userFromAuthorization(db, header, now = Date.now()) {
   const match = typeof header === 'string' ? /^Bearer\s+(\S+)\s*$/i.exec(header) : null;
   if (!match) return null;
   const row = db.prepare(`
-    SELECT u.id, u.username, u.created_at, s.id AS session_id, s.expires_at
+    SELECT u.id, u.username, u.created_at, u.email, u.email_verified, s.id AS session_id, s.expires_at
     FROM sessions s JOIN users u ON u.id = s.user_id
     WHERE s.token_hash = ?
   `).get(tokenHash(match[1]));
@@ -91,9 +165,206 @@ export function userFromAuthorization(db, header, now = Date.now()) {
     db.prepare('DELETE FROM sessions WHERE id = ?').run(row.session_id);
     return null;
   }
-  return { ...publicUser(row), sessionId: row.session_id };
+  return {
+    ...publicUser(row),
+    sessionId: row.session_id,
+    email: row.email || '',
+    emailVerified: row.email_verified === 1,
+  };
 }
 
 export function logout(db, sessionId) {
   db.prepare('DELETE FROM sessions WHERE id = ?').run(sessionId);
+}
+
+export async function requestPasswordChange(db, userId, body, now = Date.now()) {
+  const current = checkPassword(body && body.current);
+  const next = checkPassword(body && body.next);
+  if (current === next) {
+    throw new HttpError(400, 'Choose a password that is different from the current one.');
+  }
+  const row = db.prepare('SELECT username, password_hash, email, email_verified FROM users WHERE id = ?').get(userId);
+  if (!row) throw new HttpError(401, 'The current password is not correct.');
+  const matches = await verify(row.password_hash, current);
+  if (!matches) throw new HttpError(401, 'The current password is not correct.');
+  const email = typeof row.email === 'string' ? row.email.trim().toLowerCase() : '';
+  if (!email) {
+    throw new HttpError(400, 'This account has no email address, so the password cannot be changed.');
+  }
+  if (body && typeof body.email === 'string' && body.email.trim() && checkEmail(body.email) !== email) {
+    throw new HttpError(400, 'The confirmation code is sent to the email saved when the account was created.');
+  }
+  assertCodeGap(db, userId, now);
+  const nextHash = await hash(next, ARGON);
+  const code = String(randomInt(0, 1000000)).padStart(6, '0');
+  storePending(db, userId, { email, nextHash, purpose: 'password', code, now });
+  try {
+    const sent = await sendMail({
+      to: email,
+      subject: 'Confirm your Ornate Chess password change',
+      text: [
+        `Someone asked to change the password for the Ornate Chess account ${row.username}.`,
+        '',
+        `The confirmation code is ${code}.`,
+        '',
+        'It expires in 15 minutes. If you did not ask for this, you can ignore this message. The password has not changed.',
+      ].join('\n'),
+    });
+    const response = { status: 'pending', email: maskEmail(email), delivery: sent.delivery };
+    if (sent.delivery === 'saved') response.preview = code;
+    return response;
+  } catch (err) {
+    db.prepare('DELETE FROM password_resets WHERE user_id = ?').run(userId);
+    throw err;
+  }
+}
+
+export function confirmPasswordChange(db, userId, body, now = Date.now()) {
+  const row = pendingRow(db, userId, 'password', now);
+  acceptCode(db, userId, row, codeFrom(body));
+  db.exec('BEGIN IMMEDIATE');
+  try {
+    db.prepare('UPDATE users SET password_hash = ? WHERE id = ?').run(row.next_hash, userId);
+    db.prepare('DELETE FROM password_resets WHERE user_id = ?').run(userId);
+    db.exec('COMMIT');
+  } catch (err) {
+    try { db.exec('ROLLBACK'); } catch { /* The transaction may already be closed. */ }
+    throw err;
+  }
+  return { ok: true };
+}
+
+export async function requestPasswordRecovery(db, body, now = Date.now()) {
+  const username = checkUsername(body && body.username);
+  const next = checkPassword(body && body.next);
+  const row = db.prepare('SELECT id, username, password_hash, email FROM users WHERE username_fold = ?').get(username.toLowerCase());
+  const email = row && typeof row.email === 'string' ? row.email.trim().toLowerCase() : '';
+  if (!row || !email) return { status: 'pending', delivery: null };
+  if (body && typeof body.email === 'string' && body.email.trim() && checkEmail(body.email) !== email) {
+    throw new HttpError(400, 'The confirmation code is sent to the email saved when the account was created.');
+  }
+  const same = await verify(row.password_hash, next);
+  if (same) throw new HttpError(400, 'Choose a password that is different from the current one.');
+  assertCodeGap(db, row.id, now);
+  const nextHash = await hash(next, ARGON);
+  const code = String(randomInt(0, 1000000)).padStart(6, '0');
+  storePending(db, row.id, { email, nextHash, purpose: 'recover', code, now });
+  try {
+    const sent = await sendMail({
+      to: email,
+      subject: 'Reset your Ornate Chess password',
+      text: [
+        `Someone asked to reset the password for the Ornate Chess account ${row.username}.`,
+        '',
+        `The confirmation code is ${code}.`,
+        '',
+        'It expires in 15 minutes. If you did not ask for this, you can ignore this message. The password has not changed.',
+      ].join('\n'),
+    });
+    return { status: 'pending', delivery: sent.delivery };
+  } catch (err) {
+    db.prepare('DELETE FROM password_resets WHERE user_id = ?').run(row.id);
+    throw err;
+  }
+}
+
+export function confirmPasswordRecovery(db, body, now = Date.now()) {
+  const username = checkUsername(body && body.username);
+  const rowUser = db.prepare('SELECT id FROM users WHERE username_fold = ?').get(username.toLowerCase());
+  if (!rowUser) throw new HttpError(400, 'That confirmation code is not correct.');
+  const row = pendingRow(db, rowUser.id, 'recover', now);
+  acceptCode(db, rowUser.id, row, codeFrom(body));
+  db.exec('BEGIN IMMEDIATE');
+  try {
+    db.prepare('UPDATE users SET password_hash = ? WHERE id = ?').run(row.next_hash, rowUser.id);
+    db.prepare('DELETE FROM password_resets WHERE user_id = ?').run(rowUser.id);
+    db.exec('COMMIT');
+  } catch (err) {
+    try { db.exec('ROLLBACK'); } catch { /* The transaction may already be closed. */ }
+    throw err;
+  }
+  return { ok: true };
+}
+
+export async function requestEmailChange(db, userId, body, now = Date.now()) {
+  const current = checkPassword(body && body.current);
+  const nextEmail = checkEmail(body && body.email);
+  const row = db.prepare('SELECT username, password_hash, email FROM users WHERE id = ?').get(userId);
+  if (!row) throw new HttpError(401, 'The current password is not correct.');
+  const matches = await verify(row.password_hash, current);
+  if (!matches) throw new HttpError(401, 'The current password is not correct.');
+  const email = typeof row.email === 'string' ? row.email.trim().toLowerCase() : '';
+  if (!email) throw new HttpError(400, 'This account has no email address, so the address cannot be changed.');
+  if (nextEmail === email) throw new HttpError(400, 'That is already the email on this account.');
+  assertCodeGap(db, userId, now);
+  const code = String(randomInt(0, 1000000)).padStart(6, '0');
+  storePending(db, userId, { email: nextEmail, nextHash: row.password_hash, purpose: 'email', code, now });
+  try {
+    const sent = await sendMail({
+      to: email,
+      subject: 'Confirm your Ornate Chess email change',
+      text: [
+        `Someone asked to change the email for the Ornate Chess account ${row.username}.`,
+        '',
+        `The confirmation code is ${code}.`,
+        '',
+        'It expires in 15 minutes. If you did not ask for this, you can ignore this message. The email has not changed.',
+      ].join('\n'),
+    });
+    const response = { status: 'pending', email: maskEmail(email), delivery: sent.delivery };
+    if (sent.delivery === 'saved') response.preview = code;
+    return response;
+  } catch (err) {
+    db.prepare('DELETE FROM password_resets WHERE user_id = ?').run(userId);
+    throw err;
+  }
+}
+
+export function confirmEmailChange(db, userId, body, now = Date.now()) {
+  const row = pendingRow(db, userId, 'email', now);
+  acceptCode(db, userId, row, codeFrom(body));
+  db.exec('BEGIN IMMEDIATE');
+  try {
+    db.prepare('UPDATE users SET email = ?, email_verified = 1 WHERE id = ?').run(row.email, userId);
+    db.prepare('DELETE FROM password_resets WHERE user_id = ?').run(userId);
+    db.exec('COMMIT');
+  } catch (err) {
+    try { db.exec('ROLLBACK'); } catch { /* The transaction may already be closed. */ }
+    throw err;
+  }
+  return { ok: true, email: row.email };
+}
+
+export async function confirmPassword(db, userId, password) {
+  const secret = checkPassword(password);
+  const row = db.prepare('SELECT password_hash FROM users WHERE id = ?').get(userId);
+  if (!row) throw new HttpError(401, 'The password is not correct.');
+  const matches = await verify(row.password_hash, secret);
+  if (!matches) throw new HttpError(401, 'The password is not correct.');
+}
+
+export function removeAccount(db, userId) {
+  const games = db.prepare('SELECT id FROM live_games WHERE white_id = ? OR black_id = ?').all(userId, userId);
+  db.exec('BEGIN IMMEDIATE');
+  try {
+    const deleteReview = db.prepare('DELETE FROM game_reviews WHERE game_id = ?');
+    const deletePuzzles = db.prepare('DELETE FROM game_puzzles WHERE game_id = ?');
+    const deleteFlags = db.prepare('DELETE FROM cheat_flags WHERE game_id = ?');
+    const deleteJob = db.prepare('DELETE FROM jobs WHERE payload_json = ?');
+    for (const game of games) {
+      deleteReview.run(game.id);
+      deletePuzzles.run(game.id);
+      deleteFlags.run(game.id);
+      deleteJob.run(JSON.stringify({ gameId: game.id }));
+    }
+    db.prepare('DELETE FROM live_games WHERE white_id = ? OR black_id = ?').run(userId, userId);
+    db.prepare('DELETE FROM pace_ratings WHERE user_id = ?').run(userId);
+    db.prepare('DELETE FROM game_puzzles WHERE user_id = ?').run(userId);
+    db.prepare('DELETE FROM cheat_flags WHERE user_id = ?').run(userId);
+    db.prepare('DELETE FROM users WHERE id = ?').run(userId);
+    db.exec('COMMIT');
+  } catch (err) {
+    try { db.exec('ROLLBACK'); } catch { /* The transaction may already be closed. */ }
+    throw err;
+  }
 }

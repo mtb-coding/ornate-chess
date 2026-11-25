@@ -98,8 +98,8 @@ test('each pace has its own list, and two marks hide only that pace', () => {
 await test('the public list follows the requested pace', async () => {
   const srv = await startTestServer();
   try {
-    const ada = await srv.api('POST', '/api/auth/register', { body: { username: 'ada_board', password: 'correct-horse' } });
-    const bea = await srv.api('POST', '/api/auth/register', { body: { username: 'bea_board', password: 'correct-horse' } });
+    const ada = await srv.api('POST', '/api/auth/register', { body: { username: 'ada_board', password: 'correct-horse', email: 'ada_board@example.com' } });
+    const bea = await srv.api('POST', '/api/auth/register', { body: { username: 'bea_board', password: 'correct-horse', email: 'bea_board@example.com' } });
     assert.equal(ada.status, 200);
     const insert = srv.db.prepare(`INSERT INTO pace_ratings (
       user_id, pace, rating, deviation, volatility, games, wins, draws, losses, peak,

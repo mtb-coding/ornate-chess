@@ -66,6 +66,7 @@ export function createLive(db) {
   const seeks = new Map();
   const sockets = new Map();
   const disconnectedAt = new Map();
+  const rematches = new Map();
 
   const persist = db.prepare(`
     INSERT INTO live_games (
@@ -93,6 +94,7 @@ export function createLive(db) {
     WHERE status = 'finished' AND updated_at >= ? AND (white_id = ? OR black_id = ?)
     ORDER BY updated_at DESC LIMIT 1
   `);
+  const finishedStmt = db.prepare('SELECT * FROM live_games WHERE id = ?');
 
   function remember(row) {
     games.set(row.id, row);
@@ -314,6 +316,8 @@ export function createLive(db) {
   }
 
   function startGame(waiting, joining, now) {
+    endRematches(waiting.userId);
+    endRematches(joining.userId);
     const seats = assignColors(waiting, joining);
     const game = new Game();
     const row = {
@@ -398,10 +402,98 @@ export function createLive(db) {
     broadcast(row, now);
   }
 
+  function endRematches(userId) {
+    for (const offer of [...rematches.values()]) {
+      if (offer.by !== userId && offer.opponentId !== userId) continue;
+      rematches.delete(offer.gameId);
+      const otherId = offer.by === userId ? offer.opponentId : offer.by;
+      const leftName = offer.by === userId ? offer.byName : offer.opponentName;
+      send(otherId, { type: 'rematch', gameId: offer.gameId, state: 'left', username: leftName });
+    }
+  }
+
+  function handleRematch(user, msg, now) {
+    if (gameFor(user.id)) {
+      fail(user.id, 'Finish the current game before a rematch.');
+      return;
+    }
+    const gameId = typeof msg.gameId === 'string' ? msg.gameId : '';
+    const stored = gameId ? finishedStmt.get(gameId) : null;
+    if (!stored || stored.status !== 'finished' || (stored.white_id !== user.id && stored.black_id !== user.id)) {
+      fail(user.id, 'That game cannot be rematched.');
+      return;
+    }
+    const opponentId = stored.white_id === user.id ? stored.black_id : stored.white_id;
+    const opponentName = stored.white_id === user.id ? stored.black_name : stored.white_name;
+    const myName = stored.white_id === user.id ? stored.white_name : stored.black_name;
+    const offer = rematches.get(gameId);
+    if (msg.type === 'rematch-decline') {
+      if (!offer || offer.opponentId !== user.id) {
+        fail(user.id, 'There is no rematch to decline.');
+        return;
+      }
+      rematches.delete(gameId);
+      send(offer.by, { type: 'rematch', gameId, state: 'declined', username: myName });
+      send(user.id, { type: 'rematch', gameId, state: 'idle', username: opponentName });
+      return;
+    }
+    const incoming = offer && offer.by !== user.id;
+    if (msg.type === 'rematch-accept' || (msg.type === 'rematch' && incoming)) {
+      if (!offer || offer.by === user.id) {
+        fail(user.id, 'There is no rematch to accept.');
+        return;
+      }
+      if (!sockets.has(offer.by)) {
+        rematches.delete(gameId);
+        fail(user.id, 'Your opponent has left the game.');
+        return;
+      }
+      if (gameFor(offer.by)) {
+        fail(user.id, 'Your opponent is already in a game.');
+        return;
+      }
+      rematches.delete(gameId);
+      const offererWasWhite = stored.white_id === offer.by;
+      startGame({
+        userId: offer.by,
+        username: offer.byName,
+        baseMs: stored.base_ms,
+        incMs: stored.inc_ms,
+        color: offererWasWhite ? 'b' : 'w',
+      }, {
+        userId: user.id,
+        username: user.username,
+        baseMs: stored.base_ms,
+        incMs: stored.inc_ms,
+        color: offererWasWhite ? 'w' : 'b',
+      }, now);
+      return;
+    }
+    if (msg.type !== 'rematch') {
+      fail(user.id, 'That action is not recognised.');
+      return;
+    }
+    if (offer && offer.by === user.id) {
+      send(user.id, { type: 'rematch', gameId, state: 'outgoing', username: opponentName });
+      return;
+    }
+    if (!sockets.has(opponentId)) {
+      fail(user.id, 'Your opponent has left the game.');
+      return;
+    }
+    if (gameFor(opponentId)) {
+      fail(user.id, 'Your opponent is already in a game.');
+      return;
+    }
+    rematches.set(gameId, { gameId, by: user.id, byName: myName, opponentId, opponentName });
+    send(user.id, { type: 'rematch', gameId, state: 'outgoing', username: opponentName });
+    send(opponentId, { type: 'rematch', gameId, state: 'incoming', username: myName });
+  }
+
   return {
-    connect(user, sendFn) {
+    connect(user, sendFn, closeFn) {
       const prev = sockets.get(user.id);
-      sockets.set(user.id, { send: sendFn, user });
+      sockets.set(user.id, { send: sendFn, user, close: typeof closeFn === 'function' ? closeFn : null });
       disconnectedAt.delete(user.id);
       if (prev && prev.send !== sendFn) {
         try {
@@ -426,10 +518,35 @@ export function createLive(db) {
       if (!seat || seat.send !== sendFn) return;
       sockets.delete(userId);
       seeks.delete(userId);
+      endRematches(userId);
       const row = gameFor(userId);
       if (!row) return;
       disconnectedAt.set(userId, now);
       broadcast(row, now);
+    },
+
+    retire(userId, now = Date.now()) {
+      const wasSeeking = seeks.delete(userId);
+      const row = gameFor(userId);
+      if (row) {
+        if ((row.ply || 0) === 0) abort(row, now);
+        else {
+          stopClock(row, now);
+          const game = parseGame(row.gameJson);
+          game.resign(sideOf(row, userId));
+          finish(row, game, now);
+        }
+      }
+      endRematches(userId);
+      const seat = sockets.get(userId);
+      sockets.delete(userId);
+      disconnectedAt.delete(userId);
+      if (!seat) return;
+      try {
+        if (wasSeeking) seat.send({ type: 'cancelled' });
+        seat.send({ type: 'error', error: 'This account has been deleted.' });
+      } catch { /* The socket may already be closed. */ }
+      try { if (seat.close) seat.close(); } catch { /* Closing is optional for tests. */ }
     },
 
     command(user, msg, now = Date.now()) {
@@ -476,6 +593,10 @@ export function createLive(db) {
         }
         if (row) fail(user.id, 'Resign to leave a game that has started.');
         else send(user.id, { type: 'cancelled' });
+        return;
+      }
+      if (msg.type === 'rematch' || msg.type === 'rematch-accept' || msg.type === 'rematch-decline') {
+        handleRematch(user, msg, now);
         return;
       }
       const row = gameFor(user.id);
@@ -554,6 +675,37 @@ export function createLive(db) {
         return;
       }
       fail(user.id, 'That action is not recognised.');
+    },
+
+    activeSummary(userId) {
+      const row = gameFor(userId);
+      if (!row || row.status !== 'live') return null;
+      const you = sideOf(row, userId);
+      return {
+        id: row.id,
+        opponent: you === 'w' ? row.blackName : row.whiteName,
+        ply: row.ply || 0,
+      };
+    },
+
+    startPaired(from, to, spec, now = Date.now()) {
+      if (gameFor(from.id)) return { error: 'You are already in a game. Finish it or resign before starting another.' };
+      if (gameFor(to.id)) return { error: 'That player is already in a game.' };
+      const preset = presetFor(spec.baseMs, spec.incMs);
+      if (!preset) return { error: 'Choose one of the listed time controls.' };
+      if (spec.color !== 'w' && spec.color !== 'b' && spec.color !== 'random') {
+        return { error: 'Choose White, Black or Random.' };
+      }
+      seeks.delete(from.id);
+      seeks.delete(to.id);
+      const otherColor = spec.color === 'w' ? 'b' : spec.color === 'b' ? 'w' : 'random';
+      startGame(
+        { userId: from.id, username: from.username, baseMs: preset.baseMs, incMs: preset.incMs, color: spec.color },
+        { userId: to.id, username: to.username, baseMs: preset.baseMs, incMs: preset.incMs, color: otherColor },
+        now,
+      );
+      const row = gameFor(from.id);
+      return { id: row ? row.id : null };
     },
 
     tick(now = Date.now()) {

@@ -3,7 +3,9 @@ CREATE TABLE IF NOT EXISTS users (
   username TEXT NOT NULL,
   username_fold TEXT NOT NULL UNIQUE,
   password_hash TEXT NOT NULL,
-  created_at INTEGER NOT NULL
+  created_at INTEGER NOT NULL,
+  email TEXT,
+  email_verified INTEGER NOT NULL DEFAULT 0
 );
 
 CREATE TABLE IF NOT EXISTS sessions (
@@ -14,6 +16,32 @@ CREATE TABLE IF NOT EXISTS sessions (
 );
 
 CREATE INDEX IF NOT EXISTS sessions_user ON sessions(user_id);
+
+CREATE TABLE IF NOT EXISTS password_resets (
+  user_id TEXT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+  email TEXT NOT NULL,
+  code_hash TEXT NOT NULL,
+  next_hash TEXT NOT NULL,
+  expires_at INTEGER NOT NULL,
+  attempts INTEGER NOT NULL,
+  created_at INTEGER NOT NULL,
+  purpose TEXT NOT NULL DEFAULT 'password'
+);
+
+CREATE TABLE IF NOT EXISTS challenges (
+  id TEXT PRIMARY KEY,
+  from_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  to_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  from_name TEXT NOT NULL,
+  to_name TEXT NOT NULL,
+  base_ms INTEGER NOT NULL,
+  inc_ms INTEGER NOT NULL,
+  color TEXT NOT NULL,
+  created_at INTEGER NOT NULL,
+  expires_at INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS challenges_to ON challenges(to_id, expires_at);
+CREATE INDEX IF NOT EXISTS challenges_from ON challenges(from_id);
 
 CREATE TABLE IF NOT EXISTS live_games (
   id TEXT PRIMARY KEY,
@@ -132,6 +160,18 @@ CREATE TABLE IF NOT EXISTS follows (
   PRIMARY KEY (follower_id, followed_id)
 );
 CREATE INDEX IF NOT EXISTS follows_followed ON follows(followed_id);
+
+CREATE TABLE IF NOT EXISTS friendships (
+  user_low TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  user_high TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  requested_by TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  status TEXT NOT NULL,
+  created_at INTEGER NOT NULL,
+  updated_at INTEGER NOT NULL,
+  PRIMARY KEY (user_low, user_high)
+);
+CREATE INDEX IF NOT EXISTS friendships_low ON friendships(user_low, status);
+CREATE INDEX IF NOT EXISTS friendships_high ON friendships(user_high, status);
 
 CREATE TABLE IF NOT EXISTS message_threads (
   id TEXT PRIMARY KEY,

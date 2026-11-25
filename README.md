@@ -17,6 +17,8 @@ The pages are static files. Node.js 22.13 or newer is required for the account s
 
 The account database is created at `server/data/ornate.sqlite`. That folder is not part of the source distribution.
 
+Creating an account saves an email address. A password change, a forgotten-password reset, and a replacement of that address each send a confirmation code only to the address already saved. The password or the address changes only after that code is entered. To send the message, set `ORNATE_SMTP_HOST`, `ORNATE_SMTP_PORT` (usually 587), `ORNATE_SMTP_USER`, `ORNATE_SMTP_PASS`, and `ORNATE_SMTP_FROM` before starting the account server. Without those settings the message is saved in `server/data/outbox`. A signed-in password or email change shows that code on the account page. A forgotten-password reset does not show the code.
+
 ## Chess engine
 
 The included engine is Stockfish.js 19, a single-threaded lite build by Chess.com, based on Stockfish by the Stockfish developers. Ornate Chess uses those files unchanged. Their licence is `src/vendor/stockfish/COPYING.txt`.

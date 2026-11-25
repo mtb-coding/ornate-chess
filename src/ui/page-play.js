@@ -8,6 +8,7 @@ import { apiBase, readAccount } from './account-client.js';
 import { mods } from './modules.js';
 import { mountOnlineGame } from './online-game.js';
 import { storeRatings } from './online-ratings-client.js';
+import { refreshLiveNotice } from './live-notice.js';
 
 const botPage = makeGamePage('bot');
 const fc = `<span class="fc tl">${CORNER}</span><span class="fc tr">${CORNER}</span><span class="fc bl">${CORNER}</span><span class="fc br">${CORNER}</span>`;
@@ -33,6 +34,37 @@ function rememberGame(id) {
   } catch { /* This browser may block session storage. */ }
 }
 
+function colourWord(color) {
+  return color === 'w' ? 'White' : color === 'b' ? 'Black' : 'a random colour';
+}
+
+async function fetchLive() {
+  const account = readAccount();
+  if (!account) return null;
+  try {
+    const response = await fetch(`${apiBase()}/api/live`, {
+      headers: { authorization: `Bearer ${account.token}` },
+      signal: AbortSignal.timeout(4000),
+    });
+    if (!response.ok) return null;
+    return await response.json();
+  } catch {
+    return null;
+  }
+}
+
+async function postChallenge(id, act) {
+  const account = readAccount();
+  const response = await fetch(`${apiBase()}/api/challenges/${encodeURIComponent(id)}/${act}`, {
+    method: 'POST',
+    headers: { authorization: `Bearer ${account.token}` },
+    signal: AbortSignal.timeout(8000),
+  });
+  const json = await response.json().catch(() => null);
+  if (!response.ok) throw new Error((json && json.error) || 'The offer could not be answered.');
+  return json;
+}
+
 export async function render(section, ctx) {
   const query = (ctx && ctx.query) || new URLSearchParams();
   const lobby = query.get('lobby') === '1';
@@ -46,11 +78,23 @@ export async function render(section, ctx) {
     replace(await botPage.render(section));
     return () => replace(null);
   }
-  if (!lobby && liveKey() && readAccount()) openSocket(section, replace, { resume: true });
-  else if (!lobby && (app.controllers.play || resumableBot())) {
+  const account = readAccount();
+  const liveState = account ? await fetchLive() : null;
+  if (!section.isConnected) return () => replace(null);
+  if (liveState && liveState.game) {
+    openSocket(section, replace, { resume: true });
+    return () => replace(null);
+  }
+  if (!liveState && !lobby && liveKey() && account) {
+    openSocket(section, replace, { resume: true });
+    return () => replace(null);
+  }
+  if (liveState && !liveState.game) rememberGame('');
+  if (!lobby && (app.controllers.play || resumableBot())) {
     replace(await botPage.render(section));
     return () => replace(null);
-  } else showLobby(section, replace);
+  }
+  showLobby(section, replace, liveState);
   return () => replace(null);
 }
 
@@ -59,11 +103,52 @@ export function onKey(e) {
   return ctrl && ctrl.root ? botPage.onKey(e) : false;
 }
 
-function showLobby(section, replace) {
-  replace(mountLobby(section, replace));
+function showLobby(section, replace, liveState) {
+  if (liveState !== undefined) {
+    replace(mountLobby(section, replace, liveState));
+    refreshLiveNotice();
+    return;
+  }
+  if (!readAccount()) {
+    replace(mountLobby(section, replace, null));
+    return;
+  }
+  replace(() => {});
+  section.innerHTML = `<h1 class="page-title" id="title-play">Play</h1><p class="lede" role="status">The lobby is loading.</p>`;
+  fetchLive().then((state) => {
+    if (!section.isConnected) return;
+    replace(mountLobby(section, replace, state));
+    refreshLiveNotice();
+  });
 }
 
-function mountLobby(section, replace) {
+function offerHtml(liveState) {
+  if (!liveState) return '';
+  const incoming = Array.isArray(liveState.incoming) ? liveState.incoming : [];
+  const outgoing = Array.isArray(liveState.outgoing) ? liveState.outgoing : [];
+  const cards = [
+    ...incoming.map((offer) => `<article class="offer-card">
+      <p>${esc(offer.username)} offered you a ${esc(offer.clock)} ${esc(offer.paceLabel)} game and asked to play ${esc(colourWord(offer.color))}.</p>
+      <div class="btn-row">
+        <button class="btn primary" type="button" data-accept="${esc(offer.id)}">Accept</button>
+        <button class="btn" type="button" data-decline="${esc(offer.id)}">Decline</button>
+      </div>
+    </article>`),
+    ...outgoing.map((offer) => `<article class="offer-card">
+      <p class="status" role="status">You offered ${esc(offer.username)} a ${esc(offer.clock)} ${esc(offer.paceLabel)} game. Waiting for a reply.</p>
+      <div class="btn-row"><button class="btn" type="button" data-decline="${esc(offer.id)}">Cancel</button></div>
+    </article>`),
+  ];
+  if (!cards.length) return '';
+  return `<div class="frame setup-card">${fc}<div class="frame-inner">
+    <h2>Offers</h2>
+    ${DIVIDER}
+    ${cards.join('')}
+    <p class="offer-status" role="status"></p>
+  </div></div>`;
+}
+
+function mountLobby(section, replace, liveState) {
   const account = readAccount();
   const note = lobbyNote;
   lobbyNote = '';
@@ -75,6 +160,7 @@ function mountLobby(section, replace) {
     <h1 class="page-title" id="title-play">Play</h1>
     <p class="lede">Choose a time control to play another person, or play the bot on this device. The server checks every online move and keeps the clock.</p>
     ${note ? `<p class="status" role="status">${esc(note)}</p>` : ''}
+    ${offerHtml(liveState)}
     <div class="frame setup-card">${fc}<div class="frame-inner">
       <h2>Play another person</h2>
       ${DIVIDER}
@@ -102,6 +188,33 @@ function mountLobby(section, replace) {
         incMs: Number(button.dataset.inc),
         color: picked ? picked.value : 'random',
       });
+    });
+  });
+  section.querySelectorAll('[data-accept]').forEach((button) => {
+    button.addEventListener('click', async () => {
+      button.disabled = true;
+      try {
+        await postChallenge(button.dataset.accept, 'accept');
+        openSocket(section, replace, { resume: true });
+      } catch (err) {
+        button.disabled = false;
+        const status = section.querySelector('.offer-status');
+        if (status) status.textContent = err.message || 'The offer could not be answered.';
+      }
+    });
+  });
+  section.querySelectorAll('[data-decline]').forEach((button) => {
+    button.addEventListener('click', async () => {
+      button.disabled = true;
+      try {
+        await postChallenge(button.dataset.decline, 'decline');
+        const state = await fetchLive();
+        if (section.isConnected) showLobby(section, replace, state);
+      } catch (err) {
+        button.disabled = false;
+        const status = section.querySelector('.offer-status');
+        if (status) status.textContent = err.message || 'The offer could not be answered.';
+      }
     });
   });
   return () => {};
@@ -155,6 +268,7 @@ function openSocket(section, replace, opts) {
       else send({ type: 'seek', baseMs: opts.baseMs, incMs: opts.incMs, color: opts.color });
     } else if (msg.type === 'seeking') showSeeking(msg.seek);
     else if (msg.type === 'game') show(msg.game);
+    else if (msg.type === 'rematch' && view) view.rematch(msg);
     else if (msg.type === 'cancelled' || msg.type === 'aborted') fail(msg.error || '');
     else if (msg.type === 'error') {
       if (view) view.status(msg.error);

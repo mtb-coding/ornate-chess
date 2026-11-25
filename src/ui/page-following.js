@@ -47,7 +47,7 @@ export async function render(root) {
   const gameRows = games.map((game) => {
     const reason = REASON_TEXT[game.reason] ? ` ${REASON_TEXT[game.reason]}` : '';
     const clock = game.clock ? `${esc(game.clock)} ${esc(game.paceLabel)}` : esc(game.paceLabel);
-    return `<li><span>${esc(game.player)}: ${OUTCOME[game.outcome] || 'Game'} against ${esc(game.opponent)}${esc(reason)}. ${clock}.</span><span class="muted">${esc(formatDate(game.at))}</span></li>`;
+    return `<li><a href="#/game/${encodeURIComponent(game.id)}">${esc(game.player)}: ${OUTCOME[game.outcome] || 'Game'} against ${esc(game.opponent)}${esc(reason)}. ${clock}.</a><span class="muted">${esc(formatDate(game.at))}</span></li>`;
   }).join('');
   root.innerHTML = `
     <h1 class="page-title" id="title-following">Following</h1>

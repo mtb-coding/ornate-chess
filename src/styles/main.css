@@ -97,6 +97,9 @@ h3.small { font-size: 1rem; margin: .2em 0; }
 html[data-message-request="1"] .nav-toggle .notice-dot { display: block; position: absolute; top: 5px; right: 5px; z-index: 1; }
 html[data-message-request="1"] .menu-anchor:has(.more-nav.is-open) .nav-toggle .notice-dot { display: none; }
 html[data-message-request="1"] .more-nav.is-open a[data-route="messages"] .notice-dot { display: block; margin-left: 8px; flex: 0 0 auto; }
+html[data-friend-request="1"] .nav-toggle .notice-dot { display: block; position: absolute; top: 5px; right: 5px; z-index: 1; }
+html[data-friend-request="1"] .menu-anchor:has(.more-nav.is-open) .nav-toggle .notice-dot { display: none; }
+html[data-friend-request="1"] .more-nav.is-open a[data-route="friends"] .notice-dot { display: block; margin-left: 8px; flex: 0 0 auto; }
 .more-nav ul { display: none; position: absolute; top: calc(100% + 6px); left: 0; z-index: 30; min-width: 240px; max-width: calc(100vw - 32px); margin: 0; padding: 6px; list-style: none; flex-direction: column; gap: 2px; background: var(--bg-1); border: 1px solid var(--gold); border-radius: 3px; box-shadow: 0 12px 32px rgba(0, 0, 0, .45); }
 .more-nav.is-open ul { display: flex; }
 .more-nav a { display: flex; align-items: center; min-height: 44px; padding: 8px 14px; text-decoration: none; font-family: var(--display); font-variant: small-caps; letter-spacing: .06em; color: var(--ink-muted); }

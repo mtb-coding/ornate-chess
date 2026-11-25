@@ -39,7 +39,7 @@ Open items
 - Stockfish is GPL licensed, and the licensing decision is yours.
 - The source is published at https://github.com/mtb-coding/ornate-chess under GPLv3.
 - You need to do the Oracle sign-up yourself, because it asks for a card to verify your identity.
-- Account creation will later require an email address and email verification, to limit abuse. Usernames are already unique, including differences of case only.
+- Account creation saves an email address. A password change sends a confirmation code only to that address, which confirms the inbox. Usernames are already unique, including differences of case only.
 
 Status of this copy
 - Phases 1 and 2 are in place on this machine: accounts, sign-in, and automatic progress sync.

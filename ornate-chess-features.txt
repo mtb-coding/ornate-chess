@@ -1,54 +1,46 @@
-Ornate Chess - Current Features (build e12, 2026-11-23)
-=======================================================
+Ornate Chess — current features (2026-11-25)
+=============================================
 
-Ornate Chess is an installable web app (PWA) that also works offline. It runs at https://ornate-chess.netlify.app and locally through start.bat on port 8002. Everything is stored on the device in browser storage, and there are no accounts yet.
+Ornate Chess is an installable web app. The pages and the board work offline. Accounts, live games, ratings, and messages need the account server. The source is published at https://github.com/mtb-coding/ornate-chess under the GNU General Public License, version 3.
 
 Play
-- Play the bot: a built-in engine at eight levels, from Novice (about 400 Elo) to Grandmaster (about 2500 Elo). From the Casual level up, the bot uses a small opening book. A chess clock is optional.
-- Two players: two people play on the same device, with an optional clock and custom time controls.
-- The board can be flipped, and the app names the opening as soon as you play into one.
-- Board annotations let you draw arrows and highlight squares. Keyboard shortcuts are supported.
-- Sound effects are pre-rendered so they play reliably on mobile.
+- Play is one screen. The listed time controls start an online game. The bot is on the same screen and is not a separate mode.
+- Online clocks are 1+0 (bullet), 3+2, 5+0 and 5+3 (blitz), and 10+5, 15+10 and 30+0 (rapid). A custom clock stays on the bot or on a game on this device.
+- The server checks every online move and keeps the clock. Leaving the Play page closes the socket. Opening Play again resumes a game that is still live, including from another tab. Other pages show a notice while that game is live.
+- If you leave before any move, the game is aborted after a short grace. After a move, a player who stays disconnected forfeits only while the opponent is still connected.
+- From a player's page you can challenge that person to one of the listed time controls and choose White, Black, or a random colour. The offer lasts 15 minutes. Accept and Decline are on the Play page. One new offer replaces your previous one.
+- A finished online game can be offered again with the same clock and the colours swapped. The other player accepts or declines.
+- During a game, either player can ask to chat. Messages start only after the other player accepts.
+- The bot has eight levels, from Novice to Grandmaster. From the Casual level up it uses a small opening book. A clock is optional. A game against the bot is never rated.
+- Two people can play on the same device, with an optional clock.
+- The board can be flipped, and the app names the opening as soon as you play into one. You can draw arrows and highlight squares. Keyboard shortcuts are supported. Sounds are pre-rendered.
 
-Player rating
-- Your rating is estimated from games against the bot and is shown on the home page with its history.
+Accounts
+- Creating an account requires a username, a password, and an email address. The email is saved then. There is no confirmation code before the account exists. Usernames are unique, including differences of case only. Email addresses are not required to be unique.
+- Saved games and progress sync to the account. Settings stay on this device. The app still works when the server is off.
+- A password change sends a six-digit code only to the email saved at registration. The password changes only after that code. The same sign-in stays active. The code is not sent to an address typed in the request.
+- A forgotten password uses the same saved address. The code is not included in the response. After the code, the new password is stored and you sign in again.
+- Replacing the saved email requires the current password. The code is sent only to the current address, and the new address is stored only after that code. An account that has no email cannot attach one this way.
+- Deleting an account requires the password. Ratings and messages are removed. A live game with no moves is aborted. A live game that has moves is resigned, so the opponent is rated. Saved games on the device stay.
+- When the server is not configured to send mail, the message is saved on the server for the operator. A signed-in password or email change can show that code. Password recovery does not.
 
-Game review (in the style of chess.com)
-- Stockfish 19 lite (WebAssembly) analyses every move at depth 12 with two candidate lines.
-- Moves are labelled Brilliant, Great, Best, Excellent, Good, Book, Inaccuracy, Mistake, Miss, Blunder or Forced.
-- The review shows an evaluation bar, an evaluation graph, an accuracy figure for each side and the engine's best line.
-- You can step through moves and engine lines. The stepping is tuned to stay smooth on phones.
-- Each move plays its sound as you step forward, and Brilliant moves have their own preloaded sound.
+Ratings and fair play
+- Bullet, blitz, and rapid each have their own Glicko-2 rating. The pace is the starting time plus forty increments: under three minutes is bullet, under ten is blitz, and ten or more is rapid.
+- Only a finished online game with at least one move changes a rating. The bot does not.
+- A new rating is provisional. The displayed peak ignores provisional results.
+- Each pace has a leaderboard of stable ratings. A player is left off one list after two games in that category matched the engine unusually closely. The rating itself is not changed. Each move keeps the time spent on it. An appeal is decided at once from those times. It is not read by a person, and the rating is not changed.
 
-Mistakes and puzzles
-- Mistake puzzles: positions where you went wrong in your own games become puzzles, along with insights into the kinds of mistakes you make.
-- Puzzles: a set of tactical positions, from mate in one to endgame technique.
-- Generated puzzles: the device creates new puzzles on request at easy, medium or hard difficulty, and each one is checked with the engine.
+People
+- A public player page shows the three ratings and recent finished games. Each finished game can be opened, stepped through, copied or downloaded as PGN, and sent to the review.
+- A signed-in player can follow another player. The Following page lists those players and their recent games, and those games open the same way.
+- Friends are mutual. Search for a player and send a friend request. The other player accepts or declines. The Friends page lists the people who accepted, and each one can be messaged or challenged. A circle on Friends marks a request that is waiting.
+- Outside a game, the first message is a request. The other player accepts it before the conversation continues. A gold circle marks a request, or a newer message in a conversation that is already open.
 
-Openings
-- An opening library with more than a hundred named openings, taken from the Lichess chess-openings dataset (CC0). You can step through each opening and practise it.
-
-Endgame practice
-- Essential positions played against the engine:
-  - Basic checkmates: king and queen, king and rook, two bishops, and bishop and knight.
-  - King and pawn endings: the opposition, key squares, the square of the pawn and the outside passed pawn.
-  - Rook endings: the Lucena, Philidor and Vancura positions.
-  - Queen and minor-piece endings: queen against a centre pawn, queen against a rook pawn, and the wrong bishop with a rook pawn.
-
-Analysis
-- Load a game, a PGN or a FEN position and study it with Stockfish.
-
-Saved games
-- Load, rename, delete, import and export the games stored on the device as PGN files.
-
-Progress statistics
-- Rating over time, results by colour, bot level and opening, puzzle accuracy and completed endgames.
-
-Learn
-- A summary of the rules, a guide to chess notation and a list of keyboard shortcuts.
-
-Settings
-- Display, sound and gameplay preferences, set with simple toggles.
-
-Planned (see PLANS-multiplayer.txt)
-- Accounts, saved progress across devices, live online games and Glicko-2 ratings, on a self-hosted server.
+Study
+- Stockfish 19 lite reviews a finished game. Moves are labelled, with an evaluation bar, a graph, an accuracy figure, and the engine's best line.
+- Mistake puzzles come from your own games. There is also a set of tactical puzzles, and the device can generate a puzzle and check it with the engine.
+- The opening library has more than a hundred named openings from the Lichess chess-openings data (CC0).
+- Endgame practice covers basic checkmates, king and pawn endings, rook endings, and queen and minor-piece endings.
+- Analysis loads a saved game, PGN, or FEN.
+- Saved games on the device can be loaded, renamed, deleted, imported, and exported.
+- Statistics cover results, puzzles, and endgames. Learn summarises the rules, notation, and shortcuts. Settings cover display, sound, and play.

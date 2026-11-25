@@ -6,8 +6,6 @@ import { apiBase, readAccount } from './account-client.js';
 
 const fc = `<span class="fc tl">${CORNER}</span><span class="fc tr">${CORNER}</span><span class="fc bl">${CORNER}</span><span class="fc br">${CORNER}</span>`;
 
-const HELP = 'Each time control has its own list. A name appears after the rating is stable, which is when the question mark is gone. The list leaves a player out after two games in that category matched the engine unusually closely. Move times are kept with those games. An appeal looks at that pace and can restore the name when the moves were not played at a steady, very fast pace. The appeal is decided from the move times. It is not read by a person. One careful game is not enough. A marked game still counts toward the rating.';
-
 function paceNav(pace) {
   return `<nav class="mode-tabs lb-paces" aria-label="Time control">${PACES.map((id) => {
     const current = id === pace ? ' aria-current="page"' : '';
@@ -71,7 +69,6 @@ export async function render(root, { query } = {}) {
   const pace = PACES.includes(params.get('pace')) ? params.get('pace') : 'blitz';
   root.innerHTML = `
     <h1 class="page-title" id="title-leaderboard">Leaderboards</h1>
-    <p class="lede">${HELP}</p>
     ${paceNav(pace)}
     <p class="muted" role="status">The list is loading.</p>`;
   let body;
@@ -88,7 +85,6 @@ export async function render(root, { query } = {}) {
     if (!root.isConnected) return;
     root.innerHTML = `
       <h1 class="page-title" id="title-leaderboard">Leaderboards</h1>
-      <p class="lede">${HELP}</p>
       ${paceNav(pace)}
       <p role="alert">${esc(err.message || 'The leaderboard could not be loaded. The account server may be offline.')}</p>`;
     return;
@@ -97,7 +93,6 @@ export async function render(root, { query } = {}) {
   const you = body.you || null;
   root.innerHTML = `
     <h1 class="page-title" id="title-leaderboard">Leaderboards</h1>
-    <p class="lede">${HELP}</p>
     ${paceNav(pace)}
     ${youNote(pace, you)}
     ${table(body.players || [], you)}`;

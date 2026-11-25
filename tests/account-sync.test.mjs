@@ -143,7 +143,7 @@ test('snapshot round-trip writes and removes keys', () => {
 await testAsync('a device syncs with the account server and does not send the same items twice', async () => {
   const srv = await startTestServer();
   try {
-    const registered = await srv.api('POST', '/api/auth/register', { body: { username: 'ada_sync', password: 'correct-horse' } });
+    const registered = await srv.api('POST', '/api/auth/register', { body: { username: 'ada_sync', password: 'correct-horse', email: 'ada_sync@example.com' } });
     assert.equal(registered.status, 200);
     const token = registered.json.token;
     const userId = registered.json.user.id;

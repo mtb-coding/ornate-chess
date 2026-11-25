@@ -68,7 +68,9 @@ export function listThreads(db, userId) {
   const rows = db.prepare(`
     SELECT t.id, t.user_a, t.user_b, t.status, t.requested_by, t.updated_at,
       CASE WHEN t.user_a = ? THEN ub.username ELSE ua.username END AS username,
-      (SELECT body FROM direct_messages m WHERE m.thread_id = t.id ORDER BY m.created_at DESC LIMIT 1) AS last_body
+      (SELECT body FROM direct_messages m WHERE m.thread_id = t.id ORDER BY m.created_at DESC LIMIT 1) AS last_body,
+      (SELECT created_at FROM direct_messages m WHERE m.thread_id = t.id ORDER BY m.created_at DESC LIMIT 1) AS last_at,
+      (SELECT sender_id FROM direct_messages m WHERE m.thread_id = t.id ORDER BY m.created_at DESC LIMIT 1) AS last_sender
     FROM message_threads t
     JOIN users ua ON ua.id = t.user_a
     JOIN users ub ON ub.id = t.user_b
@@ -81,6 +83,8 @@ export function listThreads(db, userId) {
       username: row.username,
       status: viewerStatus(row, userId),
       last: row.last_body || '',
+      lastAt: Number.isFinite(row.last_at) ? row.last_at : null,
+      lastYours: row.last_sender === userId,
       updatedAt: row.updated_at,
     })),
   };

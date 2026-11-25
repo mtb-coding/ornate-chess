@@ -10,6 +10,8 @@ import { onSettings } from './ui/state.js';
 import { $, $$, esc } from './ui/dom.js';
 import { footerText, readAccount, syncNow, watchAccountChanges } from './ui/account-client.js';
 import { paintMessageNotice, watchMessageNotice } from './ui/message-notice.js';
+import { watchLiveNotice } from './ui/live-notice.js';
+import { watchFriendNotice } from './ui/friend-notice.js';
 
 const ROUTES = [
   { id: 'home', label: 'Home', title: 'Home', pin: true, load: () => import('./ui/page-home.js') },
@@ -21,8 +23,10 @@ const ROUTES = [
   { id: 'stats', label: 'Stats', title: 'Progress statistics', load: () => import('./ui/page-stats.js') },
   { id: 'leaderboard', label: 'Leaderboards', title: 'Leaderboards', load: () => import('./ui/page-leaderboard.js') },
   { id: 'following', label: 'Following', title: 'Following', load: () => import('./ui/page-following.js') },
+  { id: 'friends', label: 'Friends', title: 'Friends', load: () => import('./ui/page-friends.js') },
   { id: 'messages', label: 'Messages', title: 'Messages', load: () => import('./ui/page-messages.js') },
   { id: 'player', label: 'Player', title: 'Player', nav: false, load: () => import('./ui/page-player.js') },
+  { id: 'game', label: 'Game', title: 'Game', nav: false, load: () => import('./ui/page-game-record.js') },
   { id: 'saved', label: 'Saved games', title: 'Saved games', load: () => import('./ui/page-saved.js') },
   { id: 'analysis', label: 'Analysis', title: 'Analysis', load: () => import('./ui/page-analysis.js') },
   { id: 'review', label: 'Review', title: 'Game review', load: () => import('./ui/page-review.js'), nav: false },
@@ -42,7 +46,7 @@ function applySettings(s) {
 
 function navLink(route) {
   const href = route.id === 'home' ? '#/' : `#/${route.id}`;
-  const dot = route.id === 'messages' ? '<span class="notice-dot" aria-hidden="true"></span>' : '';
+  const dot = route.id === 'messages' || route.id === 'friends' ? '<span class="notice-dot" aria-hidden="true"></span>' : '';
   return `<li><a href="${href}" data-route="${route.id}">${esc(route.label)}${dot}</a></li>`;
 }
 
@@ -166,6 +170,8 @@ async function start() {
   buildShell();
   watchAccountChanges();
   watchMessageNotice();
+  watchLiveNotice();
+  watchFriendNotice();
   window.addEventListener('hashchange', navigate);
   document.addEventListener('keydown', onKey);
   await navigate();
