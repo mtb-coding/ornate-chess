@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 
 const SERVER_DIR = path.dirname(fileURLToPath(import.meta.url));
 export const DEFAULT_DB_PATH = path.join(SERVER_DIR, 'data', 'ornate.sqlite');
-const SCHEMA_VERSION = 7;
+const SCHEMA_VERSION = 9;
 
 const LIVE_GAMES_SQL = `
 CREATE TABLE IF NOT EXISTS live_games (
@@ -31,6 +31,11 @@ CREATE TABLE IF NOT EXISTS live_games (
 CREATE INDEX IF NOT EXISTS live_games_white ON live_games(white_id, status);
 CREATE INDEX IF NOT EXISTS live_games_black ON live_games(black_id, status);
 `;
+
+function addColumn(db, table, name, definition) {
+  const cols = db.prepare(`PRAGMA table_info(${table})`).all();
+  if (!cols.some((col) => col.name === name)) db.exec(`ALTER TABLE ${table} ADD COLUMN ${definition}`);
+}
 
 export function openDatabase(file = DEFAULT_DB_PATH) {
   if (file !== ':memory:') fs.mkdirSync(path.dirname(file), { recursive: true });
@@ -155,6 +160,55 @@ export function openDatabase(file = DEFAULT_DB_PATH) {
     );
     CREATE INDEX IF NOT EXISTS cheat_flags_player ON cheat_flags(user_id, pace);`);
     version = 7;
+  }
+  if (version < 8) {
+    addColumn(db, 'live_games', 'move_times_json', "move_times_json TEXT NOT NULL DEFAULT '[]'");
+    addColumn(db, 'cheat_flags', 'timing_supported', 'timing_supported INTEGER NOT NULL DEFAULT 0');
+    addColumn(db, 'cheat_flags', 'median_ms', 'median_ms INTEGER');
+    addColumn(db, 'cheat_flags', 'cleared_at', 'cleared_at INTEGER');
+    db.exec(`CREATE TABLE IF NOT EXISTS appeals (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      pace TEXT NOT NULL,
+      note TEXT NOT NULL,
+      status TEXT NOT NULL,
+      decision TEXT NOT NULL,
+      created_at INTEGER NOT NULL
+    );
+    CREATE INDEX IF NOT EXISTS appeals_user ON appeals(user_id, pace, created_at);
+    CREATE TABLE IF NOT EXISTS follows (
+      follower_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      followed_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      created_at INTEGER NOT NULL,
+      PRIMARY KEY (follower_id, followed_id)
+    );
+    CREATE INDEX IF NOT EXISTS follows_followed ON follows(followed_id);`);
+    version = 8;
+  }
+  if (version < 9) {
+    addColumn(db, 'live_games', 'chat_status', "chat_status TEXT NOT NULL DEFAULT 'closed'");
+    addColumn(db, 'live_games', 'chat_by', 'chat_by TEXT');
+    addColumn(db, 'live_games', 'chat_json', "chat_json TEXT NOT NULL DEFAULT '[]'");
+    db.exec(`CREATE TABLE IF NOT EXISTS message_threads (
+      id TEXT PRIMARY KEY,
+      user_a TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      user_b TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      status TEXT NOT NULL,
+      requested_by TEXT NOT NULL,
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL,
+      UNIQUE (user_a, user_b)
+    );
+    CREATE TABLE IF NOT EXISTS direct_messages (
+      id TEXT PRIMARY KEY,
+      thread_id TEXT NOT NULL REFERENCES message_threads(id) ON DELETE CASCADE,
+      sender_id TEXT NOT NULL,
+      body TEXT NOT NULL,
+      created_at INTEGER NOT NULL
+    );
+    CREATE INDEX IF NOT EXISTS direct_messages_thread ON direct_messages(thread_id, created_at);
+    CREATE INDEX IF NOT EXISTS direct_messages_sender ON direct_messages(sender_id, created_at);`);
+    version = 9;
   }
   db.exec(`PRAGMA user_version = ${version}`);
   return db;

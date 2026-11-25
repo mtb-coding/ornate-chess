@@ -171,6 +171,38 @@
 .lb-table th, .lb-table td { padding: 8px 6px; border-bottom: 1px solid var(--line); vertical-align: baseline; }
 .lb-table .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .lb-table .is-you td { color: var(--gold-ink); }
+.lb-table a { color: var(--gold-ink); }
+.appeal-form { max-width: 40rem; margin: 0 0 16px; }
+.appeal-form textarea.field { min-height: 6rem; }
+.appeal-status { min-height: 1.4em; }
+.follow-form { display: flex; flex-wrap: wrap; gap: 8px; align-items: end; margin: 0 0 8px; }
+.follow-form label { flex: 1 1 100%; }
+.follow-form .field { flex: 1 1 12rem; width: auto; }
+.follow-form textarea.field { flex-basis: 100%; min-height: 5rem; }
+.chat-log { max-height: 9rem; overflow: auto; margin: 8px 0; }
+.chat-line { margin: 0 0 6px; overflow-wrap: anywhere; }
+.chat-line.yours { color: var(--gold-ink); }
+.chat-form { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.chat-form .field { flex: 1 1 8rem; min-width: 0; width: auto; }
+.chat-form textarea.field { flex-basis: 100%; min-height: 5rem; }
+.msg-layout { display: grid; grid-template-columns: 12.5rem minmax(0, 1fr); gap: 16px; align-items: start; }
+.msg-rail { display: flex; flex-direction: column; gap: 2px; margin: 0; padding: 4px; border: 1px solid var(--line); border-radius: 3px; background: var(--bg-0); max-height: min(36rem, 70vh); overflow: auto; }
+.msg-rail a { display: flex; flex-direction: column; justify-content: center; gap: 2px; min-height: 44px; padding: 8px 10px; text-decoration: none; color: var(--ink-muted); border-radius: 2px; min-width: 0; }
+.msg-rail a:hover { color: var(--gold-bright); }
+.msg-rail a[aria-current="page"] { color: var(--gold-ink); background: linear-gradient(180deg, rgba(239, 212, 134, .24), rgba(201, 162, 74, .1)); box-shadow: inset 0 0 0 1px var(--gold); }
+.msg-name, .msg-preview { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.msg-name { font-family: var(--display); font-variant: small-caps; letter-spacing: .04em; }
+.msg-preview { font-size: .82rem; }
+.msg-pane { min-width: 0; }
+.msg-pane h2 { overflow-wrap: anywhere; }
+.msg-pane .chat-log { max-height: min(24rem, 52vh); }
+.msg-pane .follow-form { flex-direction: column; align-items: stretch; }
+.msg-pane .follow-form .field { flex: 0 0 auto; width: 100%; min-width: 0; }
+.msg-pane .follow-form textarea.field { flex-basis: auto; }
+.msg-pane .chat-form .field { width: 100%; min-width: 0; }
+.follow-list, .player-games { list-style: none; margin: 8px 0 16px; padding: 0; }
+.follow-list li, .player-games li { display: flex; flex-wrap: wrap; gap: 8px 16px; justify-content: space-between; align-items: baseline; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.page-player .pace-ratings, .page-following .pace-ratings { margin: 16px 0; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
 /* Puzzle mode tabs (collection and generated puzzles) */

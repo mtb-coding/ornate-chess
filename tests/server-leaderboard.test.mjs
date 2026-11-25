@@ -5,7 +5,8 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { openDatabase } from '../server/db.mjs';
-import { assessColor, leaderboard, recordCheatFlags } from '../server/cheat.mjs';
+import { assessColor, leaderboard, recordCheatFlags, submitAppeal, timingSupports } from '../server/cheat.mjs';
+import { createLive } from '../server/live.mjs';
 import { startTestServer } from './server-harness.mjs';
 
 const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'ornate-board-'));
@@ -117,6 +118,72 @@ await test('the public list follows the requested pace', async () => {
   } finally {
     await srv.close();
   }
+});
+
+await test('a played move keeps its think time', () => {
+  const live = createLive(db);
+  function seat(name) {
+    const inbox = [];
+    return { user: { id: name, username: name }, inbox, send(msg) { inbox.push(msg); } };
+  }
+  const white = seat('Tim');
+  const black = seat('Tam');
+  live.connect(white.user, white.send);
+  live.connect(black.user, black.send);
+  const t0 = 5_000_000;
+  live.command(white.user, { type: 'seek', baseMs: 60000, incMs: 0, color: 'w' }, t0);
+  live.command(black.user, { type: 'seek', baseMs: 60000, incMs: 0, color: 'b' }, t0);
+  const gameId = white.inbox.find((msg) => msg.type === 'game').game.id;
+  live.command(white.user, { type: 'move', gameId, uci: 'e2e4' }, t0 + 1500);
+  live.command(white.user, { type: 'resign', gameId }, t0 + 2000);
+  const stored = db.prepare('SELECT move_times_json FROM live_games WHERE id = ?').get(gameId);
+  assert.deepEqual(JSON.parse(stored.move_times_json), [1500]);
+});
+
+await test('very fast steady moves support a mark, and ordinary times do not', () => {
+  const moves = stretch('w', 15, 15);
+  assert.equal(timingSupports(moves, 'w', Array(15).fill(200), 60000).supported, true);
+  const ordinary = [500, 800, 1200, 2000, 4000, 1500, 900, 3000, 2500, 1800, 2200, 1600, 3500, 1100, 2700];
+  assert.equal(timingSupports(moves, 'w', ordinary, 60000).supported, false);
+  assert.equal(timingSupports(moves, 'w', [], 60000).supported, false);
+  assert.equal(timingSupports(moves, 'w', Array(12).fill(200).concat([9000, 9000, 9000]), 60000).supported, true);
+  assert.equal(timingSupports(moves, 'w', Array(11).fill(200).concat([9000, 9000, 9000, 9000]), 60000).supported, false);
+});
+
+await test('an appeal restores a name when the move times do not support the marks', () => {
+  addUser('ned', 'Ned');
+  addPace('ned', 'blitz', 1550, 80);
+  const moves = stretch('w', 15, 15);
+  const slow = [800, 1200, 2000, 4000, 1500, 900, 3000, 2500, 1800, 2200, 1600, 3500, 1100, 2700, 6000];
+  recordCheatFlags(db, { gameId: 'slow1', whiteId: 'ned', blackId: 'bea', pace: 'blitz', moves, times: slow, baseMs: 180000 });
+  recordCheatFlags(db, { gameId: 'slow2', whiteId: 'ned', blackId: 'bea', pace: 'blitz', moves, times: slow, baseMs: 180000 });
+  assert.equal(db.prepare('SELECT timing_supported FROM cheat_flags WHERE game_id = ?').get('slow1').timing_supported, 0);
+  assert.equal(leaderboard(db, 'blitz', 'ned').you.held, true);
+  const accepted = submitAppeal(db, { userId: 'ned', pace: 'blitz', note: 'I was playing slowly.' });
+  assert.equal(accepted.status, 'accepted');
+  recordCheatFlags(db, { gameId: 'slow1', whiteId: 'ned', blackId: 'bea', pace: 'blitz', moves, times: slow, baseMs: 180000 });
+  const back = leaderboard(db, 'blitz', 'ned');
+  assert.equal(back.you.held, false);
+  assert.equal(back.you.canAppeal, false);
+  assert.ok(back.players.some((row) => row.username === 'Ned'));
+});
+
+await test('two fast marks stay off the list, and the same appeal cannot be repeated', () => {
+  addUser('fay', 'Fay');
+  addPace('fay', 'bullet', 1700, 70);
+  const moves = stretch('w', 15, 15);
+  const fast = Array(15).fill(200);
+  recordCheatFlags(db, { gameId: 'fast1', whiteId: 'fay', blackId: 'bea', pace: 'bullet', moves, times: fast, baseMs: 60000 });
+  recordCheatFlags(db, { gameId: 'fast2', whiteId: 'fay', blackId: 'bea', pace: 'bullet', moves, times: fast, baseMs: 60000 });
+  assert.equal(db.prepare('SELECT timing_supported FROM cheat_flags WHERE game_id = ?').get('fast1').timing_supported, 1);
+  assert.equal(submitAppeal(db, { userId: 'fay', pace: 'bullet', note: '' }).status, 'declined');
+  assert.equal(leaderboard(db, 'bullet', 'fay').you.held, true);
+  assert.equal(leaderboard(db, 'bullet', 'fay').you.canAppeal, false);
+  assert.throws(() => submitAppeal(db, { userId: 'fay', pace: 'bullet', note: 'again' }), (err) => err.status === 400);
+  assert.throws(() => submitAppeal(db, { userId: 'fay', pace: 'bullet', note: 'x'.repeat(401) }), (err) => err.status === 400);
+  recordCheatFlags(db, { gameId: 'fast3', whiteId: 'fay', blackId: 'bea', pace: 'bullet', moves, times: fast, baseMs: 60000, now: Date.now() + 50 });
+  assert.equal(leaderboard(db, 'bullet', 'fay').you.canAppeal, true);
+  assert.equal(submitAppeal(db, { userId: 'fay', pace: 'bullet' }).status, 'declined');
 });
 
 db.close();

@@ -9,6 +9,7 @@ import { setSoundEnabled } from './ui/sound.js';
 import { onSettings } from './ui/state.js';
 import { $, $$, esc } from './ui/dom.js';
 import { footerText, readAccount, syncNow, watchAccountChanges } from './ui/account-client.js';
+import { paintMessageNotice, watchMessageNotice } from './ui/message-notice.js';
 
 const ROUTES = [
   { id: 'home', label: 'Home', title: 'Home', pin: true, load: () => import('./ui/page-home.js') },
@@ -19,6 +20,9 @@ const ROUTES = [
   { id: 'endgames', label: 'Endgames', title: 'Endgame practice', load: () => import('./ui/page-endgames.js') },
   { id: 'stats', label: 'Stats', title: 'Progress statistics', load: () => import('./ui/page-stats.js') },
   { id: 'leaderboard', label: 'Leaderboards', title: 'Leaderboards', load: () => import('./ui/page-leaderboard.js') },
+  { id: 'following', label: 'Following', title: 'Following', load: () => import('./ui/page-following.js') },
+  { id: 'messages', label: 'Messages', title: 'Messages', load: () => import('./ui/page-messages.js') },
+  { id: 'player', label: 'Player', title: 'Player', nav: false, load: () => import('./ui/page-player.js') },
   { id: 'saved', label: 'Saved games', title: 'Saved games', load: () => import('./ui/page-saved.js') },
   { id: 'analysis', label: 'Analysis', title: 'Analysis', load: () => import('./ui/page-analysis.js') },
   { id: 'review', label: 'Review', title: 'Game review', load: () => import('./ui/page-review.js'), nav: false },
@@ -38,7 +42,8 @@ function applySettings(s) {
 
 function navLink(route) {
   const href = route.id === 'home' ? '#/' : `#/${route.id}`;
-  return `<li><a href="${href}" data-route="${route.id}">${esc(route.label)}</a></li>`;
+  const dot = route.id === 'messages' ? '<span class="notice-dot" aria-hidden="true"></span>' : '';
+  return `<li><a href="${href}" data-route="${route.id}">${esc(route.label)}${dot}</a></li>`;
 }
 
 function buildShell() {
@@ -48,7 +53,7 @@ function buildShell() {
   $('#site-header').innerHTML = `
     <div class="header-top">
       <div class="menu-anchor">
-        <button type="button" class="nav-toggle btn icon-only" id="nav-toggle" aria-expanded="false" aria-controls="main-nav-list" aria-label="More pages">${ICONS.menu}</button>
+        <button type="button" class="nav-toggle btn icon-only" id="nav-toggle" aria-expanded="false" aria-controls="main-nav-list" aria-label="More pages">${ICONS.menu}<span class="notice-dot" aria-hidden="true"></span></button>
         <nav class="more-nav" id="site-nav" aria-label="More pages"><ul id="main-nav-list">${more.map(navLink).join('')}</ul></nav>
       </div>
       <a class="cartouche" href="#/" aria-label="Ornate Chess, home page">${CARTOUCHE_BG}${CROWN_EMBLEM}
@@ -58,6 +63,7 @@ function buildShell() {
     <nav class="main-nav primary-nav" aria-label="Main"><ul>${pinned.map(navLink).join('')}</ul></nav>`;
   $('#site-footer').innerHTML = `${DIVIDER}
     <p id="footer-note">${esc(footerText(readAccount()))}</p>
+    <p class="footer-licence">Ornate Chess is free software under the <a href="LICENSE">GNU General Public License, version 3</a>. The source code is published at <a href="https://github.com/mtb-coding/ornate-chess">github.com/mtb-coding/ornate-chess</a>.</p>
     <p class="footer-shortcuts">Press <kbd>?</kbd> to see the keyboard shortcuts.</p>
     ${stubsInUse.length ? `<p class="footer-warn">Development stubs are active for: ${esc(stubsInUse.join(', '))}. Some features are limited.</p>` : ''}`;
   const toggle = $('#nav-toggle');
@@ -65,7 +71,7 @@ function buildShell() {
   toggle.addEventListener('click', () => {
     const open = nav.classList.toggle('is-open');
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    toggle.setAttribute('aria-label', open ? 'Close the menu' : 'More pages');
+    paintMessageNotice();
   });
   nav.addEventListener('click', (e) => { if (e.target.closest && e.target.closest('a')) closeNav(); });
   document.addEventListener('click', (e) => {
@@ -82,7 +88,7 @@ function closeNav() {
   if (!nav || !toggle) return;
   nav.classList.remove('is-open');
   toggle.setAttribute('aria-expanded', 'false');
-  toggle.setAttribute('aria-label', 'More pages');
+  paintMessageNotice();
 }
 
 function parseHash() {
@@ -159,6 +165,7 @@ async function start() {
   onSettings(applySettings);
   buildShell();
   watchAccountChanges();
+  watchMessageNotice();
   window.addEventListener('hashchange', navigate);
   document.addEventListener('keydown', onKey);
   await navigate();

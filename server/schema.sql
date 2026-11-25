@@ -32,7 +32,11 @@ CREATE TABLE IF NOT EXISTS live_games (
   result_reason TEXT,
   draw_offer TEXT,
   created_at INTEGER NOT NULL,
-  updated_at INTEGER NOT NULL
+  updated_at INTEGER NOT NULL,
+  move_times_json TEXT NOT NULL DEFAULT '[]',
+  chat_status TEXT NOT NULL DEFAULT 'closed',
+  chat_by TEXT,
+  chat_json TEXT NOT NULL DEFAULT '[]'
 );
 
 CREATE INDEX IF NOT EXISTS live_games_white ON live_games(white_id, status);
@@ -103,9 +107,52 @@ CREATE TABLE IF NOT EXISTS cheat_flags (
   matches INTEGER NOT NULL,
   average_loss REAL NOT NULL,
   created_at INTEGER NOT NULL,
+  timing_supported INTEGER NOT NULL DEFAULT 0,
+  median_ms INTEGER,
+  cleared_at INTEGER,
   PRIMARY KEY (game_id, user_id)
 );
 CREATE INDEX IF NOT EXISTS cheat_flags_player ON cheat_flags(user_id, pace);
+
+CREATE TABLE IF NOT EXISTS appeals (
+  id TEXT PRIMARY KEY,
+  user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  pace TEXT NOT NULL,
+  note TEXT NOT NULL,
+  status TEXT NOT NULL,
+  decision TEXT NOT NULL,
+  created_at INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS appeals_user ON appeals(user_id, pace, created_at);
+
+CREATE TABLE IF NOT EXISTS follows (
+  follower_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  followed_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  created_at INTEGER NOT NULL,
+  PRIMARY KEY (follower_id, followed_id)
+);
+CREATE INDEX IF NOT EXISTS follows_followed ON follows(followed_id);
+
+CREATE TABLE IF NOT EXISTS message_threads (
+  id TEXT PRIMARY KEY,
+  user_a TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  user_b TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  status TEXT NOT NULL,
+  requested_by TEXT NOT NULL,
+  created_at INTEGER NOT NULL,
+  updated_at INTEGER NOT NULL,
+  UNIQUE (user_a, user_b)
+);
+
+CREATE TABLE IF NOT EXISTS direct_messages (
+  id TEXT PRIMARY KEY,
+  thread_id TEXT NOT NULL REFERENCES message_threads(id) ON DELETE CASCADE,
+  sender_id TEXT NOT NULL,
+  body TEXT NOT NULL,
+  created_at INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS direct_messages_thread ON direct_messages(thread_id, created_at);
+CREATE INDEX IF NOT EXISTS direct_messages_sender ON direct_messages(sender_id, created_at);
 
 CREATE TABLE IF NOT EXISTS sync_entries (
   user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,

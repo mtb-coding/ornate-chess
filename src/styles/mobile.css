@@ -266,6 +266,8 @@
 }
 @media (max-width: 390px) {
   .mode-tabs a { font-size: .86rem; padding: 8px 3px; }
+  .msg-layout { grid-template-columns: 7.25rem minmax(0, 1fr); gap: 8px; }
+  .msg-rail a { padding: 8px 6px; }
 }
 
 

@@ -76,6 +76,7 @@ function signedIn(account, last) {
   return `${DIVIDER}
     <p>You are signed in as ${esc(account.username)}.</p>
     <p class="help">Saved games and progress are synced automatically after each change. Settings stay on this device.</p>
+    <p class="help"><a href="#/player/${encodeURIComponent(account.username)}">Your public page</a> lists your ratings and finished games. <a href="#/following">Following</a> keeps the players you choose.</p>
     <p class="account-status" role="status">${esc(previous)}</p>
     <div class="btn-row">
       <button class="btn" type="button" data-act="logout">Sign out</button>

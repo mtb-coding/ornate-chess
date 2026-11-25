@@ -9,6 +9,9 @@ import { paceForClock, rateGame, readRatings } from './ratings.mjs';
 
 export const ABORT_GRACE_MS = 20_000;
 export const FORFEIT_GRACE_MS = 60_000;
+const CHAT_LIMIT = 40;
+const CHAT_TEXT_MAX = 240;
+const CHAT_GAP_MS = 400;
 const RECENT_MS = 2 * 60 * 1000;
 
 const TIME_CONTROLS = CLOCK_PRESETS.filter((preset) => preset.baseMs > 0);
@@ -34,6 +37,29 @@ function parseGame(json) {
   return Game.fromJSON(typeof json === 'string' ? JSON.parse(json) : json);
 }
 
+function chatFrom(stored) {
+  let messages = [];
+  try {
+    const value = JSON.parse((stored && stored.chat_json) || '[]');
+    if (Array.isArray(value)) messages = value;
+  } catch { messages = []; }
+  return {
+    chatStatus: stored && stored.chat_status ? stored.chat_status : 'closed',
+    chatBy: stored && stored.chat_by ? stored.chat_by : null,
+    chatMessages: messages.filter((entry) => entry && typeof entry.text === 'string' && typeof entry.by === 'string').slice(-CHAT_LIMIT),
+  };
+}
+
+function moveTimesFrom(raw) {
+  try {
+    const value = JSON.parse(raw || '[]');
+    if (!Array.isArray(value)) return [];
+    return value.map((ms) => (Number.isFinite(Number(ms)) && Number(ms) >= 0 ? Math.round(Number(ms)) : null));
+  } catch {
+    return [];
+  }
+}
+
 export function createLive(db) {
   const games = new Map();
   const byUser = new Map();
@@ -45,8 +71,8 @@ export function createLive(db) {
     INSERT INTO live_games (
       id, base_ms, inc_ms, white_id, black_id, white_name, black_name,
       game_json, w_ms, b_ms, turn_started_at, status, result, result_reason,
-      draw_offer, created_at, updated_at
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      draw_offer, created_at, updated_at, move_times_json, chat_status, chat_by, chat_json
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ON CONFLICT(id) DO UPDATE SET
       game_json = excluded.game_json,
       w_ms = excluded.w_ms,
@@ -56,7 +82,11 @@ export function createLive(db) {
       result = excluded.result,
       result_reason = excluded.result_reason,
       draw_offer = excluded.draw_offer,
-      updated_at = excluded.updated_at
+      updated_at = excluded.updated_at,
+      move_times_json = excluded.move_times_json,
+      chat_status = excluded.chat_status,
+      chat_by = excluded.chat_by,
+      chat_json = excluded.chat_json
   `);
   const recentStmt = db.prepare(`
     SELECT * FROM live_games
@@ -98,7 +128,8 @@ export function createLive(db) {
     persist.run(
       row.id, row.baseMs, row.incMs, row.whiteId, row.blackId, row.whiteName, row.blackName,
       row.gameJson, row.wMs, row.bMs, row.turnStartedAt, row.status, row.result, row.resultReason,
-      row.drawOffer, row.createdAt, row.updatedAt,
+      row.drawOffer, row.createdAt, row.updatedAt, JSON.stringify(row.moveTimes || []),
+      row.chatStatus || 'closed', row.chatBy || null, JSON.stringify(row.chatMessages || []),
     );
   }
 
@@ -123,6 +154,15 @@ export function createLive(db) {
       drawOffer: row.drawOffer,
       opponentConnected: sockets.has(other),
       rating: row.ratingFor && row.ratingFor[userId] ? row.ratingFor[userId] : null,
+      chat: {
+        state: row.chatStatus || 'closed',
+        outgoing: row.chatBy === userId,
+        messages: (row.chatMessages || []).map((entry) => ({
+          yours: entry.by === userId,
+          text: entry.text,
+          at: entry.at,
+        })),
+      },
     };
   }
 
@@ -233,6 +273,8 @@ export function createLive(db) {
         updatedAt: stored.updated_at,
         turn: game.turn,
         ply: game.length,
+        moveTimes: moveTimesFrom(stored.move_times_json),
+        ...chatFrom(stored),
       };
       remember(row);
       disconnectedAt.set(row.whiteId, now);
@@ -261,6 +303,7 @@ export function createLive(db) {
       drawOffer: null,
       createdAt: stored.created_at,
       updatedAt: stored.updated_at,
+      ...chatFrom(stored),
     };
   }
 
@@ -293,8 +336,64 @@ export function createLive(db) {
       updatedAt: now,
       turn: 'w',
       ply: 0,
+      moveTimes: [],
+      chatStatus: 'closed',
+      chatBy: null,
+      chatMessages: [],
     };
     remember(row);
+    save(row);
+    broadcast(row, now);
+  }
+
+  function handleChat(row, userId, msg, now) {
+    if (row.status !== 'live') {
+      fail(userId, 'Chat is only available during the game.');
+      return;
+    }
+    if (!Array.isArray(row.chatMessages)) row.chatMessages = [];
+    if (msg.type === 'chat-request') {
+      if (row.chatStatus === 'open') { fail(userId, 'Chat is already open.'); return; }
+      if (row.chatStatus === 'declined') { fail(userId, 'Chat was declined for this game.'); return; }
+      if (row.chatStatus === 'requested') { fail(userId, 'A chat request is already waiting.'); return; }
+      row.chatStatus = 'requested';
+      row.chatBy = userId;
+      row.updatedAt = now;
+      save(row);
+      broadcast(row, now);
+      return;
+    }
+    if (msg.type === 'chat-accept' || msg.type === 'chat-decline') {
+      if (row.chatStatus !== 'requested' || row.chatBy === userId) {
+        fail(userId, 'There is no chat request to answer.');
+        return;
+      }
+      row.chatStatus = msg.type === 'chat-accept' ? 'open' : 'declined';
+      row.updatedAt = now;
+      save(row);
+      broadcast(row, now);
+      return;
+    }
+    if (row.chatStatus !== 'open') {
+      fail(userId, 'Ask to chat, and wait for the other player to accept.');
+      return;
+    }
+    const text = typeof msg.text === 'string' ? msg.text.trim() : '';
+    if (!text || text.length > CHAT_TEXT_MAX) {
+      fail(userId, 'A chat message must be 1 to 240 characters.');
+      return;
+    }
+    if (row.chatMessages.length >= CHAT_LIMIT) {
+      fail(userId, 'This chat is full.');
+      return;
+    }
+    const last = row.chatMessages[row.chatMessages.length - 1];
+    if (last && last.by === userId && now - last.at < CHAT_GAP_MS) {
+      fail(userId, 'Wait a moment before sending another message.');
+      return;
+    }
+    row.chatMessages.push({ by: userId, text, at: now });
+    row.updatedAt = now;
     save(row);
     broadcast(row, now);
   }
@@ -401,6 +500,8 @@ export function createLive(db) {
           fail(user.id, applied.error);
           return;
         }
+        if (!Array.isArray(row.moveTimes)) row.moveTimes = [];
+        row.moveTimes.push(row.turnStartedAt == null ? null : elapsed);
         row.wMs = clock.wMs;
         row.bMs = clock.bMs;
         row.gameJson = JSON.stringify(applied.game);
@@ -446,6 +547,10 @@ export function createLive(db) {
           save(row);
           broadcast(row, now);
         }
+        return;
+      }
+      if (msg.type === 'chat-request' || msg.type === 'chat-accept' || msg.type === 'chat-decline' || msg.type === 'chat') {
+        handleChat(row, user.id, msg, now);
         return;
       }
       fail(user.id, 'That action is not recognised.');

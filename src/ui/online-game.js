@@ -53,6 +53,9 @@ export function mountOnlineGame(section, initial, actions) {
           ${DIVIDER}
           <h3 class="engraved small">Moves</h3>
           <div class="movelist" tabindex="0" role="region" aria-label="Move list"></div>
+          ${DIVIDER}
+          <h3 class="engraved small">Chat</h3>
+          <div class="chat-host"></div>
         </div></div>
       </aside>
     </div>`;
@@ -151,6 +154,7 @@ export function mountOnlineGame(section, initial, actions) {
     }
     controls.innerHTML = html;
     paintClocks();
+    paintChat();
     if (state.rating && state.rating.document) storeRatings(state.rating.document);
     if (state.status === 'finished' && !saved) {
       saved = true;
@@ -170,6 +174,47 @@ export function mountOnlineGame(section, initial, actions) {
       } catch (err) { toast(`The game could not be saved: ${err.message}`); }
     }
   }
+
+  function paintChat() {
+    const host = root.querySelector('.chat-host');
+    if (!host) return;
+    const chat = state.chat || { state: 'closed', outgoing: false, messages: [] };
+    const otherName = state.you === 'w' ? state.black.username : state.white.username;
+    const lines = (chat.messages || []).map((entry) => `<p class="chat-line${entry.yours ? ' yours' : ''}">${esc(entry.text)}</p>`).join('');
+    const log = lines ? `<div class="chat-log" role="log" aria-label="In-game chat">${lines}</div>` : '';
+    let controls = '';
+    if (state.status === 'live') {
+      if (chat.state === 'closed') controls = '<button class="btn" type="button" data-chat="chat-request">Ask to chat</button>';
+      else if (chat.state === 'requested' && chat.outgoing) controls = '<p class="help">You asked to chat. Waiting for a reply.</p>';
+      else if (chat.state === 'requested') {
+        controls = `<p class="help">${esc(otherName)} asked to chat.</p><div class="btn-row"><button class="btn" type="button" data-chat="chat-accept">Accept</button><button class="btn" type="button" data-chat="chat-decline">Decline</button></div>`;
+      } else if (chat.state === 'open') {
+        controls = `<form class="chat-form" aria-label="Send a message"><label class="visually-hidden" for="game-chat">Message</label><input id="game-chat" class="field" name="text" maxlength="240" autocomplete="off" required><button class="btn" type="submit">Send</button></form>`;
+      } else controls = '<p class="help">Chat was declined for this game.</p>';
+    } else if (!lines) controls = '<p class="muted">No chat in this game.</p>';
+    const draft = host.querySelector('input[name="text"]');
+    const keep = draft ? draft.value : '';
+    const focused = draft && document.activeElement === draft;
+    host.innerHTML = log + controls;
+    const input = host.querySelector('input[name="text"]');
+    if (input && keep) input.value = keep;
+    if (input && focused) input.focus();
+    const box = host.querySelector('.chat-log');
+    if (box) box.scrollTop = box.scrollHeight;
+  }
+
+  root.querySelector('.chat-host').addEventListener('click', (event) => {
+    const button = event.target.closest('[data-chat]');
+    if (!button || !root.contains(button)) return;
+    actions.send({ type: button.dataset.chat, gameId: state.id });
+  });
+  root.querySelector('.chat-host').addEventListener('submit', (event) => {
+    if (!event.target.classList || !event.target.classList.contains('chat-form')) return;
+    event.preventDefault();
+    const text = event.target.text.value;
+    event.target.text.value = '';
+    actions.send({ type: 'chat', gameId: state.id, text });
+  });
 
   root.addEventListener('click', async (e) => {
     const button = e.target.closest('[data-act]');

@@ -39,14 +39,28 @@ export function readAccount(backend = browserStore()) {
   }
 }
 
+const accountListeners = new Set();
+
+export function onAccountChange(listener) {
+  accountListeners.add(listener);
+}
+
+function notifyAccountChange() {
+  for (const listener of accountListeners) {
+    try { listener(); } catch { /* The listener reports its own failure. */ }
+  }
+}
+
 export function writeAccount(account, backend = browserStore()) {
   backend.setItem(ACCOUNT_STORAGE_KEY, JSON.stringify(account));
   renderFooterNote(backend);
+  notifyAccountChange();
 }
 
 export function clearAccount(backend = browserStore()) {
   try { backend.removeItem(ACCOUNT_STORAGE_KEY); } catch { /* already gone */ }
   renderFooterNote(backend);
+  notifyAccountChange();
 }
 
 export function readSyncState(backend = browserStore()) {

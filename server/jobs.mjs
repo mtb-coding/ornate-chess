@@ -93,7 +93,7 @@ export async function runReview(db, job, { analyse, depth = REVIEW_DEPTH, now = 
   const payload = JSON.parse(job.payload_json);
   const row = db.prepare(`SELECT id, white_id AS whiteId, black_id AS blackId,
       white_name AS whiteName, black_name AS blackName, game_json AS gameJson,
-      base_ms AS baseMs, inc_ms AS incMs
+      base_ms AS baseMs, inc_ms AS incMs, move_times_json AS moveTimesJson
     FROM live_games WHERE id = ?`).get(payload.gameId);
   if (!row) throw new Error('That finished game is no longer stored.');
   const saved = JSON.parse(row.gameJson);
@@ -120,12 +120,19 @@ export async function runReview(db, job, { analyse, depth = REVIEW_DEPTH, now = 
     now,
   });
   const pace = paceForClock(row.baseMs, row.incMs);
+  let times = [];
+  try {
+    const parsed = JSON.parse(row.moveTimesJson || '[]');
+    times = Array.isArray(parsed) ? parsed : [];
+  } catch { times = []; }
   const marks = recordCheatFlags(db, {
     gameId: row.id,
     whiteId: row.whiteId,
     blackId: row.blackId,
     pace,
     moves: review.moves,
+    times,
+    baseMs: row.baseMs,
     now,
   });
   return {

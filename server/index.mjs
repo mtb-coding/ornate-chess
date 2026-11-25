@@ -8,8 +8,10 @@ import { readRatings } from './ratings.mjs';
 import { DEFAULT_DB_PATH, openDatabase } from './db.mjs';
 import { HttpError } from './errors.mjs';
 import { createLive } from './live.mjs';
-import { leaderboard } from './cheat.mjs';
+import { leaderboard, submitAppeal } from './cheat.mjs';
 import { listGamePuzzles, readGameReview, updateGamePuzzle } from './reviews.mjs';
+import { followPlayer, followingFeed, playerProfile, unfollowPlayer } from './social.mjs';
+import { acceptMessage, declineMessage, listThreads, readThread, sendMessage } from './messages.mjs';
 import { getSync, putSync } from './sync.mjs';
 
 export const ALLOWED_ORIGINS = new Set([
@@ -154,6 +156,62 @@ async function handle(req, res, db) {
   if (req.method === 'GET' && pathName === '/api/leaderboard') {
     const user = userFromAuthorization(db, req.headers.authorization);
     send(res, 200, leaderboard(db, url.searchParams.get('pace'), user && user.id));
+    return;
+  }
+  if (req.method === 'POST' && pathName === '/api/appeals') {
+    const user = requireUser(db, req);
+    const body = await readJson(req, MAX_AUTH_BYTES);
+    send(res, 200, { appeal: submitAppeal(db, { userId: user.id, pace: body.pace, note: body.note }) });
+    return;
+  }
+  if (req.method === 'GET' && pathName === '/api/following') {
+    const user = requireUser(db, req);
+    send(res, 200, followingFeed(db, user.id));
+    return;
+  }
+  if (req.method === 'POST' && pathName === '/api/follow') {
+    const user = requireUser(db, req);
+    const body = await readJson(req, MAX_AUTH_BYTES);
+    send(res, 200, followPlayer(db, user.id, body.username));
+    return;
+  }
+  if (req.method === 'POST' && pathName === '/api/unfollow') {
+    const user = requireUser(db, req);
+    const body = await readJson(req, MAX_AUTH_BYTES);
+    send(res, 200, unfollowPlayer(db, user.id, body.username));
+    return;
+  }
+  if (req.method === 'GET' && pathName === '/api/messages') {
+    const user = requireUser(db, req);
+    send(res, 200, listThreads(db, user.id));
+    return;
+  }
+  const messageAnswer = /^\/api\/messages\/([^/]+)\/(accept|decline)$/.exec(pathName);
+  if (req.method === 'POST' && messageAnswer) {
+    const user = requireUser(db, req);
+    const username = decodeURIComponent(messageAnswer[1]);
+    const result = messageAnswer[2] === 'accept'
+      ? acceptMessage(db, user.id, username)
+      : declineMessage(db, user.id, username);
+    send(res, 200, result);
+    return;
+  }
+  const messagePath = /^\/api\/messages\/([^/]+)$/.exec(pathName);
+  if (messagePath && (req.method === 'GET' || req.method === 'POST')) {
+    const user = requireUser(db, req);
+    const username = decodeURIComponent(messagePath[1]);
+    if (req.method === 'GET') {
+      send(res, 200, readThread(db, user.id, username));
+      return;
+    }
+    const body = await readJson(req, MAX_AUTH_BYTES);
+    send(res, 200, sendMessage(db, user.id, username, body.text));
+    return;
+  }
+  const playerPath = /^\/api\/players\/([^/]+)$/.exec(pathName);
+  if (req.method === 'GET' && playerPath) {
+    const user = userFromAuthorization(db, req.headers.authorization);
+    send(res, 200, playerProfile(db, decodeURIComponent(playerPath[1]), user && user.id));
     return;
   }
   if (req.method === 'GET' && pathName === '/api/puzzles') {
