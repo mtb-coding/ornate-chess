@@ -264,7 +264,7 @@ export function makeGamePage(mode) {
       rootEl = root;
       root.innerHTML = `<h1 class="page-title" id="title-${key}">${isBot ? 'Play against the bot' : 'Two-player game'}</h1>
         <p class="lede">${isBot ? 'Choose a colour, a difficulty and an optional clock. The game is saved automatically after every move.' : 'Two people take turns on this device. The game is saved automatically after every move.'}</p>
-        ${isBot ? '<p class="help"><a href="#/play?lobby=1">Return to the Play page to choose an online time control.</a></p>' : ''}
+        ${isBot ? '<p class="return-play"><a href="#/play?lobby=1">Return to Play page</a></p>' : ''}
         <div class="setup-host"></div><div class="game-host"></div>`;
       const pending = app.pendingLoad && app.pendingLoad.target === key ? app.pendingLoad : null;
       if (pending) {

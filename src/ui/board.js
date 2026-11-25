@@ -7,6 +7,7 @@ import { promotionDialog } from './dialogs.js';
 import { CORNER } from './ornament.js';
 import { Annotations, ANNOTATION_COLORS, colorForModifiers, arrowPathD, engineArrowGeometry } from './annotations.js';
 import { badgeSvg } from './review-badges.js';
+import { premoveMoves } from '../premove.js';
 
 export class Board {
   constructor(host, opts = {}) {
@@ -27,6 +28,12 @@ export class Board {
     this.drag = null;
     this.busy = false;
     this.onMove = opts.onMove || (() => {});
+    this.onPremove = opts.onPremove || null;
+    this.onClearPremoves = opts.onClearPremoves || null;
+    this.premoveColor = null;
+    this.premoveBoard = null;
+    this.premoveMarks = [];
+    this.premoveEnabled = false;
     this.build();
   }
 
@@ -57,7 +64,10 @@ export class Board {
     this.boardEl.addEventListener('pointerdown', (e) => this.pointerDown(e));
     this.boardEl.addEventListener('keydown', (e) => this.keyDown(e));
     this.boardEl.addEventListener('focusin', (e) => { const sq = this.sqOfEl(e.target); if (sq != null) this.focusSq = sq; });
-    this.boardEl.addEventListener('contextmenu', (e) => e.preventDefault());
+    this.boardEl.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+      if (this.premoveMarks.length && this.onClearPremoves) this.onClearPremoves();
+    });
     this.layout();
   }
 
@@ -103,6 +113,10 @@ export class Board {
     this.position = position;
     this.lastMove = lastMove;
     this.ghosts = [];
+    this.premoveColor = null;
+    this.premoveBoard = null;
+    this.premoveMarks = [];
+    this.premoveEnabled = false;
     this.clearSelection(false);
     this.hintSquares = [];
     this.render();
@@ -124,6 +138,24 @@ export class Board {
     this.render();
   }
 
+  // `spec` is { color, board, marks, enabled }. Null clears the preview.
+  setPremove(spec) {
+    if (!spec) {
+      const had = this.premoveColor || this.premoveMarks.length;
+      this.premoveColor = null;
+      this.premoveBoard = null;
+      this.premoveMarks = [];
+      this.premoveEnabled = false;
+      if (had && this.position) this.render();
+      return;
+    }
+    this.premoveColor = spec.color;
+    this.premoveBoard = spec.board;
+    this.premoveMarks = spec.marks || [];
+    this.premoveEnabled = spec.enabled !== false;
+    if (this.position) this.render();
+  }
+
   setHint(squares) { this.hintSquares = squares || []; this.render(); }
   setArrows(arrows) { this.arrows = arrows || []; this.drawArrows(); }
   setGhosts(ghosts) { this.ghosts = ghosts || []; this.render(); }
@@ -132,8 +164,18 @@ export class Board {
 
   clearSelection(rerender = true) { this.selected = null; this.legalTargets = []; if (rerender && this.position) this.render(); }
 
+  premoveActive() {
+    return !!(this.premoveColor && this.premoveBoard && this.position && this.position.turn !== this.premoveColor);
+  }
+
   canPick(sq) {
-    if (!this.position || !this.movable || this.busy) return false;
+    if (!this.position || this.busy) return false;
+    if (this.premoveActive()) {
+      if (!this.premoveEnabled) return false;
+      const piece = this.premoveBoard[sq];
+      return !!(piece && piece.color === this.premoveColor && premoveMoves(this.premoveBoard, this.premoveColor, sq).length);
+    }
+    if (!this.movable) return false;
     const pc = this.position.board[sq];
     if (!pc || pc.color !== this.position.turn) return false;
     return this.movable === 'both' || this.movable === pc.color;
@@ -141,18 +183,23 @@ export class Board {
 
   select(sq) {
     this.selected = sq;
-    this.legalTargets = this.position.legalMovesFrom(sq);
+    if (this.premoveActive()) this.legalTargets = premoveMoves(this.premoveBoard, this.premoveColor, sq);
+    else this.legalTargets = this.position.legalMovesFrom(sq);
     this.render();
   }
 
   render() {
     const pos = this.position; if (!pos) return;
-    const checkSq = pos.inCheck() ? pos.board.findIndex((p) => p && p.type === 'k' && p.color === pos.turn) : -1;
+    const preview = this.premoveBoard;
+    const realCheck = pos.inCheck() ? pos.board.findIndex((p) => p && p.type === 'k' && p.color === pos.turn) : -1;
+    const checkSq = realCheck >= 0 && (!preview || (preview[realCheck] && preview[realCheck].type === 'k' && preview[realCheck].color === pos.turn)) ? realCheck : -1;
     const targets = new Set(this.legalTargets.map((m) => m.to));
+    const premoves = new Set(this.premoveMarks);
     for (let i = 0; i < 64; i++) {
-      const cell = this.cells[i]; const sq = +cell.dataset.sq; const pc = pos.board[sq];
+      const cell = this.cells[i]; const sq = +cell.dataset.sq; const pc = preview ? preview[sq] : pos.board[sq];
       const cls = cell.classList;
       cls.toggle('last', !!this.lastMove && (this.lastMove.from === sq || this.lastMove.to === sq));
+      cls.toggle('premove', premoves.has(sq));
       cls.toggle('check', sq === checkSq);
       cls.toggle('selected', sq === this.selected);
       cls.toggle('target', targets.has(sq) && this.opts.showLegal);
@@ -181,6 +228,7 @@ export class Board {
       if (targets.has(sq)) label += ', legal move';
       if (sq === checkSq) label += ', in check';
       if (this.lastMove && this.lastMove.to === sq) label += ', last move';
+      if (premoves.has(sq)) label += ', premove';
       if (mark) label += `, highlighted in ${ANNOTATION_COLORS[mark].label.toLowerCase()}`;
       if (cell._label !== label) { cell._label = label; cell.setAttribute('aria-label', label); }
       const selAttr = sq === this.selected ? 'true' : 'false';
@@ -275,7 +323,8 @@ export class Board {
       let choice = 'q';
       if (!this.opts.autoQueen) {
         this.busy = true;
-        choice = await promotionDialog(this.position.board[from].color, this.opts.pieceSet);
+        const carrier = (this.premoveBoard && this.premoveBoard[from]) || this.position.board[from];
+        choice = await promotionDialog(carrier ? carrier.color : this.position.turn, this.opts.pieceSet);
         this.busy = false;
       }
       if (!choice) { this.clearSelection(); this.focusCell(from); return true; }
@@ -283,7 +332,8 @@ export class Board {
     }
     this.clearSelection(false);
     this.focusSq = to;
-    this.onMove(move);
+    if (this.premoveActive() && this.onPremove) this.onPremove(move);
+    else this.onMove(move);
     return true;
   }
 
@@ -337,7 +387,15 @@ export class Board {
   }
 
   pointerDown(e) {
-    if (e.button === 2 && e.pointerType !== 'touch') { this.annotateDown(e); return; }
+    if (e.button === 2) {
+      if (this.premoveMarks.length && this.onClearPremoves) {
+        e.preventDefault();
+        this.onClearPremoves();
+        return;
+      }
+      if (e.pointerType !== 'touch') this.annotateDown(e);
+      return;
+    }
     if (e.button !== 0 && e.pointerType === 'mouse') return;
     // A left click anywhere on the board clears the annotations, as on Chess.com.
     if (e.pointerType !== 'touch' && !this.annotations.isEmpty) this.clearAnnotations();

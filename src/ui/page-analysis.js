@@ -1,10 +1,14 @@
 // Analysis board: load a saved game, PGN or FEN, step through moves and read engine lines.
+// Set up a position is a separate editor. It does not share the move-playing board.
 import { mods } from './modules.js';
 import { app } from './state.js';
 import { GameController } from './gameview.js';
+import { mountEditor } from './board-editor.js';
 import { esc, toast } from './dom.js';
 import { CORNER, ICONS } from './ornament.js';
 import { attachStockfishEval } from './analysis-stockfish.js';
+
+let editor = null;
 
 const fc = `<span class="fc tl">${CORNER}</span><span class="fc tr">${CORNER}</span><span class="fc bl">${CORNER}</span><span class="fc br">${CORNER}</span>`;
 
@@ -13,6 +17,7 @@ export function render(root) {
   root.innerHTML = `
     <h1 class="page-title" id="title-analysis">Analysis</h1>
     <p class="lede">Load a position or a game, step through the moves, and read the engine's evaluation. The evaluation bar and the suggested lines on this page are produced by the bundled Stockfish engine. You can also play moves from any position to explore alternatives.</p>
+    <p class="setup-entry"><button class="btn" type="button" data-load="setup" aria-expanded="false">${ICONS.pen}<span>Set up a position</span></button></p>
     <details class="frame load-panel" ${app.controllers.analysis ? '' : 'open'}>${fc}
       <summary class="engraved">Load a game or position</summary>
       <div class="frame-inner load-grid">
@@ -26,8 +31,11 @@ export function render(root) {
           <p class="fen-out muted"></p></div>
       </div>
     </details>
+    <div class="editor-host" hidden></div>
     <div class="game-host"></div>`;
   const host = root.querySelector('.game-host');
+  const editorHost = root.querySelector('.editor-host');
+  const setupBtn = root.querySelector('[data-load="setup"]');
   const fenOut = root.querySelector('.fen-out');
 
   const attach = (ctrl) => {
@@ -48,6 +56,48 @@ export function render(root) {
   const showFen = (ctrl) => { fenOut.textContent = `Position shown: ${ctrl.position.toFen()}`; };
   const fromGame = (game, name, orientation) => { const c = new GameController({ mode: 'analysis', game, name }); if (orientation) c.orientation = orientation; return c; };
 
+  const closeEditor = () => {
+    if (editor) { editor.destroy(); editor = null; }
+    editorHost.hidden = true;
+    host.hidden = false;
+    setupBtn.setAttribute('aria-expanded', 'false');
+  };
+  const openEditor = () => {
+    if (editor) return;
+    const ctrl = app.controllers.analysis;
+    let fen;
+    try { fen = ctrl && ctrl.position ? ctrl.position.toFen() : undefined; } catch { fen = undefined; }
+    if (ctrl) {
+      if (ctrl._sfDetach) { ctrl._sfDetach(); ctrl._sfDetach = null; }
+      ctrl.unmount();
+    }
+    host.innerHTML = '';
+    host.hidden = true;
+    editorHost.hidden = false;
+    const panel = root.querySelector('.load-panel');
+    if (panel) panel.open = false;
+    setupBtn.setAttribute('aria-expanded', 'true');
+    editor = mountEditor(editorHost, {
+      fen,
+      onAnalyze(nextFen) {
+        closeEditor();
+        try {
+          attach(fromGame(new mods.engine.Game(nextFen), 'Set up position'));
+          toast('The position was loaded.');
+        } catch (err) {
+          toast(`The position could not be loaded: ${err.message}`);
+          attach(fromGame(new mods.engine.Game(), ''));
+        }
+      },
+      onCancel() {
+        closeEditor();
+        const current = app.controllers.analysis;
+        if (current) attach(current);
+        else attach(fromGame(new mods.engine.Game(), ''));
+      },
+    });
+  };
+
   const pending = app.pendingLoad && app.pendingLoad.target === 'analysis' ? app.pendingLoad : null;
   if (pending) {
     app.pendingLoad = null;
@@ -58,8 +108,10 @@ export function render(root) {
   } else if (app.controllers.analysis) attach(app.controllers.analysis);
   else attach(fromGame(new mods.engine.Game(), ''));
 
-  root.querySelector('.load-panel').addEventListener('click', (e) => {
+  root.addEventListener('click', (e) => {
     const b = e.target.closest('[data-load]'); if (!b || b.disabled) return;
+    if (b.dataset.load === 'setup') { openEditor(); return; }
+    closeEditor();
     const { Game } = mods.engine;
     try {
       if (b.dataset.load === 'saved') {
@@ -78,7 +130,15 @@ export function render(root) {
       toast('The position was loaded.');
     } catch (err) { toast(`The input could not be loaded: ${err.message}`); }
   });
-  return () => { const c = app.controllers.analysis; if (c) { if (c._sfDetach) { c._sfDetach(); c._sfDetach = null; } c.unmount(); } };
+  return () => {
+    if (editor) { editor.destroy(); editor = null; }
+    const c = app.controllers.analysis;
+    if (c) { if (c._sfDetach) { c._sfDetach(); c._sfDetach = null; } c.unmount(); }
+  };
 }
 
-export function onKey(e) { const c = app.controllers.analysis; return c && c.root ? c.handleKey(e) : false; }
+export function onKey(e) {
+  if (editor && editor.onKey(e)) return true;
+  const c = app.controllers.analysis;
+  return c && c.root ? c.handleKey(e) : false;
+}

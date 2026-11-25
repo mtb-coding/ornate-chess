@@ -2,7 +2,8 @@
 // Sockets stay in server/index.mjs; this module only keeps the rules.
 import { randomUUID } from 'node:crypto';
 import { Game } from '../src/engine.js';
-import { CLOCK_PRESETS } from '../src/ui/clock.js';
+import { CLOCK_PRESETS } from '../src/clock-presets.js';
+import { PREMOVE_LIMIT, PREMOVE_MS, premoveAllowed } from '../src/premove.js';
 import { applyUci, clockAfterMove } from './moves.mjs';
 import { enqueueJob } from './jobs.mjs';
 import { paceForClock, rateGame, readRatings } from './ratings.mjs';
@@ -165,6 +166,8 @@ export function createLive(db) {
           at: entry.at,
         })),
       },
+      premoves: queues(row)[you] ? queues(row)[you].slice() : [],
+      premoveGeneration: generations(row)[you] || 0,
     };
   }
 
@@ -277,6 +280,8 @@ export function createLive(db) {
         ply: game.length,
         moveTimes: moveTimesFrom(stored.move_times_json),
         ...chatFrom(stored),
+        premoves: { w: [], b: [] },
+        premoveGeneration: { w: 0, b: 0 },
       };
       remember(row);
       disconnectedAt.set(row.whiteId, now);
@@ -311,8 +316,74 @@ export function createLive(db) {
 
   loadActive(Date.now());
 
-  function fail(userId, error) {
-    send(userId, { type: 'error', error });
+  function fail(userId, error, extra) {
+    send(userId, extra ? { type: 'error', error, ...extra } : { type: 'error', error });
+  }
+
+  function queues(row) {
+    if (!row.premoves) row.premoves = { w: [], b: [] };
+    return row.premoves;
+  }
+
+  function generations(row) {
+    if (!row.premoveGeneration) row.premoveGeneration = { w: 0, b: 0 };
+    return row.premoveGeneration;
+  }
+
+  function premoveState(row, side) {
+    return { premoves: queues(row)[side].slice(), premoveGeneration: generations(row)[side] || 0 };
+  }
+
+  function opposite(side) { return side === 'w' ? 'b' : 'w'; }
+
+  // Plays one move that has already been accepted as this side's turn.
+  // 'flag' and 'finished' have already told the players. A string is an error.
+  function applyPlayed(row, side, uci, elapsedMs, now) {
+    const clock = clockAfterMove({ wMs: row.wMs, bMs: row.bMs, incMs: row.incMs, turn: side, elapsedMs });
+    if (clock.flagged) {
+      flag(row, now);
+      return 'flag';
+    }
+    const applied = applyUci(JSON.parse(row.gameJson), uci);
+    if (!applied.ok) return applied.error;
+    if (!Array.isArray(row.moveTimes)) row.moveTimes = [];
+    row.moveTimes.push(row.turnStartedAt == null ? null : elapsedMs);
+    row.wMs = clock.wMs;
+    row.bMs = clock.bMs;
+    row.gameJson = JSON.stringify(applied.game);
+    row.drawOffer = null;
+    row.updatedAt = now;
+    row.ply = applied.game.uci.length;
+    if (applied.result) {
+      finish(row, parseGame(applied.game), now);
+      return 'finished';
+    }
+    row.turn = opposite(side);
+    row.turnStartedAt = now;
+    return 'ok';
+  }
+
+  function drainPremoves(row, now) {
+    for (let n = 0; n < PREMOVE_LIMIT * 2; n++) {
+      if (row.status !== 'live') return;
+      const side = row.turn;
+      const queue = queues(row)[side];
+      if (!queue.length) return;
+      const bank = side === 'w' ? row.wMs : row.bMs;
+      if (!(bank > PREMOVE_MS)) {
+        queue.length = 0;
+        return;
+      }
+      const uci = queue[0];
+      const trial = applyUci(JSON.parse(row.gameJson), uci);
+      if (!trial.ok) {
+        queue.length = 0;
+        return;
+      }
+      queue.shift();
+      const outcome = applyPlayed(row, side, uci, PREMOVE_MS, now);
+      if (outcome !== 'ok') return;
+    }
   }
 
   function startGame(waiting, joining, now) {
@@ -344,6 +415,8 @@ export function createLive(db) {
       chatStatus: 'closed',
       chatBy: null,
       chatMessages: [],
+      premoves: { w: [], b: [] },
+      premoveGeneration: { w: 0, b: 0 },
     };
     remember(row);
     save(row);
@@ -605,37 +678,56 @@ export function createLive(db) {
         return;
       }
       const side = sideOf(row, user.id);
+      if (msg.type === 'premove' || msg.type === 'premove-clear') {
+        if (row.status !== 'live') {
+          fail(user.id, 'The game is over.', premoveState(row, side));
+          return;
+        }
+        const queue = queues(row)[side];
+        const gens = generations(row);
+        if (msg.type === 'premove-clear') {
+          const generation = Number.isInteger(msg.generation) ? msg.generation : gens[side] + 1;
+          gens[side] = generation;
+          queue.length = 0;
+          broadcast(row, now);
+          return;
+        }
+        const generation = Number.isInteger(msg.generation) ? msg.generation : gens[side];
+        if (generation !== gens[side]) {
+          fail(user.id, 'That premove was cancelled.', premoveState(row, side));
+          return;
+        }
+        if (row.turn === side) {
+          fail(user.id, 'Premoves are kept while the opponent is to move.', premoveState(row, side));
+          return;
+        }
+        if (queue.length >= PREMOVE_LIMIT) {
+          fail(user.id, 'Five premoves are already queued.', premoveState(row, side));
+          return;
+        }
+        if (!premoveAllowed(parseGame(row.gameJson).position, side, queue, msg.uci)) {
+          fail(user.id, 'That premove is not possible.', premoveState(row, side));
+          return;
+        }
+        queue.push(String(msg.uci));
+        broadcast(row, now);
+        return;
+      }
       if (msg.type === 'move') {
         if (row.turn !== side) {
           fail(user.id, 'It is not your turn.');
           return;
         }
-        const elapsed = Math.max(0, now - row.turnStartedAt);
-        const clock = clockAfterMove({ wMs: row.wMs, bMs: row.bMs, incMs: row.incMs, turn: side, elapsedMs: elapsed });
-        if (clock.flagged) {
-          flag(row, now);
+        const elapsed = Math.max(0, now - (row.turnStartedAt == null ? now : row.turnStartedAt));
+        const outcome = applyPlayed(row, side, msg.uci, elapsed, now);
+        if (outcome === 'flag' || outcome === 'finished') return;
+        if (outcome !== 'ok') {
+          fail(user.id, outcome);
           return;
         }
-        const applied = applyUci(JSON.parse(row.gameJson), msg.uci);
-        if (!applied.ok) {
-          fail(user.id, applied.error);
-          return;
-        }
-        if (!Array.isArray(row.moveTimes)) row.moveTimes = [];
-        row.moveTimes.push(row.turnStartedAt == null ? null : elapsed);
-        row.wMs = clock.wMs;
-        row.bMs = clock.bMs;
-        row.gameJson = JSON.stringify(applied.game);
-        row.drawOffer = null;
-        row.updatedAt = now;
-        row.ply = applied.game.uci.length;
-        if (applied.result) {
-          const game = parseGame(applied.game);
-          finish(row, game, now);
-          return;
-        }
-        row.turn = side === 'w' ? 'b' : 'w';
-        row.turnStartedAt = now;
+        queues(row)[side] = [];
+        drainPremoves(row, now);
+        if (row.status !== 'live') return;
         save(row);
         broadcast(row, now);
         return;

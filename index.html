@@ -14,14 +14,12 @@
 <title>Ornate Chess</title>
 <meta name="description" content="Ornate Chess is a browser chess application with a bot opponent, two-player games, puzzles, analysis and saved games.">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' http://127.0.0.1:8488 http://localhost:8488 ws://127.0.0.1:8488 ws://localhost:8488 https: wss:; worker-src 'self'; manifest-src 'self'; base-uri 'self'; form-action 'self'">
 <link rel="stylesheet" href="src/styles/main.css">
 <link rel="stylesheet" href="src/styles/board.css">
 <link rel="stylesheet" href="src/styles/pages.css">
 <link rel="stylesheet" href="src/styles/mobile.css">
-<script>
-  // Apply the saved theme before first paint to avoid a flash of the default theme.
-  try { var s = JSON.parse(localStorage.getItem('ornate-chess:settings') || '{}'); if (s.theme) document.documentElement.dataset.theme = s.theme; if (s.boardStyle) document.documentElement.dataset.board = s.boardStyle; } catch (e) {}
-</script>
+<script src="src/boot-theme.js"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to the main content</a>

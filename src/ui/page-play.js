@@ -271,7 +271,10 @@ function openSocket(section, replace, opts) {
     else if (msg.type === 'rematch' && view) view.rematch(msg);
     else if (msg.type === 'cancelled' || msg.type === 'aborted') fail(msg.error || '');
     else if (msg.type === 'error') {
-      if (view) view.status(msg.error);
+      if (view) {
+        view.status(msg.error);
+        if (Array.isArray(msg.premoves)) view.setPremoves(msg.premoves, msg.premoveGeneration);
+      }
       else {
         const line = section.querySelector('[data-online-status]');
         if (line) line.textContent = msg.error;

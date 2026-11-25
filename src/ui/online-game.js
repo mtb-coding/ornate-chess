@@ -12,7 +12,7 @@ import { formatGlicko } from '../glicko.js';
 import { PACE_LABEL } from '../online-ratings.js';
 import { storeRatings } from './online-ratings-client.js';
 import { noteLiveBoard } from './live-notice.js';
-
+import { PREMOVE_LIMIT, previewPremoves } from '../premove.js';
 const fc = `<span class="fc tl">${CORNER}</span><span class="fc tr">${CORNER}</span><span class="fc bl">${CORNER}</span><span class="fc br">${CORNER}</span>`;
 
 function sideName(state, color) {
@@ -75,7 +75,11 @@ export function mountOnlineGame(section, initial, actions) {
       board.setMovable(null);
       actions.send({ type: 'move', gameId: state.id, uci: moveToUci(move) });
     },
+    onPremove(move) { queuePremove(move); },
+    onClearPremoves() { clearPremoves(); },
   });
+  let queued = Array.isArray(state.premoves) ? state.premoves.slice() : [];
+  let generation = state.premoveGeneration || 0;
   let offset = state.serverNow - Date.now();
   let ply = null;
   const unsub = onSettings((next) => {
@@ -110,13 +114,61 @@ export function mountOnlineGame(section, initial, actions) {
     if (state.status !== 'live') return 'The game is over.';
     if (!state.opponentConnected) return 'Your opponent is disconnected. The clock is still running.';
     const mine = parsed.turn === state.you;
-    if (parsed.position.inCheck()) return mine ? 'It is your move, and your king is in check.' : 'Your opponent is in check.';
-    return mine ? 'It is your move.' : `${state.you === 'w' ? state.black.username : state.white.username} is to move.`;
+    const queuedNote = !mine && queued.length
+      ? ` ${queued.length} ${queued.length === 1 ? 'premove is' : 'premoves are'} queued and ${queued.length === 1 ? 'uses' : 'use'} 0.1 seconds each. Right-click or long-press the board to cancel.`
+      : '';
+    if (parsed.position.inCheck()) return (mine ? 'It is your move, and your king is in check.' : 'Your opponent is in check.') + queuedNote;
+    return (mine ? 'It is your move.' : `${state.you === 'w' ? state.black.username : state.white.username} is to move.`) + queuedNote;
+  }
+
+  function showPremoves(parsed) {
+    const waiting = state.status === 'live' && parsed.turn !== state.you;
+    if (!waiting) {
+      board.setPremove(null);
+      return;
+    }
+    const preview = previewPremoves(parsed.position, state.you, queued);
+    board.setPremove({
+      color: state.you,
+      board: preview.board,
+      marks: preview.marks,
+      enabled: queued.length < PREMOVE_LIMIT,
+    });
+  }
+
+  function queuePremove(move) {
+    if (state.status !== 'live' || queued.length >= PREMOVE_LIMIT) return;
+    const parsed = game();
+    if (parsed.turn === state.you) return;
+    const uci = moveToUci(move);
+    queued = queued.concat(uci);
+    actions.send({ type: 'premove', gameId: state.id, uci, generation });
+    paint(false);
+  }
+
+  function clearPremoves() {
+    if (!queued.length) return;
+    generation += 1;
+    queued = [];
+    actions.send({ type: 'premove-clear', gameId: state.id, generation });
+    paint(false);
+  }
+
+  function takePremoves(next) {
+    const serverGen = next.premoveGeneration || 0;
+    if (serverGen < generation) return;
+    generation = serverGen;
+    const serverQ = Array.isArray(next.premoves) ? next.premoves : [];
+    const nextLen = Game.fromJSON(next.game).length;
+    const prevLen = Game.fromJSON(state.game).length;
+    if (nextLen !== prevLen || serverQ.length >= queued.length) queued = serverQ.slice();
+    else if (serverQ.every((uci, index) => queued[index] === uci)) return;
+    else queued = serverQ.slice();
   }
 
   function paint(sound) {
     const parsed = game();
-    if (sound && ply != null && parsed.length === ply + 1 && parsed.lastMove) sfx(soundForMove(parsed.lastMove, parsed.position));
+    if (sound && ply != null && parsed.length > ply && parsed.lastMove) sfx(soundForMove(parsed.lastMove, parsed.position));
     ply = parsed.length;
     const bottom = state.you === 'b' ? 'b' : 'w';
     const top = bottom === 'w' ? 'b' : 'w';
@@ -131,6 +183,7 @@ export function mountOnlineGame(section, initial, actions) {
     board.setPosition(parsed.position, { lastMove: parsed.lastMove, animate: sound && parsed.length > 0 });
     const movable = state.status === 'live' && parsed.turn === state.you ? state.you : null;
     board.setMovable(movable);
+    showPremoves(parsed);
     root.querySelector('.status').textContent = statusText(parsed);
     const note = root.querySelector('[data-draw-note]');
     const rematchLine = rematchText();
@@ -269,6 +322,7 @@ export function mountOnlineGame(section, initial, actions) {
     update(next) {
       if (next.id !== state.id || next.status === 'live') rematch = null;
       const grew = Game.fromJSON(next.game).length > (ply || 0);
+      takePremoves(next);
       state = next;
       offset = next.serverNow - Date.now();
       paint(grew);
@@ -276,6 +330,11 @@ export function mountOnlineGame(section, initial, actions) {
     rematch(msg) {
       if (!msg || (msg.gameId && msg.gameId !== state.id) || state.status !== 'finished') return;
       rematch = !msg.state || msg.state === 'idle' ? null : msg;
+      paint(false);
+    },
+    setPremoves(list, nextGeneration) {
+      if (Number.isInteger(nextGeneration)) generation = nextGeneration;
+      queued = Array.isArray(list) ? list.slice() : [];
       paint(false);
     },
     status(text) {

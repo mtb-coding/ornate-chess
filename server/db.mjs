@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 
 const SERVER_DIR = path.dirname(fileURLToPath(import.meta.url));
 export const DEFAULT_DB_PATH = path.join(SERVER_DIR, 'data', 'ornate.sqlite');
-const SCHEMA_VERSION = 12;
+const SCHEMA_VERSION = 13;
 
 const LIVE_GAMES_SQL = `
 CREATE TABLE IF NOT EXISTS live_games (
@@ -256,6 +256,42 @@ export function openDatabase(file = DEFAULT_DB_PATH) {
     CREATE INDEX IF NOT EXISTS friendships_high ON friendships(user_high, status);`);
     version = 12;
   }
+  if (version < 13) {
+    db.exec(`CREATE TABLE IF NOT EXISTS password_resets_v13 (
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      email TEXT NOT NULL,
+      code_hash TEXT NOT NULL,
+      next_hash TEXT NOT NULL,
+      expires_at INTEGER NOT NULL,
+      attempts INTEGER NOT NULL,
+      created_at INTEGER NOT NULL,
+      purpose TEXT NOT NULL DEFAULT 'password',
+      reuse INTEGER NOT NULL DEFAULT 0,
+      PRIMARY KEY (user_id, purpose)
+    )`);
+    const existing = db.prepare("SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'password_resets'").get();
+    if (existing) {
+      const cols = db.prepare('PRAGMA table_info(password_resets)').all().map((col) => col.name);
+      if (!cols.includes('reuse') || !db.prepare("SELECT sql FROM sqlite_master WHERE name = 'password_resets'").get().sql.includes('user_id, purpose')) {
+        const purpose = cols.includes('purpose') ? 'purpose' : "'password'";
+        db.exec(`INSERT OR REPLACE INTO password_resets_v13 (user_id, email, code_hash, next_hash, expires_at, attempts, created_at, purpose, reuse)
+          SELECT user_id, email, code_hash, next_hash, expires_at, attempts, created_at, ${purpose}, 0 FROM password_resets`);
+        db.exec('DROP TABLE password_resets');
+        db.exec('ALTER TABLE password_resets_v13 RENAME TO password_resets');
+      } else {
+        db.exec('DROP TABLE password_resets_v13');
+      }
+    } else {
+      db.exec('ALTER TABLE password_resets_v13 RENAME TO password_resets');
+    }
+    version = 13;
+  }
   db.exec(`PRAGMA user_version = ${version}`);
   return db;
+}
+
+export function purgeExpired(db, now = Date.now()) {
+  db.prepare('DELETE FROM sessions WHERE expires_at <= ?').run(now);
+  db.prepare('DELETE FROM password_resets WHERE expires_at <= ?').run(now);
+  db.prepare('DELETE FROM challenges WHERE expires_at <= ?').run(now);
 }

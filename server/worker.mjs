@@ -3,7 +3,7 @@
 // The bundled Stockfish build is used only on this machine. It is not sent to players.
 import path from 'node:path';
 import { constants, setPriority } from 'node:os';
-import { DEFAULT_DB_PATH, openDatabase } from './db.mjs';
+import { DEFAULT_DB_PATH, openDatabase, purgeExpired } from './db.mjs';
 import { claimJob, ensureBackup, failJob, finishJob, runBackup, runReview } from './jobs.mjs';
 import { REVIEW_DEPTH } from '../src/review.js';
 import { createNodeEngine } from './stockfish-process.mjs';
@@ -28,6 +28,7 @@ function analyser() {
 }
 
 async function tick() {
+  try { purgeExpired(db); } catch (err) { console.error('[jobs]', err && err.message ? err.message : err); }
   ensureBackup(db);
   const job = claimJob(db);
   if (!job) return;

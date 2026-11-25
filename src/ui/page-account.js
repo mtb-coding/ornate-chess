@@ -69,7 +69,9 @@ function signedOut() {
       <input id="account-password" class="field" name="password" type="password" autocomplete="current-password" required minlength="8" maxlength="128">
       <label for="account-email">Email</label>
       <input id="account-email" class="field" name="email" type="email" autocomplete="email" required maxlength="254" spellcheck="false">
-      <p class="help">A password must be at least 8 characters. The username uses letters, numbers and underscores. The email is saved with the account. A password change sends its code to that address.</p>
+      <label for="account-email-again">Email again</label>
+      <input id="account-email-again" class="field" name="emailAgain" type="email" autocomplete="email" maxlength="254" spellcheck="false">
+      <p class="help">A password must be at least 8 characters. The username uses letters, numbers and underscores. Enter the email twice. It is saved with the account, and a password change sends its code to that address.</p>
       <div class="btn-row">
         <button class="btn primary" type="submit" data-act="login" formnovalidate>Sign in</button>
         <button class="btn" type="submit" data-act="register">Create an account</button>
@@ -144,7 +146,7 @@ function signedIn(account, last) {
     ${DIVIDER}
     <form class="account-form" aria-label="Delete this account">
       <h2>Delete this account</h2>
-      <p class="help">Deleting the account removes the ratings and the messages. Saved games on this device stay. This cannot be undone.</p>
+      <p class="help">Deleting the account removes the ratings and the messages. Finished games stay, with this account shown as Deleted player. Saved games on this device stay. This cannot be undone.</p>
       <label for="delete-password">Password</label>
       <input id="delete-password" class="field" name="password" type="password" autocomplete="current-password" required minlength="8" maxlength="128">
       <div class="btn-row"><button class="btn danger" type="submit">Delete the account</button></div>
@@ -178,6 +180,10 @@ function bindSignedOut(root, setStatus) {
     const username = form.username.value.trim();
     const password = form.password.value;
     const email = form.email.value.trim();
+    if (act === 'register' && email.toLowerCase() !== form.emailAgain.value.trim().toLowerCase()) {
+      setStatus('Enter the same email address in both fields.');
+      return;
+    }
     const problem = validate(username, password, email, act === 'register');
     if (problem) { setStatus(problem); return; }
     const buttons = [...form.querySelectorAll('button')];

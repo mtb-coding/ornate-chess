@@ -1,6 +1,6 @@
 // A direct offer of one clock to one player. The game starts only when that player accepts.
 import { randomUUID } from 'node:crypto';
-import { CLOCK_PRESETS, clockMark } from '../src/ui/clock.js';
+import { CLOCK_PRESETS, clockMark } from '../src/clock-presets.js';
 import { HttpError } from './errors.mjs';
 
 const USERNAME = /^[A-Za-z0-9_]{3,24}$/;

@@ -13,6 +13,8 @@ import { settings, updateSettings, difficulty, onSettings } from './state.js';
 import { confirmDialog, gameOverDialog, promptDialog } from './dialogs.js';
 import { ratedStatus, playerScore, formatRating, MIN_FULLMOVES } from '../rating.js';
 import { readRating, ratingChangeHtml } from './rating-view.js';
+import { moveToUci } from '../engine.js';
+import { PREMOVE_LIMIT, previewPremoves, premoveAllowed } from '../premove.js';
 
 const START_COUNT = { p: 8, n: 2, b: 2, r: 2, q: 1 };
 export const evalClient = new BotClient();
@@ -63,6 +65,7 @@ export class GameController {
     this.root = null;
     this.reported = this.over;
     this.drawOfferedAt = -10;
+    this.premoves = [];
     // Rating bookkeeping for bot games. See src/rating.js for the rules.
     this.ratingMeta = { rated: true, usedUndo: false, usedHint: false, loaded: false, legacy: false, recorded: false, ...(rating || {}) };
     this.ratingOutcome = null;
@@ -233,6 +236,8 @@ export class GameController {
       pieceSet: s.pieceSet, orientation, showLegal: s.showLegal, showCoords: s.showCoords, animations: s.animations, autoQueen: s.autoQueen,
       label: 'Chess board. Use the arrow keys to move between squares and Enter to select a piece or a destination.',
       onMove: (m) => this.userMove(m),
+      onPremove: (m) => this.addPremove(m),
+      onClearPremoves: () => this.clearPremoves(),
     });
     this.renderControls();
     root.addEventListener('click', (e) => this.onClick(e));
@@ -319,7 +324,10 @@ export class GameController {
     // status
     let status;
     if (result) status = describeResult(result);
-    else if (this.mode === 'bot' && live.turn === this.botColor) status = live.inCheck() ? 'The bot is in check and is choosing a move.' : 'The bot is choosing a move.';
+    else if (this.mode === 'bot' && live.turn === this.botColor) {
+      status = live.inCheck() ? 'The bot is in check and is choosing a move.' : 'The bot is choosing a move.';
+      if (this.premoves.length && this.atEnd) status += ` ${this.premoves.length} ${this.premoves.length === 1 ? 'premove is' : 'premoves are'} queued and ${this.premoves.length === 1 ? 'uses' : 'use'} 0.1 seconds each. Right-click or long-press the board to cancel.`;
+    }
     else {
       const side = live.turn === 'w' ? 'White' : 'Black';
       const who = this.mode === 'bot' ? 'It is your move' : `${side} is to move`;
@@ -333,6 +341,7 @@ export class GameController {
     this.renderMoves();
     this.renderThinking();
     this.updateMovable();
+    this.updatePremoves();
     this.updateButtons();
     this.renderEval();
   }
@@ -420,6 +429,55 @@ export class GameController {
     }
     if (this.mode === 'analysis') m = 'both';
     this.board.setMovable(m);
+  }
+
+  updatePremoves() {
+    const show = this.mode === 'bot' && this.atEnd && !this.game.result() && !this.over
+      && this.game.position.turn === this.botColor;
+    if (!show) {
+      this.board.setPremove(null);
+      return;
+    }
+    const preview = previewPremoves(this.game.position, this.playerColor, this.premoves);
+    this.board.setPremove({
+      color: this.playerColor,
+      board: preview.board,
+      marks: preview.marks,
+      enabled: this.premoves.length < PREMOVE_LIMIT,
+    });
+  }
+
+  addPremove(move) {
+    if (this.mode !== 'bot' || this.game.result() || this.over || !this.atEnd) return;
+    if (this.game.position.turn === this.playerColor || this.premoves.length >= PREMOVE_LIMIT) return;
+    const uci = moveToUci(move);
+    if (!premoveAllowed(this.game.position, this.playerColor, this.premoves, uci)) return;
+    this.premoves.push(uci);
+    this.render();
+  }
+
+  clearPremoves() {
+    if (!this.premoves.length) return;
+    this.premoves = [];
+    this.render();
+  }
+
+  playQueuedPremove() {
+    if (this.mode !== 'bot' || this.game.result() || this.over || !this.premoves.length) return;
+    if (this.game.position.turn !== this.playerColor) return;
+    const next = this.game.position.parseUci(this.premoves[0]);
+    if (!next) {
+      this.premoves = [];
+      this.render();
+      return;
+    }
+    if (this.clock && !this.clock.premove(this.playerColor)) {
+      this.premoves = [];
+      this.render();
+      return;
+    }
+    this.premoves.shift();
+    this.applyMove(next, true, 'none');
   }
 
   updateButtons() {
@@ -580,7 +638,7 @@ export class GameController {
     this.applyMove(move, true);
   }
 
-  applyMove(move, byUser) {
+  applyMove(move, byUser, clockMode = 'normal') {
     const mover = this.game.position.turn;
     if (!this.game.play(move)) { if (settings().sound) sfx('illegal'); toast('That move is not legal in this position.'); this.board.setPosition(this.position, { lastMove: this.game.moves[this.viewPly - 1] || null }); return false; }
     this.viewPly = this.game.moves.length;
@@ -588,9 +646,10 @@ export class GameController {
     this.board.setArrows([]);
     this.board.setPosition(this.position, { lastMove: played, animate: !byUser || true });
     if (settings().sound) sfx(soundForMove(played, this.position));
-    if (this.clock && !this.game.result()) this.clock.switchAfterMove(mover);
+    if (this.clock && !this.game.result() && clockMode !== 'none') this.clock.switchAfterMove(mover);
     this.afterChange();
-    this.maybeBotMove();
+    if (this.mode === 'bot' && mover === this.botColor) this.playQueuedPremove();
+    else this.maybeBotMove();
     return true;
   }
 
@@ -698,6 +757,7 @@ export class GameController {
     }
     this.thinkToken++;
     bot.cancel();
+    this.premoves = [];
     const over = !!this.game.result();
     if (this.mode === 'bot') {
       // Undo the bot reply and the player's move so that it is the player's turn again.

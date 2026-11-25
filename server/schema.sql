@@ -18,14 +18,16 @@ CREATE TABLE IF NOT EXISTS sessions (
 CREATE INDEX IF NOT EXISTS sessions_user ON sessions(user_id);
 
 CREATE TABLE IF NOT EXISTS password_resets (
-  user_id TEXT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+  user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   email TEXT NOT NULL,
   code_hash TEXT NOT NULL,
   next_hash TEXT NOT NULL,
   expires_at INTEGER NOT NULL,
   attempts INTEGER NOT NULL,
   created_at INTEGER NOT NULL,
-  purpose TEXT NOT NULL DEFAULT 'password'
+  purpose TEXT NOT NULL DEFAULT 'password',
+  reuse INTEGER NOT NULL DEFAULT 0,
+  PRIMARY KEY (user_id, purpose)
 );
 
 CREATE TABLE IF NOT EXISTS challenges (

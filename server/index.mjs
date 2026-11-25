@@ -5,8 +5,9 @@ import { fileURLToPath } from 'node:url';
 import { WebSocketServer } from 'ws';
 import { confirmEmailChange, confirmPassword, confirmPasswordChange, confirmPasswordRecovery, login, logout, register, removeAccount, requestEmailChange, requestPasswordChange, requestPasswordRecovery, userFromAuthorization } from './auth.mjs';
 import { readRatings } from './ratings.mjs';
-import { DEFAULT_DB_PATH, openDatabase } from './db.mjs';
+import { DEFAULT_DB_PATH, openDatabase, purgeExpired } from './db.mjs';
 import { HttpError } from './errors.mjs';
+import { clearLimit, fail, hit, locked } from './limit.mjs';
 import { createLive } from './live.mjs';
 import { leaderboard, submitAppeal } from './cheat.mjs';
 import { listGamePuzzles, readGameReview, updateGamePuzzle } from './reviews.mjs';
@@ -22,6 +23,7 @@ export const ALLOWED_ORIGINS = new Set([
   'http://localhost:8477',
   'http://127.0.0.1:8477',
   'https://ornate-chess.netlify.app',
+  ...String(process.env.ORNATE_ALLOWED_ORIGINS || '').split(',').map((item) => item.trim()).filter(Boolean),
 ]);
 
 const MAX_AUTH_BYTES = 32 * 1024;
@@ -103,6 +105,26 @@ function requireUser(db, req) {
   return user;
 }
 
+function clientIp(req) {
+  const remote = (req.socket && req.socket.remoteAddress) || '';
+  if (process.env.ORNATE_TRUST_PROXY === '1') {
+    const forwarded = req.headers['x-forwarded-for'];
+    if (typeof forwarded === 'string' && forwarded.trim()) return forwarded.split(',')[0].trim().replace(/^::ffff:/, '');
+  }
+  return String(remote).replace(/^::ffff:/, '');
+}
+
+function previewCodes(req) {
+  if (process.env.ORNATE_DEV_CODES === '1') return true;
+  if (process.env.ORNATE_DEV_CODES === '0') return false;
+  const ip = clientIp(req);
+  return ip === '127.0.0.1' || ip === '::1';
+}
+
+function limit(key, max, windowMs) {
+  if (hit(key, max, windowMs)) throw new HttpError(429, 'Wait a moment before trying again.');
+}
+
 async function handle(req, res, db, hub) {
   if (!applyCors(req, res)) {
     send(res, 403, { error: 'That origin is not allowed to call this API.' });
@@ -120,11 +142,23 @@ async function handle(req, res, db, hub) {
     return;
   }
   if (req.method === 'POST' && pathName === '/api/auth/register') {
+    limit(`register:${clientIp(req)}`, 20, 10 * 60 * 1000);
     send(res, 200, await register(db, await readJson(req, MAX_AUTH_BYTES)));
     return;
   }
   if (req.method === 'POST' && pathName === '/api/auth/login') {
-    send(res, 200, await login(db, await readJson(req, MAX_AUTH_BYTES)));
+    limit(`login:${clientIp(req)}`, 60, 10 * 60 * 1000);
+    const body = await readJson(req, MAX_AUTH_BYTES);
+    const name = typeof body.username === 'string' ? body.username.trim().toLowerCase() : '';
+    if (name && locked(`login-fail:${name}`)) throw new HttpError(429, 'Wait a moment before trying again.');
+    try {
+      const session = await login(db, body);
+      if (name) clearLimit(`login-fail:${name}`);
+      send(res, 200, session);
+    } catch (err) {
+      if (err instanceof HttpError && err.status === 401 && name) fail(`login-fail:${name}`, 8, 15 * 60 * 1000);
+      throw err;
+    }
     return;
   }
   if (req.method === 'POST' && pathName === '/api/auth/logout') {
@@ -135,15 +169,17 @@ async function handle(req, res, db, hub) {
   }
   if (req.method === 'POST' && pathName === '/api/auth/password') {
     const user = requireUser(db, req);
-    send(res, 200, await requestPasswordChange(db, user.id, await readJson(req, MAX_AUTH_BYTES)));
+    limit(`code:${user.id}`, 10, 10 * 60 * 1000);
+    send(res, 200, await requestPasswordChange(db, user.id, await readJson(req, MAX_AUTH_BYTES), Date.now(), { preview: previewCodes(req) }));
     return;
   }
   if (req.method === 'POST' && pathName === '/api/auth/password/confirm') {
     const user = requireUser(db, req);
-    send(res, 200, confirmPasswordChange(db, user.id, await readJson(req, MAX_AUTH_BYTES)));
+    send(res, 200, confirmPasswordChange(db, user.id, await readJson(req, MAX_AUTH_BYTES), Date.now(), user.sessionId));
     return;
   }
   if (req.method === 'POST' && pathName === '/api/auth/recover') {
+    limit(`recover:${clientIp(req)}`, 30, 10 * 60 * 1000);
     send(res, 200, await requestPasswordRecovery(db, await readJson(req, MAX_AUTH_BYTES)));
     return;
   }
@@ -153,7 +189,8 @@ async function handle(req, res, db, hub) {
   }
   if (req.method === 'POST' && pathName === '/api/auth/email') {
     const user = requireUser(db, req);
-    send(res, 200, await requestEmailChange(db, user.id, await readJson(req, MAX_AUTH_BYTES)));
+    limit(`code:${user.id}`, 10, 10 * 60 * 1000);
+    send(res, 200, await requestEmailChange(db, user.id, await readJson(req, MAX_AUTH_BYTES), Date.now(), { preview: previewCodes(req) }));
     return;
   }
   if (req.method === 'POST' && pathName === '/api/auth/email/confirm') {
@@ -303,6 +340,7 @@ async function handle(req, res, db, hub) {
       send(res, 200, readThread(db, user.id, username));
       return;
     }
+    limit(`msg:${user.id}`, 20, 60 * 1000);
     const body = await readJson(req, MAX_AUTH_BYTES);
     send(res, 200, sendMessage(db, user.id, username, body.text));
     return;
@@ -348,9 +386,27 @@ function safeSend(ws, payload) {
 function attachSocket(ws, db, hub) {
   let user = null;
   let sendFn = null;
+  let socketHits = [];
   const helloTimer = setTimeout(() => { if (!user) ws.close(); }, 5000);
   helloTimer.unref?.();
+  ws.isAlive = true;
+  ws.on('pong', () => { ws.isAlive = true; });
+  const beat = setInterval(() => {
+    if (ws.isAlive === false) { ws.terminate(); return; }
+    ws.isAlive = false;
+    try { ws.ping(); } catch { /* The socket may already be closed. */ }
+  }, 30000);
+  beat.unref?.();
+  ws.on('close', () => clearInterval(beat));
   ws.on('message', (data, isBinary) => {
+    const now = Date.now();
+    socketHits = socketHits.filter((at) => now - at < 10000);
+    socketHits.push(now);
+    if (socketHits.length > 40) {
+      safeSend(ws, { type: 'error', error: 'Wait a moment before sending another message.' });
+      ws.close();
+      return;
+    }
     if (isBinary || data.length > MAX_SOCKET_BYTES) {
       safeSend(ws, { type: 'error', error: 'The message is too large.' });
       return;
@@ -417,6 +473,10 @@ export function createServer({ db, port = 0, host = '127.0.0.1' }) {
       server.on('error', (err) => console.error(err));
       const timer = setInterval(() => hub.tick(Date.now()), 250);
       timer.unref?.();
+      const sweep = setInterval(() => {
+        try { purgeExpired(db); } catch (err) { console.error(err); }
+      }, 15 * 60 * 1000);
+      sweep.unref?.();
       const address = server.address();
       resolve({
         server,
@@ -424,6 +484,7 @@ export function createServer({ db, port = 0, host = '127.0.0.1' }) {
         hub,
         close: () => new Promise((done, fail) => {
           clearInterval(timer);
+          clearInterval(sweep);
           for (const client of wss.clients) client.terminate();
           wss.close();
           server.close((err) => (err ? fail(err) : done()));

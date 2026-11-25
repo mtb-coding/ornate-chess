@@ -1,6 +1,6 @@
 // Public player pages and one-way follows. Ratings and finished games are visible.
 // Cheat marks are not.
-import { clockMark } from '../src/ui/clock.js';
+import { clockMark } from '../src/clock-presets.js';
 import { PACES } from '../src/online-ratings.js';
 import { PROVISIONAL_DEVIATION } from '../src/glicko.js';
 import { HttpError } from './errors.mjs';

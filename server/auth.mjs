@@ -17,6 +17,7 @@ const USERNAME = /^[A-Za-z0-9_]{3,24}$/;
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 let dummyHash = null;
+const recoverGap = new Map();
 
 export function tokenHash(token) {
   return createHash('sha256').update(token).digest('hex');
@@ -54,31 +55,35 @@ function codeHash(code) {
   return createHash('sha256').update(code).digest('hex');
 }
 
-function storePending(db, userId, { email, nextHash, purpose, code, now }) {
-  db.prepare(`INSERT INTO password_resets (user_id, email, code_hash, next_hash, expires_at, attempts, created_at, purpose)
-    VALUES (?, ?, ?, ?, ?, 0, ?, ?)
-    ON CONFLICT(user_id) DO UPDATE SET
+function storePending(db, userId, { email, nextHash, purpose, code, now, reuse = 0 }) {
+  db.prepare(`INSERT INTO password_resets (user_id, email, code_hash, next_hash, expires_at, attempts, created_at, purpose, reuse)
+    VALUES (?, ?, ?, ?, ?, 0, ?, ?, ?)
+    ON CONFLICT(user_id, purpose) DO UPDATE SET
       email = excluded.email,
       code_hash = excluded.code_hash,
       next_hash = excluded.next_hash,
       expires_at = excluded.expires_at,
       attempts = 0,
       created_at = excluded.created_at,
-      purpose = excluded.purpose`).run(userId, email, codeHash(code), nextHash, now + CODE_MS, now, purpose);
+      reuse = excluded.reuse`).run(userId, email, codeHash(code), nextHash, now + CODE_MS, now, purpose, reuse ? 1 : 0);
 }
 
 function assertCodeGap(db, userId, now) {
-  const pending = db.prepare('SELECT created_at FROM password_resets WHERE user_id = ?').get(userId);
-  if (pending && now - pending.created_at < CODE_GAP_MS) {
+  const pending = db.prepare('SELECT MAX(created_at) AS created_at FROM password_resets WHERE user_id = ?').get(userId);
+  if (pending && pending.created_at && now - pending.created_at < CODE_GAP_MS) {
     throw new HttpError(429, 'Wait a moment before asking for another code.');
   }
 }
 
+function dropPending(db, userId, purpose) {
+  db.prepare('DELETE FROM password_resets WHERE user_id = ? AND purpose = ?').run(userId, purpose);
+}
+
 function pendingRow(db, userId, purpose, now) {
-  const row = db.prepare('SELECT email, code_hash, next_hash, expires_at, attempts, purpose FROM password_resets WHERE user_id = ?').get(userId);
-  if (!row || row.purpose !== purpose) throw new HttpError(400, 'Ask for a confirmation code first.');
+  const row = db.prepare('SELECT email, code_hash, next_hash, expires_at, attempts, purpose, reuse FROM password_resets WHERE user_id = ? AND purpose = ?').get(userId, purpose);
+  if (!row) throw new HttpError(400, 'Ask for a confirmation code first.');
   if (row.expires_at <= now) {
-    db.prepare('DELETE FROM password_resets WHERE user_id = ?').run(userId);
+    dropPending(db, userId, purpose);
     throw new HttpError(400, 'That confirmation code has expired. Ask for a new one.');
   }
   return row;
@@ -88,10 +93,10 @@ function acceptCode(db, userId, row, code) {
   if (!codesMatch(row.code_hash, code)) {
     const attempts = row.attempts + 1;
     if (attempts >= 5) {
-      db.prepare('DELETE FROM password_resets WHERE user_id = ?').run(userId);
+      dropPending(db, userId, row.purpose);
       throw new HttpError(400, 'That confirmation code is no longer valid. Ask for a new one.');
     }
-    db.prepare('UPDATE password_resets SET attempts = ? WHERE user_id = ?').run(attempts, userId);
+    db.prepare('UPDATE password_resets SET attempts = ? WHERE user_id = ? AND purpose = ?').run(attempts, userId, row.purpose);
     throw new HttpError(400, 'That confirmation code is not correct.');
   }
 }
@@ -177,7 +182,24 @@ export function logout(db, sessionId) {
   db.prepare('DELETE FROM sessions WHERE id = ?').run(sessionId);
 }
 
-export async function requestPasswordChange(db, userId, body, now = Date.now()) {
+function recoverResponse() {
+  return { status: 'pending', delivery: process.env.ORNATE_SMTP_HOST ? 'sent' : 'saved' };
+}
+
+function claimRecoverGap(db, usernameFold, userId, now) {
+  const remembered = recoverGap.get(usernameFold) || 0;
+  let stored = 0;
+  if (userId) {
+    const pending = db.prepare('SELECT MAX(created_at) AS created_at FROM password_resets WHERE user_id = ?').get(userId);
+    stored = pending && pending.created_at ? pending.created_at : 0;
+  }
+  if (now - Math.max(remembered, stored) < CODE_GAP_MS) {
+    throw new HttpError(429, 'Wait a moment before asking for another code.');
+  }
+  recoverGap.set(usernameFold, now);
+}
+
+export async function requestPasswordChange(db, userId, body, now = Date.now(), options = {}) {
   const current = checkPassword(body && body.current);
   const next = checkPassword(body && body.next);
   if (current === next) {
@@ -211,21 +233,23 @@ export async function requestPasswordChange(db, userId, body, now = Date.now()) 
       ].join('\n'),
     });
     const response = { status: 'pending', email: maskEmail(email), delivery: sent.delivery };
-    if (sent.delivery === 'saved') response.preview = code;
+    if (options.preview && sent.delivery === 'saved') response.preview = code;
     return response;
   } catch (err) {
-    db.prepare('DELETE FROM password_resets WHERE user_id = ?').run(userId);
+    dropPending(db, userId, 'password');
     throw err;
   }
 }
 
-export function confirmPasswordChange(db, userId, body, now = Date.now()) {
+export function confirmPasswordChange(db, userId, body, now = Date.now(), sessionId = '') {
   const row = pendingRow(db, userId, 'password', now);
   acceptCode(db, userId, row, codeFrom(body));
   db.exec('BEGIN IMMEDIATE');
   try {
     db.prepare('UPDATE users SET password_hash = ? WHERE id = ?').run(row.next_hash, userId);
-    db.prepare('DELETE FROM password_resets WHERE user_id = ?').run(userId);
+    dropPending(db, userId, 'password');
+    if (sessionId) db.prepare('DELETE FROM sessions WHERE user_id = ? AND id != ?').run(userId, sessionId);
+    else db.prepare('DELETE FROM sessions WHERE user_id = ?').run(userId);
     db.exec('COMMIT');
   } catch (err) {
     try { db.exec('ROLLBACK'); } catch { /* The transaction may already be closed. */ }
@@ -237,20 +261,25 @@ export function confirmPasswordChange(db, userId, body, now = Date.now()) {
 export async function requestPasswordRecovery(db, body, now = Date.now()) {
   const username = checkUsername(body && body.username);
   const next = checkPassword(body && body.next);
-  const row = db.prepare('SELECT id, username, password_hash, email FROM users WHERE username_fold = ?').get(username.toLowerCase());
+  const supplied = body && typeof body.email === 'string' && body.email.trim() ? checkEmail(body.email) : '';
+  const fold = username.toLowerCase();
+  const row = db.prepare('SELECT id, username, password_hash, email FROM users WHERE username_fold = ?').get(fold);
   const email = row && typeof row.email === 'string' ? row.email.trim().toLowerCase() : '';
-  if (!row || !email) return { status: 'pending', delivery: null };
-  if (body && typeof body.email === 'string' && body.email.trim() && checkEmail(body.email) !== email) {
-    throw new HttpError(400, 'The confirmation code is sent to the email saved when the account was created.');
-  }
-  const same = await verify(row.password_hash, next);
-  if (same) throw new HttpError(400, 'Choose a password that is different from the current one.');
-  assertCodeGap(db, row.id, now);
+  claimRecoverGap(db, fold, row ? row.id : '', now);
   const nextHash = await hash(next, ARGON);
+  if (!row || !email || (supplied && supplied !== email)) return recoverResponse();
+  const same = await verify(row.password_hash, next);
   const code = String(randomInt(0, 1000000)).padStart(6, '0');
-  storePending(db, row.id, { email, nextHash, purpose: 'recover', code, now });
+  storePending(db, row.id, {
+    email,
+    nextHash: same ? row.password_hash : nextHash,
+    purpose: 'recover',
+    code,
+    now,
+    reuse: same ? 1 : 0,
+  });
   try {
-    const sent = await sendMail({
+    await sendMail({
       to: email,
       subject: 'Reset your Ornate Chess password',
       text: [
@@ -261,9 +290,9 @@ export async function requestPasswordRecovery(db, body, now = Date.now()) {
         'It expires in 15 minutes. If you did not ask for this, you can ignore this message. The password has not changed.',
       ].join('\n'),
     });
-    return { status: 'pending', delivery: sent.delivery };
+    return recoverResponse();
   } catch (err) {
-    db.prepare('DELETE FROM password_resets WHERE user_id = ?').run(row.id);
+    dropPending(db, row.id, 'recover');
     throw err;
   }
 }
@@ -274,10 +303,15 @@ export function confirmPasswordRecovery(db, body, now = Date.now()) {
   if (!rowUser) throw new HttpError(400, 'That confirmation code is not correct.');
   const row = pendingRow(db, rowUser.id, 'recover', now);
   acceptCode(db, rowUser.id, row, codeFrom(body));
+  if (row.reuse) {
+    dropPending(db, rowUser.id, 'recover');
+    throw new HttpError(400, 'Choose a password that is different from the current one.');
+  }
   db.exec('BEGIN IMMEDIATE');
   try {
     db.prepare('UPDATE users SET password_hash = ? WHERE id = ?').run(row.next_hash, rowUser.id);
-    db.prepare('DELETE FROM password_resets WHERE user_id = ?').run(rowUser.id);
+    dropPending(db, rowUser.id, 'recover');
+    db.prepare('DELETE FROM sessions WHERE user_id = ?').run(rowUser.id);
     db.exec('COMMIT');
   } catch (err) {
     try { db.exec('ROLLBACK'); } catch { /* The transaction may already be closed. */ }
@@ -286,7 +320,7 @@ export function confirmPasswordRecovery(db, body, now = Date.now()) {
   return { ok: true };
 }
 
-export async function requestEmailChange(db, userId, body, now = Date.now()) {
+export async function requestEmailChange(db, userId, body, now = Date.now(), options = {}) {
   const current = checkPassword(body && body.current);
   const nextEmail = checkEmail(body && body.email);
   const row = db.prepare('SELECT username, password_hash, email FROM users WHERE id = ?').get(userId);
@@ -312,10 +346,10 @@ export async function requestEmailChange(db, userId, body, now = Date.now()) {
       ].join('\n'),
     });
     const response = { status: 'pending', email: maskEmail(email), delivery: sent.delivery };
-    if (sent.delivery === 'saved') response.preview = code;
+    if (options.preview && sent.delivery === 'saved') response.preview = code;
     return response;
   } catch (err) {
-    db.prepare('DELETE FROM password_resets WHERE user_id = ?').run(userId);
+    dropPending(db, userId, 'email');
     throw err;
   }
 }
@@ -326,7 +360,7 @@ export function confirmEmailChange(db, userId, body, now = Date.now()) {
   db.exec('BEGIN IMMEDIATE');
   try {
     db.prepare('UPDATE users SET email = ?, email_verified = 1 WHERE id = ?').run(row.email, userId);
-    db.prepare('DELETE FROM password_resets WHERE user_id = ?').run(userId);
+    dropPending(db, userId, 'email');
     db.exec('COMMIT');
   } catch (err) {
     try { db.exec('ROLLBACK'); } catch { /* The transaction may already be closed. */ }
@@ -344,20 +378,21 @@ export async function confirmPassword(db, userId, password) {
 }
 
 export function removeAccount(db, userId) {
-  const games = db.prepare('SELECT id FROM live_games WHERE white_id = ? OR black_id = ?').all(userId, userId);
   db.exec('BEGIN IMMEDIATE');
   try {
-    const deleteReview = db.prepare('DELETE FROM game_reviews WHERE game_id = ?');
-    const deletePuzzles = db.prepare('DELETE FROM game_puzzles WHERE game_id = ?');
-    const deleteFlags = db.prepare('DELETE FROM cheat_flags WHERE game_id = ?');
-    const deleteJob = db.prepare('DELETE FROM jobs WHERE payload_json = ?');
-    for (const game of games) {
-      deleteReview.run(game.id);
-      deletePuzzles.run(game.id);
-      deleteFlags.run(game.id);
-      deleteJob.run(JSON.stringify({ gameId: game.id }));
+    db.prepare(`UPDATE live_games SET white_name = 'Deleted player' WHERE white_id = ?`).run(userId);
+    db.prepare(`UPDATE live_games SET black_name = 'Deleted player' WHERE black_id = ?`).run(userId);
+    const empty = db.prepare(`SELECT id, game_json, status FROM live_games WHERE white_id = ? OR black_id = ?`).all(userId, userId);
+    const deleteJob = db.prepare(`DELETE FROM jobs WHERE kind = 'review' AND json_extract(payload_json, '$.gameId') = ?`);
+    const deleteGame = db.prepare('DELETE FROM live_games WHERE id = ?');
+    for (const game of empty) {
+      let moves = 1;
+      try { moves = JSON.parse(game.game_json).uci.length; } catch { moves = 1; }
+      if (game.status === 'aborted' || moves === 0) {
+        deleteJob.run(game.id);
+        deleteGame.run(game.id);
+      }
     }
-    db.prepare('DELETE FROM live_games WHERE white_id = ? OR black_id = ?').run(userId, userId);
     db.prepare('DELETE FROM pace_ratings WHERE user_id = ?').run(userId);
     db.prepare('DELETE FROM game_puzzles WHERE user_id = ?').run(userId);
     db.prepare('DELETE FROM cheat_flags WHERE user_id = ?').run(userId);

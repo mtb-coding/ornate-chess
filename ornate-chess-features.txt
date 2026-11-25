@@ -6,6 +6,7 @@ Ornate Chess is an installable web app. The pages and the board work offline. Ac
 Play
 - Play is one screen. The listed time controls start an online game. The bot is on the same screen and is not a separate mode.
 - Online clocks are 1+0 (bullet), 3+2, 5+0 and 5+3 (blitz), and 10+5, 15+10 and 30+0 (rapid). A custom clock stays on the bot or on a game on this device.
+- During the opponent's turn, online and bot games accept up to five premoves. Each one is highlighted in red and, when it is still legal, plays for 0.1 seconds. Right-click or a long-press on the board cancels the queue. A premove that the opponent's move makes illegal is cancelled instead of played.
 - The server checks every online move and keeps the clock. Leaving the Play page closes the socket. Opening Play again resumes a game that is still live, including from another tab. Other pages show a notice while that game is live.
 - If you leave before any move, the game is aborted after a short grace. After a move, a player who stays disconnected forfeits only while the opponent is still connected.
 - From a player's page you can challenge that person to one of the listed time controls and choose White, Black, or a random colour. The offer lasts 15 minutes. Accept and Decline are on the Play page. One new offer replaces your previous one.
@@ -21,7 +22,7 @@ Accounts
 - A password change sends a six-digit code only to the email saved at registration. The password changes only after that code. The same sign-in stays active. The code is not sent to an address typed in the request.
 - A forgotten password uses the same saved address. The code is not included in the response. After the code, the new password is stored and you sign in again.
 - Replacing the saved email requires the current password. The code is sent only to the current address, and the new address is stored only after that code. An account that has no email cannot attach one this way.
-- Deleting an account requires the password. Ratings and messages are removed. A live game with no moves is aborted. A live game that has moves is resigned, so the opponent is rated. Saved games on the device stay.
+- Deleting an account requires the password. Ratings and messages are removed. A live game with no moves is aborted. A live game that has moves is resigned, so the opponent is rated. Finished games stay, and the deleted account is shown as Deleted player. Saved games on the device stay.
 - When the server is not configured to send mail, the message is saved on the server for the operator. A signed-in password or email change can show that code. Password recovery does not.
 
 Ratings and fair play
@@ -41,6 +42,6 @@ Study
 - Mistake puzzles come from your own games. There is also a set of tactical puzzles, and the device can generate a puzzle and check it with the engine.
 - The opening library has more than a hundred named openings from the Lichess chess-openings data (CC0).
 - Endgame practice covers basic checkmates, king and pawn endings, rook endings, and queen and minor-piece endings.
-- Analysis loads a saved game, PGN, or FEN.
+- Analysis loads a saved game, PGN, or FEN, or a position set up by dragging pieces, with the side to move, castling for each side and direction, and en passant, and that setup is separate from playing moves.
 - Saved games on the device can be loaded, renamed, deleted, imported, and exported.
 - Statistics cover results, puzzles, and endgames. Learn summarises the rules, notation, and shortcuts. Settings cover display, sound, and play.

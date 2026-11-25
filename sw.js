@@ -2,7 +2,7 @@
 // CACHE whenever shipped files change so older caches are dropped on activate.
 // While online, responses are taken from the network first so a new deploy is
 // not hidden by a stale cache. The cache is used only when the network fails.
-const CACHE = 'ornate-chess-2026-11-25-r3';
+const CACHE = 'ornate-chess-2026-11-25-r12';
 const PRECACHE = [
   './',
   './index.html',
@@ -18,6 +18,10 @@ const PRECACHE = [
   './src/styles/pages.css',
   './src/styles/mobile.css',
   './src/app.js',
+  './src/boot-theme.js',
+  './src/clock-presets.js',
+  './src/premove.js',
+  './src/setup-position.js',
   './src/engine.js',
   './src/ai.js',
   './src/ai-worker.js',
@@ -90,6 +94,7 @@ const PRECACHE = [
   './src/ui/dev-stubs.js',
   './src/ui/page-openings.js',
   './src/ui/page-saved.js',
+  './src/ui/board-editor.js',
   './src/ui/page-analysis.js',
   './src/account-sync.js',
   './src/ui/account-client.js',

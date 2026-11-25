@@ -1,7 +1,7 @@
 // Online Glicko-2 ratings. One record per player for bullet, blitz and rapid.
 // The numbers are stored here. A client cannot replace them through sync.
 import { glickoPeriod } from '../src/glicko.js';
-import { clockMark } from '../src/ui/clock.js';
+import { clockMark } from '../src/clock-presets.js';
 import {
   PACES, applyPaceGame, blankOnlineRatings, normalizeOnlineRatings, normalizePace,
 } from '../src/online-ratings.js';

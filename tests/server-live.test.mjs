@@ -455,12 +455,64 @@ await test('deleting an account over HTTP ends the live game and removes the rat
     assert.equal((await srv.api('POST', '/api/auth/login', { body: { username: 'Ada_Gone', password: 'correct-horse' } })).status, 401);
     assert.equal(srv.db.prepare('SELECT COUNT(*) AS n FROM pace_ratings WHERE user_id = ?').get(ada.json.user.id).n, 0);
     assert.equal(srv.db.prepare('SELECT games FROM pace_ratings WHERE user_id = ? AND pace = ?').get(bea.json.user.id, 'blitz').games, 1);
-    assert.equal(srv.db.prepare('SELECT COUNT(*) AS n FROM live_games WHERE white_id = ? OR black_id = ?').get(ada.json.user.id, ada.json.user.id).n, 0);
+    const kept = srv.db.prepare('SELECT white_name, black_name, status FROM live_games WHERE white_id = ? OR black_id = ?').get(ada.json.user.id, ada.json.user.id);
+    assert.equal(kept.status, 'finished');
+    assert.equal(kept.white_name, 'Deleted player');
+    assert.equal(kept.black_name, 'Bea_Stay');
     white.ws.close();
     black.ws.close();
   } finally {
     await srv.close();
   }
+});
+
+test('a premove costs 0.1 seconds, an illegal one is dropped, and five is the limit', () => {
+  const db = openDatabase(':memory:');
+  const live = createLive(db);
+  const white = seat('Nia');
+  const black = seat('Ora');
+  live.connect(white.user, white.send);
+  live.connect(black.user, black.send);
+  const t0 = 2_000_000;
+  live.command(white.user, { type: 'seek', baseMs: 180000, incMs: 2000, color: 'w' }, t0);
+  live.command(black.user, { type: 'seek', baseMs: 180000, incMs: 2000, color: 'b' }, t0);
+  const id = last(white, 'game').game.id;
+  live.command(white.user, { type: 'premove', gameId: id, uci: 'g1f3', generation: 0 }, t0 + 10);
+  assert.match(last(white, 'error').error, /opponent is to move/);
+  live.command(white.user, { type: 'move', gameId: id, uci: 'e2e4' }, t0 + 5000);
+  assert.equal(last(white, 'game').game.wMs, 177000);
+  live.command(white.user, { type: 'premove', gameId: id, uci: 'a1a3', generation: 0 }, t0 + 5100);
+  assert.match(last(white, 'error').error, /not possible/);
+  for (const uci of ['g1f3', 'f3g5', 'g5f7', 'f7d6', 'd6b5']) {
+    live.command(white.user, { type: 'premove', gameId: id, uci, generation: 0 }, t0 + 5200);
+  }
+  assert.deepEqual(last(white, 'game').game.premoves, ['g1f3', 'f3g5', 'g5f7', 'f7d6', 'd6b5']);
+  assert.deepEqual(last(black, 'game').game.premoves, []);
+  live.command(white.user, { type: 'premove', gameId: id, uci: 'b5c3', generation: 0 }, t0 + 5300);
+  assert.match(last(white, 'error').error, /Five premoves/);
+  live.command(white.user, { type: 'premove-clear', gameId: id, generation: 1 }, t0 + 5400);
+  assert.deepEqual(last(white, 'game').game.premoves, []);
+  assert.equal(last(white, 'game').game.premoveGeneration, 1);
+  live.command(white.user, { type: 'premove', gameId: id, uci: 'g1f3', generation: 0 }, t0 + 5500);
+  assert.match(last(white, 'error').error, /cancelled/);
+  live.command(white.user, { type: 'premove', gameId: id, uci: 'g1f3', generation: 1 }, t0 + 5600);
+  live.command(white.user, { type: 'premove', gameId: id, uci: 'f1c4', generation: 1 }, t0 + 5700);
+  live.command(black.user, { type: 'move', gameId: id, uci: 'e7e5' }, t0 + 15000);
+  const played = last(white, 'game').game;
+  assert.deepEqual(played.game.uci, ['e2e4', 'e7e5', 'g1f3']);
+  assert.deepEqual(played.premoves, ['f1c4']);
+  assert.equal(played.wMs, 178900);
+  assert.equal(played.bMs, 172000);
+  assert.deepEqual(last(black, 'game').game.premoves, []);
+  live.command(white.user, { type: 'premove-clear', gameId: id, generation: 2 }, t0 + 15100);
+  live.command(white.user, { type: 'premove', gameId: id, uci: 'e4d5', generation: 2 }, t0 + 15200);
+  live.command(black.user, { type: 'move', gameId: id, uci: 'a7a6' }, t0 + 20000);
+  const dropped = last(white, 'game').game;
+  assert.deepEqual(dropped.game.uci, ['e2e4', 'e7e5', 'g1f3', 'a7a6']);
+  assert.deepEqual(dropped.premoves, []);
+  assert.equal(dropped.wMs, 178900);
+  assert.equal(dropped.bMs, 169000);
+  db.close();
 });
 
 console.log(`\n${passed} passed, ${failed} failed`);

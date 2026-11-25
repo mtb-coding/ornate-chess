@@ -144,11 +144,14 @@ try {
     fs.unlinkSync(path.join(outbox, mailed[0]));
     const early = await srv.api('POST', '/api/auth/login', { body: { username: 'Ada_Pass', password: 'another-horse' } });
     assert.equal(early.status, 401);
+    const otherSession = await srv.api('POST', '/api/auth/login', { body: { username: 'Ada_Pass', password: 'correct-horse' } });
+    assert.equal(otherSession.status, 200);
     const wrongCode = await srv.api('POST', '/api/auth/password/confirm', { token, body: { code: '000000' } });
     assert.equal(wrongCode.status, 400);
     const confirmed = await srv.api('POST', '/api/auth/password/confirm', { token, body: { code: changed.json.preview } });
     assert.equal(confirmed.status, 200);
     assert.equal(confirmed.json.ok, true);
+    assert.equal((await srv.api('GET', '/api/auth/me', { token: otherSession.json.token })).status, 401);
     const still = await srv.api('GET', '/api/auth/me', { token });
     assert.equal(still.status, 200);
     assert.equal(still.json.user.username, 'Ada_Pass');
@@ -199,13 +202,6 @@ try {
     const created = await srv.api('POST', '/api/auth/register', { body: { username: 'Ada_Rec', password: 'correct-horse', email: 'Ada.Rec@Example.com' } });
     assert.equal(created.status, 200);
     const before = new Set(outboxNames());
-    const same = await srv.api('POST', '/api/auth/recover', { body: { username: 'Ada_Rec', next: 'correct-horse' } });
-    assert.equal(same.status, 400);
-    assert.match(same.json.error, /different from the current/);
-    const other = await srv.api('POST', '/api/auth/recover', { body: { username: 'Ada_Rec', next: 'reset-horse', email: 'other@example.com' } });
-    assert.equal(other.status, 400);
-    assert.match(other.json.error, /saved when the account was created/);
-    assert.equal(freshOutbox(before).length, 0);
     const pending = await srv.api('POST', '/api/auth/recover', { body: { username: 'ada_rec', next: 'reset-horse' } });
     assert.equal(pending.status, 200);
     assert.equal(pending.json.status, 'pending');
@@ -220,7 +216,7 @@ try {
     const code = (/The confirmation code is (\d{6})/.exec(letter) || [])[1];
     assert.equal(code.length, 6);
     const swapped = await srv.api('POST', '/api/auth/recover', { body: { username: 'Ada_Rec', next: 'third-horse', email: 'third@example.com' } });
-    assert.equal(swapped.status, 400);
+    assert.equal(swapped.status, 429);
     assert.equal(freshOutbox(before).length, 1);
     const wrong = await srv.api('POST', '/api/auth/recover/confirm', { body: { username: 'Ada_Rec', code: '000000' } });
     assert.equal(wrong.status, 400);
@@ -228,6 +224,7 @@ try {
     assert.equal(confirmed.status, 200);
     assert.equal(confirmed.json.ok, true);
     assert.equal(confirmed.json.token, undefined);
+    assert.equal((await srv.api('GET', '/api/auth/me', { token: created.json.token })).status, 401);
     assert.equal((await srv.api('POST', '/api/auth/login', { body: { username: 'Ada_Rec', password: 'correct-horse' } })).status, 401);
     const next = await srv.api('POST', '/api/auth/login', { body: { username: 'Ada_Rec', password: 'reset-horse' } });
     assert.equal(next.status, 200);
@@ -241,7 +238,10 @@ try {
     const res = await srv.api('POST', '/api/auth/recover', { body: { username: 'Missing_User', next: 'long-enough' } });
     assert.equal(res.status, 200);
     assert.equal(res.json.status, 'pending');
-    assert.equal(res.json.delivery, null);
+    assert.equal(res.json.delivery, 'saved');
+    assert.deepEqual(Object.keys(res.json).sort(), ['delivery', 'status']);
+    const repeat = await srv.api('POST', '/api/auth/recover', { body: { username: 'Missing_User', next: 'long-enough' } });
+    assert.equal(repeat.status, 429);
     assert.equal(res.json.preview, undefined);
     assert.equal(freshOutbox(before).length, 0);
     const short = await srv.api('POST', '/api/auth/recover', { body: { username: 'Missing_User', next: 'short' } });
@@ -277,6 +277,8 @@ try {
     const before = new Set(outboxNames());
     const pending = await srv.api('POST', '/api/auth/email', { token: created.json.token, body: { current: 'correct-horse', email: 'mix.new@example.com' } });
     assert.equal(pending.status, 200);
+    const recover = await srv.api('POST', '/api/auth/recover', { body: { username: 'Ada_Mix', next: 'other-horse' } });
+    assert.equal(recover.status, 429);
     const crossed = await srv.api('POST', '/api/auth/password/confirm', { token: created.json.token, body: { code: pending.json.preview } });
     assert.equal(crossed.status, 400);
     assert.equal(crossed.json.error, 'Ask for a confirmation code first.');
@@ -287,6 +289,42 @@ try {
     assert.equal((await srv.api('GET', '/api/auth/me', { token: created.json.token })).json.user.email, 'mix.new@example.com');
     assert.equal((await srv.api('POST', '/api/auth/login', { body: { username: 'Ada_Mix', password: 'correct-horse' } })).status, 200);
     for (const name of freshOutbox(before)) fs.unlinkSync(path.join(outbox, name));
+  });
+
+  await test('a repeated password is refused after the code, and a supplied email does not reveal the account', async () => {
+    const created = await srv.api('POST', '/api/auth/register', { body: { username: 'Ada_Same', password: 'correct-horse', email: 'same@example.com' } });
+    const before = new Set(outboxNames());
+    const pending = await srv.api('POST', '/api/auth/recover', { body: { username: 'Ada_Same', next: 'correct-horse' } });
+    assert.equal(pending.status, 200);
+    assert.equal(pending.json.preview, undefined);
+    assert.equal(pending.json.delivery, 'saved');
+    const mailed = freshOutbox(before);
+    assert.equal(mailed.length, 1);
+    const letter = fs.readFileSync(path.join(outbox, mailed[0]), 'utf8');
+    const code = (/The confirmation code is (\d{6})/.exec(letter) || [])[1];
+    const refused = await srv.api('POST', '/api/auth/recover/confirm', { body: { username: 'Ada_Same', code } });
+    assert.equal(refused.status, 400);
+    assert.match(refused.json.error, /different from the current/);
+    assert.equal((await srv.api('POST', '/api/auth/login', { body: { username: 'Ada_Same', password: 'correct-horse' } })).status, 200);
+    const hidden = await srv.api('POST', '/api/auth/register', { body: { username: 'Ada_Hide', password: 'correct-horse', email: 'hide@example.com' } });
+    assert.equal(hidden.status, 200);
+    const quietBefore = new Set(outboxNames());
+    const quiet = await srv.api('POST', '/api/auth/recover', { body: { username: 'Ada_Hide', next: 'reset-horse', email: 'other@example.com' } });
+    assert.equal(quiet.status, 200);
+    assert.deepEqual(quiet.json, pending.json);
+    assert.equal(freshOutbox(quietBefore).length, 0);
+    assert.equal((await srv.api('GET', '/api/auth/me', { token: created.json.token })).status, 200);
+    for (const name of freshOutbox(before)) fs.unlinkSync(path.join(outbox, name));
+  });
+
+  await test('repeated wrong passwords are throttled', async () => {
+    await srv.api('POST', '/api/auth/register', { body: { username: 'Ada_Lock', password: 'correct-horse', email: 'lock@example.com' } });
+    for (let i = 0; i < 8; i += 1) {
+      const wrong = await srv.api('POST', '/api/auth/login', { body: { username: 'Ada_Lock', password: 'wrong-password' } });
+      assert.equal(wrong.status, 401);
+    }
+    const blocked = await srv.api('POST', '/api/auth/login', { body: { username: 'Ada_Lock', password: 'correct-horse' } });
+    assert.equal(blocked.status, 429);
   });
 } finally {
   await srv.close();

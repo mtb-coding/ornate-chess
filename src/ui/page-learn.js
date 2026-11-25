@@ -54,7 +54,7 @@ export function render(root) {
         <p class="annot-help">${esc(ANNOTATION_HELP)}</p>
         <p>Every control can be reached with the Tab key. On the board, each square announces its name and contents to screen readers.</p>
       </div></article>
-      <article class="frame">${fc}<div class="frame-inner">
+      <article class="frame learn-span">${fc}<div class="frame-inner">
         <h2>About this application</h2>${DIVIDER}
         <p>Ornate Chess is a static web application written in plain JavaScript modules. The rules engine, the bot, the puzzle collection and the storage layer are separate modules. The bot searches in a background worker so that the page remains responsive while it calculates.</p>
         <p>The bot has eight levels, from Novice to Grandmaster. The approximate ratings are estimates and are not official ratings. The pieces, frames and ornaments are drawn with inline SVG, and the sound effects are synthesised by the browser, so the application needs no downloads after it loads.</p>

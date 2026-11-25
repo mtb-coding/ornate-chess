@@ -35,7 +35,7 @@
     max-width: 100%;
   }
   .shell { max-width: 100%; overflow-x: hidden; }
-  .page, .game-layout, .game-root, .board-col, .side-col, .card-grid, .puzzle-grid, .saved-list, .settings-grid, .learn-grid, .filters, .import-card, .setup-card, .resume-card, .hero {
+  .page, .game-layout, .editor-layout, .game-root, .board-col, .side-col, .card-grid, .puzzle-grid, .saved-list, .settings-grid, .learn-grid, .filters, .import-card, .setup-card, .resume-card, .hero {
     max-width: 100%;
   }
 }
@@ -105,7 +105,7 @@
   :root {
     --board-size: calc(100vw - 16px - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px));
   }
-  .game-layout {
+  .game-layout, .editor-layout {
     grid-template-columns: minmax(0, 1fr);
     gap: 14px;
     width: 100%;
