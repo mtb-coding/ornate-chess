@@ -10,10 +10,9 @@ This program is free software under the GNU General Public License, version 3. Y
 
 The pages are static files. Node.js 22.13 or newer is required for the account server.
 
-1. Install the server libraries: `npm install` inside the `server` folder.
-2. Start the account server from the project folder: `node server/index.mjs`. It listens on `http://127.0.0.1:8488`.
-3. Start the page server: `start.bat`, or `powershell -ExecutionPolicy Bypass -File serve.ps1`. The app is at `http://localhost:8002/`.
-4. For saved game reviews, mistake puzzles, and database backups, also run `node server/worker.mjs`.
+Double-click `start.bat`. It installs the server libraries the first time, starts the account server on `http://127.0.0.1:8488`, starts the worker that saves backups and reviews finished games, and serves the pages at `http://localhost:8002/`. The app opens in the browser. If a part is already running, that part is left as it is.
+
+To start one part by itself: `npm install` inside `server`, then `node server/index.mjs`, `node server/worker.mjs`, or `powershell -ExecutionPolicy Bypass -File serve.ps1`.
 
 The account database is created at `server/data/ornate.sqlite`. That folder is not part of the source distribution.
 
